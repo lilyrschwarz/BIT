@@ -1,0 +1,216 @@
+/*******************
+ADVISING
+********************/
+
+create table thesis (
+  university_id int (8),
+  FileName varchar (250),
+  FilePath varchar (250),
+  primary key (university_id)
+);
+
+create table courses (
+  subject varchar(4),
+  course_num int (5),
+  title varchar (30),
+  credits int (2),
+  prereq_sub1 varchar (4),
+  prereq_1 int (5),
+  prereq_sub2 varchar (4),
+  prereq_2 int (5),
+  primary key (course_num, subject),
+  foreign key (prereq_1, prereq_sub1) references courses(course_num, subject),
+  foreign key (prereq_2, prereq_sub2) references courses(course_num, subject)
+);
+
+create table users (
+  user_type varchar (30),
+  university_id int (8),
+  password varchar(30),
+  primary key (university_id)
+);
+
+create table form1 (
+  num int AUTO_INCREMENT,
+  university_id int (8),
+  subject varchar(4),
+  course_num int(5),
+  primary key (num, university_id),
+  foreign key(university_id) references users (university_id)
+);
+
+create table advisor (
+  university_id int(8),
+  name varchar(30),
+  primary key (university_id),
+  foreign key(university_id) references users (university_id)
+);
+
+create table student (
+  university_id int (8),
+  f_name varchar (30),
+  l_name varchar (30),
+  address varchar (255),
+  email varchar (255),
+  phone_num bigint,
+  program_type varchar (20),
+  advisor int (8),
+  GPA float (5, 4),
+  total_credits int(5),
+  clear_for_grad int (1),
+  thesis_approved int (1),
+  thesis MEDIUMTEXT,
+  primary key (university_id),
+  foreign key (advisor) references advisor (university_id),
+  foreign key (university_id) references users (university_id)
+);
+
+
+
+create table alumni (
+  university_id int (8),
+  f_name varchar (30),
+  l_name varchar (30),
+  address varchar (255),
+  email varchar (255),
+  phone_num bigint,
+  program_type varchar (20),
+  advisor int (8),
+  grad_year int (4),
+  grad_semester varchar (10),
+  primary key (university_id)
+);
+
+create table transcript (
+	semester varchar(6),
+	year int(4),
+	final_grade varchar(2),
+	credits int(2),
+	course_num int(5),
+	subject varchar(4),
+	university_id int(8),
+	primary key (semester, year, course_num, university_id),
+	foreign key (university_id) references student (university_id)
+);
+
+
+create table systems_administrator (
+  university_id int(8),
+  primary key (university_id),
+  foreign key(university_id) references users (university_id)
+);
+
+create table graduate_secretary (
+  university_id int(8),
+  primary key (university_id),
+  foreign key(university_id) references users (university_id)
+);
+
+
+/********************
+Applications
+********************/
+
+CREATE TABLE users (
+  role varchar(3) NOT NULL,
+  fname char(15) NOT NULL,
+  lname char(15) NOT NULL,
+  username varchar(20) NOT NULL,
+  password varchar(20) NOT NULL,
+  email varchar(50) NOT NULL,
+  userID int(8) NOT NULL,
+  PRIMARY KEY (userID)
+);
+
+CREATE TABLE personal_info (
+  fname char(15),
+  lname char(15),
+  uid int(8) NOT NULL,
+  address varchar(50),
+  ssn int(9),
+  PRIMARY KEY (uid),
+  FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+CREATE TABLE academic_info (
+  uid int(8) NOT NULL,
+  degreeType char(3),
+  AOI varchar(30),
+  experience varchar(100),
+  semester char(2),
+  year int(4),
+  transcript boolean,
+  recletter boolean,
+  PRIMARY KEY (uid),
+  FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+CREATE TABLE rec_letter  (
+  fname char(15),
+  lname char(15),
+  email varchar(30),
+  institution varchar(30),
+  uid int(8) NOT NULL,
+  recID int NOT NULL AUTO_INCREMENT,
+  recommendation varchar(10000),
+  PRIMARY KEY (recID),
+  FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+CREATE TABLE app_review (
+  uid int(8) NOT NULL,
+  reviewID int(8) NOT NULL AUTO_INCREMENT,
+  reviewerRole varchar(3),
+  comments varchar(100),
+  deficiency varchar(20),
+  reason char,
+  rating int,
+  advisor char(30),
+  status int NOT NULL DEFAULT 1,
+  PRIMARY KEY (reviewID),
+  FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+CREATE TABLE rec_review (
+  reviewID int(8) NOT NULL,
+  reviewerRole varchar(3),
+  rating int,
+  generic boolean,
+  credible boolean,
+  uid int(8) NOT NULL,
+  recID int,
+  PRIMARY KEY (reviewID),
+  FOREIGN KEY (uid) REFERENCES users(userID),
+  FOREIGN KEY (recID) REFERENCES rec_letter(recID),
+  FOREIGN KEY (reviewID) REFERENCES app_review(reviewID)
+);
+
+CREATE TABLE gre (
+  verbal int,
+  quant int,
+  year int,
+  advScore int,
+  subject varchar(15),
+  toefl int,
+  advYear int,
+  uid int(8) NOT NULL,
+  PRIMARY KEY (uid),
+  FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+CREATE TABLE prior_degrees (
+  gpa float,
+  year int(4),
+  university varchar(30),
+  major varchar(30),
+  uid int(8) NOT NULL,
+  deg_type char(3),
+  PRIMARY KEY (deg_type, uid),
+  FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+
+
+/********************
+Registration
+********************/
