@@ -233,6 +233,8 @@ CREATE TABLE user (
   password varchar(20),
   active varchar(5),
   type varchar(5),
+  isAdvisor varchar(3),
+  isReviewer varchar(3),
   PRIMARY KEY (uid)
 );
 
