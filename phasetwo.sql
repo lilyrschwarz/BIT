@@ -23,7 +23,7 @@ create table courses (
   foreign key (prereq_2, prereq_sub2) references courses(course_num, subject)
 );
 
-create table users (
+create table loginusers (
   user_type varchar (30),
   university_id int (8),
   password varchar(30),

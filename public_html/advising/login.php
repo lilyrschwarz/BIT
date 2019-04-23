@@ -16,7 +16,7 @@
       }
       $myusername = $_POST['university_id'];
       $mypassword = $_POST['password'];
-      $sql = "SELECT * FROM users WHERE university_id = ".$myusername." and password = '".$mypassword."';";
+      $sql = "SELECT * FROM loginusers WHERE university_id = ".$myusername." and password = '".$mypassword."';";
       $result = mysqli_query($db,$sql);
       //$row = mysqli_fetch_assoc($result);
       //$active = $row['active'];
@@ -25,7 +25,7 @@
       if($count > 0 ) {
          //session_register("myusername");
          $_SESSION['login_user'] = $myusername;
-         $role = mysqli_query($db, "select user_type from users where university_id =". $myusername);
+         $role = mysqli_query($db, "select user_type from loginusers where university_id =". $myusername);
         // if(mysqli_num_rows($role)>0){echo "successful ";}
         // else{echo mysqli_error($db);}
          $role = mysqli_fetch_assoc($role);
