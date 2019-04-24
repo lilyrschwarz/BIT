@@ -1,24 +1,24 @@
--- inserting into applications
+# inserting into applications
 INSERT INTO users VALUES 
-  -- Systems Administrator
+  # Systems Administrator
   ("SA", "Dietrich", "Reidenbaugh", "123456", "dreidenbaugh@gwu.edu", 5),
-  -- Graduate Secretary
+  # Graduate Secretary
   ("GS", "Dawn", "Ginetti", "123456", "dawn@gwu.edu", 6),
-  -- Faculty Reviewer
+  # Faculty Reviewer
   ("FR", "Bhagi", "Narahari", "123456", "narahari@gwu.edu", 10),
-  -- Chair of Admissions Comm
+  # Chair of Admissions Comm
   ("CAC", "John", "Smith" "123456", "jsmith@gmail.com", 42142172),
-  -- Applicants
+  # Applicants
   ("A", "John", "Lennon", "plsletmein", "john_lennon@gmail.com", 55555555),
   ("A", "Ringo", "Starr", "Apply!", "ringostarr@gmail.com", 66666666);
 
 
--- insert personal data for applicants
+# insert personal data for applicants
 INSERT INTO personal_info VALUES
   ("John", "Lennon", 55555555, "123 Main St, New York NY", 111111111),
   ("Ringo", "Starr", 66666666, NULL, 222111111);
 
--- John's application (complete)
+# John's application (complete)
 INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES ("Recommender", "1", "recommend@gmail.com", "GWU", 55555555);
 INSERT INTO academic_info VALUES (55555555, "MS", "Computer Science", "bioinformatics research", "FA", 2019, true, true);
 INSERT INTO gre VALUES (157, 162, 2018, 830, "mathematics", 100, 2018, 55555555);
@@ -29,11 +29,11 @@ INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "CAC");
 INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "FR", 7);
 INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "CAC", 7);
 
--- Ringo's application (incomplete)
+# Ringo's application (incomplete)
 INSERT INTO academic_info (uid, transcript, recletter) VALUES (66666666, false, false);
 
 
---Insert into registration system
+#Insert into registration system
 
 insert into room VALUES
 	(1, 24, "SEH", 1300),
@@ -112,7 +112,7 @@ insert into transcript (uid, grade, crn) values (88888888, 'IP', 2), (88888888, 
 
 
 
---Insert into advising sysyem
+#Insert into advising sysyem
 insert into thesis values
     (76666667, null, null);
 
