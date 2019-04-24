@@ -7,7 +7,7 @@ INSERT INTO users VALUES
   # Faculty Reviewer
   ("FR", "Bhagi", "Narahari", "123456", "narahari@gwu.edu", 10),
   # Chair of Admissions Comm
-  ("CAC", "John", "Smith" "123456", "jsmith@gmail.com", 42142172),
+  ("CAC", "John", "Smith" ,"123456", "jsmith@gmail.com", 42142172),
   # Applicants
   ("A", "John", "Lennon", "plsletmein", "john_lennon@gmail.com", 55555555),
   ("A", "Ringo", "Starr", "Apply!", "ringostarr@gmail.com", 66666666);
@@ -122,13 +122,13 @@ insert into loginusers values
     ('student', 2, '123456'),/*George Harrison*/
     ('student', 88888888, '123456'),
     ('student', 99999999, '123456'),
-    ('student', 66666667, '123456'),
-    ('student', 76666667, '123456'),
+    #('student', 66666667, '123456'),
+    #('student', 76666667, '123456'),
     ('graduate_secretary', 6 , '123456'),
     ('systems_administrator', 5,  '123456'),
     ('advisor', 10, '123456'), /*Narahari*/
     ('advisor', 12, '123456'), /*Vora*/
-    ('alumni', 65656565, '2222'),
+    #('alumni', 65656565, '2222'),
     ('alumni', 77777777, '4444'),
     #('alumni', 88888888, '8888');
 
