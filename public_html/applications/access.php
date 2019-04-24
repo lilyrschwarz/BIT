@@ -107,7 +107,7 @@
 
       <br><br>
 
-      <form method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/registration/public_html/login.php">
+      <form method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php"> 
         <input type="submit" name="submit" value="Go To Student Services" class="btn">
       </form>
 

@@ -27,6 +27,9 @@
 			font-weight: bold;
 			color: red;
 		}
+		.center {
+			text-align: center;
+		}
 
 
 		/*.box {
@@ -67,7 +70,8 @@
 	<h2 style="text-align: center;">Graduate Application System</h2>
 	<div class="row">
 		<!-- Log in -->
-		<div class="column box">
+		
+			<div class="green-bg box">
 			<h3>Log In</h3>
 			<p>Log in to complete your application, view its status, or see the final decision</p>
 			<?php echo $_SESSION['errL']; ?><br>
@@ -76,11 +80,12 @@
 				<input type="password" name="password_login" placeholder="Password" required><br/><br/>
 				<input type="submit" name="login" value="Log In">
 			</form>
-		</div>
+			</div>
+		
 
 
 		<!-- Sign up -->
-		<div class="column box">
+			<div class="green-bg box">
 			<h3>Sign Up</h3>
 			<p>Sign up here if you don't already have an account to begin your application</p>
 			<?php echo $_SESSION['errS']; ?><br>
@@ -92,7 +97,7 @@
 				<input type="text" name="lname" required><br/><br/>
 
 				<label for="email">Email:</label>
-				<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br/><br/>
+				<input style="font-size:14pt;" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br/><br/>
 
 				<label for="password">Password:</label>
 				<input type="password" name="password" required><br/>
@@ -103,11 +108,11 @@
 			    <input type="submit" name="signup" value="Create Account"><br/>
 			</form>
 			<br/>
-		</div>
+			</div>
 	</div>
 
 	<!-- RESET button -->
-	<br/><br/><br/>
+	<br/>
 	<div align='center';>
 		<form action="reset.php" method="POST">
 			<input type="submit" name="RESET" value="RESET">

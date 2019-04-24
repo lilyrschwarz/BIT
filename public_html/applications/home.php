@@ -25,6 +25,17 @@
 	    	right: 10px;
 	    	top: 20px;
     	}
+    	.btn {
+	      background-color: #4CAF50;
+	      color: white;
+	      padding: 12px;
+	      margin: 10px 0;
+	      border: none;
+	      width: 40%;
+	      border-radius: 3px;
+	      cursor: pointer;
+	      font-size: 17px;
+    	}
 
 	</style>
 	
@@ -70,7 +81,7 @@
 			if (!isset($row['status']) || $row['status'] == 1) {
 				echo "Application incomplete</p>";
 				echo "<form align='center' action='application_form.php' method='post'>
-	    				<input type='submit' value='Start Application'>
+	    				<input type='submit' value='Start Application' class='btn'>
 					  </form>";
 			}
 
@@ -79,7 +90,7 @@
 				echo "Your application is pending</p>";
 				echo "<p style='text-align: center;'>We are still waiting to receive your transcript and recommendation letter, please check back later.</p>";
 				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application'>
+	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -88,7 +99,7 @@
 				echo "Your application is pending</p>";
 				echo "<p style='text-align: center;'>We are still waiting to receive your transcript, please check back later.</p>";
 				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application'>
+	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -97,7 +108,7 @@
 				echo "Your application is pending</p>";
 				echo "<p style='text-align: center;'>We are still waiting to receive your recommendation letter, please check back later.</p>";
 				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application'>
+	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -106,7 +117,7 @@
 				echo "Your application is complete!</p>";
 				echo "<p style='text-align: center;'>Refer back to this page frequently to see when a decision has been made.</p>";
 				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application'>
+	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -123,7 +134,7 @@
 				'
 					<span class="center">
 					<form method="post" action="acceptance_fee.php">
-					<input type="submit" name="submit" value="Accept Admission">
+					<input type="submit" name="submit" value="Accept Admission" class='btn'>
 					</form></span>
 				';
 			}
