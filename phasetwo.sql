@@ -1,8 +1,10 @@
 --Advising Drop
+set session foreign_key_checks = 0;
+
 drop table if exists alumni cascade;
 drop table if exists systems_administrator cascade;
 drop table if exists graduate_secretary cascade;
-drop table if exists transcript cascade;
+--drop table if exists transcript cascade;
 drop table if exists student cascade;
 drop table if exists advisor cascade;
 drop table if exists form1 cascade;
@@ -310,3 +312,8 @@ CREATE TABLE transcript (
   foreign key (uid) references user(uid),
   foreign key (crn) references course(crn)
 );
+
+set session foreign_key_checks = 1;
+
+
+
