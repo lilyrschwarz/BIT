@@ -1,17 +1,19 @@
 <?php
 
 session_start();
+if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
+}
+else{
+  echo $_SESSION['login_user'].$_SESSION['role'];
+  header("Location: login.php");
+}
 
 $servername = "localhost";
 $username = "SJL";
 $password = "SJLoss1!";
 $dbname = "SJL";
 
-//If they somehow got here without logging in, politely send them away
-if(!$_SESSION['loggedin']) {
-    header("Location: login.php");
-    die();
-}
+
   $db = mysqli_connect($servername, $username, $password, $dbname);
   if (!$db) {
           die("connection failed" . mysqli_connect_error());

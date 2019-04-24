@@ -1,5 +1,5 @@
 <?php
-/*    session_start();
+session_start();
 
     if($_SESSION['login_user'] && $_SESSION['role'] == 'student'){
 
@@ -15,8 +15,7 @@
     else if($_POST['phd']){
         header("Location: audit_phd.php");
     }
-*/
-    session_start();
+
 
     //connect to database
     $servername = "localhost";
