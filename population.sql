@@ -120,6 +120,8 @@ insert into loginusers values
      /*given the following 2*/
     ('student', 1, '123456'),/*Paul McCartney*/
     ('student', 2, '123456'),/*George Harrison*/
+    ('student', 3, '123456'),/*George Harrison*/
+
     ('student', 88888888, '123456'),
     ('student', 99999999, '123456'),
     #('student', 66666667, '123456'),
@@ -132,19 +134,19 @@ insert into loginusers values
     ('alumni', 77777777, '4444');
     #('alumni', 88888888, '8888');
 
+insert into advisor values
+    (10,  'Narahari'),
+    (12, 'Vora');
+
 insert into student values
     ( 1, 'Richard', 'Sear', 'Wisconsin Ave', 'searri@gwu.edu',"0123456789", 'Masters', 10, 3.3750, null, 0, 0, null),
     ( 2, 'Rachell', 'Kim', 'Wisconsin Ave', 'rachellkim@gwu.edu', "0123456789", 'Masters', 12, 2.8888, null, 0, 0, null),
-    ( 3, 'Selin', 'Onal', 'Wisconsin Ave', 'selingonal@gwu.edu', "0123456789", 'Masters', 12, 2.8888, null, 0, 0, null),
+    ( 3, 'Selin', 'Onal', 'Wisconsin Ave', 'selingonal@gwu.edu', "0123456789", 'PhD', 12, 2.8888, null, 0, 0, null),
     (88888888, 'Billie', 'Holiday', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'Masters', 12, null, null, 1, 0, null),
     (99999999, 'Diana', 'Krall', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'PhD', 12, null, null, 0, 0, null);
 
 insert into alumni values
     ( 77777777, 'Eric', 'Clapton', 'Somewhere, Pittsburgh', 'vic@school.edu', 1234567, 'Masters', 10, 2014, 'spring');
-
-insert into advisor values
-    (10,  'Narahari'),
-    (12, 'Vora');
 
 insert into systems_administrator values
     (5);
