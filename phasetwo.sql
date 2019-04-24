@@ -19,6 +19,8 @@ DROP TABLE IF EXISTS rec_letter CASCADE;
 DROP TABLE IF EXISTS academic_info CASCADE;
 DROP TABLE IF EXISTS personal_info CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS transcript CASCADE;
+
 --Registration Drop
 DROP TABLE IF EXISTS transcript CASCADE;
 DROP TABLE IF EXISTS course CASCADE;
@@ -143,7 +145,6 @@ CREATE TABLE users (
   role varchar(3) NOT NULL,
   fname char(15) NOT NULL,
   lname char(15) NOT NULL,
-  username varchar(20) NOT NULL,
   password varchar(20) NOT NULL,
   email varchar(50) NOT NULL,
   userID int(8) NOT NULL,
@@ -154,7 +155,11 @@ CREATE TABLE personal_info (
   fname char(15),
   lname char(15),
   uid int(8) NOT NULL,
-  address varchar(50),
+  street varchar(20),
+  city varchar(20),
+  state varchar(2),
+  zip int(5),
+  phone varchar(10),
   ssn int(9),
   PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
@@ -168,7 +173,7 @@ CREATE TABLE academic_info (
   semester char(2),
   year int(4),
   transcript boolean,
-  recletter boolean,
+  recletter boolean, 
   PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
@@ -194,21 +199,21 @@ CREATE TABLE app_review (
   reason char,
   rating int,
   advisor char(30),
-  status int NOT NULL DEFAULT 1,
+  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-admitted
   PRIMARY KEY (reviewID),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
 CREATE TABLE rec_review (
-  reviewID int(8) NOT NULL,
+  reviewID int(8) NOT NULL, 
   reviewerRole varchar(3),
   rating int,
-  generic boolean,
-  credible boolean,
+  generic boolean, 
+  credible boolean, 
   uid int(8) NOT NULL,
-  recID int,
-  PRIMARY KEY (reviewID),
+  PRIMARY KEY (recID, reviewerRole),
   FOREIGN KEY (uid) REFERENCES users(userID),
+  recID int,
   FOREIGN KEY (recID) REFERENCES rec_letter(recID),
   FOREIGN KEY (reviewID) REFERENCES app_review(reviewID)
 );
@@ -235,6 +240,13 @@ CREATE TABLE prior_degrees (
   deg_type char(3),
   PRIMARY KEY (deg_type, uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
+);
+
+CREATE TABLE transcript (
+	uid int(8),
+	pdf BLOB,
+	PRIMARY KEY (uid),
+	FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
 
