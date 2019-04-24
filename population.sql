@@ -49,19 +49,19 @@ insert into room VALUES
 	(11, 30, "SEH", 3040),
 	(12, 30, "SEH", 5040);
 
-insert into user (fname, lname, street, city, state, zip, phone, email, password, active, type)VALUES
-	("Richard", "Sear", "Wisconsin Ave", "Washington", "DC", 20052, "0123456789", "searri@gwu.edu", "123456", "yes", "MS"),
-	("Rachell", "Kim", "I Street", "Washington", "DC", 20052, "1234567890", "rachell@gwu.edu", "123456", "yes", "MS"),
-	("Selin", "Onal", "Pennsylvania Ave", "Washington", "DC", 20052, "2345678901", "selingonal@gwu.edu", "123456", "no", "PHD"),
-	("Maya", "Shende", "Wisconsin Ave", "Washington", "DC", 20052, "3456789012", "shende@gwu.edu", "123456", "yes", "inst"),
-	("Dietrich", "Reidenbaugh", "Pennsylvania Ave", "Washington", "DC", 20052, "4567890123", "dreidenbaugh@gwu.edu", "123456", "yes", "admin"),
-	("Dawn", "Ginetti", "Franklin St", "Arlington", "VA", 22201, "5678901234", "dawn@gwu.edu", "123456", "yes", "secr"),
-	("Aylin", "Caliskan", "Wisconsin Ave", "Washington", "DC", 20052, "6789012345", "caliskan@gwu.edu", "123456", "yes", "inst"),
-	("Timothy", "Wood", "Wisconsin Ave", "Washington", "DC", 20052, "7890123456", "timwood@gwu.edu", "123456", "yes", "inst"),
-	("Abdou", "Youssef", "Wisconsin Ave", "Washington", "DC", 20052, "8901234567", "youssef@gwu.edu", "123456", "yes", "inst"),
-	("Bhagi", "Narahari", "Wisconsin Ave", "Washington", "DC", 20052, "9012345678", "narahari@gwu.edu", "123456", "yes", "inst"),
-	("Pablo", "Bolton", "Wisconsin Ave", "Washington", "DC", 20052, "0012345678", "pablo@gwu.edu", "123456", "yes", "inst"),
-	("Poorvi", "Vora", "Wisconsin Ave", "Washington", "DC", 20052, "112345678", "vora@gwu.edu", "123456", "yes", "inst");
+insert into user (fname, lname, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer)VALUES
+	("Richard", "Sear", "Wisconsin Ave", "Washington", "DC", 20052, "0123456789", "searri@gwu.edu", "123456", "yes", "MS", NULL, NULL),
+	("Rachell", "Kim", "I Street", "Washington", "DC", 20052, "1234567890", "rachell@gwu.edu", "123456", "yes", "MS", NULL, NULL),
+	("Selin", "Onal", "Pennsylvania Ave", "Washington", "DC", 20052, "2345678901", "selingonal@gwu.edu", "123456", "no", "PHD", NULL, NULL),
+	("Maya", "Shende", "Wisconsin Ave", "Washington", "DC", 20052, "3456789012", "shende@gwu.edu", "123456", "yes", "inst", NULL, NULL),
+	("Dietrich", "Reidenbaugh", "Pennsylvania Ave", "Washington", "DC", 20052, "4567890123", "dreidenbaugh@gwu.edu", "123456", "yes", "admin", NULL, NULL),
+	("Dawn", "Ginetti", "Franklin St", "Arlington", "VA", 22201, "5678901234", "dawn@gwu.edu", "123456", "yes", "secr", NULL, NULL),
+	("Aylin", "Caliskan", "Wisconsin Ave", "Washington", "DC", 20052, "6789012345", "caliskan@gwu.edu", "123456", "yes", "inst", NULL, NULL),
+	("Timothy", "Wood", "Wisconsin Ave", "Washington", "DC", 20052, "7890123456", "timwood@gwu.edu", "123456", "yes", "inst", NULL, NULL),
+	("Abdou", "Youssef", "Wisconsin Ave", "Washington", "DC", 20052, "8901234567", "youssef@gwu.edu", "123456", "yes", "inst", NULL, NULL),
+	("Bhagi", "Narahari", "Wisconsin Ave", "Washington", "DC", 20052, "9012345678", "narahari@gwu.edu", "123456", "yes", "inst", "yes", "yes"),
+	("Pablo", "Bolton", "Wisconsin Ave", "Washington", "DC", 20052, "0012345678", "pablo@gwu.edu", "123456", "yes", "inst", NULL, NULL),
+	("Poorvi", "Vora", "Wisconsin Ave", "Washington", "DC", 20052, "112345678", "vora@gwu.edu", "123456", "yes", "inst", NULL, "yes");
 
 
 insert into course (dept, courseno, name, credits, prereq1, prereq2, day, tme, section, year, semester, instructor, location)
@@ -130,13 +130,13 @@ insert into loginusers values
     ('advisor', 12, '123456'), /*Vora*/
     ('alumni', 65656565, '2222'),
     ('alumni', 77777777, '4444'),
-    ('alumni', 88888888, '8888');
+    #('alumni', 88888888, '8888');
 
 insert into student values
     ( 1, 'Richard', 'Sear', 'Wisconsin Ave', 'searri@gwu.edu',"0123456789", 'Masters', 10, 3.3750, null, 0, 0, null),
     ( 2, 'Rachell', 'Kim', 'Wisconsin Ave', 'rachellkim@gwu.edu', "0123456789", 'Masters', 12, 2.8888, null, 0, 0, null),
     ( 3, 'Selin', 'Onal', 'Wisconsin Ave', 'selingonal@gwu.edu', "0123456789", 'Masters', 12, 2.8888, null, 0, 0, null),
-    ( 88888888, 'Billie', 'Holiday', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'Masters', 12, null, null, 1, 0, null),
+    (88888888, 'Billie', 'Holiday', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'Masters', 12, null, null, 1, 0, null),
     (99999999, 'Diana', 'Krall', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'PhD', 12, null, null, 0, 0, null);
 
 insert into alumni values
