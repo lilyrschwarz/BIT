@@ -2,7 +2,17 @@
 <html>
 <head>
 	<title>Update Final Decision</title>
+	<link rel="stylesheet" href="style.css">
 </head>
+<style>
+	.topright {
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
+    }
+</style>
+
+<span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
 <body>
 
 	<?php session_start();
@@ -14,7 +24,7 @@
     	}
 
 		// connect to mysql
-		$conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+		$conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
 		// Check connection
 		if (!$conn) {
 			die("Connection failed: " . mysqli_connect_error());
@@ -27,17 +37,17 @@
 		}
 		else if (isset($_POST['submit'])) {
 			if ($_POST['decision'] == 'Reject') {
-				$r = mysqli_query($conn, "UPDATE app_review SET status=6 WHERE uid=".$_SESSION['applicantID']);
+				$r = mysqli_query($conn, "UPDATE app_review SET status=8 WHERE uid=".$_SESSION['applicantID']);
 				if (!$r)
 					echo "Error: ".mysqli_error();
 			}
 			else if ($_POST['decision']=='Borderline Admit' || $_POST['decision']=='Admit Without Aid') {
-				$r = mysqli_query($conn, "UPDATE app_review SET status=4 WHERE uid=".$_SESSION['applicantID']);
+				$r = mysqli_query($conn, "UPDATE app_review SET status=6 WHERE uid=".$_SESSION['applicantID']);
 				if (!$r)
 					echo "Error: ".mysqli_error();
 			}
 			else if ($_POST['decision'] == 'Admit With Aid') {
-				$r = mysqli_query($conn, "UPDATE app_review SET status=5 WHERE uid=".$_SESSION['applicantID']);
+				$r = mysqli_query($conn, "UPDATE app_review SET status=7 WHERE uid=".$_SESSION['applicantID']);
 				if (!$r)
 					echo "Error: ".mysqli_error();
 			}
@@ -80,11 +90,11 @@
 
 		// if CAC has reviewed, show the final decision
 		else {
-			if ($row['status'] == 4) 
+			if ($row['status'] == 6) 
 				echo "<p>The final decision made by the CAC was to admit without aid</p>";
-			else if ($row['status'] == 5) 
+			else if ($row['status'] == 7) 
 				echo "<p>The final decision made by the CAC was to admit with aid</p>";
-			else if ($row['status'] == 6) 
+			else if ($row['status'] == 8) 
 				echo "<p>The final decision made by the CAC was to reject the student</p>";
 			else 
 				echo "<p>Error: The CAC made a review but an invalid decision is stored</p>";

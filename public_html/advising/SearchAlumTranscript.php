@@ -1,17 +1,19 @@
 <?php
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
+session_start();
+
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$db = new mysqli($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
+
   $gpa_update_in_student = null;
-  $db = new mysqli($servername, $username, $password, $dbname);
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
 ?>
 
@@ -55,7 +57,7 @@ li a:hover:not(.active) {
   <li><a class="active" href="advisor.php">Home</a></li>
   <li><a href="SearchTranscript.php">Search Transcript</a></li>
   <li><a href="SearchForm1.php">Review Form1</a></li>
-  <li><a href="viewThesisFile.php">View Thesis</a></li>  
+  <li><a href="viewThesisFile.php">View Thesis</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul><br/><br/>
 
@@ -92,7 +94,7 @@ li a:hover:not(.active) {
   if($db->connect_error){echo "db connect error";}
   $alum_id = $_POST['alum_id'] ?? '';
 
-  $info_array = $db->query("SELECT f_name, l_name, program_type, grad_year, grad_semester, advisor.name as aname 
+  $info_array = $db->query("SELECT f_name, l_name, program_type, grad_year, grad_semester, advisor.name as aname
                             FROM alumni, advisor
                             WHERE advisor = advisor.university_id and alumni.university_id =".$alum_id);
 
@@ -126,13 +128,13 @@ li a:hover:not(.active) {
 
 <?php
   if($db->connect_error){echo "db connect error";}
-  $course_array = $db->query("SELECT subject, course_num, year, semester, credits, final_grade 
-                              FROM transcript 
+  $course_array = $db->query("SELECT subject, course_num, year, semester, credits, final_grade
+                              FROM transcript
                               WHERE not(semester = 'spring' and year = '2019') and university_id =".$alum_id);
 
   $sum = 0;
-  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits 
-                             FROM transcript 
+  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits
+                             FROM transcript
                              WHERE not(semester = 'spring' and year = '2019') and university_id =".$alum_id);
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
@@ -207,4 +209,3 @@ if($row['final_grade'] == 'A'){
 </body>
 </html>
                                                               195,1         Bot
-

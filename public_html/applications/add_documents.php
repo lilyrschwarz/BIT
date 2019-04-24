@@ -1,6 +1,15 @@
 <!DOCTYPE html>
+<style>
+	.topright {
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
+    }
+</style> 
+<span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
 <head>
     <title>Received Documents</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -13,7 +22,7 @@
     	}
 
     	// get the applicant the GS wants to update
-    	$conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+    	$conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
     	$applicants = mysqli_query($conn, "SELECT * FROM users WHERE role='A'");
 		while ($row = $applicants->fetch_assoc()) {
 			if (isset($_POST[$row['userID']])) {

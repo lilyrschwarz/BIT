@@ -8,9 +8,9 @@
 
   // connect to mysql
   $servername = "localhost";
-  $user = "TheSpookyLlamas";
-  $pass = "TSL_jjy_2019";
-  $dbname = "TheSpookyLlamas";
+  $user = "sloanej";
+  $pass = "Westland76!";
+  $dbname = "sloanej";
   $conn = mysqli_connect($servername, $user, $pass, $dbname);
   // Check connection
   if (!$conn) {
@@ -95,7 +95,8 @@
 ?>
 
 <html>
-  
+
+ <head>
   <title>
     CAC Review
   </title>
@@ -103,9 +104,9 @@
   <style>
     .field {
       position: absolute;
-      left: 140px;
+      left: 180px;
     }
-    body{line-height: 1.6;}
+    /*body{line-height: 1.6;}*/
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -113,10 +114,20 @@
        width: 100%;
     }
     .error {color: #FF0000;}
-    table, th, td {
-      text-align: left;
+
+    .topright {
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
     }
+    /*table, th, td {
+      text-align: left;
+    }*/
   </style>
+  <link rel="stylesheet" href="style.css">
+ </head>
+
+  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
   <h1> CAC Review </h1>
 

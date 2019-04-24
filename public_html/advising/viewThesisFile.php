@@ -1,17 +1,17 @@
 <?php
 
-  session_start();
-  if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
-  }
-  else{
-    echo $_SESSION['login_user'].$_SESSION['role'];
-    header("Location: login.php");
-  }
+session_start();
 
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
   $db = mysqli_connect($servername, $username, $password, $dbname);
   if (!$db) {
           die("connection failed" . mysqli_connect_error());
@@ -70,8 +70,8 @@ li a:hover:not(.active) {
 
 <form method="post">
         <?php
-  $result = $db->query("SELECT f_name, l_name,university_id 
-	  		FROM student 
+  $result = $db->query("SELECT f_name, l_name,university_id
+	  		FROM student
 			WHERE program_type = 'PhD' AND advisor =".$_SESSION['login_user']) or die ("cannot retrieve names");
         echo "Advisee: ";
         echo "<select name='student_id'>";
@@ -84,7 +84,7 @@ li a:hover:not(.active) {
 </form>
 
 <?php
- 
+
   $student_id = $_POST['student_id'];
   $_SESSION['student_id'] = $student_id;
   //see if student submitted thesis
@@ -96,7 +96,7 @@ li a:hover:not(.active) {
   if(isset($_POST['submit'])) {
      if(is_null($row['FileName'])) {
 	   echo "Student has not submitted a thesis.";
-           
+
 	   //updates student thesis requirement to 0, unable to graduate
            $updateThesis = $db->query("UPDATE student
                                        SET thesis_approved = 0
@@ -104,13 +104,13 @@ li a:hover:not(.active) {
      }
      else {
 
-	//opens thesis in another window     
+	//opens thesis in another window
 	$findFile = mysqli_query($db, "SELECT FilePath, FileName FROM thesis where university_id=".$student_id);
  	while($row = mysqli_fetch_assoc($findFile)) {
              $url = $row['FilePath'].$row['FileName'];
              echo "<script>window.open('$url', '_blank');</script>";
 	}
-	
+
 	//allows advisor to approve thesis
 	echo "<form action='ThesisApproved.php' method='post'>
                  <input type='submit' name='approve' value='APPROVE'/>

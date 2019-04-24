@@ -4,7 +4,7 @@
   if we're ready to move to the next page of the application */
 
   // connect to mysql
-  $conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+  $conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
   // Check connection
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -27,15 +27,16 @@
 ?>
 
 <html>
-  
+ <head>
   <title>
     Reject
   </title>
   
   <style>
-    body{
+
+    /*body{
       line-height: 1.6;
-    }
+    }*/    
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -43,7 +44,15 @@
        width: 100%;
     }
     .error {color: #FF0000;}
+    .topright {
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
+    }
   </style>
+  <link rel="stylesheet" href="style.css">
+ </head>
+  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
   <h2> Reason for rejecting applicant: </h2>
 

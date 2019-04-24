@@ -26,7 +26,11 @@ CREATE TABLE personal_info (
   fname char(15),
   lname char(15),
   uid int(8) NOT NULL,
-  address varchar(50),
+  street varchar(20),
+  city varchar(20),
+  state varchar(2),
+  zip int(5),
+  phone varchar(10),
   ssn int(9),
   PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
@@ -66,7 +70,7 @@ CREATE TABLE app_review (
   reason char,
   rating int,
   advisor char(30),
-  status int NOT NULL DEFAULT 1,
+  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-admitted
   PRIMARY KEY (reviewID),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
@@ -128,8 +132,8 @@ INSERT INTO users VALUES
 
 -- insert personal data for applicants
 INSERT INTO personal_info VALUES
-  ("John", "Lennon", 55555555, "123 Main St, New York NY", 111111111),
-  ("Ringo", "Starr", 66666666, NULL, 222111111);
+  ("John", "Lennon", 55555555, "123 Main St", "New York", "NY", "23321", "8604626594", 111111111),
+  ("Ringo", "Starr", 66666666, NULL, NULL, NULL, NULL, NULL, 222111111);
 
 -- John's application (complete)
 INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES ("Recommender", "1", "recommend@gmail.com", "GWU", 55555555);

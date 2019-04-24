@@ -1,16 +1,17 @@
 <?php
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
-  $db = new mysqli($servername, $username, $password, $dbname);
+session_start();
+
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$db = new mysqli($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
 ?>
 <!DOCTYPE html>
@@ -51,7 +52,7 @@ background-color: #4CAF50;
   <li><a class="active" href="advisor.php">Home</a></li>
   <li><a href="SearchTranscript.php">Search Transcript</a></li>
   <li><a href="SearchForm1.php">Review Form1</a></li>
-  <li><a href="viewThesisFile.php">View Thesis</a></li>  
+  <li><a href="viewThesisFile.php">View Thesis</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul><br/></br>
   <div class="w3-container">
@@ -71,8 +72,8 @@ background-color: #4CAF50;
     	?>
         <input type="submit"/>
      </form>
-<?php 
-  $student_id = $_POST['student_id']; 
+<?php
+  $student_id = $_POST['student_id'];
   $student_name = $db->query("SELECT f_name, l_name FROM student WHERE university_id=".$student_id);
   $row = mysqli_fetch_array($student_name);
   $fullname = $row['f_name']." ".$row['l_name'];

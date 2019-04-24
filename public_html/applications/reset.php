@@ -1,7 +1,7 @@
 <?php
 
 	// make connection to database
-	$conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+	$conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
 	if (!$conn) die("Connection failed: ".mysqli_connect_error());
 
 	// open the sql file and read from it

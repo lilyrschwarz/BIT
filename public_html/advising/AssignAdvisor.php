@@ -7,17 +7,26 @@
 //  header("Location: login.php");
 //}
 
+session_start();
 
+//connect to database
 $servername = "localhost";
-$username = "BLT";
-$password = "Blt1234!";
-$dbname = "BLT";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
+
 $update=null;
 $studentsql=null;
 $advisorsql=null;
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
 if (!$conn) {
@@ -72,7 +81,7 @@ li a:hover:not(.active) {
   <ul>
   <li><a class="active" href="gs.php">Home</a></li>
   <li><a href="SearchStudentData.php">Search Student Information</a></li>
-  <li><a href="SearchStudentTranscriptGS.php">Search Student Transcript</a></li> 
+  <li><a href="SearchStudentTranscriptGS.php">Search Student Transcript</a></li>
   <li><a href="AssignAdvisor.php">Assign Advisor to Student</a></li>
   <li><a href="SearchStudentRequirements.php">Graduate a Student</a></li>
   <li><a href="logout.php">Logout</a></li>
@@ -125,7 +134,7 @@ li a:hover:not(.active) {
 
       if(($update_advisor) === TRUE) {
 	      echo "Record updated successfully";
-	      	      
+
       } //else {
         //      echo "Error updating record: " . $conn->error;
      // }
@@ -142,13 +151,13 @@ li a:hover:not(.active) {
       </tr>
 
       <?php
-      
+
 
       //get students name and advisor name and give feedback
       $student_array = $conn->query("SELECT s.f_name, s.l_name, a.name
 			       FROM student s, advisor a
 			       WHERE s.advisor=a.university_id AND s. university_id=".$university_id);
-	
+
 
       if (!empty($student_array)) {
             while($row = $student_array->fetch_assoc())
@@ -159,7 +168,7 @@ li a:hover:not(.active) {
         <td><?php echo $row["f_name"]; ?><?php echo " " . $row["l_name"]; ?></td>
 	<td><?php echo $row["name"]; ?></td>
       </tr>
-      
+
       <?php
                 }
       }

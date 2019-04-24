@@ -1,5 +1,5 @@
 <?php
-    session_start();
+/*    session_start();
 
     if($_SESSION['login_user'] && $_SESSION['role'] == 'student'){
 
@@ -15,12 +15,22 @@
     else if($_POST['phd']){
         header("Location: audit_phd.php");
     }
+*/
+    session_start();
 
+    //connect to database
     $servername = "localhost";
-    $username = "BLT";
-    $password = "Blt1234!";
-    $dbname = "BLT";
+    $username = "SJL";
+    $password = "SJLoss1!";
+    $dbname = "SJL";
     $db = new mysqli($servername, $username, $password, $dbname);
+
+    //If they somehow got here without logging in, politely send them away
+    if(!$_SESSION['loggedin']) {
+        header("Location: login.php");
+        die();
+    }
+
 
     $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 

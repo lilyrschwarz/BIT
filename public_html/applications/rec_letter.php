@@ -1,50 +1,40 @@
 <?php
   session_start(); 
   // connect to mysql
-  $conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+  $conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
   // Check connection
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
   }
   
   //FORM VALIDATION
-  function isValidUID($value){
-  	if (strlen($value) != 8){
-  		return false;
-  	}
-  	if (!is_numeric($value)){
-  		return false;
-  	}
-	return true;
-  }
-
   $dataReady = true;
   if (isset($_POST['submit'])){
 
-    $uidTest = $_POST["uid"];
-    $uidErr = "";
-    $uid = "";
+    $recIDTest = $_POST["recID"];
+    $recIDErr = "";
+    $recID = "";
     $recTest = $_POST["rec"];
     $recErr = "";
     $rec = "";
 
-    if(empty($uidTest)){
-    	$uidErr = "Applicant uid is required";
+    if(empty($recIDTest)){
+    	$recIDErr = "Code required";
     	$dataReady = false;
     }
-    else if (!isValidUID($uidTest)){
-    	$uidErr = "Invalid uid";
+    else if (!is_numeric($recIDTest)){
+    	$recIDErr = "Invalid code";
     	$dataReady = false;
     }
     else{
-    	$sql = "SELECT * FROM rec_letter WHERE uid = " .$uidTest. "";
+    	$sql = "SELECT * FROM rec_letter WHERE recID = " .$recIDTest. "";
     	$result = mysqli_query($conn, $sql) or die ("************* Select query failed *************");
     	if (mysqli_num_rows($result) == 0){
-	        $uidErr = "There is no applicant with this uid";
+	        $recIDErr = "The code entered does not match any of the applicants";
 	        $dataReady = false;
-        }
-        else
-    		$uid = $uidTest;
+      }
+      else
+    		$recID = $recIDTest;
     }
 
     if(strlen($recTest) > 10000){
@@ -61,15 +51,15 @@
 
 
     if ($dataReady){
-    	$sql = "UPDATE rec_letter SET recommendation = '" .$rec. "' WHERE uid = " .$uid; 
-    	$result = mysqli_query($conn, $sql) or die ("************* Update query failed *************");
-    	die("<br><h2> Recommendation Letter Sent. Please Exit This Page </h2>");
+    	$sql = "UPDATE rec_letter SET recommendation = '" .$rec. "' WHERE recID = " .$recID. "";
+    	$result = mysqli_query($conn, $sql) or die ("The format of your recommendation could not be accepted. <br>Note: copying and pasting from outside the site may cause issues. Try typing it out instead.");
+    	die("<h3> Recommendation Letter Sent. Please Exit This Page </h3>");
     }
   }
 ?>
 
 <html>
-  
+ <head>
   <title>
     Recomendation Letter
   </title>
@@ -77,9 +67,9 @@
   <style>
     .field {
       position: absolute;
-      left: 140px;
+      left: 180px;
     }
-    body{line-height: 1.6;}
+    /*body{line-height: 1.6;}*/
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -88,15 +78,17 @@
     }
     .error {color: #FF0000;}
   </style>
+  <link rel="stylesheet" href="style.css">
+ </head>
   
    <h1> Write Your Recommendation </h1>
    
   <body>
     
     <form id="mainform" method="post">
-      Enter the student's uid that was supplied in the email: <br>
-      <input type="text" name="uid">
-      <span class="error"><?php echo " " . $uidErr;?></span></span>
+      Enter the code that was supplied in the email: <br>
+      <input type="text" name="recID">
+      <span class="error"><?php echo " " . $recIDErr;?></span></span>
       <br><br>
       
       <h3> Write recommendation below </h3>

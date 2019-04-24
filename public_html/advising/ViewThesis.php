@@ -1,18 +1,17 @@
 <?php
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
+session_start();
 
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
-  $db = new mysqli($servername, $username, $password, $dbname);
-  ?>
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$db = new mysqli($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
 
 <!DOCTYPE html>
 <html>
@@ -109,7 +108,7 @@ li a:hover:not(.active) {
 
                     if(isset($_POST['approve'])) {
                         echo "Thesis approved.";
-                        $updateThesis = $db->query("UPDATE student SET thesis_approved = 1 
+                        $updateThesis = $db->query("UPDATE student SET thesis_approved = 1
                                                     WHERE university_id=".$student_id);
 		}
 

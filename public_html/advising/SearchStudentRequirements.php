@@ -1,16 +1,16 @@
 <?php
 session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
-}
-else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
-}
 
-$servername = 'localhost';
-$username = "BLT";
-$password = "Blt1234!";
-$dbname = "BLT";
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
 $studentsql = null;
 
 //create connection
@@ -78,7 +78,7 @@ li a:hover:not(.active) {
     </form>
 
 <!-- check to see if a student has met requirements -->
-<?php 
+<?php
 $student_id = $_POST['student_id'] ?? '';
 $_SESSION['studentid'] = $student_id;
 
@@ -103,7 +103,7 @@ if($reqcheck==1) {
 	echo "Student has not met requirements";
 	$graduate = 'no';
 }
-?> 
+?>
 
     </div>
 </div>

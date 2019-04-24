@@ -1,19 +1,18 @@
 <?php
 session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
-}
-else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
-}
 
 $servername = "localhost";
-$username = "BLT";
-$password = "Blt1234!";
-$dbname = "BLT";
-
-//create connection
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
 $db = new mysqli($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +112,7 @@ li a:hover:not(.active) {
         <th> Address </th>
         <th> Email </th>
     </tr>
-	    
+
 	    <?php
     if($db->connect_error) {echo "connection error";}
     $university_id = $_POST['university_id'] ?? '';
@@ -145,4 +144,3 @@ li a:hover:not(.active) {
 
 </body>
 </html>
-

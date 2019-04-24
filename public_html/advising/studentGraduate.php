@@ -1,15 +1,16 @@
 <?php
 session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
-}
-else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
-}
+
 $servername = "localhost";
-$username = "BLT";
-$password = "Blt1234!";
-$dbname = "BLT";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
 $update=null;
 $studentsql=null;
 $advisorsql=null;
@@ -75,13 +76,13 @@ li a:hover:not(.active) {
   </ul><br/></br>
 
 <div class="w3-container">
-  
 
-<?php 
+
+<?php
 	//add student as an alum
 	$insertAlum = $conn->query("INSERT INTO alumni (university_id, f_name, l_name, address, email, phone_num, program_type, advisor)
-				   SELECT university_id, f_name, l_name, address, email, phone_num, program_type, advisor 
-				   FROM student 
+				   SELECT university_id, f_name, l_name, address, email, phone_num, program_type, advisor
+				   FROM student
 				   WHERE university_id=".$student_id);
 
 	//update graduation year and semester for alum
@@ -93,15 +94,15 @@ li a:hover:not(.active) {
         $alumUser = $conn->query("UPDATE users
                                   SET user_type='alumni'
                                   WHERE university_id=".$student_id);
-	
-	//delete student from student table	
+
+	//delete student from student table
 	$deleteStudent = $conn->query("DELETE FROM student
-				       WHERE university_id=".$student_id);	
+				       WHERE university_id=".$student_id);
 
 
 
 	if($insertAlum === TRUE) {
-		echo "<h1>Student successfully graduated</h1>"; 
+		echo "<h1>Student successfully graduated</h1>";
 		echo "<h2>Student has been transitioned to alumni</h2>";
 	} else {
 		echo "error";

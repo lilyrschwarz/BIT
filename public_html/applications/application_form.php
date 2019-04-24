@@ -4,14 +4,20 @@
   if we're ready to move to the next page of the application */
   $done = false;
   // connect to mysql
-  $conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+  $conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
   // Check connection
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
   }
   //HANDLE FORM VALIDATION
   $somethingEmpty = "";
-  $addressErr = "";
+
+  $streetErr = "";
+  $cityErr = "";
+  $stateErr = "";
+  $zipErr = "";
+  $phoneErr = "";
+
   $ssnErr = "";
   $degreeTypeErr = "";
   $appYearErr = "";
@@ -41,10 +47,20 @@
   $dYear4Err = "";
   $university4Err = "";
   $major4Err = "";
+
   $fnameRecErr = "";
   $lnameRecErr = "";
   $institutionErr = "";
   $emailErr = "";
+  $fnameRecErr2 = "";
+  $lnameRecErr2 = "";
+  $institutionErr2 = "";
+  $emailErr2 = "";
+  $fnameRecErr3 = "";
+  $lnameRecErr3 = "";
+  $institutionErr3 = "";
+  $emailErr3 = "";
+
   if (isset($_POST['submit'])){
     $dataReady = true;
     
@@ -53,7 +69,11 @@
     ////////////////////////////////////////////////////////////////////////
     //make sure nothing's empty
     if(
-      empty($_POST["address"]) ||
+      empty($_POST["street"]) ||
+      empty($_POST["city"]) ||
+      empty($_POST["state"]) ||
+      empty($_POST["zip"]) ||
+      empty($_POST["phone"]) ||
       empty($_POST["ssn"]) ||
       empty($_POST["degreeType"]) ||
       empty($_POST["semester"]) ||
@@ -80,7 +100,11 @@
        $dataReady = false;
     }
     
-	    $addressTest = $_POST["address"];
+	    $streetTest = $_POST["street"];
+	    $cityTest = $_POST["city"];
+	    // $stateTest = $_POST["state"];
+	    $zipTest = $_POST["zip"];
+	    $phoneTest = $_POST["phone"];
 	    $ssnTest = $_POST["ssn"];
 	    
 	    $appYearTest = $_POST["appYear"];
@@ -114,8 +138,20 @@
 	    $lnameRecTest = $_POST["lnameRec"];
 	    $institutionTest = $_POST["institution"];
 	    $emailTest = $_POST["email"];
+	    $fnameRecTest2 = $_POST["fnameRec2"];
+	    $lnameRecTest2 = $_POST["lnameRec2"];
+	    $institutionTest2 = $_POST["institution2"];
+	    $emailTest2 = $_POST["email2"];
+	     $fnameRecTest3 = $_POST["fnameRec3"];
+	    $lnameRecTest3 = $_POST["lnameRec3"];
+	    $institutionTest3 = $_POST["institution3"];
+	    $emailTest3 = $_POST["email3"];
 	    
-	    $address= "";
+	    $street = "";
+	    $city = "";
+	    $state = $_POST["state"];
+	    $zip = "";
+	    $phone = "";
 	    $ssn = "";
 	    
 	    $appYear= "";
@@ -155,6 +191,14 @@
 	    $lnameRec = "";
 	    $institution = "";
 	    $email = "";
+	    $fnameRec2 = "";
+	    $lnameRec2 = "";
+	    $institution2 = "";
+	    $email2 = "";
+	    $fnameRec3 = "";
+	    $lnameRec3 = "";
+	    $institution3 = "";
+	    $email3 = "";
 	    
 	    function isValidSSN($value, $low = 0, $high = 999999999){
 	    	$value = (int)$value;
@@ -210,17 +254,54 @@
 	    	//otherwise the year is valid so return true
 	    	return true;
 	    }
-	   
-	    if (!empty($addressTest) && !preg_match("/^[a-zA-Z0-9 ]+$/i",$addressTest)) {
-	      $addressErr = "Only letters, numbers, and white space allowed";
+
+	    if (!empty($streetTest) && !preg_match("/^[a-zA-Z0-9 ]+$/i",$streetTest)) {
+	      $streetErr = "Only letters, numbers, and white space allowed";
 	      $dataReady = false;
 	    } 
-	    else if (empty($addressTest)){
-	      $addressErr = "Address is required";
+	    else if (empty($streetTest)){
+	      $streetErr = "Street is required";
 	      $dataReady = false;
 	    }
 	    else{
-	      $address = $addressTest;
+	      $street = $streetTest;
+	    }
+	     if (!empty($cityTest) && !preg_match("/^[a-zA-Z0-9 ]+$/i",$cityTest)) {
+	      $cityErr = "Only letters, numbers, and white space allowed";
+	      $dataReady = false;
+	    } 
+	    else if (empty($streetTest)){
+	      $cityErr = "city is required";
+	      $dataReady = false;
+	    }
+	    else{
+	      $city = $cityTest;
+	    }
+	    if (empty($state)){
+	    	$stateErr = "State is required";
+	    	$dataReady = false;
+	    }
+	    if (!empty($zipTest) && !is_numeric($zipTest) && strlen((string)$zipTestp) != 5) {
+	      $zipErr = "Only 5 digit numbers allowed";
+	      $dataReady = false;
+	    } 
+	    else if (empty($zipTest)){
+	      $zipErr = "Zip is required";
+	      $dataReady = false;
+	    }
+	    else{
+	      $zip = $zipTest;
+	    }
+	    if (!empty($phoneTest) && !is_numeric($phoneTest)) {
+	      $phoneErr = "Only numbers allowed";
+	      $dataReady = false;
+	    } 
+	    else if (empty($phoneTest)){
+	      $phoneErr = "phone number is required";
+	      $dataReady = false;
+	    }
+	    else{
+	      $phone = $phoneTest;
 	    }
 	    if (!empty($ssnTest) && (!preg_match("/^[0-9]+$/i",$ssnTest) || !isValidSSN($ssnTest))) {
 	      $ssnErr = "Not a valid social security number";
@@ -233,11 +314,11 @@
 	    else{
 	      $ssn = $ssnTest;
 	    }
+
 	    if (empty($_POST['degreeType'])){
 	      $degreeTypeErr = "Degree type required";
 	      $dataReady = false;
-	    } 
-	    
+	    }
 	    if (empty($_POST['semester'])){
 	      $semesterErr = "Semester required";
 	      $dataReady = false;
@@ -521,6 +602,65 @@
 	    else{
 	      $email = $emailTest;
 	    }
+
+	    //Optional Recs
+	    $secondRec = false;
+	    if (!empty($fnameRecTest2) && !empty($lnameRecTest2) && !empty($institutionTest2) && !empty($emailTest2)){
+	    	$secondRec = true;
+	    	if (!preg_match("/^[a-zA-Z ]+$/i",$fnameRecTest2)){
+	    		$fnameRecErr2 = "Only letters, and white space allowed";
+	    		$dataReady = false;
+	    	}else{
+	    		$fnameRec2 = $fnameRecTest2;
+	    	}
+	    	if (!preg_match("/^[a-zA-Z ]+$/i",$lnameRecTest2)){
+	    		$lnameRecErr2 = "Only letters, and white space allowed";
+	    		$dataReady = false;
+	    	}else{
+	    		$lnameRec2 = $lnameRecTest2;
+	    	}
+	    	if (!preg_match("/^[a-zA-Z ]+$/i",$institutionTest2)){
+	    		$institutionErr2 = "Only letters, and white space allowed";
+	    		$dataReady = false;
+	    	}else{
+	    		$institution2 = $institutionTest2;
+	    	}
+	    	if (!filter_var($emailTest2, FILTER_VALIDATE_EMAIL)){
+	    		$emailErr2 = "Invalid email";
+	      		$dataReady = false;
+	    	}else{
+	    		$email2 = $emailTest2;
+	    	}
+	    }
+	    $thirdRec = false;
+	    if (!empty($fnameRecTest3) && !empty($lnameRecTest3) && !empty($institutionTest3) && !empty($emailTest3)){
+	    	$thirdRec = true;
+	    	if (!preg_match("/^[a-zA-Z ]+$/i",$fnameRecTest3)){
+	    		$fnameRecErr3 = "Only letters, and white space allowed";
+	    		$dataReady = false;
+	    	}else{
+	    		$fnameRec3 = $fnameRecTest3;
+	    	}
+	    	if (!preg_match("/^[a-zA-Z ]+$/i",$lnameRecTest3)){
+	    		$lnameRecErr3 = "Only letters, and white space allowed";
+	    		$dataReady = false;
+	    	}else{
+	    		$lnameRec3 = $lnameRecTest3;
+	    	}
+	    	if (!preg_match("/^[a-zA-Z ]+$/i",$institutionTest3)){
+	    		$institutionErr3 = "Only letters, and white space allowed";
+	    		$dataReady = false;
+	    	}else{
+	    		$institution3 = $institutionTest3;
+	    	}
+	    	if (!filter_var($emailTest3, FILTER_VALIDATE_EMAIL)){
+	    		$emailErr3 = "Invalid email";
+	      		$dataReady = false;
+	    	}else{
+	    		$email3 = $emailTest3;
+	    	}
+	    }
+
     
     ////////////////////////////////////////////////////////////////////////
     
@@ -538,12 +678,12 @@
       $result = mysqli_query($conn, $sql) or die ("**Check for existing personal info Error**");
       if (mysqli_num_rows($result) == 0){
 	    //fill in personal_info table iniially
-	    $sql1 = "INSERT INTO personal_info VALUES('".$fname."', '".$lname."', ".$_SESSION['id'].", '".$address."', ".$ssn.")";
+	    $sql1 = "INSERT INTO personal_info VALUES('".$fname."', '".$lname."', ".$_SESSION['id'].", '".$street."', '".$city."', '".$state."', ".$zip.", ".$phone.", ".$ssn.")";
 	    $result1 = mysqli_query($conn, $sql1) or die ("**********insert personal_info MySQL Error***********");
 	  }
 	  else{
 	  	//upadate personal_info table
-	    $sql1 = "UPDATE personal_info SET fname = '" .$fname. "', lname = '" .$lname. "', address = '" .$address. "', ssn = " .$ssn." WHERE uid = " .$_SESSION['id'];
+	    $sql1 = "UPDATE personal_info SET fname = '" .$fname. "', lname = '" .$lname. "', street = '" .$street. "', city = '" .$city. "', state = '" .$state. "', zip = " .$zip. ", phone = " .$phone. ", ssn = " .$ssn." WHERE uid = " .$_SESSION['id'];
 	    $result1 = mysqli_query($conn, $sql1) or die ("**********update personal_info MySQL Error***********");
 	  }
       //GRE
@@ -581,10 +721,37 @@
       	$sql4 = "INSERT INTO prior_degrees VALUES (".$gpa4.", " .$dYear4.", '".$university4."', '" .$major4. "', " .$_SESSION['id']. ", '".$type4."')"; 
         $result4 = mysqli_query($conn, $sql4) or die ("**********5.3 MySQL Error***********");
       }
-      //fill in rec_letter table
+
+
+      //fill in rec_letter table:
       $sql5 = "INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES('".$fnameRec."', '".$lnameRec."', '".$email."', '".$institution."', " . $_SESSION['id'] . ")";
       $result5 = mysqli_query($conn, $sql5) or die ("**********6th MySQL Error***********");
-
+      //get recID 1
+      $recID1;
+      $sql = "SELECT MAX(recID) AS id FROM rec_letter";
+      $result = mysqli_query($conn, $sql) or die ("get recID 1 failed");
+  	  $value = mysqli_fetch_object($result);
+ 	  $recID1 = $value->id;
+      if ($secondRec){
+      	$sql = "INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES('".$fnameRec2."', '".$lnameRec2."', '".$email2."', '".$institution2."', " . $_SESSION['id'] . ")";
+      	$result = mysqli_query($conn, $sql) or die ("insert 2nd rec failed"); 
+      	//get recID 2
+      	$recID2;
+      	$sql = "SELECT MAX(recID) AS id FROM rec_letter";
+      	$result = mysqli_query($conn, $sql) or die ("get recID 1 failed");
+  	 	$value = mysqli_fetch_object($result);
+ 	  	$recID2 = $value->id;
+      }
+      if ($thirdRec){
+      	$sql = "INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES('".$fnameRec3."', '".$lnameRec3."', '".$email3."', '".$institution3."', " . $_SESSION['id'] . ")";
+      	$result = mysqli_query($conn, $sql) or die ("insert 3rd rec failed");
+      	//get recID 3
+      	$recID3;
+      	$sql = "SELECT MAX(recID) AS id FROM rec_letter";
+      	$result = mysqli_query($conn, $sql) or die ("get recID 1 failed");
+  	 	$value = mysqli_fetch_object($result);
+ 	  	$recID3 = $value->id; 
+      }
 
       //email rec
 	  $msg = '<html>
@@ -594,46 +761,92 @@
 				<body>
 					<p>
 						'.$fname.' '.$lname.' has requested a letter of recommendation from you. If you <br>
-						are interested, please copy the uid and follow the link below.<br>
-						uid: ' .$_SESSION["id"].'<br><br>
-						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp1-TheSpookyLlamas/TheSpookyLlamas/rec_letter.php "> http://gwupyterhub.seas.gwu.edu/~sp19DBp1-TheSpookyLlamas/TheSpookyLlamas/rec_l0etter.php </a>
+						are interested, please copy the code provided, and follow the link below.<br>
+						Code: ' .$recID1.'<br><br>
+						<a href="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/applications/public_html/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/applications/public_html/rec_letter.php </a>
 
 					</p>
 				</body>
 				</html>';
 	  $subject = "Recommendation Letter for " .$fname." ".$lname."";
 	  $headers = "MIME-Version: 1.0" . "\r\n";
-	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+	  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
       mail($email, $subject, $msg, $headers) or die ("rec email failed");
       
+      //email optional recs
+      if ($secondRec){
+      	 $msg = '<html>
+				<head>
+					<title>Invitation To Write Recommendation Letter</title>
+				</head>
+				<body>
+					<p>
+						'.$fname.' '.$lname.' has requested a letter of recommendation from you. If you <br>
+						are interested, please copy the code provided, and follow the link below.<br>
+						Code: ' .$recID2.'<br><br>
+						<a href="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/applications/public_html/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/applications/public_html/rec_letter.php </a>
+
+					</p>
+				</body>
+				</html>';
+      	mail($email2, $subject, $msg, $headers) or die ("rec email failed");
+      }
+      if ($thirdRec){
+      	 $msg = '<html>
+				<head>
+					<title>Invitation To Write Recommendation Letter</title>
+				</head>
+				<body>
+					<p>
+						'.$fname.' '.$lname.' has requested a letter of recommendation from you. If you <br>
+						are interested, please copy the code provided, and follow the link below.<br>
+						Code: ' .$recID3.'<br><br>
+						<a href="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/applications/public_html/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/applications/public_html/rec_letter.php </a>
+
+					</p>
+				</body>
+				</html>';
+      	mail($email3, $subject, $msg, $headers) or die ("rec email failed");
+      }
+
+
+
       $sql = "UPDATE app_review SET status = 2 WHERE uid = " .$_SESSION['id']. "";
       $result = mysqli_query($conn, $sql) or die ("**********UPDATE STATUS MySQL Error***********");
       // If we made it here,  we're done
       $done = true;
     }
-    
-    //If the data was successfuly added to database, move to page 2
-    if ($done){
-      echo "done";
-      header("Location:home.php"); 
-      exit;
-    }
-    
-  }
-?>
+
+ //    var_dump($_FILES);
+	// if (ftp_put($ftp_conn, "1.png",$_FILES['fileToUpload']['tmp_name'], FTP_BINARY)){
+	//   echo "Successfully uploaded $file.";
+	// }
+	// else{
+	//   echo "Error uploading $file.";
+	// }
+	  
+	    //If the data was successfuly added to database, move to page 2
+	    if ($done){
+	      echo "done";
+	      header("Location:home.php"); 
+	      exit;
+	    }
+	    
+	  }
+	?>
 
 <html>
-  
+  <head>
   <title>
     Application Form
   </title>
-  
+ 
   <style>
     .field {
       position: absolute;
-      left: 140px;
+      left: 180px;
     }
-    body{line-height: 1.6;}
+    /*body{line-height: 1.6;}*/
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -641,7 +854,16 @@
        width: 100%;
     }
     .error {color: #FF0000;}
+    .topright {
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
+    }
   </style>
+
+  <link rel="stylesheet" href="style.css">
+  </head>
+  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
    <h1> Application Form </h1>
    
@@ -650,10 +872,76 @@
     
     <form id="mainform" method="post">
       <h3> Personal Information </h3>
-      Address <!--(If you are and international student, enter country name. Otherwise, enter city, state, zip) <br> -->
-      <span class="field"><input type="text" name="address">
-      <span class="error"><?php echo " " . $addressErr;?></span></span><br>
-      SSN <span class="field"><input type="text" name="ssn">
+      Street 
+      <span class="field"><input type="text" name="street">
+      <span class="error"><?php echo " " . $streetErr;?></span></span><br>
+      City
+      <span class="field"><input type="text" name="city">
+      <span class="error"><?php echo " " . $cityErr;?></span></span><br><br>
+      State
+      <span class="field"> 
+      <select name="state">
+      	<option value ="D" disabled selected value> -- select a state -- </option>
+		<option value="AL">Alabama</option>
+		<option value="AK">Alaska</option>
+		<option value="AZ">Arizona</option>
+		<option value="AR">Arkansas</option>
+		<option value="CA">California</option>
+		<option value="CO">Colorado</option>
+		<option value="CT">Connecticut</option>
+		<option value="DE">Delaware</option>
+		<option value="DC">District Of Columbia</option>
+		<option value="FL">Florida</option>
+		<option value="GA">Georgia</option>
+		<option value="HI">Hawaii</option>
+		<option value="ID">Idaho</option>
+		<option value="IL">Illinois</option>
+		<option value="IN">Indiana</option>
+		<option value="IA">Iowa</option>
+		<option value="KS">Kansas</option>
+		<option value="KY">Kentucky</option>
+		<option value="LA">Louisiana</option>
+		<option value="ME">Maine</option>
+		<option value="MD">Maryland</option>
+		<option value="MA">Massachusetts</option>
+		<option value="MI">Michigan</option>
+		<option value="MN">Minnesota</option>
+		<option value="MS">Mississippi</option>
+		<option value="MO">Missouri</option>
+		<option value="MT">Montana</option>
+		<option value="NE">Nebraska</option>
+		<option value="NV">Nevada</option>
+		<option value="NH">New Hampshire</option>
+		<option value="NJ">New Jersey</option>
+		<option value="NM">New Mexico</option>
+		<option value="NY">New York</option>
+		<option value="NC">North Carolina</option>
+		<option value="ND">North Dakota</option>
+		<option value="OH">Ohio</option>
+		<option value="OK">Oklahoma</option>
+		<option value="OR">Oregon</option>
+		<option value="PA">Pennsylvania</option>
+		<option value="RI">Rhode Island</option>
+		<option value="SC">South Carolina</option>
+		<option value="SD">South Dakota</option>
+		<option value="TN">Tennessee</option>
+		<option value="TX">Texas</option>
+		<option value="UT">Utah</option>
+		<option value="VT">Vermont</option>
+		<option value="VA">Virginia</option>
+		<option value="WA">Washington</option>
+		<option value="WV">West Virginia</option>
+		<option value="WI">Wisconsin</option>
+		<option value="WY">Wyoming</option>
+	  </select><span class="error"><?php echo " " . $stateErr;?></span></span><br><br></span>
+      Zip Code
+      <span class="field"><input type="text" name="zip">
+      <span class="error"><?php echo " " . $zipErr;?></span></span><br>
+      Phone Number
+      <span class="field"><input type="text" name="phone">
+      <span class="error"><?php echo " " . $phoneErr;?></span></span><br>
+      SSN 
+      <span class="field"><input type="text" name="ssn">
       <span class="error"><?php echo " " . $ssnErr;?></span></span><br> 
       <hr>
       
@@ -662,19 +950,15 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <span class="error"><?php echo " " . $degreeTypeErr;?></span><br>
-      <input type="radio" name="degreeType" value="Mas" > MS<br>
-      <input type="radio" name="degreeType" value="PhD"> PhD<br><br>
+      <input type="radio" name="degreeType" value="MS" > MS<br>
+      <input type="radio" name="degreeType" value="PHD"> PhD<br><br>
       Year <span class="field"><input type="text" name="appYear">
       <span class="error"><?php echo " " . $appYearErr;?></span></span><br> 
-      Semester <span class="error">
-      	<?php echo " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      	&nbsp;&nbsp;&nbsp;&nbsp; " . $semesterErr;?> </span></span> <br>
+      Semester <br>
       <input type="radio" name="semester" value="FA"> Fall<br>
       <input type="radio" name="semester" value="SP"> Spring<br>
-      <input type="radio" name="semester" value="SU"> Summer<br><br>
+      <input type="radio" name="semester" value="SU"> Summer<br>
+      <span class="error"><?php echo " " . $semesterErr;?> </span></span> <br><br>
       GRE: <br>
       Verbal <span class="field"><input type="text" name="verbal">
       <span class="error"><?php echo " " . $verbalErr;?></span></span><br>
@@ -686,7 +970,7 @@
       Score <span class="field"><input type="text" name="advScore">
       <span class="error"><?php echo " " . $advScoreErr;?></span></span><br>
 
-     Subject <span class="field"> 
+      <br>Subject <span class="field"> 
       <select name="subject">
       	<option disabled selected value> -- select an option -- </option>
         <option value="Biology">Biology</option>
@@ -694,7 +978,7 @@
         <option value="English">English</option>
         <option value="Physics">Physics</option>
         <option value="Psychology">Pyschology</option>
-      </select> </span><br>
+      </select> </span><br><br>
 
       TOEFL Score <span class="field"><input type="text" name="toefl">
       <span class="error"><?php echo " " . $toeflErr;?></span></span><br>
@@ -768,6 +1052,8 @@
       <i>Enter the contact information of the person who will provide your recommendation letter.<br>
       We will reach out to this person and ask for their letter. <br>
       You can see the status of your recommendation letter on your homepage.</i> <br><br>
+
+      <b>Recomendation Letter One (required)<b><br>
       First name <span class="field"><input type="text" name="fnameRec">
       <span class="error"><?php echo " " . $fnameRecErr;?></span></span><br>
       Last name <span class="field"><input type="text" name="lnameRec">
@@ -777,6 +1063,30 @@
       Email <span class="field"><input type="text" name="email">
       <span class="error"><?php echo " " . $emailErr;?></span></span><br>
       <br><br>
+      <b>Recomendation Letter Two (optional)<b><br>
+      First name <span class="field"><input type="text" name="fnameRec2">
+      <span class="error"><?php echo " " . $fnameRecErr2;?></span></span><br>
+      Last name <span class="field"><input type="text" name="lnameRec2">
+      <span class="error"><?php echo " " . $lnameRecErr2;?></span></span><br>
+      Institution <span class="field"><input type="text" name="institution2">
+      <span class="error"><?php echo " " . $institutionErr2;?></span></span><br>
+      Email <span class="field"><input type="text" name="email2">
+      <span class="error"><?php echo " " . $emailErr2;?></span></span><br>
+      <br><br>
+      <b>Recomendation Letter Three (optional)<b><br>
+      First name <span class="field"><input type="text" name="fnameRec3">
+      <span class="error"><?php echo " " . $fnameRecErr3;?></span></span><br>
+      Last name <span class="field"><input type="text" name="lnameRec3">
+      <span class="error"><?php echo " " . $lnameRecErr3;?></span></span><br>
+      Institution <span class="field"><input type="text" name="institution3">
+      <span class="error"><?php echo " " . $institutionErr3;?></span></span><br>
+      Email <span class="field"><input type="text" name="email3">
+      <span class="error"><?php echo " " . $emailErr3;?></span></span><br>
+      <br><br><hr>
+
+      <h3><b>Transcript</b></h3>
+      Select image to upload:<br><br>
+      <input type="file" name="fileToUpload" id="fileToUpload">
       
       <div class="bottomCentered"><input type="submit" name="submit" value="Submit">
       <span class="error"><?php echo $somethingEmpty;?></span></div>

@@ -4,7 +4,7 @@
 
 	<!-- CSS styling -->
 	<style>
-		tbody tr:nth-child(odd) {
+		/*tbody tr:nth-child(odd) {
   			background-color: #ff33cc;
 		}
 
@@ -14,11 +14,23 @@
 
 		h2 {
 			color: #5689DF;
+		}*/
+
+		.center{
+			text-align: center;
 		}
 
-	</style
+		.topright {
+	    	position: absolute;
+	    	right: 10px;
+	    	top: 20px;
+    	}
 
+	</style>
+	
+	<link rel="stylesheet" href="style.css">
 </head>
+<span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
 
 <body>
 	<?php
@@ -30,7 +42,7 @@
     	}
 
         // connect to the database
-		$conn = mysqli_connect("localhost", "TheSpookyLlamas", "TSL_jjy_2019", "TheSpookyLlamas");
+		$conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
 
 		// if no role is set, need to go all the way back to log in page
 		if (!isset($_SESSION['role'])) {
@@ -107,6 +119,13 @@
 				if ($row['status'] == 7) {
 					echo "<p style='text-align: center;'>You have also been selected for financial aid, please speak to our office about that.</p>";
 				}
+				echo 
+				'
+					<span class="center">
+					<form method="post" action="acceptance_fee.php">
+					<input type="submit" name="submit" value="Accept Admission">
+					</form></span>
+				';
 			}
 
 			// if they were rejected
@@ -178,14 +197,15 @@
 
 			// get all the applicants who match search and have a finished application
 			if (isset($_POST['submit'])) {
-				$result = mysqli_query($conn, "SELECT userID, fname, lname, status FROM users, app_review WHERE role='A' AND status>1 AND userID=uid AND (fname LIKE '".$_POST['search']."' OR lname LIKE '".$_POST['search']."')");
+
+				$result = mysqli_query($conn, "SELECT userID, fname, lname, status FROM users, app_review WHERE uid=userID AND role='A' and status > 1 AND reviewerRole = 'FR' AND (fname LIKE '%".$_POST['search']."%' OR lname LIKE '%".$_POST['search']."%')") or die ("GS Search Query Failed");
 
 				// if there were matches, show them
 				if ($result->num_rows > 0) {
 					// start table
 					echo "<table border='1' align='center'; style='border-collapse: collapse;'>
-			        	    	<tr>
-	        		        		<th>First Name</th>
+			        	<tr>
+	        		        <th>First Name</th>
 							<th>Last Name</th>
 							<th></th>
 							<th></th>
@@ -194,30 +214,75 @@
 						</tr>";
 					
 					// show each applicant with a button to the review page
-					for ($i=0; $i < $result->num_rows; $i++) {
-						$row = $result->fetch_assoc();
+					while ($row = mysqli_fetch_assoc($result)) {
 						echo "<tr>
 	        		        		<td>".$row['fname']."</td>
 					                <td>".$row['lname']."</td>
-	                    				<td><form align='center' action='add_documents.php' method='post'>
-	    							<input type='submit' name='".$row['userID']."' value='Check documents'>
-							</form></td>
-							<td><form align='center' action='view_faculty_review.php' method='post'>
-								<input type='submit' name='".$row['userID']."' value='View review'>
-							</form></td>
-							<td><form align='center' action='view_cac_review.php' method='post'>
-								<input type='submit' name='".$row['userID']."' value='View CAC review'>
-							</form></td>
-							<td><form align='center' action='final_decision.php' method='post'>
-								<input type='submit' name='".$row['userID']."' value='Update decision'>
-							</form></td>
+	                    			<td>
+	                    				<form align='center' action='add_documents.php' method='post'>
+	    								<input type='submit' name='".$row['userID']."' value='Check documents'>
+	    								</form>
+									</td>
+									<td>
+										<form align='center' action='view_faculty_review.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='View review'>
+										</form>
+									</td>
+									<td>
+										<form align='center' action='view_cac_review.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='View CAC review'>
+										</form>
+									</td>
+									<td>
+										<form align='center' action='final_decision.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='Update decision'>
+										</form>
+									</td>
 				                </tr>";
 					}
 				}
-
 				// if there were no matches, tell them
-				else 
-					echo "There are no applicants matching that name.";
+				else {
+					echo "<center> Zero Results </center>";
+				}
+			}
+			else{
+					$result = mysqli_query($conn, "SELECT DISTINCT userID, fname, lname FROM users, app_review WHERE status>1 AND userID=uid") or die("Table Query Failed");
+					echo "<table border='1' align='center'; style='border-collapse: collapse;'>
+			        	<tr>
+	        		        <th>First Name</th>
+							<th>Last Name</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>";
+					while ($row = mysqli_fetch_assoc($result)) {
+						echo "<tr>
+	        		        		<td>".$row['fname']."</td>
+					                <td>".$row['lname']."</td>
+	                    			<td>
+	                    				<form align='center' action='add_documents.php' method='post'>
+	    								<input type='submit' name='".$row['userID']."' value='Check documents'>
+	    								</form>
+									</td>
+									<td>
+										<form align='center' action='view_faculty_review.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='View review'>
+										</form>
+									</td>
+									<td>
+										<form align='center' action='view_cac_review.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='View CAC review'>
+										</form>
+									</td>
+									<td>
+										<form align='center' action='final_decision.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='Update decision'>
+										</form>
+									</td>
+				                </tr>";
+					}
 			}
 	
 		}// end-Grad secretary view
