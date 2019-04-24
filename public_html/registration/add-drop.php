@@ -15,42 +15,35 @@
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <link rel = "stylesheet" type="text/css" href="style.css"/>
     </head>
-	<body class="gray-bg">
+    <body class="gray-bg">
         <?php
             session_start();
             $studUID = $_SESSION["studuid"];
             $_SESSION['redir'] = "add-drop.php";
-            $dept = $_POST['coursedept'];
-            $_SESSION['selecteddept'] = $dept;
-
             //Ensure user is logged in
             $loggedin = $_SESSION['loggedin'];
             if(!$loggedin) {
                 header("Location: login.php");
                 die();
             }
-
             //send to menu page if they don't have sufficient permissions
             if(($_SESSION['type']=="secr") || $_SESSION['type']=="inst") {
                 header("Location: menu.php");
                 die();
             }
-
             //Connect to database
             $search = $_POST['search'];
             $servername = "localhost";
-            $username = "SJL";
-            $password = "SJLoss1!";
-            $dbname = "SJL";
+            $username = "SELECT_team_name";
+            $password = "Password123!";
+            $dbname = "SELECT_team_name";
             $connection = mysqli_connect($servername, $username, $password, $dbname);
             if (!$connection) {
                 die("Couldn't connect: ".mysqli_error());
-            }       
-
+            }         
             //"back to menu" button
             echo "<div style=\"display: inline-block;\" class=\"menu-button\">";
             echo "<form action=\"menu.php\"><input type=\"submit\" value=\"Menu\"/></form></div>";
-
             // Limit courses displayed to one department
             echo '<div style="float: right;">';
             echo "<div style=\"display: inline-block;\">";
@@ -68,34 +61,34 @@
             echo '<input type="submit" value="Go" style="height: 50px;">';
             echo '</form>';
             echo "</div></div>";
-
-            // No departments selected? Prompt user to pick one
-            if(empty($dept) || $dept=='Select a department') {
+            
+            $dept = "";
+            if(empty($_POST['coursedept'])) {
                 $dept = $_SESSION['selecteddept'];
+            } else if($_POST['coursedept'] != 'Select a department') {
+                $_SESSION['selecteddept'] = $_POST['coursedept'];
+                $dept = $_POST['coursedept'];
+            } else {
+                $dept = $_POST['coursedept'];
             }
-
+            // No departments selected? Prompt user to pick one
             if(empty($dept) || $dept=='Select a department') {
                 echo "<div style=\"text-align: center;\" class=\"gray-text\">";
                 echo "It looks like you haven't picked a department!</div>";
                 die();
             }
-
             //Search box
             echo "<div style=\"text-align: center;\">";
             echo "<form method=\"post\" action=\"add-drop.php\"><input type=\"text\" name=\"search\" placeholder=\"Search for course by name...\"/><input type=\"submit\" value=\"Search\"/>";
             echo '<input type="hidden" value="'.$dept.'" name="coursedept">';
             echo "</form></div>";
             echo "<br><br>";
-
             //Link to View Schedule
             echo "<div style=\"display: inline-block;\">";
             echo "<form action=\"view-schedule-reg.php\"><input type=\"submit\" value=\"View My Schedule\"/></form></div>";
-
             $isRegistered = true;
-
             //Display all courses or the search results
             if (is_null($search)) {
-
                 //no search terms - select all courses from current year
                 $query = "select crn, dept, courseno, name, credits, day, tme, prereq1, prereq2, lname from course, user where semester = 'spring' and year = '2019' and tme is not null and course.instructor=user.uid and dept='".$dept."' order by dept, courseno";
                 $result = mysqli_query($connection, $query);
@@ -116,7 +109,6 @@
                         echo "<td>" . $row["prereq1"] . "</td>";
                         echo "<td>" . $row["prereq2"] . "</td>";
                         echo "<td>" . $row["lname"] . "</td>";
-
                         //Check to see if student is already registered
                         $checkQuery = "select crn from transcript where uid = '".$studUID."' and crn = '".$row['crn']."' and grade = 'IP'";
                         $checkResult = mysqli_query($connection, $checkQuery);
@@ -125,7 +117,6 @@
                         } else {
                             $isRegistered = false;
                         }
-
                         //If student is already registered, prompt to drop
                         //Otherwise, prompt to add
                         if ($isRegistered) {
@@ -146,7 +137,6 @@
                         echo "</tr>";
                     }
                     echo "</table>";
-
                 } else {
                     //If nothing came back from the query, there was a problem
                     die("Bad query: ".mysqli_error());
@@ -171,7 +161,6 @@
                         echo "<td>" . $row["prereq1"] . "</td>";
                         echo "<td>" . $row["prereq2"] . "</td>";
                         echo "<td>" . $row["lname"] . "</td>";
-
                         //Check to see if student is already registered
                         $checkQuery = "select crn from transcript where uid = '".$studUID."' and crn = '".$row['crn']."' and grade ='IP'";
                         $checkResult = mysqli_query($connection, $checkQuery);
@@ -180,7 +169,6 @@
                         } else {
                             $isRegistered = false;
                         }
-
                         //If student is already registered, prompt to drop
                         //Otherwise, prompt to add
                         if ($isRegistered) {
@@ -205,13 +193,11 @@
                     echo "<br><br>Your search returned no results.<br><br>";
                 }
             }
-
             //Link to View Schedule
             echo "<div style=\"display: inline-block;\">";
             echo "<form action=\"view-schedule-reg.php\"><input type=\"submit\" value=\"View My Schedule\"/></form></div>";          
-
             //close sql connection
             mysqli_close($connection);
         ?>
-	</body>
+    </body>
 </html>
