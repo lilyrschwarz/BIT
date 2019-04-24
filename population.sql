@@ -15,8 +15,8 @@ INSERT INTO users VALUES
 
 # insert personal data for applicants
 INSERT INTO personal_info VALUES
-  ("John", "Lennon", 55555555, "123 Main St, New York NY", 111111111),
-  ("Ringo", "Starr", 66666666, NULL, 222111111);
+  ("John", "Lennon", 55555555, "123 Main St", "New York", "NY", "23321", "8604626594", 111111111),
+  ("Ringo", "Starr", 66666666, NULL, NULL, NULL, NULL, NULL, 222111111);
 
 # John's application (complete)
 INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES ("Recommender", "1", "recommend@gmail.com", "GWU", 55555555);
