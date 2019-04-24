@@ -4,12 +4,12 @@
 
 //If they somehow got here without logging in, politely send them away
 session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'systems_administrator'){
+if($_SESSION['uid'] && $_SESSION['type'] == 'admin'){
 
 }
 else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
+  echo $_SESSION['uid'].$_SESSION['type'];
+  header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
 }
 /*** LOGIN FUNCTIONALITY ABOVE****/
  ?>
