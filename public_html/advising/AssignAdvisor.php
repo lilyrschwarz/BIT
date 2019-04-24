@@ -1,13 +1,14 @@
 <?php
 session_start();
-if($_SESSION['uid'] && $_SESSION['type'] == 'secr'){
+
+if($_SESSION['uid'] && ($_SESSION['type'] == 'secr' )){
+ //echo $_SESSION['uid'];
 }
 else{
- echo $_SESSION['uid'].$_SESSION['type'];
- header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+    echo $_SESSION['uid'].$_SESSION['type'];
+    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
 }
 
-session_start();
 
 //connect to database
 $servername = "localhost";

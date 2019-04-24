@@ -1,6 +1,7 @@
 <?php
 
 /*** LOGIN FUNCTIONALITY BELOW****/
+
 session_start();
 if($_SESSION['uid'] && $_SESSION['type'] == 'alumni'){
 

@@ -1,13 +1,13 @@
 <?php
 
 session_start();
-    if($_SESSION['uid'] && $_SESSION['type'] == 'alumni'){
+if($_SESSION['uid'] && $_SESSION['type'] == 'alumni'){
 
-    }
-    else{
-      echo $_SESSION['uid'].$_SESSION['type'];
-      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
-    }
+}
+else{
+  echo $_SESSION['uid'].$_SESSION['type'];
+  header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+}
 
 //connect to database
 $servername = "localhost";

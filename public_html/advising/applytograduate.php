@@ -1,18 +1,19 @@
 <?php
 session_start();
 
-    if($_SESSION['uid'] && ($_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD')){
+if($_SESSION['uid'] && $_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD'){
 
-    }
-    else{
-      echo $_SESSION['uid'].$_SESSION['type'];
-      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
-    }
+}
+else{
+    echo $_SESSION['uid'].$_SESSION['type'];
+    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+}
 
-    if($_POST['masters']){
+
+    if($_SESSION['type'] == 'MS'){
         header("Location: audit_masters.php");
     }
-    else if($_POST['phd']){
+    else if($_SESSION['type'] == 'PHD'){
         header("Location: audit_phd.php");
     }
 

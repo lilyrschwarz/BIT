@@ -1,15 +1,14 @@
 <?php
-    session_start();
+   session_start();
+if($_SESSION['uid'] && $_SESSION['type'] == 'admin'){
 
-    /* only let logged in users access, and protect this page so that
-       only sys admins can access. else, redirects to login page */
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'systems_administrator'){
+}
+else{
+  echo $_SESSION['uid'].$_SESSION['type'];
+  header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+}
 
-    }
-    else{
-        echo $_SESSION['login_user'].$_SESSION['role'];
-        header("Location: login.php");
-    }
+
 
     /* connect to database */
     $servername = "localhost";

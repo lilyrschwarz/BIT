@@ -1,12 +1,13 @@
 <?php
-session_start();
+ session_start();
 if($_SESSION['uid'] && $_SESSION['type'] == 'admin'){
 
 }
 else{
-    echo $_SESSION['uid'].$_SESSION['type'];
-    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+  echo $_SESSION['uid'].$_SESSION['type'];
+  header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
 }
+
 
 $servername = "localhost";
 $username = "SJL";

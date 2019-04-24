@@ -201,14 +201,18 @@
 
             $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
             $advPrompt = "GO TO ADVISING";
-        } else {
-            $nextItem = false;
         }else if ($type == "secr") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+           // echo "WE ARE A SECRATARY";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/gs.php";
             $advPrompt = "GO TO ADVISING";
         }else if ($type == "MS" || $type == "PHD") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/student.php";
             $advPrompt = "GO TO ADVISING";
+        }else if ($type == "inst") {
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/advisor.php";
+            $advPrompt = "GO TO ADVISING";
+        } else {
+            $nextItem = false;
         }
 
 
