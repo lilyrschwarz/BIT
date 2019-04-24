@@ -1,6 +1,7 @@
 <?php
+session_start();
 
-if($_SESSION['uid'] && ($_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD')){
+if($_SESSION['uid'] && $_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD'){
 
 }
 else{

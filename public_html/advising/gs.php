@@ -1,14 +1,16 @@
 <?php
 /*** LOGIN FUNCTIONALITY BELOW****/
-if($_SESSION['uid'] && ($_SESSION['type'] == 'secr' )){
+session_start();
 
+if($_SESSION['uid'] && ($_SESSION['type'] == 'secr' )){
+ //echo $_SESSION['uid'];
 }
 else{
     echo $_SESSION['uid'].$_SESSION['type'];
     header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
 }
 /*** LOGIN FUNCTIONALITY ABOVE****/
-//  ?>
+  ?>
 
 <!DOCTYPE html>
 <html>
