@@ -1,11 +1,11 @@
 <?php
-//session_start();
-//if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
-//}
-//else{
-//  echo $_SESSION['login_user'].$_SESSION['role'];
-//  header("Location: login.php");
-//}
+session_start();
+if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
+}
+else{
+ echo $_SESSION['login_user'].$_SESSION['role'];
+ header("Location: login.php");
+}
 
 session_start();
 
@@ -16,11 +16,7 @@ $password = "SJLoss1!";
 $dbname = "SJL";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-//If they somehow got here without logging in, politely send them away
-if(!$_SESSION['loggedin']) {
-    header("Location: login.php");
-    die();
-}
+
 
 $update=null;
 $studentsql=null;
