@@ -134,7 +134,7 @@
 				'
 					<span class="center">
 					<form method="post" action="acceptance_fee.php">
-					<input type="submit" name="submit" value="Accept Admission" class='btn'>
+					<input type="submit" name="submit" value="Accept Admission" class="btn">
 					</form></span>
 				';
 			}
