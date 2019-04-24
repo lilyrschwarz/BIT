@@ -40,9 +40,9 @@
         } 
         //connect to database
         $servername = "localhost";
-        $username = "SELECT_team_name"; 
-        $password = "Password123!"; 
-        $dbname = "SELECT_team_name";
+        $username = "SJL";
+        $password = "SJLoss1!";
+        $dbname = "SJL";
         $connection = mysqli_connect($servername, $username, $password, $dbname);
         $query = "select usid from user;";	
         $result	= mysqli_query($connection, $query);
