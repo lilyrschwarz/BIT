@@ -199,17 +199,17 @@
         $advPrompt = "";
         if ($type == "admin") {
 
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";// "../advising/admin.php";
             $advPrompt = "GO TO ADVISING";
         }else if ($type == "secr") {
            // echo "WE ARE A SECRATARY";
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/gs.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/gs.php";// "../advising/gs.php";
             $advPrompt = "GO TO ADVISING";
         }else if ($type == "MS" || $type == "PHD") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/student.php";
+            $advAction = "../advising/student.php";
             $advPrompt = "GO TO ADVISING";
         }else if ($type == "inst") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/advisor.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/advisor.php";// "../advising/advisor.php";
             $advPrompt = "GO TO ADVISING";
         } else {
             $nextItem = false;
