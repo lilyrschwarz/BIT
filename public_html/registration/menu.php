@@ -65,6 +65,11 @@
             header("Location: login.php");
             die();
         }
+        $advrole = mysqli_query($db, "select user_type from loginusers where university_id =". $_SESSION["uid"]);
+        $advrole = mysqli_fetch_assoc($advrole);
+        $advrole = $advrole['user_type'];
+        $_SESSION['advrole'] = $advrole;
+
         echo "<div style=\"text-align: center;\"><div style=\"display: inline-block; width: 80%;\">";
         echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $role . " privileges.<br><br>";
         $nextItem = true;
@@ -185,6 +190,30 @@
 
         if ($nextItem) {
             echo "<div><form action=\"" . $rostAction . "\"><input type=\"submit\" value=\"" . $rostPrompt . "\"/></form></div>";
+        } else {
+            $nextItem = true;
+        }
+
+
+
+        $advPrompt = "";
+        if ($type == "admin") {
+
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+            $advPrompt = "GO TO ADVISING";
+        } else {
+            $nextItem = false;
+        }else if ($type == "secr") {
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+            $advPrompt = "GO TO ADVISING";
+        }else if ($type == "MS" || $type == "PHD") {
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+            $advPrompt = "GO TO ADVISING";
+        }
+
+
+        if ($nextItem) {
+            echo "<div><form action=\"" . $advAction . "\"><input type=\"submit\" value=\"" . $advPrompt . "\"/></form></div>";
         } else {
             $nextItem = true;
         }

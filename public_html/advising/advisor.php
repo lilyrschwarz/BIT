@@ -9,11 +9,11 @@ $dbname = "SJL";
 $connection = mysqli_connect($servername, $username, $password, $dbname);
 
 //If they somehow got here without logging in, politely send them away
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
+    if($_SESSION['uid'] && $_SESSION['type'] == 'inst'){
     }
     else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
+      echo $_SESSION['uid'].$_SESSION['type'];
+      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
     }
   ?>
 
