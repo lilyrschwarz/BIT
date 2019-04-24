@@ -1,23 +1,23 @@
 <?php
 
+session_start();
 
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'alumni'){
+//connect to database
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$db = new mysqli($servername, $username, $password, $dbname);
 
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
+
 
 $student_id = $_SESSION['login_user'];
-
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
-  $gpa_update_in_student = null;
-  $db = new mysqli($servername, $username, $password, $dbname);
+$gpa_update_in_student = null;
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
 ?>
 <!DOCTYPE html>

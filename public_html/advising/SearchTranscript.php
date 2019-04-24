@@ -1,15 +1,16 @@
 <?php
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'advisor'){
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
+session_start();
+
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
   $gpa_update_in_student = null;
   $db = new mysqli($servername, $username, $password, $dbname);
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
@@ -55,7 +56,7 @@ li a:hover:not(.active) {
   <li><a class="active" href="advisor.php">Home</a></li>
   <li><a href="SearchTranscript.php">Search Transcript</a></li>
   <li><a href="SearchForm1.php">Review Form1</a></li>
-  <li><a href="viewThesisFile.php">View Thesis</a></li>  
+  <li><a href="viewThesisFile.php">View Thesis</a></li>
   <li><a href="logout.php">Logout</a></li>
 </ul><br/><br/>
 

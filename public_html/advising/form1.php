@@ -1,20 +1,20 @@
 <?php
 /*** LOGIN FUNCTIONALITY BELOW****/
+//connect to database
 session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'student'){
-
-}
-else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
-}
-/*** LOGIN FUNCTIONALITY ABOVE****/
-
 
 $servername = "localhost";
-$username = "BLT";
-$password = "Blt1234!";
-$dbname = "BLT";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
+
 
 $form1 = null;
 
@@ -23,8 +23,6 @@ $form1 = null;
 // Create connection
 
 
-echo $_SESSION['username'];
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 $program_type = $conn->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 
@@ -120,6 +118,9 @@ if (!empty($program_type)) {
 <li><a href="logout.php">Logout</a></li>
 </ul><br/></br>
 <style>
+
+
+
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
 div.container{
 width: 960px;

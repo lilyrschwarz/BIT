@@ -1,21 +1,16 @@
 <?php
-    session_start();
+session_start();
 
-    /* only let logged in users access, and protect this page so that
-       only sys admins can access. else, redirects to login page */
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'systems_administrator'){
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
 
-    }
-    else{
-        echo $_SESSION['login_user'].$_SESSION['role'];
-        header("Location: login.php");
-    }
-
-    /* connect to database */
-    $servername = "localhost";
-    $username = "BLT";
-    $password = "Blt1234!";
-    $dbname = "BLT";
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"

@@ -1,22 +1,19 @@
 <?php
 
 
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'student'){
+session_start();
 
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$db = new mysqli($servername, $username, $password, $dbname);
 
-
-
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
-  $db = new mysqli($servername, $username, $password, $dbname);
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
 
 $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);

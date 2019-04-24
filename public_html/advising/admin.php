@@ -1,12 +1,12 @@
 <?php
-/*** LOGIN FUNCTIONALITY BELOW****/
-session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'systems_administrator'){
 
-}
-else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
+session_start();
+
+
+//If they somehow got here without logging in, politely send them away
+if (!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
 }
 /*** LOGIN FUNCTIONALITY ABOVE****/
  ?>

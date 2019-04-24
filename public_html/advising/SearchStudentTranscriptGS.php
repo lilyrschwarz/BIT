@@ -1,17 +1,18 @@
 <?php
-    session_start();
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
-    }
-    else{
-      echo $_SESSION['login_user'].$_SESSION['role'];
-      header("Location: login.php");
-    }
-  $servername = "localhost";
-  $username = "BLT";
-  $password = "Blt1234!";
-  $dbname = "BLT";
+session_start();
+
+$servername = "localhost";
+$username = "SJL";
+$password = "SJLoss1!";
+$dbname = "SJL";
+$db = new mysqli($servername, $username, $password, $dbname);
+
+//If they somehow got here without logging in, politely send them away
+if(!$_SESSION['loggedin']) {
+    header("Location: login.php");
+    die();
+}
   $gpa_update_in_student = null;
-  $db = new mysqli($servername, $username, $password, $dbname);
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
 ?>
 
@@ -85,7 +86,7 @@ li a:hover:not(.active) {
         <input type="submit"/>
   </form>
 
-<?php 
+<?php
         $student_id = $_POST['student_id'] ?? '';
 	$status = $db->query("SELECT user_type FROM users WHERE university_id =".$student_id);
 	while ($row = mysqli_fetch_array($status)) {
@@ -103,11 +104,11 @@ li a:hover:not(.active) {
 <?php
   if($db->connect_error){echo "db connect error";}
  // $student_id = $_POST['student_id'] ?? '';
-  
-  $info_array = $db->query("SELECT f_name, l_name, program_type, advisor.name as aname 
+
+  $info_array = $db->query("SELECT f_name, l_name, program_type, advisor.name as aname
 			    FROM student, advisor
 			    WHERE advisor = advisor.university_id and student.university_id =".$student_id);
- 
+
     if (!empty($info_array)) {
     	//foreach($course_array as $key=>$value)
       while($row = $info_array->fetch_assoc())
@@ -124,7 +125,7 @@ li a:hover:not(.active) {
   }
 ?>
   </table>
-  
+
 <table class="w3-table-all">
 <tr>
   <th>Course</th>
@@ -136,22 +137,22 @@ li a:hover:not(.active) {
 
 <?php
   if($db->connect_error){echo "db connect error";}
-  $course_array = $db->query("SELECT subject, course_num, year, semester, credits, final_grade 
-	  		      FROM transcript 
+  $course_array = $db->query("SELECT subject, course_num, year, semester, credits, final_grade
+	  		      FROM transcript
 			      WHERE not(semester = 'spring' and year = '2019') and university_id =".  $student_id.";");
- 
+
   $sum = 0;
-  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits 
-	  		     FROM transcript 
+  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits
+	  		     FROM transcript
 			     WHERE not(semester = 'spring' and year = '2019') and university_id =".  $student_id);
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
-  
+
   if (!empty($course_array)) {
   	//foreach($course_array as $key=>$value)
     while($row = $course_array->fetch_assoc())
     {
-      
+
       if($row['final_grade'] == 'A'){
         $sum += (4.0 * $row['credits']);
       }
@@ -184,7 +185,7 @@ li a:hover:not(.active) {
       }
       $GPA = $sum/$credits_sum;
       mysqli_query($conn,"update student set GPA = '$GPA' where university_id =". $university_id);
-      
+
 ?>
 <tr>
   <td><?php echo $row["subject"]; ?><?php echo $row["course_num"]; ?></td>
