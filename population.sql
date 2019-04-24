@@ -129,7 +129,7 @@ insert into loginusers values
     ('advisor', 10, '123456'), /*Narahari*/
     ('advisor', 12, '123456'), /*Vora*/
     #('alumni', 65656565, '2222'),
-    ('alumni', 77777777, '4444'),
+    ('alumni', 77777777, '4444');
     #('alumni', 88888888, '8888');
 
 insert into student values
