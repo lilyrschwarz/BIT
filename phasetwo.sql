@@ -127,13 +127,13 @@ create table alumni (
 create table systems_administrator (
   university_id int(8),
   primary key (university_id),
-  foreign key(university_id) references users (university_id)
+  foreign key(university_id) references loginusers (university_id)
 );
 
 create table graduate_secretary (
   university_id int(8),
   primary key (university_id),
-  foreign key(university_id) references users (university_id)
+  foreign key(university_id) references loginusers (university_id)
 );
 
 
