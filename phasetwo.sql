@@ -1,20 +1,17 @@
-
-
-
 /*******************
 ADVISING
 ********************/
---Advising Drop
-set session foreign_key_checks = 0;
+#Advising Drop
+#set session foreign_key_checks = 0;
 
 drop table if exists alumni cascade;
 drop table if exists systems_administrator cascade;
 drop table if exists graduate_secretary cascade;
---drop table if exists transcript cascade;
+#drop table if exists transcript cascade;
 drop table if exists student cascade;
 drop table if exists advisor cascade;
 drop table if exists form1 cascade;
-drop table if exists users cascade;
+drop table if exists loginusers cascade;
 drop table if exists courses cascade;
 drop table if exists thesis cascade;
 
@@ -25,19 +22,19 @@ create table thesis (
   primary key (university_id)
 );
 
--- create table courses (
---   subject varchar(4),
---   course_num int (5),
---   title varchar (30),
---   credits int (2),
---   prereq_sub1 varchar (4),
---   prereq_1 int (5),
---   prereq_sub2 varchar (4),
---   prereq_2 int (5),
---   primary key (course_num, subject),
---   foreign key (prereq_1, prereq_sub1) references courses(course_num, subject),
---   foreign key (prereq_2, prereq_sub2) references courses(course_num, subject)
--- );
+# create table courses (
+#   subject varchar(4),
+#   course_num int (5),
+#   title varchar (30),
+#   credits int (2),
+#   prereq_sub1 varchar (4),
+#   prereq_1 int (5),
+#   prereq_sub2 varchar (4),
+#   prereq_2 int (5),
+#   primary key (course_num, subject),
+#   foreign key (prereq_1, prereq_sub1) references courses(course_num, subject),
+#   foreign key (prereq_2, prereq_sub2) references courses(course_num, subject)
+# );
 
 create table loginusers (
   user_type varchar (30),
@@ -97,17 +94,17 @@ create table alumni (
   primary key (university_id)
 );
 
--- create table transcript (
--- 	semester varchar(6),
--- 	year int(4),
--- 	final_grade varchar(2),
--- 	credits int(2),
--- 	course_num int(5),
--- 	subject varchar(4),
--- 	university_id int(8),
--- 	primary key (semester, year, course_num, university_id),
--- 	foreign key (university_id) references student (university_id)
--- );
+# create table transcript (
+# 	semester varchar(6),
+# 	year int(4),
+# 	final_grade varchar(2),
+# 	credits int(2),
+# 	course_num int(5),
+# 	subject varchar(4),
+# 	university_id int(8),
+#	primary key (semester, year, course_num, university_id),
+#	foreign key (university_id) references student (university_id)
+#);
 
 
 create table systems_administrator (
@@ -122,12 +119,12 @@ create table graduate_secretary (
   foreign key(university_id) references loginusers (university_id)
 );
 
-set session foreign_key_checks = 1;
+#set session foreign_key_checks = 1;
 
 /********************
 Applications
 ********************/
---Applications drop
+#Applications drop
 DROP TABLE IF EXISTS rec_review CASCADE;
 DROP TABLE IF EXISTS app_review CASCADE;
 DROP TABLE IF EXISTS gre CASCADE;
@@ -135,8 +132,8 @@ DROP TABLE IF EXISTS prior_degrees CASCADE;
 DROP TABLE IF EXISTS rec_letter CASCADE;
 DROP TABLE IF EXISTS academic_info CASCADE;
 DROP TABLE IF EXISTS personal_info CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS undertranscript CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 
 CREATE TABLE users (
@@ -253,7 +250,7 @@ CREATE TABLE undertranscript (
 Registration
 ********************/
 
---Registration Drop
+#Registration Drop
 DROP TABLE IF EXISTS transcript CASCADE;
 DROP TABLE IF EXISTS course CASCADE;
 DROP TABLE IF EXISTS room CASCADE;

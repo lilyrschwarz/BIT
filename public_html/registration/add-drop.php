@@ -39,13 +39,13 @@
             //Connect to database
             $search = $_POST['search'];
             $servername = "localhost";
-            $username = "SELECT_team_name";
-            $password = "Password123!";
-            $dbname = "SELECT_team_name";
+            $username = "SJL";
+            $password = "SJLoss1!";
+            $dbname = "SJL";
             $connection = mysqli_connect($servername, $username, $password, $dbname);
             if (!$connection) {
                 die("Couldn't connect: ".mysqli_error());
-            }         
+            }       
 
             //"back to menu" button
             echo "<div style=\"display: inline-block;\" class=\"menu-button\">";

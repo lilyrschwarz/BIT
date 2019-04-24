@@ -15,16 +15,13 @@
 
         //connect to database
         $servername = "localhost";
-        $username = "SELECT_team_name";
-        $password = "Password123!";
-        $dbname = "SELECT_team_name";
-        $connection = mysqli_connect($servername, $username, $password, $dbname);
-
-        //If they somehow got here without logging in, politely send them away
-        if (!$_SESSION['loggedin']) {
-            header("Location: login.php");
-            die();
-        }
+            $username = "SJL";
+            $password = "SJLoss1!";
+            $dbname = "SJL";
+            $connection = mysqli_connect($servername, $username, $password, $dbname);
+            if (!$connection) {
+                die("Couldn't connect: ".mysqli_error());
+            }
 
         //get CRN of course
         $courseToAdd = $_POST['crn'];
