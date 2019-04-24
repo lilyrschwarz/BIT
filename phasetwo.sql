@@ -1,23 +1,12 @@
 
 
+
+/*******************
+ADVISING
+********************/
+--Advising Drop
 set session foreign_key_checks = 0;
 
---Registration Drop
-DROP TABLE IF EXISTS transcript CASCADE;
-DROP TABLE IF EXISTS course CASCADE;
-DROP TABLE IF EXISTS room CASCADE;
-DROP TABLE IF EXISTS user CASCADE;
---Applications drop
-DROP TABLE IF EXISTS rec_review CASCADE;
-DROP TABLE IF EXISTS app_review CASCADE;
-DROP TABLE IF EXISTS gre CASCADE;
-DROP TABLE IF EXISTS prior_degrees CASCADE;
-DROP TABLE IF EXISTS rec_letter CASCADE;
-DROP TABLE IF EXISTS academic_info CASCADE;
-DROP TABLE IF EXISTS personal_info CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS undertranscript CASCADE;
---Advising Drop
 drop table if exists alumni cascade;
 drop table if exists systems_administrator cascade;
 drop table if exists graduate_secretary cascade;
@@ -25,17 +14,9 @@ drop table if exists graduate_secretary cascade;
 drop table if exists student cascade;
 drop table if exists advisor cascade;
 drop table if exists form1 cascade;
-drop table if exists loginusers cascade;
+drop table if exists users cascade;
 drop table if exists courses cascade;
 drop table if exists thesis cascade;
-
-
-
-
-
-/*******************
-ADVISING
-********************/
 
 create table thesis (
   university_id int (8),
@@ -141,10 +122,22 @@ create table graduate_secretary (
   foreign key(university_id) references loginusers (university_id)
 );
 
+set session foreign_key_checks = 1;
 
 /********************
 Applications
 ********************/
+--Applications drop
+DROP TABLE IF EXISTS rec_review CASCADE;
+DROP TABLE IF EXISTS app_review CASCADE;
+DROP TABLE IF EXISTS gre CASCADE;
+DROP TABLE IF EXISTS prior_degrees CASCADE;
+DROP TABLE IF EXISTS rec_letter CASCADE;
+DROP TABLE IF EXISTS academic_info CASCADE;
+DROP TABLE IF EXISTS personal_info CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS undertranscript CASCADE;
+
 
 CREATE TABLE users (
   role varchar(3) NOT NULL,
@@ -260,6 +253,11 @@ CREATE TABLE undertranscript (
 Registration
 ********************/
 
+--Registration Drop
+DROP TABLE IF EXISTS transcript CASCADE;
+DROP TABLE IF EXISTS course CASCADE;
+DROP TABLE IF EXISTS room CASCADE;
+DROP TABLE IF EXISTS user CASCADE;
 
 CREATE TABLE user (
   fname varchar(20),
@@ -316,7 +314,6 @@ CREATE TABLE transcript (
   foreign key (crn) references course(crn)
 );
 
-set session foreign_key_checks = 1;
 
 
 
