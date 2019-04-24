@@ -5,12 +5,12 @@
     /* this page so that only students can access.   */
     /* else, redirects to login page                 */
     /*************************************************/
-    if($_SESSION['login_user'] && $_SESSION['role'] == 'student'){
+    if($_SESSION['uid'] && ($_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD')){
 
     }
     else{
-        echo $_SESSION['login_user'].$_SESSION['role'];
-        header("Location: login.php");
+        echo $_SESSION['uid'].$_SESSION['type'];
+        header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
     }
 
     //connect to database
