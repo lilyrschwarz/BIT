@@ -1,17 +1,12 @@
---Advising Drop
+
+
 set session foreign_key_checks = 0;
 
-drop table if exists alumni cascade;
-drop table if exists systems_administrator cascade;
-drop table if exists graduate_secretary cascade;
---drop table if exists transcript cascade;
-drop table if exists student cascade;
-drop table if exists advisor cascade;
-drop table if exists form1 cascade;
-drop table if exists users cascade;
-drop table if exists courses cascade;
-drop table if exists thesis cascade;
-
+--Registration Drop
+DROP TABLE IF EXISTS transcript CASCADE;
+DROP TABLE IF EXISTS course CASCADE;
+DROP TABLE IF EXISTS room CASCADE;
+DROP TABLE IF EXISTS user CASCADE;
 --Applications drop
 DROP TABLE IF EXISTS rec_review CASCADE;
 DROP TABLE IF EXISTS app_review CASCADE;
@@ -21,13 +16,21 @@ DROP TABLE IF EXISTS rec_letter CASCADE;
 DROP TABLE IF EXISTS academic_info CASCADE;
 DROP TABLE IF EXISTS personal_info CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS transcript CASCADE;
+DROP TABLE IF EXISTS undertranscript CASCADE;
+--Advising Drop
+drop table if exists alumni cascade;
+drop table if exists systems_administrator cascade;
+drop table if exists graduate_secretary cascade;
+--drop table if exists transcript cascade;
+drop table if exists student cascade;
+drop table if exists advisor cascade;
+drop table if exists form1 cascade;
+drop table if exists loginusers cascade;
+drop table if exists courses cascade;
+drop table if exists thesis cascade;
 
---Registration Drop
-DROP TABLE IF EXISTS transcript CASCADE;
-DROP TABLE IF EXISTS course CASCADE;
-DROP TABLE IF EXISTS room CASCADE;
-DROP TABLE IF EXISTS user CASCADE;
+
+
 
 
 /*******************
@@ -68,14 +71,14 @@ create table form1 (
   subject varchar(4),
   course_num int(5),
   primary key (num, university_id),
-  foreign key(university_id) references users (university_id)
+  foreign key(university_id) references loginusers (university_id)
 );
 
 create table advisor (
   university_id int(8),
   name varchar(30),
   primary key (university_id),
-  foreign key(university_id) references users (university_id)
+  foreign key(university_id) references loginusers (university_id)
 );
 
 create table student (
@@ -94,7 +97,7 @@ create table student (
   thesis MEDIUMTEXT,
   primary key (university_id),
   foreign key (advisor) references advisor (university_id),
-  foreign key (university_id) references users (university_id)
+  foreign key (university_id) references loginusers (university_id)
 );
 
 
@@ -244,7 +247,7 @@ CREATE TABLE prior_degrees (
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
-CREATE TABLE transcript (
+CREATE TABLE undertranscript (
 	uid int(8),
 	pdf BLOB,
 	PRIMARY KEY (uid),
