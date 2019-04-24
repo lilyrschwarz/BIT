@@ -65,7 +65,7 @@ create table student (
   l_name varchar (30),
   address varchar (255),
   email varchar (255),
-  phone_num bigint,
+  phone_num varchar(10),
   program_type varchar (20),
   advisor int (8),
   GPA float (5, 4),
