@@ -21,9 +21,9 @@
 
         //connect to database
         $servername = "localhost";
-        $username = "SELECT_team_name";
-        $password = "Password123!";
-        $dbname = "SELECT_team_name";
+        $username = "SJL";
+        $password = "SJLoss1!";
+        $dbname = "SJL";
         $connection = mysqli_connect($servername, $username, $password, $dbname);
 
         // define variables and set to empty values
