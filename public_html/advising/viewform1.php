@@ -18,18 +18,17 @@ $password = "SJLoss1!";
 $dbname = "SJL";
 
   $db = new mysqli($servername, $username, $password, $dbname);
-
-  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['login_user']);
+/*  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['login_user']);
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
-
-  $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
-
+*/
+  //$program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
+/*
   $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
   while ($row2 = mysqli_fetch_array($thesis_url )) {
         $url = $row2['FilePath'].$row2['FileName'];
         var_dump($url);
-  }
+  }*/
 
 
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
@@ -90,7 +89,7 @@ background-color: #4CAF50;
     //foreach($course_array as $key=>$value)
     while($row = $program_type->fetch_assoc())
     {
-      if($row['program_type'] == 'PhD'){
+      if($row['program_type'] == 'PhD'){*/
   ?>
 
   <li><a href="submitThesisFile.php" >Submit Thesis</a><li>
