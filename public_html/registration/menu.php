@@ -85,7 +85,7 @@
         echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $role . $extra. " privileges.<br><br>";
         $nextItem = true;
 
-       
+
 
         //EDIT PROFILE
         $editInfoPrompt = "";
@@ -209,17 +209,17 @@
         $advPrompt = "";
         if ($type == "admin") {
 
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/admin.php";
             $advPrompt = "Visit the Advising System";
         }else if ($type == "secr") {
            // echo "WE ARE A SECRATARY";
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/gs.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/gs.php";
             $advPrompt = "Visit the Advising System";
         }else if ($type == "MS" || $type == "PHD") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/student.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/student.php";
             $advPrompt = "Visit the Advising System";
         }else if ($type == "inst" && $isAdvisor = "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/advisor.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/advisor.php";
             $advPrompt = "Visit the Advising System";
         } else {
             $nextItem = false;
@@ -239,7 +239,7 @@
 
         //LOGOUT
         echo "<div><form background-color: #FF0000 action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
-        
+
         echo "</div></div>";
 
     ?>
