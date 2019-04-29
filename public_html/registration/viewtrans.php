@@ -33,17 +33,18 @@
       }
 
       // Search database for courses that match with input uid
-      $query = "select C.credits, C.section, C.name, C.courseno, C.day, C.tme, C.instructor, C.crn, C.location, T.grade FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn;";
+      $query = "select C.credits, C.section, C.name, C.courseno, C.dept, C.day, C.tme, C.instructor, C.crn, C.location, T.grade FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn;";
       $result = mysqli_query($conn, $query);
       if (mysqli_num_rows($result) > 0) {
               echo "<table>";
-              echo "<thead><tr><th>Credits</th><th>Name</th><th>Course Number</th><th>CRN</th><th>Grade</th></tr></thead>";
+              echo "<thead><tr><th>Credits</th><th>Name</th><th>Dept</th><th>Course Number</th><th>CRN</th><th>Grade</th></tr></thead>";
 
               while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr>";
                   echo "<td>" . $row["credits"] . "</td>";
                   //echo "<td>" . $row["section"] . "</td>";
                   echo "<td>" . $row["name"] . "</td>";
+                  echo "<td>" . $row["dept"] . "</td>";
                   echo "<td>" . $row["courseno"] . "</td>";
                   echo "<td>" . $row["crn"] . "</td>";
                   echo "<td>" . $row["grade"] . "</td>";
