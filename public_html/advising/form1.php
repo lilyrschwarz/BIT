@@ -206,7 +206,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 <form method="post">
 <label class="heading">Pick a Maximum of 12:</label></br></br>
 <?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
-    <input name="check_list[<?php echo $class["subject"]; ?>][]" value=<?php echo $class["course_num"]; ?> type="checkbox" class="auto"/><?php echo $class["subject"]; ?> <label><?php echo $class["course_num"]; ?> </label> <br>
+  <input name="check_list[<?php echo $class["subject"]; ?>][]" value=<?php echo $class["course_num"]; ?> type="checkbox" class="auto"/><?php echo $class["subject"]; ?> <label><?php echo $class["course_num"]; ?> </label> <br>
 
 <?php } ?>
 <input type="submit" name="submit" value="Submit">
