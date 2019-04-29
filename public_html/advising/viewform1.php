@@ -1,5 +1,6 @@
 <?php
 
+
 ession_start();
 
 if($_SESSION['uid'] && $_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD'){
@@ -25,8 +26,8 @@ $dbname = "SJL";
 
   $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
   while ($row2 = mysqli_fetch_array($thesis_url )) {
-	$url = $row2['FilePath'].$row2['FileName'];
-	var_dump($url);
+        $url = $row2['FilePath'].$row2['FileName'];
+        var_dump($url);
   }
 
 
@@ -105,10 +106,7 @@ background-color: #4CAF50;
   <h2>View Form 1</h2>
   <?php
   if($credits_sum<30){
-    echo "<b>ERROR: You need at least 30 credits to graduate. Please update the form again.</b></br>";
-    $form1_update = $db->query("UPDATE form1 set subject = null, course_num = null, num = null;");
-
-
+    echo "<b>ERROR: You need at least 30 credits to graduate.</b></br>";
   }
    ?>
   <div class="w3-responsive">
