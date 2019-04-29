@@ -45,11 +45,10 @@ create table loginusers (
 
 create table form1 (
   num int AUTO_INCREMENT,
-  university_id int (8),
-  subject varchar(4),
-  course_num int(5),
-  primary key (num, university_id),
-  foreign key(university_id) references loginusers (university_id)
+  uid int (8),
+  crn int(10),
+  primary key (num, uid),
+  foreign key(uid) references user (uid)
 );
 
 create table advisor (
@@ -168,7 +167,7 @@ CREATE TABLE academic_info (
   semester char(2),
   year int(4),
   transcript boolean,
-  recletter boolean, 
+  recletter boolean,
   PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
@@ -200,11 +199,11 @@ CREATE TABLE app_review (
 );
 
 CREATE TABLE rec_review (
-  reviewID int(8) NOT NULL, 
+  reviewID int(8) NOT NULL,
   reviewerRole varchar(3),
   rating int,
-  generic boolean, 
-  credible boolean, 
+  generic boolean,
+  credible boolean,
   uid int(8) NOT NULL,
   PRIMARY KEY (recID, reviewerRole),
   FOREIGN KEY (uid) REFERENCES users(userID),
@@ -310,7 +309,3 @@ CREATE TABLE transcript (
   foreign key (uid) references user(uid),
   foreign key (crn) references course(crn)
 );
-
-
-
-

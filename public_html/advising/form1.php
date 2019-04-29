@@ -36,16 +36,16 @@ $url = $row2['FilePath'].$row2['FileName'];
 //var_dump($url);
 }
 
-$classesResult = $conn->query("SELECT  subject, course_num FROM transcript where university_id =". $_SESSION['login_user']);
+$classesResult = $conn->query("SELECT crn FROM transcript where uid =". $_SESSION['uid']);
 
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$subject = $_POST['subject'] ?? '';
-$course_num = $_POST['course_num'] ?? '';
-$university_id = $_SESSION['login_user'];
+$subject = $_POST['crn'] ?? '';
+//$course_num = $_POST['course_num'] ?? '';
+$university_id = $_SESSION['uid'];
 
 //$order = mysqli_query($conn,"update form1 set course1sub = '$course1sub', course1num = '$course1num', course2sub = '$course2sub', course2num = '$course2num', course3sub = '$course3sub', course3num = '$course3num', course4sub = '$course4sub', course4num = '$course4num', course5sub = '$course5sub', course5num = '$course5num', course6sub = '$course6sub', course6num = '$course6num', course7sub = '$course7sub', course7num = '$course7num', course8sub = '$course8sub', course8num = '$course8num', ////course9sub = '$course9sub', course9num = '$course9num', course10sub = '$course10sub', course10num = '$course10num', course11sub = '$course11sub', course11num = '$course11num', course12sub = '$course12sub', course12num = '$course12num' where university_id =". $_SESSION['login_user']);
 //}
@@ -206,7 +206,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 <form method="post">
 <label class="heading">Pick a Maximum of 12:</label></br></br>
 <?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
-    <input name="check_list[<?php echo $class["subject"]; ?>][]" value=<?php echo $class["course_num"]; ?> type="checkbox" class="auto"/><?php echo $class["subject"]; ?> <label><?php echo $class["course_num"]; ?> </label> <br>
+    <input name="check_list[<?php echo $class["subject"]; ?>][]" value=<?php echo $class["subject"]; ?> type="checkbox" class="auto"/><?php echo $class["subject"]; ?> <label><?php echo $class["subject"]; ?> </label> <br>
 
 <?php } ?>
 <input type="submit" name="submit" value="Submit">
@@ -217,24 +217,24 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 if(isset($_POST['submit'])){
   $count = 0;
 
-  $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
+  $delete = mysqli_query($conn, "DELETE FROM form1 WHERE uid =".$university_id);
 
   foreach($_POST['check_list'] as $first_value=>$tmpArray) {
 
-      foreach($tmpArray as $second_value) {
+    //  foreach($tmpArray as $second_value) {
 
-          echo $first_value." ".$second_value."<br>";;
+          echo $first_value."<br>";;
           $count++;
           $secval = (int) $second_value;
-          $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
+          $form1 = mysqli_query($conn,"INSERT INTO form1(num, uid, crn) VALUES ($count, $university_id, '$first_value');");
 
-          $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
+          $form1_update = mysqli_query($conn,"UPDATE form1 set crn = '$first_value' where num = '$count' and uid= '$university_id';");
 
             // var_dump($secval);
 
 //echo mysqli_error();
 
-      }
+    //  }
     }
     if($count>12){
       echo "You can only submit up to 12 courses";
