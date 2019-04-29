@@ -1,5 +1,6 @@
 <?php
 
+
 session_start();
 
 if($_SESSION['uid'] && $_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD'){
@@ -15,6 +16,7 @@ $servername = "localhost";
 $username = "SJL";
 $password = "SJLoss1!";
 $dbname = "SJL";
+
   $db = new mysqli($servername, $username, $password, $dbname);
 
   $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['login_user']);
