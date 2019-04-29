@@ -21,13 +21,13 @@ $db = new mysqli($servername, $username, $password, $dbname);
 
 
 
-$credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['uid']);
+$credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['login_user']);
 $credits_sum = $credits_sum->fetch_assoc();
 $credits_sum = $credits_sum['sum_of_credits'];
 
-$program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['uid']);
+$program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 
-$thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['uid']);
+$thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
 while ($row2 = mysqli_fetch_array($thesis_url )) {
 $url = $row2['FilePath'].$row2['FileName'];
 var_dump($url);
@@ -109,7 +109,10 @@ if (!empty($program_type)) {
 <h2>View Form 1</h2>
 <?php
 if($credits_sum<30){
-  echo "<b>ERROR: You need at least 30 credits to graduate.</b></br>";
+  echo "<b>ERROR: You need at least 30 credits to graduate. Please update the form again.</b></br>";
+  $form1_update = $db->query("UPDATE form1 set subject = null, course_num = null, num = null;");
+
+
 }
  ?>
 <div class="w3-responsive">
@@ -122,7 +125,7 @@ if($credits_sum<30){
 <?php
   //if($db->connect_error){echo "db connect error";}
 
-  $course_array = $db->query("SELECT subject, course_num FROM form1 where university_id =".  $_SESSION['uid']);
+  $course_array = $db->query("SELECT subject, course_num FROM form1 where university_id =".  $_SESSION['login_user']);
   //echo $_SESSION['username'];
 
   if (!empty($course_array)) {
