@@ -15,7 +15,6 @@
             margin: 4px 2px;
             width: 70%;
         }
-
         input[type=submit]:hover {
             background-color: #990000;
             border: none;
@@ -78,7 +77,7 @@
             $extra = " and Advisor";
         }else if($isReviewer == "yes"){
             $extra = " and Reviewer";
-        }else if($isReviewer == "yes" && $isAdvisor == "yes" ){
+        }else if($isReviewer == "yes" && $isAdvisor == "yes"){
             $extra = ", Advisor, and Reviewer";
         }
 
@@ -226,6 +225,22 @@
         }
 
 
+        $advPrompt = "";
+        if ($type == "admin") {
+
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/system_admin_page.php";
+            $advPrompt = "Visit the Admissions System";
+        }else if ($type == "secr") {
+           // echo "WE ARE A SECRATARY";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+            $advPrompt = "Visit the Admissions System";
+        }else if ($type == "inst" && $isReviewer = "yes") {
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+            $advPrompt = "Review Applicants";
+        } else {
+            $nextItem = false;
+        }
+
         if ($nextItem) {
             echo "<div><form action=\"" . $advAction . "\"><input type=\"submit\" value=\"" . $advPrompt . "\"/></form></div>";
         } else {
@@ -238,8 +253,13 @@
         }
 
         //LOGOUT
+<<<<<<< HEAD
+        echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
+        
+=======
         echo "<div><form background-color: #FF0000 action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 
+>>>>>>> b2a8e2a1c3e9cd5d2cabd5fabe234cd1cf929bc3
         echo "</div></div>";
 
     ?>
