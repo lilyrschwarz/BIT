@@ -253,13 +253,10 @@
         }
 
         //LOGOUT
-<<<<<<< HEAD
         echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
-        
-=======
+
         echo "<div><form background-color: #FF0000 action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 
->>>>>>> b2a8e2a1c3e9cd5d2cabd5fabe234cd1cf929bc3
         echo "</div></div>";
 
     ?>
