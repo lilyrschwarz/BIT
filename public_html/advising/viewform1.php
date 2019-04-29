@@ -120,7 +120,7 @@ background-color: #4CAF50;
   <?php
     //if($db->connect_error){echo "db connect error";}
 
-    $course_array = $db->query("SELECT subject, course_num FROM form1 where university_id =".  $_SESSION['login_user']);
+    $course_array = $db->query("select C.courseno, C.dept FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn");
     //echo $_SESSION['username'];
 
     if (!empty($course_array)) {
@@ -129,8 +129,8 @@ background-color: #4CAF50;
       {
     ?>
   <tr>
-    <td><?php echo $row["subject"]; ?></td>
-    <td><?php echo $row["course_num"]; ?></td>
+    <td><?php echo $row["dept"]; ?></td>
+    <td><?php echo $row["courseno"]; ?></td>
   </tr>
 
   <?php
