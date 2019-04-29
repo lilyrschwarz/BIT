@@ -86,13 +86,13 @@
         }
     ?>
     <div style="text-align: center;" class="gray-bg">
-       <div class="green-bg box">
-            <h2 class="karla">Sign into JARS</h2>
-            <h4 class="karla">Just Another Registration System</h4>
+       <div class="crimson-bg box">
+            <h2 class="karla">Sign into BITWeb</h2>
+            <h4 class="karla">The Bhagi Institute of Technology Web System</h4>
             <div style="display: inline-block;">
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 
-                    <input type="number" name="uid" value="<?php echo $uid; ?>" placeholder="UID">
+                    <input type="text" name="uid" value="<?php echo $uid; ?>" placeholder="UID">
                     <span class="error">
                         <?php echo "<br>" . $uidErr; ?></span>
                     <br><br>
