@@ -35,7 +35,7 @@ while ($row2 = mysqli_fetch_array($thesis_url )) {
 $url = $row2['FilePath'].$row2['FileName'];
 //var_dump($url);
 }
-$classesResult = $conn->query("SELECT C.dept, C.courseno FROM course C, transcript T where '".$_SESSION['uid']."'=T.uid AND T.crn=C.crn"
+$classesResult = $conn->query("SELECT C.dept, C.courseno FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn"
 );
 
 // Check connection
@@ -206,6 +206,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 <form method="post">
 <label class="heading">Pick a Maximum of 12:</label></br></br>
 <?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
+    <?php echo "POTATO"; ?>
     <input name="check_list[<?php echo $class["subject"]; ?>][]" value=<?php echo $class["course_num"]; ?> type="checkbox" class="auto"/><?php echo $class["subject"]; ?> <label><?php echo $class["course_num"]; ?> </label> <br>
 
 <?php } ?>
