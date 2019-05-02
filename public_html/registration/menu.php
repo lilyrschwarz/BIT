@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <head>
-    <title>BIT Main Menu</title>
+    <title>JARS Main Menu</title>
     <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
     <link rel = "stylesheet" type="text/css" href="style.css"/>
     <style>
         input[type=submit] {
-            background-color: #990000;
+            background-color: #76b852;
             border: none;
             color: white;
             padding: 16px 32px;
@@ -15,8 +15,9 @@
             margin: 4px 2px;
             width: 70%;
         }
+
         input[type=submit]:hover {
-            background-color: #990000;
+            background-color: #76b852;
             border: none;
             color: white;
             padding: 16px 32px;
@@ -49,9 +50,6 @@
 
         //determine what type of user is currently logged in
         $type = $_SESSION['type'];
-        $isAdvisor = $_SESSION['isAdvisor'];
-        $isReviewer = $_SESSION['isReviewer'];
-
         $role = "";
         if ($type == "admin") {
             $role = "Admin";
@@ -71,20 +69,13 @@
         $advrole = mysqli_fetch_assoc($advrole);
         $advrole = $advrole['user_type'];
         $_SESSION['advrole'] = $advrole;
-        $extra = "";
-        echo "<div style=\"text-align: center;\"><div style=\"display: inline-block; width: 80%;\">";
-        if($isAdvisor == "yes"){
-            $extra = " and Advisor";
-        }else if($isReviewer == "yes"){
-            $extra = " and Reviewer";
-        }else if($isReviewer == "yes" && $isAdvisor == "yes"){
-            $extra = ", Advisor, and Reviewer";
-        }
 
-        echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $role . $extra. " privileges.<br><br>";
+        echo "<div style=\"text-align: center;\"><div style=\"display: inline-block; width: 80%;\">";
+        echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $role . " privileges.<br><br>";
         $nextItem = true;
 
-
+        //LOGOUT
+        echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 
         //EDIT PROFILE
         $editInfoPrompt = "";
@@ -208,38 +199,22 @@
         $advPrompt = "";
         if ($type == "admin") {
 
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/admin.php";
-            $advPrompt = "Visit the Advising System";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/admin.php";// "../advising/admin.php";
+            $advPrompt = "GO TO ADVISING";
         }else if ($type == "secr") {
            // echo "WE ARE A SECRATARY";
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/gs.php";
-            $advPrompt = "Visit the Advising System";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/gs.php";// "../advising/gs.php";
+            $advPrompt = "GO TO ADVISING";
         }else if ($type == "MS" || $type == "PHD") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/student.php";
-            $advPrompt = "Visit the Advising System";
-        }else if ($type == "inst" && $isAdvisor = "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/advisor.php";
-            $advPrompt = "Visit the Advising System";
+            $advAction = "../advising/student.php";
+            $advPrompt = "GO TO ADVISING";
+        }else if ($type == "inst") {
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/advisor.php";// "../advising/advisor.php";
+            $advPrompt = "GO TO ADVISING";
         } else {
             $nextItem = false;
         }
 
-
-        $advPrompt = "";
-        if ($type == "admin") {
-
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/system_admin_page.php";
-            $advPrompt = "Visit the Admissions System";
-        }else if ($type == "secr") {
-           // echo "WE ARE A SECRATARY";
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
-            $advPrompt = "Visit the Admissions System";
-        }else if ($type == "inst" && $isReviewer = "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
-            $advPrompt = "Review Applicants";
-        } else {
-            $nextItem = false;
-        }
 
         if ($nextItem) {
             echo "<div><form action=\"" . $advAction . "\"><input type=\"submit\" value=\"" . $advPrompt . "\"/></form></div>";
@@ -251,11 +226,6 @@
         if ($type == "admin") {
             echo "<div><form action=\"manageusers.php\"><input type=\"submit\" value=\"Manage Users\"/></form></div>";
         }
-
-        //LOGOUT
-        echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
-
-        echo "<div><form background-color: #FF0000 action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 
         echo "</div></div>";
 
