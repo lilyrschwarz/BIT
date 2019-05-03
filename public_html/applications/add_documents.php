@@ -1,18 +1,78 @@
 <!DOCTYPE html>
 <style>
-	.topright {
-    	position: absolute;
-    	right: 10px;
-    	top: 10px;
+    .field {
+      position: absolute;
+      left: 180px;
     }
-</style> 
-<span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
+    /*body{line-height: 1.6;}*/
+    .bottomCentered{
+       position: fixed;   
+       text-align: center;
+       bottom: 30px;
+       width: 100%;
+    }
+    .error {color: #FF0000;}
+    .topright {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 25%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    }
+
+    li {
+    float: left;
+    }
+
+    li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+    background-color: #111;
+    }
+
+    .active {
+      background-color: #4CAF50;
+    }
+
+</style>
+
+
 <head>
-    <title>Received Documents</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+	<ul>
+	<li><a href="home.php">Back</a></li>
+	<li><a class="active" href="add_documents.php">Check Documents</a></li>
+	<li style="float:right"><a href="logout.php">Log Out</a></li>
+	</ul>
+
+	<title>Received Documents</title>
 
 	<?php session_start(); 
 		// if they aren't the GS, redirect them
@@ -53,7 +113,6 @@
         // determine which buttons to include
         if ($transcript == 1 && $recletter == 1) {
         	echo "<p style='text-align:center;'>This applicant's documents have already been received.</p>";
-        	$submit = "<input type='submit' name='submit' value='Home'>";
         }
        	// rec letter not needed
         else if ($recletter == 1) {
@@ -94,11 +153,6 @@
 
 
 	<?php
-		// if they didn't have anything to submit, go home
-		if (isset($_POST['submit'])) {
-			header("Location: home.php");
-			die();
-		}
 
 		// if they have submitted their answers
 		if (isset($_POST['submitdocs'])) {

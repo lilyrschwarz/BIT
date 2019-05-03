@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <head>
     <title>APPS Home Page</title>
@@ -36,16 +39,75 @@
 	      cursor: pointer;
 	      font-size: 17px;
     	}
+    	.field {
+	      position: absolute;
+	      left: 180px;
+    	}
+	    /*body{line-height: 1.6;}*/
+	    .bottomCentered{
+	       position: fixed;   
+	       text-align: center;
+	       bottom: 30px;
+	       width: 100%;
+	    }
+	    .error {color: #FF0000;}
+	    .topright {
+	      position: absolute;
+	      right: 10px;
+	      top: 10px;
+	    }
+
+	    .btn {
+	        background-color: #4CAF50;
+	        color: white;
+	        padding: 12px;
+	        margin: 10px 0;
+	        border: none;
+	        width: 25%;
+	        border-radius: 3px;
+	        cursor: pointer;
+	        font-size: 17px;
+	    }
+
+	    ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #333;
+	    }
+
+	    li {
+	    float: left;
+	    }
+
+	    li a {
+	    display: block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	    }
+
+	    li a:hover:not(.active) {
+	    background-color: #111;
+	    }
+
+	    .active {
+	      background-color: #4CAF50;
+	    }
 
 	</style>
 	
 	<link rel="stylesheet" href="style.css">
 </head>
-<span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
 
 <body>
+	<ul>
+    <li><a class="active" href="home.php">Home</a></li>
+    <li style="float:right"><a href="logout.php">Log Out</a></li>
+    </ul>
 	<?php
-        session_start();
 
         if (!isset($_SESSION['role'])) {
         	header("Location: login.php");
@@ -80,7 +142,7 @@
 			// if their application is incomplete
 			if (!isset($row['status']) || $row['status'] == 1) {
 				echo "Application incomplete</p>";
-				echo "<form align='center' action='application_form.php' method='post'>
+				echo "<form align='center' action='app_personal_info.php' method='post'>
 	    				<input type='submit' value='Start Application' class='btn'>
 					  </form>";
 			}
@@ -89,8 +151,8 @@
 			else if ($row['status'] == 2) {
 				echo "Your application is pending</p>";
 				echo "<p style='text-align: center;'>We are still waiting to receive your transcript and recommendation letter, please check back later.</p>";
-				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
+				echo "<form align='center' action='confirmation.php' method='post'>
+	    				<input type='submit' name='".$row['uid']."' value='Edit Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -98,8 +160,8 @@
 			else if ($row['status'] == 3) {
 				echo "Your application is pending</p>";
 				echo "<p style='text-align: center;'>We are still waiting to receive your transcript, please check back later.</p>";
-				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
+				echo "<form align='center' action='confirmation.php' method='post'>
+	    				<input type='submit' name='".$row['uid']."' value='Edit Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -107,8 +169,8 @@
 			else if ($row['status'] == 4) {
 				echo "Your application is pending</p>";
 				echo "<p style='text-align: center;'>We are still waiting to receive your recommendation letter, please check back later.</p>";
-				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
+				echo "<form align='center' action='confirmation.php' method='post'>
+	    				<input type='submit' name='".$row['uid']."' value='Edit Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -116,8 +178,8 @@
 			else if ($row['status'] == 5) {
 				echo "Your application is complete!</p>";
 				echo "<p style='text-align: center;'>Refer back to this page frequently to see when a decision has been made.</p>";
-				echo "<form align='center' action='application_view_form.php' method='post'>
-	    				<input type='submit' name='".$row['uid']."' value='View Application' class='btn'>
+				echo "<form align='center' action='confirmation.php' method='post'>
+	    				<input type='submit' name='".$row['uid']."' value='Edit Application' class='btn'>
 					  </form>"; 
 			}
 
@@ -209,7 +271,7 @@
 			// get all the applicants who match search and have a finished application
 			if (isset($_POST['submit'])) {
 
-				$result = mysqli_query($conn, "SELECT userID, fname, lname, status FROM users, app_review WHERE uid=userID AND role='A' and status > 1 AND reviewerRole = 'FR' AND (fname LIKE '%".$_POST['search']."%' OR lname LIKE '%".$_POST['search']."%')") or die ("GS Search Query Failed");
+				$result = mysqli_query($conn, "SELECT DISTINCT userID, fname, lname, status FROM users, app_review WHERE uid=userID AND role='A' and status > 1 AND reviewerRole = 'FR' AND (fname LIKE '%".$_POST['search']."%' OR lname LIKE '%".$_POST['search']."%')") or die ("GS Search Query Failed");
 
 				// if there were matches, show them
 				if ($result->num_rows > 0) {
@@ -235,8 +297,8 @@
 	    								</form>
 									</td>
 									<td>
-										<form align='center' action='view_faculty_review.php' method='post'>
-										<input type='submit' name='".$row['userID']."' value='View review'>
+										<form align='center' action='list_reviews.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='View faculty reviews'>
 										</form>
 									</td>
 									<td>
@@ -278,8 +340,8 @@
 	    								</form>
 									</td>
 									<td>
-										<form align='center' action='view_faculty_review.php' method='post'>
-										<input type='submit' name='".$row['userID']."' value='View review'>
+										<form align='center' action='list_reviews.php' method='post'>
+										<input type='submit' name='".$row['userID']."' value='View faculty reviews'>
 										</form>
 									</td>
 									<td>

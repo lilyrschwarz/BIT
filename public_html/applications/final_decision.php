@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,17 +8,74 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <style>
-	.topright {
-    	position: absolute;
-    	right: 10px;
-    	top: 10px;
+    .field {
+      position: absolute;
+      left: 180px;
     }
-</style>
+    /*body{line-height: 1.6;}*/
+    .bottomCentered{
+       position: fixed;   
+       text-align: center;
+       bottom: 30px;
+       width: 100%;
+    }
+    .error {color: #FF0000;}
+    .topright {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
 
-<span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 25%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    }
+
+    li {
+    float: left;
+    }
+
+    li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+    background-color: #111;
+    }
+
+    .active {
+      background-color: #4CAF50;
+    }
+
+  </style>
+
 <body>
+	<ul>
+    <li><a href="home.php">Back</a></li>
+    <li><a class="active" href="view_cac_review.php">Final Decision</a></li>
+    <li style="float:right"><a href="logout.php">Log Out</a></li>
+    </ul>
 
-	<?php session_start();
+	<?php
 
 		// if they aren't the GS, redirect them
 		if ($_SESSION['role'] != 'GS') {
@@ -71,8 +131,9 @@
 
 
 		// header info
-		echo "<h2>Final decision for ".$name."</h2>";
+		echo "<h1>Final decision for ".$name."</h1>";
 
+		echo "<h3> Recommended Action </h3>";
 		// Get the decision made by the CAC 
 		$q = "SELECT status FROM app_review WHERE uid=".$_SESSION['applicantID']." AND reviewerRole='CAC'";
 		$result = mysqli_query($conn, $q);
@@ -80,40 +141,73 @@
 
 		// if no decision made, give them the option of viewing the application
 		if ($result->num_rows == 0 || $row['status'] < 4) {
-			echo "<p>The CAC has not reviewed this application yet, but you may still view the application and make a final decision.</p><br/>";
+			echo "<p>The CAC has not reviewed this application yet, but you may still view the application and make a final decision.</p></br>";
 
 			// button to view the application
 			echo "<form action='application_view_form.php' method='post'>
 				<input type='submit' name='".$_SESSION['applicantID']."' value='View application'>
-				</form><br/>";
+				</form></br>";
 		}
 
 		// if CAC has reviewed, show the final decision
 		else {
 			if ($row['status'] == 6) 
-				echo "<p>The final decision made by the CAC was to admit without aid</p>";
+				echo "<p>The final decision made by the CAC was to admit without aid.</p>";
 			else if ($row['status'] == 7) 
-				echo "<p>The final decision made by the CAC was to admit with aid</p>";
+				echo "<p>The final decision made by the CAC was to admit with aid.</p>";
 			else if ($row['status'] == 8) 
-				echo "<p>The final decision made by the CAC was to reject the student</p>";
+				echo "<p>The final decision made by the CAC was to reject the student.</p>";
 			else 
-				echo "<p>Error: The CAC made a review but an invalid decision is stored</p>";
+				echo "<p>Error: The CAC made a review but an invalid decision is stored.</p>";
 		}
+	?>
+      This is the average review of all faculty reviewers:
+      <?php 
+        $sql = "SELECT rating FROM app_review WHERE reviewerRole = 'FR' AND uid = " .$_SESSION['applicantID'];
+        $result = mysqli_query($conn, $sql) or die ("average review query failed");
+        $total = 0;
+        $count = 0;
+        while($row = mysqli_fetch_assoc($result)){
+          $temp = (int) $row['rating'];
+          $total += $temp;
+          $count ++;
+        }
 
+        $review = "";
+        if ($count == 0){
+          $review = "THIS APPLICANT HAS NOT BEEN REVIEWED";
+        }
+        else{
+          $average = $total / $count;
+          $average = round($average);
+        }
+        
+        
+        if ($average == 1){
+          $review = "Reject";
+        }
+        if ($average == 2){
+          $review = "Borderline Admit";
+        }
+        if ($average == 3){
+          $review = "Admit Without Aid";
+        }
+        if ($average == 4){
+          $review = "Admit With Aid";
+        }
+
+        echo '<u>'.$review.'</u>';
+
+      ?>
+	<?php
 		// now have the option to change the final decision
-		echo "<br/><br/><p>Update the final decision (not required):</p>";
+		echo "<br><br><h3>Update the final decision (not required):</h3>";
 		echo "<form action='final_decision.php' method='post'>
 				Reject:<input type='radio' name='decision' value='Reject'><br/>
 				Borderline Admit:<input type='radio' name='decision' value='Borderline Admit'><br/>
 				Admit Without Aid:<input type='radio' name='decision' value='Admit Without Aid'><br/>
 				Admit With Aid:<input type='radio' name='decision' value='Admit With Aid'><br/>
-				<input type='submit' name='submit' value='Submit'><br/><br/>
-			</form>";
-
-
-		// home button
-		echo "<form action='home.php' method='post'>
-				<input type='submit' name='home' value='Back to Home'>
+				<br><input type='submit' name='submit' value='Submit' class='btn'><br/><br/>
 			</form>";
 
 	?>

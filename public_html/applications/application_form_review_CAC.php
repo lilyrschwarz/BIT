@@ -97,33 +97,6 @@
         $advisor = "NA";
       else
         $advisor = $_POST["advisor"];
-
-
-      // insert rec review into database
-      $sql = "SELECT reviewID FROM app_review WHERE uid = ".$_SESSION['applicantID']." AND reviewerRole = 'CAC'";
-      $result = mysqli_query($conn, $sql) or die ("************* GET reviewID FAILED*************");
-      if (mysqli_num_rows($result) != 0){
-        $value = mysqli_fetch_object($result);
-        $reviewID = $value->reviewID;
-      }
-      else{
-        die("Cannot Review: This applicant has not been initialized properly int the database");
-      }
-      if (isset($_POST['rating1'])){
-        $recID = $_SESSION['recID1'];
-        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', " .$_POST['rating1'].", " .$_POST['generic1']. ", " .$_POST['credible1']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
-        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 1 SQL FAILED *************");
-      }
-      if (isset($_POST['rating2'])){
-        $recID = $_SESSION['recID2'];
-        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', " .$_POST['rating2'].", " .$_POST['generic2']. ", " .$_POST['credible2']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
-        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 2 SQL FAILED *************");
-      }
-      if (isset($_POST['rating3'])){
-        $recID = $_SESSION['recID3'];
-        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', " .$_POST['rating3'].", " .$_POST['generic3']. ", " .$_POST['credible3']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
-        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 3 SQL FAILED *************");
-      }
       
       // Calculate final status (THIS WILL INDICATE THE FINAL DECISION) corresponding to the "final decision section" )
       $status = 5;
@@ -140,8 +113,22 @@
         $status = 7;
       }
 
+
+
+      // insert rec review into database
+      $sql = "SELECT reviewID FROM app_review WHERE uid = ".$_SESSION['applicantID']." AND reviewerRole = 'CAC'";
+      $result = mysqli_query($conn, $sql) or die ("************* GET reviewID FAILED*************");
+      if (mysqli_num_rows($result) != 0){
+        $value = mysqli_fetch_object($result);
+        $reviewID = $value->reviewID;
+      }
+      else{
+        die("Cannot Review: This applicant has not been initialized properly int the database");
+      }
+
+
       //load general review info into datase
-      $sql = "UPDATE app_review  SET reviewerRole = '" .$_SESSION['role']. "', rating = " .$action.", advisor = '" .$advisor. "', status = 3 WHERE reviewID = " .$reviewID. "";
+      $sql = "UPDATE app_review  SET reviewerRole = '" .$_SESSION['role']. "', reviewerID = " .$_SESSION['id'].", rating = " .$action.", advisor = '" .$advisor. "', status = 5 WHERE reviewID = " .$reviewID. "";
       $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO app_review SQL FAILED *************");
 
       //update status for all instances of applicant
@@ -150,28 +137,45 @@
        
       //check if defiency is empty. If not, update app review
       if (!empty($_POST["defCourse"])){
-        $sql = "UPDATE app_review SET deficiency = '" . $_POST["defCourse"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewID = " .$reviewID . "";
+        $sql = "UPDATE app_review SET deficiency = '" . $_POST["defCourse"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewID = ".$reviewID . "";
         $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH dificiency SQL FAILED *************");
 
       }
-
       //if comments is not empty, update app review
       if (!empty($_POST["comments"])){
         $sql = "UPDATE app_review SET comments = '" . $_POST["comments"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewID = " .$reviewID . "";
         $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH comments SQL FAILED *************");
       }
       
-      //check if defiency is empty. If not, update app review
-      if (!empty($_POST["defCourse"])){
-        $sql = "UPDATE app_review SET deficiency = '" . $_POST["defCourse"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewerRole = '" .$_SESSION['role'] . "'";
-        $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH dificiency SQL FAILED *************");
+      // //check if defiency is empty. If not, update app review
+      // if (!empty($_POST["defCourse"])){
+      //   $sql = "UPDATE app_review SET deficiency = '" . $_POST["defCourse"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewerRole = '" .$_SESSION['role'] . "'";
+      //   $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH dificiency SQL FAILED *************");
+      // }
+
+      // //if comments is not empty, update app review
+      // if (!empty($_POST["comments"])){
+      //   $sql = "UPDATE app_review SET comments = '" . $_POST["comments"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewerRole = '" .$_SESSION['role'] . "'";
+      //   $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH comments SQL FAILED *************");
+
+      // }
+
+
+      
+      if (isset($_POST['rating1'])){
+        $recID = $_SESSION['recID1'];
+        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', ".$_SESSION['id'].", " .$_POST['rating1'].", " .$_POST['generic1']. ", " .$_POST['credible1']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
+        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 1 SQL FAILED *************");
       }
-
-      //if comments is not empty, update app review
-      if (!empty($_POST["comments"])){
-        $sql = "UPDATE app_review SET comments = '" . $_POST["comments"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewerRole = '" .$_SESSION['role'] . "'";
-        $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH comments SQL FAILED *************");
-
+      if (isset($_POST['rating2'])){
+        $recID = $_SESSION['recID2'];
+        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', ".$_SESSION['id'].", " .$_POST['rating2'].", " .$_POST['generic2']. ", " .$_POST['credible2']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
+        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 2 SQL FAILED *************");
+      }
+      if (isset($_POST['rating3'])){
+        $recID = $_SESSION['recID3'];
+        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', ".$_SESSION['id'].", " .$_POST['rating3'].", " .$_POST['generic3']. ", " .$_POST['credible3']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
+        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 3 SQL FAILED *************");
       }
 
       //if reject, require reason, and load reason into database
@@ -232,19 +236,6 @@
     <b>Student Number: </b> <u> <?php echo $_SESSION['applicantID']; ?> </u> <br><br>
     <b>Semester and Year of Application: </b> <u> <?php echo $semester." ".$year; ?> </u> <br><br>
     <b>Applying for Degree: </b> <u> <?php echo $degreeType; ?> </u> <br><br>
-
-    <!-- Button to view FR's review if exists -->
-    <?php 
-      $q = "SELECT rating FROM app_review WHERE reviewerRole = 'FR' AND uid = ".$_SESSION['applicantID'];
-      $result = mysqli_query($conn, $q) or die ("Error: line 218");
-      $value = mysqli_fetch_object($result);
-      if ($value->rating != NULL) {
-        // if a review has been made, show the button
-        echo "<form action='view_faculty_review.php' method='post'>
-              <input type='submit' name=".$_SESSION['applicantID']." value='View Faculty Reviewer review'>
-              </form>";
-      }
-    ?>
     <hr>
 
     <!-- Academic info -->
@@ -289,7 +280,7 @@
         mysqli_free_result($result);
       }
     ?>
-
+    <br>
     <b>Areas of Interest: </b> <u> <?php echo $aoi; ?> </u> <br>
     <b>Experience: </b> <u> <?php echo $experience; ?> </u> <hr>
 
@@ -343,6 +334,52 @@
 
       <!-- Overall Review -->
       <hr>
+
+
+
+       <!--AVERAGE REVIEW GOES HERE-->
+      <h2> Recommended Action </h2>
+      <i> This is the average review of all faculty reviewers: </i>
+      <?php 
+        $sql = "SELECT rating FROM app_review WHERE reviewerRole = 'FR' AND uid = " .$_SESSION['applicantID'];
+        $result = mysqli_query($conn, $sql) or die ("average review query failed");
+        $total = 0;
+        $count = 0;
+        while($row = mysqli_fetch_assoc($result)){
+          $temp = (int) $row['rating'];
+          $total += $temp;
+          $count ++;
+        }
+
+        $review = "";
+        if ($count == 0){
+          $review = "THIS APPLICANT HAS NOT BEEN REVIEWED";
+        }
+        else{
+          $average = $total / $count;
+          $average = round($average);
+        }
+        
+        
+        if ($average == 1){
+          $review = "Reject";
+        }
+        if ($average == 2){
+          $review = "Borderline Admit";
+        }
+        if ($average == 3){
+          $review = "Admit Without Aid";
+        }
+        if ($average == 4){
+          $review = "Admit With Aid";
+        }
+
+        echo '<u>'.$review.'</u>';
+
+      ?>
+      <hr>
+
+
       <h2> Final Decision </h2>
 
       1. <input type="radio" name="action" value=1 > Reject <br>
