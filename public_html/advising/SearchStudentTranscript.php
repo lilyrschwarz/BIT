@@ -74,7 +74,7 @@ li a:hover:not(.active) {
 -->
   <form method="post">
     	<?php
-  	$result = $db->query("SELECT f_name, l_name,university_id FROM student WHERE advisor =".$_SESSION['login_user']) or die ("cannot retrieve names");
+  	$result = $db->query("SELECT f_name, l_name,university_id FROM student WHERE advisor =".$_SESSION['uid']) or die ("cannot retrieve names");
   	echo "Advisee: ";
     	echo "<select name='student_id'>";
 	while ($row = mysqli_fetch_array($result )) {
