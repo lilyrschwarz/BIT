@@ -162,9 +162,9 @@
 	            // add info to the database
 	            $query = "INSERT INTO users VALUES ('A', '".$_POST['fname']."', '".$_POST['lname']."', '".$_POST['password']."', '".$_POST['email']."', ".$_SESSION['id'].")";
 	            //JACK: I added these additional queries when creating a user to make the app forms work properly
-	            $query2 = "INSERT INTO app_review (uid, reviewerRole) VALUES (" .$_SESSION['id']. ", 'FR')";
-	            $query3 = "INSERT INTO app_review (uid, reviewerRole) VALUES (" .$_SESSION['id']. ", 'CAC')";	
-	            if (mysqli_query($conn, $query) && mysqli_query($conn, $query2) && mysqli_query($conn, $query3)) {
+	            //$query2 = "INSERT INTO app_review (uid, reviewerRole) VALUES (" .$_SESSION['id']. ", 'FR')";
+	            $query2 = "INSERT INTO app_review (uid, reviewerRole) VALUES (" .$_SESSION['id']. ", 'CAC')";	
+	            if (mysqli_query($conn, $query) && mysqli_query($conn, $query2)) {
 					$_SESSION['role'] = 'A';
 					$_SESSION['errS'] = "";
 					echo "redirect";

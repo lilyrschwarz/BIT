@@ -17,8 +17,8 @@
   $stateErr = "";
   $zipErr = "";
   $phoneErr = "";
-
   $ssnErr = "";
+
   $degreeTypeErr = "";
   $appYearErr = "";
   $semesterErr = "";
@@ -31,6 +31,7 @@
   $advYearErr = "";
   $aoiErr = "";
   $experienceErr = "";
+
   $gpaErr = "";
   $dYearErr = "";
   $universityErr = "";
@@ -117,6 +118,7 @@
 	    $advYearTest = $_POST["advYear"];
 	    $aoiTest = $_POST["aoi"];
 	    $experienceTest = $_POST["experience"];
+
 	    $gpaTest = $_POST["gpa"];
 	    $dYearTest = $_POST["dYear"];
 	    $universityTest = $_POST["university"];
@@ -142,7 +144,7 @@
 	    $lnameRecTest2 = $_POST["lnameRec2"];
 	    $institutionTest2 = $_POST["institution2"];
 	    $emailTest2 = $_POST["email2"];
-	     $fnameRecTest3 = $_POST["fnameRec3"];
+	    $fnameRecTest3 = $_POST["fnameRec3"];
 	    $lnameRecTest3 = $_POST["lnameRec3"];
 	    $institutionTest3 = $_POST["institution3"];
 	    $emailTest3 = $_POST["email3"];
@@ -166,6 +168,7 @@
 	    $experience= "";
 	    $degreeType = $_POST["degreeType"];
 	    $semester = $_POST["semester"];
+
 	    $gpa = "";
 	    $dYear = "";
 	    $university = "";
@@ -425,6 +428,8 @@
 	    else{
 	      $experience = $experienceTest;
 	    }
+
+	    // prior degrees
 	    if (!empty($gpaTest) && (!is_numeric($gpaTest) || !isValidGPA($gpaTest))) {
 	      $gpaErr = "Not a valid gpa";
 	      $dataReady = false;
@@ -557,6 +562,7 @@
 	    else{
 	      $major4 = $major4Test;
 	    }
+
 	    //rec checks
 	    if (!empty($fnameRecTest) && (!preg_match("/^[a-zA-Z ]+$/i",$fnameRecTest))) {
 	      $fnameRecErr = "Only letters, and white space allowed";

@@ -194,21 +194,24 @@ CREATE TABLE app_review (
   reason char,
   rating int,
   advisor char(30),
+  reviewerID int,
   status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-admitted
   PRIMARY KEY (reviewID),
-  FOREIGN KEY (uid) REFERENCES users(userID)
+  FOREIGN KEY (uid) REFERENCES users(userID),
+  FOREIGN KEY (reviewerID) REFERENCES users(userID)
 );
 
 CREATE TABLE rec_review (
   reviewID int(8) NOT NULL, 
   reviewerRole varchar(3),
+  reviewerID int,
   rating int,
   generic boolean, 
   credible boolean, 
   uid int(8) NOT NULL,
-  PRIMARY KEY (recID, reviewerRole),
-  FOREIGN KEY (uid) REFERENCES users(userID),
   recID int,
+  PRIMARY KEY (recID, reviewerID),
+  FOREIGN KEY (uid) REFERENCES users(userID),
   FOREIGN KEY (recID) REFERENCES rec_letter(recID),
   FOREIGN KEY (reviewID) REFERENCES app_review(reviewID)
 );
@@ -233,7 +236,8 @@ CREATE TABLE prior_degrees (
   major varchar(30),
   uid int(8) NOT NULL,
   deg_type char(3),
-  PRIMARY KEY (deg_type, uid),
+  degreeID int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (degreeID),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
