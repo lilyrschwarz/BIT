@@ -43,8 +43,8 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$subject = $_POST['C.dept'] ?? '';
-$course_num = $_POST['C.courseno'] ?? '';
+$subject = $_POST['dept'] ?? '';
+$course_num = $_POST['courseno'] ?? '';
 $university_id = $_SESSION['uid'];
 
 //$order = mysqli_query($conn,"update form1 set course1sub = '$course1sub', course1num = '$course1num', course2sub = '$course2sub', course2num = '$course2num', course3sub = '$course3sub', course3num = '$course3num', course4sub = '$course4sub', course4num = '$course4num', course5sub = '$course5sub', course5num = '$course5num', course6sub = '$course6sub', course6num = '$course6num', course7sub = '$course7sub', course7num = '$course7num', course8sub = '$course8sub', course8num = '$course8num', ////course9sub = '$course9sub', course9num = '$course9num', course10sub = '$course10sub', course10num = '$course10num', course11sub = '$course11sub', course11num = '$course11num', course12sub = '$course12sub', course12num = '$course12num' where university_id =". $_SESSION['login_user']);
