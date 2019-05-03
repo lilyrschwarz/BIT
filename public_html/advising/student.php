@@ -40,10 +40,10 @@ $db = new mysqli($servername, $username, $password, $dbname);
       <h1>Graduate Students</h1>
     </div>
     <div class="w3-padding-64">
-      <a href="StudentEnrollmentInfo.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">Current Enrollment</a>
-      <a href="transcript.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">View Transcript</a>
-      <a href="studentinfo.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Update Personal Information</a>
-      <a href="viewStudentPersonalInfo.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">View Personal Information</a>
+      <!-- <a href="StudentEnrollmentInfo.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">Current Enrollment</a> -->
+      <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/viewtrans.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">View Transcript</a>
+      <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/edit-info-reg.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Update Personal Information</a>
+      <!-- <a href="viewStudentPersonalInfo.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">View Personal Information</a> -->
       <a href="form1.php" class="w3-button  w3-block w3-hover-teal w3-padding-16">Update Form 1</a>
       <a href="viewform1.php" class="w3-button  w3-block w3-hover-teal w3-padding-16">View Form 1</a>
       <a href="applytograduate.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Apply to Graduate</a>

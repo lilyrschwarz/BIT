@@ -40,7 +40,7 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
     <div class="w3-padding-64">
       <a href="SearchForm1.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">Review a student's form1</a>
       <a href="viewThesisFile.php" class="w3-button w3-block w3-hover-dark-grey w3-padding-16">Review a PhD student's thesis</a>
-      <a href="SearchTranscript.php" class="w3-button w3-block w3-hover-blue-grey w3-padding-16">View a transcript</a>
+      <!-- <a href="SearchTranscript.php" class="w3-button w3-block w3-hover-blue-grey w3-padding-16">View a transcript</a> -->
       <a href="logout.php" class="w3-button w3-block w3-hover-red w3-padding-16">Logout</a>
     </div>
    </div>
