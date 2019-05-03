@@ -30,7 +30,7 @@
     $cleared = 1;
 
     /* store university ID in $user */
-    $user = $_SESSION['login_user'];
+    $user = $_SESSION['uid'];
 
     /* FIRST CHECK: did student fill out a form 1?     */
     $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
@@ -78,7 +78,7 @@
     /***************************************************/
     /* THIRD CHECK: no more than 2 grades below B      */
     /***************************************************/
-    $sql = "SELECT final_grade FROM transcript WHERE university_id = ".$user.";";
+    $sql = "SELECT grade FROM transcript WHERE uid = ".$user.";";
     $result_3 = mysqli_query($db,$sql);
 
     if (!empty($result_3)) {
@@ -92,13 +92,13 @@
     }
 
     foreach($final_grades as $grades){
-        if("{$grades[final_grade]}" === 'C'){
+        if("{$grades[grade]}" === 'C'){
             $grades_below_b = $grades_below_b + 1;
         }
-        else if("{$grades[final_grade]}" === 'D'){
+        else if("{$grades[grade]}" === 'D'){
             $grades_below_b = $grades_below_b + 1;
         }
-        else if("{$grades[final_grade]}" === 'F'){
+        else if("{$grades[grade]}" === 'F'){
             $grades_below_b = $grades_below_b + 1;
         }
     }
@@ -133,7 +133,7 @@
     /* FIFTH CHECK: overall credits > 30               */
     /***************************************************/
 
-    $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from transcript where university_id =".$user);
+    $credits_sum = $db->query("select sum(c.credits) from course c, transcript t where '".$_SESSION['studuid']."'=t.uid AND t.crn=c.crn");
     $credits_sum = $credits_sum->fetch_assoc();
     $credits_sum = $credits_sum['sum_of_credits'];
 
@@ -157,7 +157,7 @@
     /* as a part of the 30 credit minimum              */
     /***************************************************/
 
-    $sql = "SELECT subject FROM transcript WHERE university_id = ".$user.";";
+    $sql = "SELECT subject FROM form1 WHERE university_id = ".$user.";";
     $result_6 = mysqli_query($db,$sql);
 
     $class_subj = array();

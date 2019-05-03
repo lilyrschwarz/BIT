@@ -49,14 +49,14 @@ create table form1 (
   subject varchar(4),
   course_num int(5),
   primary key (num, university_id),
-  foreign key(university_id) references loginusers (university_id)
+  foreign key(university_id) references users (userID)
 );
 
 create table advisor (
   university_id int(8),
   name varchar(30),
   primary key (university_id),
-  foreign key(university_id) references loginusers (university_id)
+  foreign key(university_id) references users (userID)
 );
 
 create table student (
@@ -75,7 +75,7 @@ create table student (
   thesis MEDIUMTEXT,
   primary key (university_id),
   foreign key (advisor) references advisor (university_id),
-  foreign key (university_id) references loginusers (university_id)
+  foreign key (university_id) references users (userID)
 );
 
 
@@ -168,7 +168,7 @@ CREATE TABLE academic_info (
   semester char(2),
   year int(4),
   transcript boolean,
-  recletter boolean, 
+  recletter boolean,
   PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
@@ -200,11 +200,11 @@ CREATE TABLE app_review (
 );
 
 CREATE TABLE rec_review (
-  reviewID int(8) NOT NULL, 
+  reviewID int(8) NOT NULL,
   reviewerRole varchar(3),
   rating int,
-  generic boolean, 
-  credible boolean, 
+  generic boolean,
+  credible boolean,
   uid int(8) NOT NULL,
   PRIMARY KEY (recID, reviewerRole),
   FOREIGN KEY (uid) REFERENCES users(userID),
@@ -307,10 +307,6 @@ CREATE TABLE transcript (
   grade varchar(2),
   crn int(10),
   lineid int auto_increment primary key,
-  foreign key (uid) references user(uid),
+  foreign key (uid) references user(userID),
   foreign key (crn) references course(crn)
 );
-
-
-
-

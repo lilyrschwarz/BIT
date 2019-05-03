@@ -34,7 +34,7 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
 <div class="w3-row">
   <div class=" w3-container w3-center" >
     <div class="w3-padding-64">
-        <h1>Advisor</h1>
+        <h1>Faculty Advisor</h1>
     </div>
 
     <div class="w3-padding-64">
