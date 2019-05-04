@@ -73,13 +73,15 @@ $db = new mysqli($servername, $username, $password, $dbname);
     <!-- <a href="viewStudentPersonalInfo.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">View Personal Information</a> -->
 <div>
   <form action="form1.php">
-    <input type="submit" value="Update Form1">
+    <input type="submit" value="Update Form 1">
   </form
-
+</div>
+<div>
   <form action="viewform1.php">
-    <input type="submit" value="View Form1">
+    <input type="submit" value="View Form 1">
   </form
-
+</div>
+<div>
   <form action="applytograduate.php">
     <input type="submit" value="Apply to Graduate">
   </form
@@ -100,7 +102,8 @@ $db = new mysqli($servername, $username, $password, $dbname);
     <form action="submitThesisFile.php">
       <input type="submit" value="Submit a Thesis">
     </form
-
+  </div>
+  <div>
     <form action="<?php echo $url;?>">
       <input type="submit" value="View Thesis Submission">
     </form
@@ -117,7 +120,8 @@ $db = new mysqli($servername, $username, $password, $dbname);
   <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">
     <input type="submit" value="Main Menu">
   </form
-
+</div>
+<div>
   <form action="logout.php">
     <input type="submit" value="Logout">
   </form
