@@ -247,7 +247,7 @@ if(isset($_POST['submit'])){
     if ($form1) {
 
         //  echo '<br>Input data is successful';
-        //  header("Location: viewform1.php");
+          header("Location: viewform1.php");
 
 
     }
