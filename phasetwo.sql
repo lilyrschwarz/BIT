@@ -20,6 +20,8 @@ create table thesis (
   FileName varchar (250),
   FilePath varchar (250),
   primary key (university_id)
+  FOREIGN KEY (university_id) REFERENCES users(userID)
+
 );
 
 # create table courses (
@@ -92,6 +94,7 @@ create table alumni (
   grad_year int (4),
   grad_semester varchar (10),
   primary key (university_id)
+  FOREIGN KEY (university_id) REFERENCES users(userID)
 );
 
 # create table transcript (

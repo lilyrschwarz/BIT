@@ -17,8 +17,8 @@ $db = new mysqli($servername, $username, $password, $dbname);
 
 
 
-    $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
-    $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
+    $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['uid']);
+    $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['uid']);
     while ($row2 = mysqli_fetch_array($thesis_url )) {
 	$url = $row2['FilePath'].$row2['FileName'];
 	//var_dump($url);
@@ -32,7 +32,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 <meta name="viewport">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel = "stylesheet" type="text/css" href="style.css"/>
-<style>
+<!-- <style>
     input[type=submit] {
         background-color: #990000;
         border: none;
@@ -53,7 +53,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
         width: 80%;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
-</style>
+</style> -->
 </head>
 
 <body class="gray-bg">
@@ -75,11 +75,19 @@ $db = new mysqli($servername, $username, $password, $dbname);
   <form action="form1.php">
     <input type="submit" value="Update Form1">
   </form
+
+  <form action="viewform1.php">
+    <input type="submit" value="View Form1">
+  </form
+
+  <form action="applytograduate.php">
+    <input type="submit" value="Apply to Graduate">
+  </form
 </div>
 
-      <a href="form1.php" class="w3-button  w3-block w3-hover-teal w3-padding-16">Update Form 1</a>
+      <!-- <a href="form1.php" class="w3-button  w3-block w3-hover-teal w3-padding-16">Update Form 1</a>
       <a href="viewform1.php" class="w3-button  w3-block w3-hover-teal w3-padding-16">View Form 1</a>
-      <a href="applytograduate.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Apply to Graduate</a>
+      <a href="applytograduate.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Apply to Graduate</a> -->
 
   <?php
 
@@ -88,10 +96,16 @@ $db = new mysqli($servername, $username, $password, $dbname);
         while($row = $program_type->fetch_assoc())  {
           	if($row['program_type'] == 'PhD'){
   ?>
+  <div>
+    <form action="submitThesisFile.php">
+      <input type="submit" value="Submit a Thesis">
+    </form
 
-         	 <a href="submitThesisFile.php" class="w3-button  w3-block w3-hover-red w3-padding-16">Submit a Thesis</a>
-
-		 <a href="<?php echo $url;?>" target='_blank' class='w3-button w3-block w3-hover-red w3-padding-16'>View Thesis Submission</a>
+    <form action="<?php echo $url;?>">
+      <input type="submit" value="View Thesis Submission">
+    </form
+  </div>
+        
 
 <?php
 		}
