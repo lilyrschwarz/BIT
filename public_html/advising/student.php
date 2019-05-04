@@ -60,11 +60,12 @@ $db = new mysqli($servername, $username, $password, $dbname);
 <!-- <body class="w3-content"> -->
 
 <!-- First Grid -->
-<div class="w3-row">
-  <div class="  w3-container w3-center" >
-    <div class="w3-padding-64">
+<!-- <div class="w3-row"> -->
+  <!-- <div class="  w3-container w3-center" >
+    <div class="w3-padding-64"> -->
+<div style="text-align: center"><div style=display: inline-block; width: 80%>
       <h1>Graduate Student Advising</h1>
-    </div>
+
     <div class="w3-padding-64">
       <!-- <a href="StudentEnrollmentInfo.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">Current Enrollment</a> -->
       <!-- <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/edit-info-reg.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Update Personal Information</a> -->
