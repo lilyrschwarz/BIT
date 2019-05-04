@@ -20,9 +20,10 @@ $dbname = "SJL";
   $db = new mysqli($servername, $username, $password, $dbname);
   $user = $_SESSION['uid'];
 
-  $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
+  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=course.courseno and university_id =".$_SESSION['uid']);
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
+  echo $credits_sum;
 
   //$program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 /*
