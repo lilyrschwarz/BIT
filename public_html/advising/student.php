@@ -65,7 +65,9 @@ $db = new mysqli($servername, $username, $password, $dbname);
      }
 ?>
 
-      <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php" class="w3-button  w3-block w3-hover-red w3-padding-16">Main Menu</a>
+      <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Main Menu</a>
+      <a href="logout.php" class="w3-button  w3-block w3-hover-red w3-padding-16">Logout</a>
+
 
 
     </div>
