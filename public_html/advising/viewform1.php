@@ -18,6 +18,8 @@ $password = "SJLoss1!";
 $dbname = "SJL";
 
   $db = new mysqli($servername, $username, $password, $dbname);
+  $user = $_SESSION['uid'];
+
 /*  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['login_user']);
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
@@ -107,8 +109,10 @@ background-color: #4CAF50;
   <?php
   if($credits_sum<30){
     echo "<b>ERROR: You need at least 30 credits to graduate.</b></br>";
-    update
-  }else{
+    $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
+    $result = mysqli_query($db, $sql_1);
+    $makeEmpty = empty($result);
+  }
    ?>
   <div class="w3-responsive">
   <table class="w3-table-all">
@@ -136,7 +140,6 @@ background-color: #4CAF50;
   <?php
                  }
   }
-}
               ?>
   </table>
   </div>
