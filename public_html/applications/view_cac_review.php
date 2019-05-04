@@ -9,14 +9,6 @@
     die("Connection failed: " . mysqli_connect_error());
   }
 
-  //set up reviewerID
-  $q = "SELECT reviewerID, rating FROM app_review WHERE reviewerRole = 'CAC' AND uid= " .$_SESSION['applicantID'];;
-  $result = mysqli_query($conn, $q) or die ("get reviewerID failed");
-  $value = mysqli_fetch_object($result);
-  $_SESSION['rating'] =  $value->rating;
-  $_SESSION['reviewerID'] = $value->reviewerID;
-
-
   //get the applicant the GS wants to update
   $applicants = mysqli_query($conn, "SELECT * FROM users WHERE role='A'");
   while ($row = $applicants->fetch_assoc()) {
@@ -27,6 +19,13 @@
       $name = $fname." ".$lname;
     }
   }
+
+  //set up reviewerID
+  $q = "SELECT reviewerID, rating FROM app_review WHERE reviewerRole = 'CAC' AND uid= " .$_SESSION['applicantID'];
+  $result = mysqli_query($conn, $q) or die ("get reviewerID failed");
+  $value = mysqli_fetch_object($result);
+  $_SESSION['rating'] =  $value->rating;
+  $_SESSION['reviewerID'] = $value->reviewerID;
 
   if (!$_SESSION['applicantID'])
     echo "Error: Applicant not found</br>";
