@@ -195,10 +195,10 @@ background-color: #4CAF50;
   if($credits_sum<30){
     //echo $credits_sum;
     echo "<b>ERROR: You need at least 30 credits to graduate. Please fill out Form 1 with the necessary credentials.</b></br>";
-    $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
-    // $result = mysqli_query($db, $sql_1);
-    // $makeEmpty = empty($result);
-    $form1_update = mysqli_query($db,"UPDATE form1 set subject = null, course_num = null where university_id= '$user';");
+    // $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
+    // // $result = mysqli_query($db, $sql_1);
+    // // $makeEmpty = empty($result);
+    // $form1_update = mysqli_query($db,"UPDATE form1 set subject = null, course_num = null where university_id= '$user';");
   }else{
    ?>
   <div class="w3-responsive">

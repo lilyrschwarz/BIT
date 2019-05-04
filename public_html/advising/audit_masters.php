@@ -28,6 +28,9 @@
     /* not complete successfully                         */
     /*****************************************************/
     $cleared = 1;
+    $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
+    $credits_sum = $credits_sum->fetch_assoc();
+    $credits_sum = $credits_sum['sum_of_credits'];
 
     /* store university ID in $user */
     $user = $_SESSION['uid'];
