@@ -107,7 +107,8 @@ background-color: #4CAF50;
   <?php
   if($credits_sum<30){
     echo "<b>ERROR: You need at least 30 credits to graduate.</b></br>";
-  }
+    update
+  }else{
    ?>
   <div class="w3-responsive">
   <table class="w3-table-all">
@@ -135,6 +136,7 @@ background-color: #4CAF50;
   <?php
                  }
   }
+}
               ?>
   </table>
   </div>
