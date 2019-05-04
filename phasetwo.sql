@@ -20,7 +20,7 @@ create table thesis (
   FileName varchar (250),
   FilePath varchar (250),
   primary key (university_id)
-  -- FOREIGN KEY (university_id) REFERENCES users(userID)
+  FOREIGN KEY (university_id) REFERENCES users(userID)
 
 );
 
