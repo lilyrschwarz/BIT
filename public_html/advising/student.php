@@ -32,7 +32,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 <meta name="viewport">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel = "stylesheet" type="text/css" href="style.css"/>
-<!-- <style>
+<style>
     input[type=submit] {
         background-color: #990000;
         border: none;
@@ -53,7 +53,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
         width: 80%;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
-</style> -->
+</style> 
 </head>
 
 <body class="gray-bg">
@@ -105,7 +105,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
       <input type="submit" value="View Thesis Submission">
     </form
   </div>
-        
+
 
 <?php
 		}
