@@ -32,8 +32,32 @@ $db = new mysqli($servername, $username, $password, $dbname);
 <meta name="viewport">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel = "stylesheet" type="text/css" href="style.css"/>
+<style>
+    input[type=submit] {
+        background-color: #990000;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        width: 70%;
+    }
+    input[type=submit]:hover {
+        background-color: #990000;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 80%;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+</style>
+</head>
 
-<body class="w3-content">
+<body class="gray-bg">
+<!-- <body class="w3-content"> -->
 
 <!-- First Grid -->
 <div class="w3-row">
