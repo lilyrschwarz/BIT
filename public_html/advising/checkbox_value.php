@@ -4,6 +4,7 @@ if(!empty($_POST['check_list'])) {
   // Counting number of checked checkboxes.
   $checked_count = count($_POST['check_list']);
 //  echo "You have selected the following: <br/>";
+echo "sdafjkasdfhksdalfhsjkfhf";
 
   if($checked_count>12){
     echo "You can only submit up to 12 courses";
