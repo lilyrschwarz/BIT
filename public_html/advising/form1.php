@@ -28,9 +28,9 @@ $form1 = null;
 
 
 
-$program_type = $conn->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
+$program_type = $conn->query("SELECT program_type from student where university_id =".$_SESSION['uid']);
 
-$thesis_url = $conn->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
+$thesis_url = $conn->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['uid']);
 while ($row2 = mysqli_fetch_array($thesis_url )) {
 $url = $row2['FilePath'].$row2['FileName'];
 //var_dump($url);
@@ -236,6 +236,12 @@ if(isset($_POST['submit'])){
 
       }
     }
+
+      $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
+      $credits_sum = $credits_sum->fetch_assoc();
+      $credits_sum = $credits_sum['sum_of_credits'];
+
+      echo $credits_sum;
     if($count>12){
       echo "You can only submit up to 12 courses";
       header('Location: ' . $form1.php);
@@ -245,7 +251,7 @@ if(isset($_POST['submit'])){
     if ($form1) {
 
         //  echo '<br>Input data is successful';
-          header("Location: viewform1.php");
+        //  header("Location: viewform1.php");
 
 
     }
