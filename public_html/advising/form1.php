@@ -36,7 +36,7 @@ $url = $row2['FilePath'].$row2['FileName'];
 //var_dump($url);
 }
 
-$classesResult = $conn->query("select C.courseno, C.dept FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn");
+$classesResult = $conn->query("select C.courseno, C.dept FROM course C, transcript T where '".$_SESSION['uid']."'=T.uid AND T.crn=C.crn");
 
 // Check connection
 if (!$conn) {
@@ -309,7 +309,6 @@ if(isset($_POST['submit'])){
           $count++;
           $secval = (int) $second_value;
           $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
-echo $form1;
           $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
 
             // var_dump($secval);
