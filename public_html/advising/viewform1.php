@@ -110,6 +110,7 @@ background-color: #4CAF50;
   <h2>View Form 1</h2>
   <?php
   if($credits_sum<30){
+    echo $credit_sum;
     echo "<b>ERROR: You need at least 30 credits to graduate. Please fill out Form 1 with the necessary credentials.</b></br>";
     $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
     // $result = mysqli_query($db, $sql_1);
