@@ -24,7 +24,7 @@
         padding: 12px;
         margin: 10px 0;
         border: none;
-        width: 25%;
+        width: 35%;
         border-radius: 3px;
         cursor: pointer;
         font-size: 17px;
@@ -120,7 +120,7 @@
 				Yes<input type='radio' name='transcript' value='yes' required>
 				No<input type='radio' name='transcript' value='no'><br/>";
 			$rec_button = "";
-			$submit = "<input type='submit' name='submitdocs' value='Submit'>";
+			$submit = "<br><input type='submit' name='submitdocs' value='Submit' class='btn'>";
         }
         // transcript not needed
         else if ($transcript == 1) {
@@ -128,7 +128,7 @@
         	$rec_button = "<br/>Has ".$name."'s recommendation letter been received?	&nbsp
 				Yes<input type='radio' name='rec' value='yes' required>
 				No<input type='radio' name='rec' value='no'> <br/>";
-			$submit = "<input type='submit' name='submitdocs' value='Submit'>";
+			$submit = "<br><input type='submit' name='submitdocs' value='Submit' class='btn'>";
         }
         // if neither has been received, show both buttons
         else {
@@ -138,7 +138,7 @@
 			$rec_button = "<br/>Has ".$name."'s recommendation letter been received?	&nbsp
 				Yes<input type='radio' name='rec' value='yes' required>
 				No<input type='radio' name='rec' value='no'> <br/>";
-			$submit = "<input type='submit' name='submitdocs' value='Submit'>";
+			$submit = "<br><input type='submit' name='submitdocs' value='Submit' class='btn'>";
         }
 	?>
 

@@ -216,10 +216,27 @@
 
 			// page header info
         	echo "<h2 style='text-align: center;'>Reviewer Home Page</h2>
-        		<h4 style='text-align: center;'>View completed applications and review them here</h4>";
+        		<h4 style='text-align: center;'>View completed applications and review them here:</h4>";
 
 			// get all the applicants whose application is complete
-			$result = mysqli_query($conn, "SELECT DISTINCT userID, fname, lname FROM users, app_review WHERE status>4 AND userID=uid");
+        	$q = "SELECT DISTINCT userID, fname, lname FROM users, app_review WHERE status=5 AND userID=uid";
+			$result = mysqli_query($conn, $q) or die ("list applicants query failed");
+
+			if ($result->num_rows == 0){
+				die ("<center><i> No applicants to review </i></center>");
+			}
+			// else{
+			// 	while ($row = mysqli_fetch_assoc($result)){
+			// 		$testReviewed = "SELECT rating FROM app_review WHERE uid = " .$row['userID']. " AND reviewerID = " .$_SESSION['id'];
+			// 		$r = mysqli_query($conn, $q) or die ("test reviewed query failed");
+			// 		$value = mysqli_fetch_object($r);
+			// 		$rating = $value->rating;
+			// 	}
+			// }
+			//AND rating <=> NULL AND reviewerID = " .$_SESSION['id'];
+
+
+			
 
 			if ($_SESSION['role'] == "FR"){
 				// start table
@@ -245,11 +262,40 @@
 			// show each applicant with a button to the review page
 			for ($i=0; $i < $result->num_rows; $i++) {
 				$row = $result->fetch_assoc();
+
+				//test if reviewed
+				$testReviewed = "SELECT rating FROM app_review WHERE rating IS NOT NULL AND uid = " .$row['userID']. " AND reviewerID = " .$_SESSION['id'];
+				$r = mysqli_query($conn, $testReviewed) or die ("test reviewed query failed");
+				
+				$isReviewed;
+				if ($r->num_rows > 0){
+					$isReviewed = true;
+				}
+				else{
+					$isReviewed = false;
+				}
+
+				// $reviewed = false;
+				// if ($r->num_rows > 0){
+				// 	$value = mysqli_fetch_object($r);
+				// 	$rating = $value->rating;
+				// 	if ($rating == NULL){
+				// 		$reviewed = true;
+				// 	}
+				// }
+
+				
 				// the button will go to a different place based on role
 				if ($_SESSION['role'] == "FR"){
-					$button = "<form action='application_form_review.php' method='post'>
-		    						<input type='submit' name='".$row['userID']."' value='Review Application'>
-						  		</form>";
+					
+					if ($isReviewed == true){
+						$button = "<i>Review Complete</i>";
+					}
+					else{
+						$button = "<form action='application_form_review.php' method='post'>
+			    						<input type='submit' name='".$row['userID']."' value='Review Application'>
+							  		</form>";
+					}
 					echo "<tr>
                     	<td>".$row['fname']."</td>
 	                    <td>".$row['lname']."</td>
@@ -257,9 +303,15 @@
 	                </tr>";
 				}
 				else { 
-					$button = "<form action='application_form_review_CAC.php' method='post'>
-		    						<input type='submit' name='".$row['userID']."' value='Review Application'>
-						  		</form>";
+
+					if ($isReviewed == true){
+						$button = "<i>Review Complete</i>";
+					}
+					else{
+						$button = "<form action='application_form_review_CAC.php' method='post'>
+			    						<input type='submit' name='".$row['userID']."' value='Review Application'>
+							  		</form>";
+					}
 					echo "<tr>
                     	<td>".$row['fname']."</td>
 	                    <td>".$row['lname']."</td>
