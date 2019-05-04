@@ -93,14 +93,14 @@ li a:hover:not(.active) {
 }
 </style>
 <ul>
-<li><a class="active" href="student.php">Home</a></li>
-<li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
-<li><a href="transcript.php">Transcript</a></li>
-<li><a href="studentinfo.php">Update Info</a></li>
-<li><a href="viewStudentPersonalInfo.php">View Info</a></li>
-<li><a href="form1.php">Update Form 1</a></li>
-<li><a href="viewform1.php">View Form 1</a></li>
-<li><a href="applytograduate.php">Apply to Graduate</a></li>
+  <li><a class="active" href="student.php">Advising Home</a></li>
+  <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
+  <li><a href="transcript.php">Transcript</a></li>
+  <li><a href="studentinfo.php">Update Info</a></li>
+  <li><a href="viewStudentPersonalInfo.php">View Info</a></li> -->
+  <li><a href="form1.php">Update Form 1</a></li>
+  <li><a href="viewform1.php">View Form 1</a></li>
+  <li><a href="applytograduate.php">Apply to Graduate</a></li>
 
 
 <?php
