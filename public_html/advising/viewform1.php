@@ -167,7 +167,7 @@ background-color: #4CAF50;
   <li><a href="applytograduate.php">Apply to Graduate</a></li> -->
 
 
-  <?php
+  <!-- <?php
 
   if (!empty($program_type)) {
     //foreach($course_array as $key=>$value)
@@ -182,7 +182,7 @@ background-color: #4CAF50;
   }
  }
 }
-            ?>
+            ?> -->
   <!-- <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">Main Menu</a></li> -->
   <li style="float:right"><a href="logout.php">Logout</a></li>
 
