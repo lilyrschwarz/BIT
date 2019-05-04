@@ -10,10 +10,12 @@
   }
 
   //set up reviewerID
-  $q = "SELECT reviewerID FROM app_review WHERE reviewerRole = 'CAC'";
+  $q = "SELECT reviewerID, rating FROM app_review WHERE reviewerRole = 'CAC' AND uid= " .$_SESSION['applicantID'];;
   $result = mysqli_query($conn, $q) or die ("get reviewerID failed");
   $value = mysqli_fetch_object($result);
+  $_SESSION['rating'] =  $value->rating;
   $_SESSION['reviewerID'] = $value->reviewerID;
+
 
   //get the applicant the GS wants to update
   $applicants = mysqli_query($conn, "SELECT * FROM users WHERE role='A'");
@@ -161,7 +163,13 @@
     <li style="float:right"><a href="logout.php">Log Out</a></li>
     </ul>
 
-    <h1> Faculty Review </h1>
+    <?php 
+      if ($_SESSION['rating'] == NULL){
+        die("<h2> The CAC has not reviewed this applicant </h2>");
+      }
+    ?>
+
+    <h1> CAC Review </h1>
     <!-- Rec letter -->
     <h2>Recommendation Letter </h2>
 
@@ -176,7 +184,7 @@
         echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
         echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
         echo "<b>Letter: </b><br>";
-        echo '<textarea readonly rows="15" cols="100">'.$row['recommendation'].'</textarea>';
+        echo '<textarea readonly rows="15" cols="80" style="font-size: 16px;">'.$row['recommendation'].'</textarea>';
         echo "<br><br>";
 
        
@@ -203,8 +211,8 @@
     (1=Reject, 2=Borderline admit, 3=Admit without aid, 4=Admit with aid)<br>
     <b>Recommended Deficiency Courses: </b> <u> <?php echo $dificiency; ?> </u> <br>
     <b>Recommended Advisor: </b> <u> <?php echo $advisor; ?> </u> <br>
-    <b>Faculty Reviewer Comments: </b> <br>
-    <textarea rows="4" cols="50"><?php echo $comments; ?> </textarea>
+    <b>CAC Comments: </b> <br>
+    <textarea rows="10" cols="71" style="font-size: 18px;" name="comments" form="mainform"><?php echo $comments; ?> </textarea>
     <hr>
       
 
