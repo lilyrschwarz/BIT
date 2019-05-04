@@ -114,7 +114,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 ?>
 
 <div>
-  <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.ph">
+  <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">
     <input type="submit" value="Main Menu">
   </form
 
