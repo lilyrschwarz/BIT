@@ -53,7 +53,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
         width: 80%;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
-</style> 
+</style>
 </head>
 
 <body class="gray-bg">
@@ -113,9 +113,19 @@ $db = new mysqli($servername, $username, $password, $dbname);
      }
 ?>
 
-      <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Main Menu</a>
-      <a href="logout.php" class="w3-button  w3-block w3-hover-red w3-padding-16">Logout</a>
+<div>
+  <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.ph">
+    <input type="submit" value="Main Menu">
+  </form
 
+  <form action="logout.php">
+    <input type="submit" value="Logout">
+  </form
+</div>
+
+      <!-- <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Main Menu</a>
+      <a href="logout.php" class="w3-button  w3-block w3-hover-red w3-padding-16">Logout</a>
+ -->
 
 
     <!-- </div> -->
