@@ -13,9 +13,12 @@ else{
 if($_POST['masters']){
     header("Location: audit_masters.php");
 }
-else if($_POST['phd']){
+if($_POST['phd']){
     header("Location: audit_phd.php");
 }
+// if($_POST['phd']){
+//     header("Location: audit_phd.php");
+// }
 
 
     //connect to database

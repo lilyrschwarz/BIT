@@ -5,7 +5,7 @@
     /* this page so that only students can access.   */
     /* else, redirects to login page                 */
     /*************************************************/
-    if($_SESSION['uid'] && $_SESSION['type'] == 'MS'){
+    if($_SESSION['uid'] && ($_SESSION['type'] == 'PHD' || $_SESSION['type'] == 'MS')){
 
     }
     else{
