@@ -74,11 +74,6 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
       </form
     </div>
     <div>
-      <form action="SearchTranscript.php">
-        <input type="submit" value="View a Student's Transcript">
-      </form
-    </div>
-    <div>
       <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">
         <input type="submit" value="Main Menu">
       </form
