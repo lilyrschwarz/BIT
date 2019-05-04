@@ -24,8 +24,8 @@ option, select {
   font-size: 20px;
 }
 
-.green-bg {
-  background-color: #76b852;
+.crimson-bg {
+  background-color: #990000;
 }
 
 .gray-bg {
@@ -67,7 +67,7 @@ thead {
 }
 
 .menu-button input[type=submit] {
-  background-color: #76b852;
+  background-color: #990000;
   border: none;
   color: white;
   padding: 16px 32px;
@@ -77,7 +77,7 @@ thead {
 }
 
 .menu-button input[type=submit]:hover {
-  background-color: #76b852;
+  background-color: #990000;
   border: none;
   color: white;
   padding: 16px 32px;

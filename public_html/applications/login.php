@@ -48,7 +48,7 @@
 <body>
 
 	<?php 
-		session_start(); 
+		session_start();  
 
 		// connect to the database
 		$conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
@@ -71,7 +71,7 @@
 	<div class="row">
 		<!-- Log in -->
 		
-			<div class="green-bg box">
+			<div class="crimson-bg box">
 			<h3>Log In</h3>
 			<p>Log in to complete your application, view its status, or see the final decision</p>
 			<?php echo $_SESSION['errL']; ?><br>
@@ -85,7 +85,7 @@
 
 
 		<!-- Sign up -->
-			<div class="green-bg box">
+			<div class="crimson-bg box">
 			<h3>Sign Up</h3>
 			<p>Sign up here if you don't already have an account to begin your application</p>
 			<?php echo $_SESSION['errS']; ?><br>
@@ -136,11 +136,21 @@
 					$_SESSION['errL'] = "<p class='error'>Incorrect password, try again:</p>";
 				}
 				else {
-					// direct to application page
 					$_SESSION['role'] = $row['role'];
 					$_SESSION['errL'] = "";
+
+					// set up session variables for main site
+					$_SESSION['loggedin'] = true;
+					$q = "SELECT type, isAdvisor, isReviewer FROM user WHERE uid = ".$_SESSION['id'];
+					$r = mysqli_query($conn, $q) or die("user session variables failed");
+					$value = mysqli_fetch_object($r);
+					$_SESSION['type'] = $value->type;
+					$_SESSION['isAdvisor'] = $value->isAdvisor;
+					$_SESSION['isReviewer'] = $value->isReviewer;
+
+					// direct to application page
 					header("Location: home.php");
-					die();
+					exit();
 				}
 			}
 		}
@@ -169,7 +179,7 @@
 					$_SESSION['errS'] = "";
 					echo "redirect";
                     header("Location: home.php");
-                    die();
+                    exit();
             	}
                 else
                     $_SESSION['errS'] = "<p class='error'>Failure creating account: ".mysqli_error()."</p>";

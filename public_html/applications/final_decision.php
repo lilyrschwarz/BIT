@@ -27,7 +27,7 @@ session_start();
     }
 
     .btn {
-        background-color: #4CAF50;
+        background-color: #990000;
         color: white;
         padding: 12px;
         margin: 10px 0;
@@ -63,7 +63,7 @@ session_start();
     }
 
     .active {
-      background-color: #4CAF50;
+      background-color: #990000;
     }
 
   </style>
@@ -152,16 +152,16 @@ session_start();
 		// if CAC has reviewed, show the final decision
 		else {
 			if ($row['status'] == 6) 
-				echo "<p>The final decision made by the CAC was to admit without aid.</p>";
+				echo "<p>The final decision made by the CAC: <u>Admit without aid</u></p>";
 			else if ($row['status'] == 7) 
-				echo "<p>The final decision made by the CAC was to admit with aid.</p>";
+				echo "<p>The final decision made by the CAC: <u>Admit with aid</u></p>";
 			else if ($row['status'] == 8) 
-				echo "<p>The final decision made by the CAC was to reject the student.</p>";
+				echo "<p>The final decision made by the CAC: <u>Reject the student</u></p>";
 			else 
 				echo "<p>Error: The CAC made a review but an invalid decision is stored.</p>";
 		}
 	?>
-      This is the average review of all faculty reviewers:
+      The average review of all faculty reviewers:
       <?php 
         $sql = "SELECT rating FROM app_review WHERE reviewerRole = 'FR' AND uid = " .$_SESSION['applicantID'];
         $result = mysqli_query($conn, $sql) or die ("average review query failed");

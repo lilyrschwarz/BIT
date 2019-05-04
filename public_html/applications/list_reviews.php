@@ -8,12 +8,23 @@
     die("Connection failed: " . mysqli_connect_error());
   }
 
-  //get name of applicant
-  $q = "SELECT fname, lname FROM users WHERE userID = " .$_SESSION['applicantID'];
-  $result = mysqli_query($conn, $q) or die ("get name failed");
-  $value = mysqli_fetch_object($result);
-  $fname = $value->fname;
-  $lname = $value->lname;
+  // get the applicant
+  $applicants = mysqli_query($conn, "SELECT * FROM users WHERE role='A'");
+  while ($row = $applicants->fetch_assoc()) {
+    if (isset($_POST[$row['userID']])) {
+        $_SESSION['applicantID'] = $row['userID'];
+          $fname = $row['fname'];
+          $lname = $row['lname'];
+          $name = $fname." ".$lname;
+      }
+  }
+
+  // //get name of applicant
+  // $q = "SELECT fname, lname FROM users WHERE userID = " .$_SESSION['applicantID'];
+  // $result = mysqli_query($conn, $q) or die ("get name failed");
+  // $value = mysqli_fetch_object($result);
+  // $fname = $value->fname;
+  // $lname = $value->lname;//
 ?>
 
 
@@ -43,7 +54,7 @@
     }
 
     .btn {
-        background-color: #4CAF50;
+        background-color: #990000;
         color: white;
         padding: 12px;
         margin: 10px 0;
@@ -79,7 +90,7 @@
     }
 
     .active {
-      background-color: #4CAF50;
+      background-color: #990000;
     }
 
   </style>

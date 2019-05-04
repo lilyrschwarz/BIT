@@ -199,12 +199,12 @@
     Review Form
   </title>
   
-  <style>
+ <style>
     .field {
       position: absolute;
       left: 180px;
     }
-   /* body{line-height: 1.6;}*/
+    /*body{line-height: 1.6;}*/
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -213,17 +213,60 @@
     }
     .error {color: #FF0000;}
     .topright {
-    	position: absolute;
-    	right: 10px;
-    	top: 10px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
     }
-   /* table, th, td {
-      text-align: left;
-    }*/
+
+    .btn {
+        background-color: #990000;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 40%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    }
+
+    li {
+    float: left;
+    }
+
+    li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+    background-color: #111;
+    }
+
+    .active {
+      background-color: #990000;
+    }
+
   </style>
   <link rel="stylesheet" href="style.css">
  </head>
-  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
+ 
+ <ul>
+  <li><a href="home.php">Back</a></li>
+  <li><a class="active" href="application_form_review.php">Review Applicant</a></li>
+  <li style="float:right"><a href="logout.php">Log Out</a></li>
+ </ul>
   
   <h1> Graduate Admissions Review Form </h1>
 
@@ -290,9 +333,9 @@
           echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
           echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
           echo "<b>Letter: </b><br>";
-          echo '<textarea readonly rows="15" cols="100">'.$row['recommendation'].'</textarea>';
+          echo '<textarea readonly rows="15" cols="80" style="font-size: 16px;">'.$row['recommendation'].'</textarea>';
           echo "<br><br>";
-
+          
           echo 
           '
           Rating: &nbsp;&nbsp;&nbsp;&nbsp; 
@@ -332,15 +375,18 @@
       4. <input type="radio" name="action" value=4 > Admit with aid <br>
       
       <b>Deficiency Courses if Any: </b><input type="text" name="defCourse"><br>
-      <b>Recommended Advisor: </b><input type="text" name="advisor"><br>
+      <b>Recommended Advisor: </b><input type="text" name="advisor"><br><br>
 
-      <div class="bottomCentered"><input type="submit" name="submit" value="Submit Review">
-      <span class="error"><?php echo $somethingEmpty;?></span></div>
+      <b>GAS Reviewer Comments: </b><br>
+      <textarea rows="10" cols="71" style="font-size: 18px;" name="comments" form="mainform"></textarea>
+      <br><br>
+
+      <input type="submit" name="submit" value="Submit Review" class="btn"><br>
+      <span class="error"><?php echo $somethingEmpty;?></span><br><br>
 
     </form>
 
-     <b>GAS Reviewer Comments: </b><br>
-     <textarea rows="5" cols="50" name="comments" form="mainform"></textarea>
+     
 
   </body>
 </html>

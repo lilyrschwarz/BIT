@@ -105,7 +105,7 @@
     }
 
     .btn {
-        background-color: #4CAF50;
+        background-color: #990000;
         color: white;
         padding: 12px;
         margin: 10px 0;
@@ -141,7 +141,7 @@
     }
 
     .active {
-      background-color: #4CAF50;
+      background-color: #990000;
     }
 
   </style>
@@ -170,7 +170,7 @@
         echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
         echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
         echo "<b>Letter: </b><br>";
-        echo '<textarea readonly rows="15" cols="100">'.$row['recommendation'].'</textarea>';
+        echo '<textarea readonly rows="15" cols="80" style="font-size: 16px;">'.$row['recommendation'].'</textarea>';
         echo "<br><br>";
 
        
@@ -198,7 +198,7 @@
     <b>Recommended Deficiency Courses: </b> <u> <?php echo $dificiency; ?> </u> <br>
     <b>Recommended Advisor: </b> <u> <?php echo $advisor; ?> </u> <br>
     <b>Faculty Reviewer Comments: </b> <br>
-    <textarea rows="4" cols="50"><?php echo $comments; ?> </textarea>
+    <textarea rows="10" cols="71" style="font-size: 18px;" name="comments" form="mainform"><?php echo $comments; ?> </textarea>
     <hr>
     	
 
