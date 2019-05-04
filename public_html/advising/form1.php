@@ -309,7 +309,7 @@ if(isset($_POST['submit'])){
           $count++;
           $secval = (int) $second_value;
           $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
-
+echo $form1;
           $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
 
             // var_dump($secval);
