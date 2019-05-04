@@ -180,11 +180,11 @@ li a:hover:not(.active) {
   <li><a href="transcript.php">Transcript</a></li>
   <li><a href="studentinfo.php">Update Info</a></li>
   <li><a href="viewStudentPersonalInfo.php">View Info</a></li> -->
-  <li><a href="form1.php">Update Form 1</a></li>
-  <li><a href="viewform1.php">View Form 1</a></li>
-  <li><a href="applytograduate.php">Apply to Graduate</a></li>
+  <!-- <li><a href="form1.php">Update Form 1</a></li>
+  <li><a href="viewform1.php">View Form 1</a></li> -->
+  <!-- <li><a href="applytograduate.php">Apply to Graduate</a></li> -->
 
-
+<!--
 <?php
 
 if (!empty($program_type)) {
@@ -200,9 +200,9 @@ if (!empty($program_type)) {
 }
 }
 }
-          ?>
-<li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">Main Menu</a></li>
-<li><a href="logout.php">Logout</a></li></ul><br/></br>
+          ?> -->
+<!-- <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php"  style="float:left">Main Menu</a></li> -->
+<li><a href="logout.php"  style="float:right">Logout</a></li></ul><br/></br>
 <style>
 
 
