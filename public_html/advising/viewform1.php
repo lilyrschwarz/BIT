@@ -129,7 +129,7 @@ background-color: #4CAF50;
     ?>
   <tr>
     <td><?php echo $row["subject"]; ?></td>
-    <td><?php echo $row["cousrse_num"]; ?></td>
+    <td><?php echo $row["course_num"]; ?></td>
   </tr>
 
   <?php
