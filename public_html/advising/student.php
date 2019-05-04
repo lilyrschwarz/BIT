@@ -22,7 +22,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
     while ($row2 = mysqli_fetch_array($thesis_url )) {
 	$url = $row2['FilePath'].$row2['FileName'];
 	//var_dump($url);
-
+echo "Sdfasdf";
   echo $program_type;
     }
 ?>
