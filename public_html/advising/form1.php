@@ -284,48 +284,49 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 <body>
 <div class="container">
 <div class="main">
-<h2>Form 1</h2>
-<form method="post">
-<label class="heading">Pick a Maximum of 12:</label></br></br>
-<?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
-  <input name="check_list[<?php echo $class["dept"]; ?>][]" value=<?php echo $class["courseno"]; ?> type="checkbox" class="auto"/><?php echo $class["dept"]; ?> <label><?php echo $class["courseno"]; ?> </label> <br>
+  <h2>Form 1</h2>
+  <form method="post">
+  <label class="heading">Pick a Maximum of 12:</label></br></br>
+  <?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
+    <input name="check_list[<?php echo $class["dept"]; ?>][]" value=<?php echo $class["courseno"]; ?> type="checkbox" class="auto"/><?php echo $class["dept"]; ?> <label><?php echo $class["courseno"]; ?> </label> <br>
 
-<?php } ?>
-<input type="submit" name="submit" value="Submit">
+  <?php } ?>
+  <input type="submit" name="submit" value="Submit">
 
-<!-- Including PHP Script ----->
-<?php include 'checkbox_value.php';?>
-<?php
-if(isset($_POST['submit'])){
-  $count = 0;
+  <!-- Including PHP Script ----->
+  <?php include 'checkbox_value.php';?>
+  <?php
+  if(isset($_POST['submit'])){
+    $count = 0;
 
-  $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
+    $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
 
-  foreach($_POST['check_list'] as $first_value=>$tmpArray) {
+    foreach($_POST['check_list'] as $first_value=>$tmpArray) {
 
-      foreach($tmpArray as $second_value) {
+        foreach($tmpArray as $second_value) {
 
-          echo $first_value." ".$second_value."<br>";;
-          $count++;
-          $secval = (int) $second_value;
-          $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
-          $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
+            echo $first_value." ".$second_value."<br>";;
+            $count++;
+            $secval = (int) $second_value;
+            $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
 
-            // var_dump($secval);
+            $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
 
-//echo mysqli_error();
+              // var_dump($secval);
 
+  //echo mysqli_error();
+
+        }
       }
-    }
 
 
-    if($count>12){
-      echo "You can only submit up to 12 courses";
-      header('Location: ' . $form1.php);
-      die();
-    }
+      if($count>12){
+        echo "You can only submit up to 12 courses";
+        header('Location: ' . $form1.php);
+        die();
+      }
 
-    if ($form1) {
+      if ($form1) {
 
         //  echo '<br>Input data is successful';
           header("Location: viewform1.php");
