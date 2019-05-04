@@ -66,10 +66,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
     <div class="w3-padding-64"> -->
 <div style="text-align: center"><div style=display: inline-block; width: 80%>
       <h1>Graduate Student Advising</h1>
-<?php
-echo "Sdfasdf";
-  echo $program_type;
-?>
+
     <!-- <div class="w3-padding-64"> -->
       <!-- <a href="StudentEnrollmentInfo.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">Current Enrollment</a> -->
       <!-- <a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/edit-info-reg.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Update Personal Information</a> -->
