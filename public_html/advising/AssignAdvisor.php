@@ -91,7 +91,7 @@ li a:hover:not(.active) {
 <!-- get student ID from input -->
   <form action="AssignAdvisor.php" method="post">
     <label for="university_id">Student ID:</label>
-    <input type="text" name="university_id" required/><br>
+    <input type="text" name="university_id" required/><br></br>
 
 <!-- get advisor name from dropdown list -->
     <?php
@@ -103,7 +103,7 @@ li a:hover:not(.active) {
     while ($row = mysqli_fetch_array($result )) {
         	echo "<option value ='" . $row['name'] . "'>" .  $row['name'] . "</option>";
     }
-    echo "</select>";
+    echo "</select></br></br>";
     ?>
     <br><input type="submit"/>
   </form>
