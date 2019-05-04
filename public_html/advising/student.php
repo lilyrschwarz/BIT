@@ -92,6 +92,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
       <a href="applytograduate.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Apply to Graduate</a> -->
 
   <?php
+  echo $program_type;
 
       if (!empty($program_type)) {
       	//foreach($course_array as $key=>$value)
