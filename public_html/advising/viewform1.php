@@ -89,7 +89,7 @@ background-color: #4CAF50;
     //foreach($course_array as $key=>$value)
     while($row = $program_type->fetch_assoc())
     {
-      if($row['program_type'] == 'PhD'){*/
+      if($row['program_type'] == 'PhD'){
   ?>
 
   <li><a href="submitThesisFile.php" >Submit Thesis</a><li>
