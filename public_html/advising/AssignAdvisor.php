@@ -103,7 +103,7 @@ li a:hover:not(.active) {
     while ($row = mysqli_fetch_array($result )) {
         	echo "<option value ='" . $row['name'] . "'>" .  $row['name'] . "</option>";
     }
-    echo "</select></br></br>";
+    echo "</select></br>";
     ?>
     <br><input type="submit"/>
   </form>
