@@ -42,6 +42,7 @@
              <li><a class="active" href="menu.php">Menu</a></li>
              <li style="float:right"><a href="logout.php">Log Out</a></li>
         </ul>
+        <br>
   <h3> Schedule by Day & Time </h3>
   <hr>
     <?php

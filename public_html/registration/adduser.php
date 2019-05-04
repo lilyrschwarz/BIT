@@ -82,8 +82,9 @@
         $result	= mysqli_query($connection, $query);
 
         // define variables and set to empty values
-        $fnameErr = $lnameErr = $emailErr = $passwordErr = $typeErr = $uidErr = "";
-        $uid = $fname = $lname = $email = $active = $type = $street = $city = $state = $zip = $phone = $submit = "";
+        $fnameErr = $lnameErr = $emailErr = $passwordErr = $typeErr = $uidErr = $isRevErr = $isAdvErr= $SSNErr= "";
+        $uid = $fname = $lname = $email = $active = $type = $street = $city = $state = $zip = $phone = $submit = $isReviewer = $isAdvisor = $ssn = "";
+        $AppType = "";
         $accountSuccess = TRUE;
         $customUID = FALSE;
         
@@ -110,7 +111,7 @@
             }
 
             if (empty($_POST["street"])) {
-                $streetErr = "Please enter a steet!";
+                $streetErr = "Please enter a street!";
                 $accountSuccess = FALSE;
             } else {
                 $street = test_input($_POST["street"]);
@@ -146,6 +147,12 @@
             } else {
                 $phone = test_input($_POST["phone"]);
             }
+            if (empty($_POST["ssn"])) {
+                $phoneErr = "Please enter a SSN!";
+                $accountSuccess = FALSE;
+            } else {
+                $ssn = test_input($_POST["ssn"]);
+            }
 
             if (empty($_POST["active"])) {
                 $activeErr = "Indicate if the user is active!";
@@ -158,6 +165,19 @@
                 $accountSuccess = FALSE;
             } else {
                 $type = test_input($_POST["type"]);
+            }
+             if (empty($_POST["isReviewer"])) {
+                $isRevErr = "Reviewer? yes or no?";
+                $accountSuccess = FALSE;
+            } else {
+                $isReviewer = test_input($_POST["isReviewer"]);
+            } 
+
+            if (empty($_POST["isAdvisor"])) {
+                $isAdvErr = "Advisor? yes or no?";
+                $accountSuccess = FALSE;
+            } else {
+                $isAdvisors = test_input($_POST["isAdvisor"]);
             }
 
             if (empty($_POST["uid"])) {
@@ -174,6 +194,13 @@
                 }
             }
 
+            if($_POST["type"] == "inst" && $_POST['isReviewer'] == "yes"){
+                $AppType = "FR";
+            }else if($_POST["type"] == "admin"){
+                $AppType = "SA";
+            }else if($_POST["type"] == "secr"){
+                $AppType = "GS";
+            }
 
             if($accountSuccess) {
                 $_SESSION['loggedin'] = TRUE;
@@ -181,14 +208,22 @@
                 $_SESSION['password'] = '123456';
                 $query = "";
                 if($customUID) {
-                    $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state, uid) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."', ".$uid.")";	
+                    $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state, uid, isReviewer, isAdvisor) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."', '".$uid."', ".$isReviewer."', '".$isAdvisor."')";	
+                    //$sql = "insert into users (role, fname, lname, password, email, userID) values ('" .$AppType. "', '" .$fname . "', '" .$lname. "', '123456', '" .$email. "', " .$uid. ")";
+                    //$sql2 = "insert into personal_info (fname, lname, uid, street, city, state, zip, phone, ssn) values ('" .$fname. "', '" .$lname. "', " .$uid. ", '" .$address. "', '" .$ssn. "')";
+
                 } else {
                     $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."')";	
                 }
 
                 $result	= mysqli_query($connection, $query);
+
+                //$result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query failed***********");
+
+                //$result3 = mysqli_query($conn, $sql2) or die ("**********Error: personal_info insert query failed***********");
+                
                 header("Location: manageusers.php");
-                die();
+                die("BAAAAAAAAAAAD`");
             }
             
         }
@@ -234,6 +269,13 @@
             <?php echo "*".$phoneErr;?></span>
 
         <br><br>
+
+        SSN: <input type="text" name="ssn" value="<?php echo $ssn;?>">
+                <span class="error">
+            <?php echo "*".$SSNErr;?></span>
+
+        <br><br>
+
         Active: <input type="text" name="active" value="<?php echo $active;?>">
         <span class="error">
             <?php echo "*".$activeErr;?></span>
@@ -245,7 +287,17 @@
         Custom UID (optional): <input type="number" name="uid" value="<?php echo $uid;?>">
         <span class="error">
             <?php echo $uidErr;?></span>
-        <br><br>
+               <br><br>
+
+        Is a Reviewer?: <input type="text" name="isReviewer" value="<?php echo $isReviewer;?>">
+        <span class="error">
+<!--             <?php echo $isRevErr;?></span>
+ -->               <br><br>
+
+        Is an Advisor?: <input type="text" name="isAdvisor" value="<?php echo $isAdvisor;?>">
+        <span class="error">
+<!--             <?php echo $isAdvErr;?></span>
+ -->        <br><br>
 
         <input type="submit" name="submit" value="Add new user!">
 
