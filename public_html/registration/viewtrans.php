@@ -64,6 +64,20 @@
       if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());
       }
+      $query = "select f_name, l_name, program_type, advisor.name as aname FROM student, advisor WHERE advisor = advisor.university_id and student.university_id =".$_SESSION['uid'].")";
+      $result = mysqli_query($conn, $query);
+        
+        echo "Student Name:";
+        echo  $row["fname"] . $row["lname"];
+        echo "<br>";
+        echo "Program Type: ";
+        echo $row["program_type"];
+        echo "<br>";
+        echo "Advisor:" ;
+        echo $row["aname"];
+        echo "<br>";
+      
+      
 
       // Search database for courses that match with input uid
       $query = "select C.credits, C.section, C.name, C.courseno, C.dept, C.day, C.tme, C.instructor, C.crn, C.location, T.grade FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn;";

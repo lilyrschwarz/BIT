@@ -271,6 +271,8 @@ CREATE TABLE user (
   type varchar(5),
   isAdvisor varchar(3),
   isReviewer varchar(3),
+  gpa float(5,4),
+  advisor int(8),
   PRIMARY KEY (uid)
 );
 
