@@ -273,6 +273,7 @@ CREATE TABLE user (
   isReviewer varchar(3),
   gpa float(5,4),
   advisor int(8),
+  total_credits int(3),
   PRIMARY KEY (uid)
 );
 

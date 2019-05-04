@@ -138,6 +138,12 @@
             }
             $gpa = ($sum/$final_sum);
             echo "GPA: " .$gpa;
+            $gpa_update = mysqli_query($db,"UPDATE user
+                SET gpa = '$gpa'
+                WHERE uid =". $_SESSION['uid']);
+            $total_credits = mysqli_query($db,"UPDATE user
+                 SET total_credits = '$finalSum'
+             WHERE uid =". $_SESSION['uid']);
           }
     ?>
 
