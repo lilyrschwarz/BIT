@@ -10,16 +10,13 @@ else{
 }
 
 
-if($_POST['applytograduate'] || $_SESSION['type'] == 'MS'){
+if($_POST['masters']){
     header("Location: audit_masters.php");
 }
-
 if($_POST['phd']){
     header("Location: audit_phd.php");
 }
-// if($_POST['phd']){
-//     header("Location: audit_phd.php");
-// }
+
 
 
     //connect to database
