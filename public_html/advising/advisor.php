@@ -22,8 +22,8 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
 <html>
 <title>Faculty Advisor</title>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport">
+<!-- <meta charset="UTF-8">
+<meta name="viewport"> -->
 <style>
     input[type=submit] {
         background-color: #990000;
@@ -46,9 +46,14 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
 </style>
-</head>
-
+<meta charset="UTF-8">
+<meta name="viewport">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
+
+
+</head>
+<body class="gray-bg">
 
 <!-- First Grid -->
 <!-- <div class="w3-row">
@@ -88,10 +93,9 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
       <a href="viewThesisFile.php" class="w3-button w3-block w3-hover-dark-grey w3-padding-16">Review a PhD student's thesis</a>
       <!-- <a href="SearchTranscript.php" class="w3-button w3-block w3-hover-blue-grey w3-padding-16">View a transcript</a> -->
       <!-- <a href="logout.php" class="w3-button w3-block w3-hover-red w3-padding-16">Logout</a> -->
-    <!-- </div> --> 
+    <!-- </div> -->
    </div>
-  </div>
-</div>
+
 
 <!-- Footer -->
 <footer class="w3-container  w3-padding-16">
