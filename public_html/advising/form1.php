@@ -241,6 +241,7 @@ if(isset($_POST['submit'])){
       $credits_sum = $credits_sum->fetch_assoc();
       $credits_sum = $credits_sum['sum_of_credits'];
 
+      echo "sdafjkasdfhksdalfhsjkfhf";
       echo $credits_sum;
     if($count>12){
       echo "You can only submit up to 12 courses";
