@@ -10,16 +10,13 @@ else{
 }
 
 
-if($_POST['applygraduate'] || $_SESSION['type'] == 'MS'){
+if($_POST['applytograduate'] || $_SESSION['type'] == 'MS'){
     header("Location: audit_masters.php");
 }
-if($_POST['applygraduate'] || $_SESSION['type'] == 'PHD'){
+
+if($_POST['phd']){
     header("Location: audit_phd.php");
 }
-
-// if($_POST['phd']){
-//     header("Location: audit_phd.php");
-// }
 // if($_POST['phd']){
 //     header("Location: audit_phd.php");
 // }
@@ -120,7 +117,6 @@ li a:hover:not(.active) {
   <h2>Apply to Graduate</h2>
     <form method = "POST">
         <p> Select your degree program.</p>
-        <input type = "submit" value = "Apply to Graduate" name = "applygraduate">
         <input type = "submit" value = "Masters" name = "masters">
         <input type = "submit" value = "PhD" name = "phd">
     </form>
