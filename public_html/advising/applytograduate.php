@@ -10,12 +10,12 @@ else{
 }
 
 
-    if($_SESSION['type'] == 'MS'){
-        header("Location: audit_masters.php");
-    }
-    else if($_SESSION['type'] == 'PHD'){
-        header("Location: audit_phd.php");
-    }
+if($_POST['masters']){
+    header("Location: audit_masters.php");
+}
+else if($_POST['phd']){
+    header("Location: audit_phd.php");
+}
 
 
     //connect to database
@@ -25,16 +25,11 @@ else{
     $dbname = "SJL";
     $db = new mysqli($servername, $username, $password, $dbname);
 
-    //If they somehow got here without logging in, politely send them away
-    if(!$_SESSION['loggedin']) {
-        header("Location: login.php");
-        die();
-    }
 
 
-    $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
+    $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['uid']);
 
-    $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
+    $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['uid']);
     while ($row2 = mysqli_fetch_array($thesis_url )) {
     $url = $row2['FilePath'].$row2['FileName'];
   //  var_dump($url);
