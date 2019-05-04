@@ -202,7 +202,7 @@ if (!empty($program_type)) {
 }
           ?> -->
 <!-- <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php"  style="float:left">Main Menu</a></li> -->
-<li><a href="logout.php"  style="float:right">Logout</a></li></ul><br/></br>
+<li style="float:right"><a href="logout.php"  >Logout</a></li></ul><br/></br>
 <style>
 
 
