@@ -136,7 +136,6 @@
     $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
     $credits_sum = $credits_sum->fetch_assoc();
     $credits_sum = $credits_sum['sum_of_credits'];
-    echo $credits_sum;
 
     // $sql = "SELECT total_credits FROM student WHERE university_id = '.$user.';";
     // $result_5 = mysqli_query($db,$sql);
