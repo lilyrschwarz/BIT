@@ -70,14 +70,21 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION["uid"] = $uid;
                 $_SESSION["password"] = $password;
-                $query = "select type from user where uid=" . $uid;
+                $query = "select type, isAdvisor, isReviewer from user where uid=" . $uid;
                 $result = mysqli_query($connection, $query);
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION["type"] = $row["type"];
+                $_SESSION["isReviewer"] = $row["isReviewer"];
+                $_SESSION["isAdvisor"] = $row["isAdvisor"];
+
                 $query = "select fname from user where uid=" . $uid;
                 $result = mysqli_query($connection, $query);
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION["fname"] = $row["fname"];
+                $query = "select role from users where userID=". $uid;
+                $result = mysqli_query($conn, $query);
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION['role'] = $row['role'];
                 header("Location: menu.php");
                 die();
             } else {

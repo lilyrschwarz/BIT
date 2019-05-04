@@ -28,7 +28,30 @@
 
         //global variable to hold whether a student is allowed to register
         $canAdd = true;
+        $query = "select crn from transcript where uid = " . $_SESSION['studuid'];
+        $result = mysqli_query($connection, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $already = false;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $crn1 = $row['crn'];
+                $crn2 = $courseToAdd;
+                    if($crn1 != $crn2){
+                        $already = false; 
+                    }else{
+                        $already = true;
+                    }
+                    if($already){
+                        echo "You have already taken this class, and are not elligable to take it again.";
+                        echo "<br><br>";
+                        echo "<form action=\"add-drop.php\" class=\"menu-button\">";
+                        echo "<input type=\"submit\" value=\"Return to Add/Drop Page\"/>";
+                        echo "</form>";
+                        $canAdd = false;
+                        die();
+                    }
 
+            }
+        }
         //get student's current course list and check for schedule conflicts
         $query = "select crn from transcript where uid = " . $_SESSION['studuid'] . " and grade='IP'";
         $result = mysqli_query($connection, $query);

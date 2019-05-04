@@ -49,24 +49,34 @@
 
         //determine what type of user is currently logged in
         $type = $_SESSION['type'];
+        $_SESSION['id'] = $_SESSION['uid'];
+        //$_SESSION['role'];
         $isAdvisor = $_SESSION['isAdvisor'];
         $isReviewer = $_SESSION['isReviewer'];
 
-        $role = "";
+        $nrole = "";
         if ($type == "admin") {
-            $role = "Admin";
+            $nrole = "Admin";
+            $_SESSION['role'] = "SA";
         } else if ($type == "MS") {
-            $role = "Masters Student";
+            $nrole = "Masters Student";
         } else if ($type == "PHD") {
-            $role = "PhD Student";
+            $nrole = "PhD Student";
         } else if ($type == "inst") {
-            $role = "Instructor";
+            $nrole = "Instructor";
+            $_SESSION['role'] = "FR";
+				if($type == "inst" && $isReviewer == "yes"){
+        		$_SESSION['role'] = "FR";
+       		 }
         } else if ($type == "secr") {
-            $role = "Secretary";
-        } else {
+            $nrole = "Secretary";
+            $_SESSION['role'] = "GS";
+        }  
+        else {
             header("Location: login.php");
             die();
         }
+
         $advrole = mysqli_query($db, "select user_type from loginusers where university_id =". $_SESSION["uid"]);
         $advrole = mysqli_fetch_assoc($advrole);
         $advrole = $advrole['user_type'];
@@ -81,7 +91,7 @@
             $extra = ", Advisor, and Reviewer";
         }
 
-        echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $role . $extra. " privileges.<br><br>";
+        echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $nrole . $extra. " privileges.<br><br>";
         $nextItem = true;
 
 
@@ -208,18 +218,18 @@
         $advPrompt = "";
         if ($type == "admin") {
 
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/admin.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/admin.php";
             $advPrompt = "Visit the Advising System";
         }else if ($type == "secr") {
            //
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/gs.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/gs.php";
             $advPrompt = "Visit the Advising System";
         }else if ($type == "MS" || $type == "PHD") {
             //echo "WE ARE A STUDENT";
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/student.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/student.php";
             $advPrompt = "Visit the Advising System";
         }else if ($type == "inst" && $isAdvisor = "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/advisor.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/advisor.php";
             $advPrompt = "Visit the Advising System";
         } else {
             $nextItem = false;
@@ -232,15 +242,15 @@
 
         $advPrompt = "";
         if ($type == "admin") {
-
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/system_admin_page.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/system_admin_page.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "secr") {
-           // echo "WE ARE A SECRATARY";
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+        	
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Visit the Admissions System";
-        }else if ($type == "inst" && $isReviewer = "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+        }else if ($type == "inst" && $isReviewer == "yes") {
+
+			$advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
             $advPrompt = "Review Applicants";
         } else {
             $nextItem = false;

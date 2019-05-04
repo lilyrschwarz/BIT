@@ -5,11 +5,44 @@
     <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
     <link rel = "stylesheet" type="text/css" href="style.css"/>
+      <style>
+        ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+        background-color: #111;
+        }
+
+        .active {
+          background-color: #990000;
+        }
+
+    </style>
   </head>
   <body>
-    <div style="display: inline-block;" class="menu-button">
-      <form action="menu.php"><input type="submit" value="Menu"/></form>
-    </div>
+    <ul>
+             <li><a class="active" href="menu.php">Menu</a></li>
+             <li style="float:right"><a href="logout.php">Log Out</a></li>
+        </ul>
+                <br>
+
     <h3> Transcript </h3>
     <?php /* Note: currently returns empty results from query as a result of empty transcript table */
       session_start();
@@ -54,7 +87,7 @@
           }
         $sum = 0;
         $query2 = "select t.grade, c.credits from course c, transcript t where '".$_SESSION['studuid']."'=t.uid AND t.crn=c.crn;";
-        $credit_sum = "select sum(c.credits) from course c, transcript t where '".$_SESSION['studuid']."'=t.uid AND t.crn=c.crn;";
+        $credit_sum = "select sum(c.credits) from course c, transcript t where '".$_SESSION['studuid']."'=t.uid AND t.crn=c.crn AND t.grade != 'IP';";
         $result2 = mysqli_query($conn, $query2);
         $result_sum = mysqli_query($conn, $credit_sum);
         $final_sum = mysqli_fetch_assoc($result_sum)["sum(c.credits)"];
@@ -84,9 +117,10 @@
               if($row["grade"] == "F"){
               	$sum += (0 * $row["credits"]);
               }
-              if($row["grade"] == "IP"){
-              	$sum += 0;
-              }
+              // if($row["grade"] == "IP"){
+              // 	$sum += 0;
+              //   $final_sum -= 1;
+              // }
             }
             $gpa = ($sum/$final_sum);
             echo "GPA: " .$gpa;
