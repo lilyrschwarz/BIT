@@ -112,6 +112,7 @@ background-color: #4CAF50;
     $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
     $result = mysqli_query($db, $sql_1);
     $makeEmpty = empty($result);
+    $form1_update = mysqli_query($db,"UPDATE form1 set subject = null, course_num = null where university_id= '$user';");
   }
    ?>
   <div class="w3-responsive">
