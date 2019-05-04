@@ -20,9 +20,10 @@ $dbname = "SJL";
   $db = new mysqli($servername, $username, $password, $dbname);
   $user = $_SESSION['uid'];
 
-/*  $credits_sum = $db->query("SELECT sum(credits) as sum_of_credits from courses, form1 where form1.course_num=courses.course_num and university_id =".$_SESSION['login_user']);
+  $credits_sum = $db->query("select sum(c.credits) from course c, transcript t where '".$_SESSION['studuid']."'=t.uid AND t.crn=c.crn");
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
+  echo $credits_sum;
 */
   //$program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 /*
@@ -112,8 +113,8 @@ background-color: #4CAF50;
   if($credits_sum<30){
     echo "<b>ERROR: You need at least 30 credits to graduate.</b></br>";
     $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
-    $result = mysqli_query($db, $sql_1);
-    $makeEmpty = empty($result);
+    // $result = mysqli_query($db, $sql_1);
+    // $makeEmpty = empty($result);
     $form1_update = mysqli_query($db,"UPDATE form1 set subject = null, course_num = null where university_id= '$user';");
   }
    ?>
