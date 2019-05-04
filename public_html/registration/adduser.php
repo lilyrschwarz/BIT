@@ -7,9 +7,43 @@
     <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
     <title>Create New User</title>
     <link rel = "stylesheet" type="text/css" href="style.css"/>
+     <style>
+         ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+        background-color: #111;
+        }
+
+        .active {
+          background-color: #990000;
+        }
+
+    </style>
 </head>
 
 <body>
+     <ul>
+             <li><a class="active" href="manageusers.php">Back</a></li>
+             <li style="float:right"><a href="logout.php">Log Out</a></li>
+        </ul>
     <?php
 
         session_start();
@@ -46,10 +80,6 @@
         $connection = mysqli_connect($servername, $username, $password, $dbname);
         $query = "select usid from user;";	
         $result	= mysqli_query($connection, $query);
-
-        //"back to menu" button
-        echo "<div style=\"display: inline-block;\" class=\"menu-button\">";
-        echo "<form action=\"menu.php\"><input type=\"submit\" value=\"Menu\"/></form></div>";
 
         // define variables and set to empty values
         $fnameErr = $lnameErr = $emailErr = $passwordErr = $typeErr = $uidErr = "";

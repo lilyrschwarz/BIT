@@ -5,12 +5,43 @@
         <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <link rel = "stylesheet" type="text/css" href="style.css"/>
+    <style>
+        ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+        background-color: #111;
+        }
+
+        .active {
+          background-color: #990000;
+        }
+
+    </style> 
     </head>
 	<body class="gray-bg">
 
-        <div style="display: inline-block;" class="menu-button">
-            <form action="menu.php"><input type="submit" value="Menu"/></form>
-        </div>
+        <ul>
+             <li><a class="active" href="menu.php">Menu</a></li>
+             <li style="float:right"><a href="logout.php">Log Out</a></li>
+        </ul>
 
         <form action="add-drop-admin.php" method="post">
             Enter student ID: <input type="text" name="uid">

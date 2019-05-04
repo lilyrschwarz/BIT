@@ -10,12 +10,47 @@
                 border-radius: 10px;
                 border: 1px solid;
             }
+
+         ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+        background-color: #111;
+        }
+
+        .active {
+          background-color: #990000;
+        }
+
+  
+
         </style>
         <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <link rel = "stylesheet" type="text/css" href="style.css"/>
     </head>
     <body class="gray-bg">
+         <ul>
+             <li><a class="active" href="menu.php">Menu</a></li>
+             <li style="float:right"><a href="logout.php">Log Out</a></li>
+        </ul>
         <?php
             session_start();
             $studUID = $_SESSION["studuid"];
@@ -41,9 +76,6 @@
             if (!$connection) {
                 die("Couldn't connect: ".mysqli_error());
             }         
-            //"back to menu" button
-            echo "<div style=\"display: inline-block;\" class=\"menu-button\">";
-            echo "<form action=\"menu.php\"><input type=\"submit\" value=\"Menu\"/></form></div>";
             // Limit courses displayed to one department
             echo '<div style="float: right;">';
             echo "<div style=\"display: inline-block;\">";

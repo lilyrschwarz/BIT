@@ -5,12 +5,43 @@
     <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
     <link rel = "stylesheet" type="text/css" href="style.css"/>
+    <style>
+         ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+        background-color: #111;
+        }
+
+        .active {
+          background-color: #990000;
+        }
+
+    </style>
 </head>
 
 <body>
-  <div style="display: inline-block;" class="menu-button">
-    <form action="menu.php"><input type="submit" value="Menu"/></form>
-  </div>
+  <ul>
+             <li><a class="active" href="edit-info-admin.php">Back</a></li>
+             <li style="float:right"><a href="logout.php">Log Out</a></li>
+        </ul>
   <h3> Records & Information </h3>
   <hr>
     <?php
@@ -35,9 +66,6 @@
         if(!$conn){
           die("Connection failed: " . mysqli_connect_error());
         }
-
-        echo '<form action=edit-info-admin.php method=post>';
-        echo "<input type=\"submit\" value=\"Back\"/>";
 
         $query = "select * FROM user where uid='".$_POST["studuid"]."';";
         $result = mysqli_query($conn, $query);
