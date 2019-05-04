@@ -76,11 +76,12 @@ li a:hover:not(.active) {
 <body>
 
   <ul>
-  <li><a class="active" href="gs.php">Home</a></li>
-  <li><a href="SearchStudentData.php">Search Student Information</a></li>
-  <li><a href="SearchStudentTranscriptGS.php">Search Student Transcript</a></li>
+  <li><a class="active" href="gs.php">Advising Home</a></li>
+  <!-- <li><a href="SearchStudentData.php">Search Student Information</a></li>
+  <li><a href="SearchStudentTranscriptGS.php">Search Student Transcript</a></li> -->
   <li><a href="AssignAdvisor.php">Assign Advisor to Student</a></li>
   <li><a href="SearchStudentRequirements.php">Graduate a Student</a></li>
+  <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php?">Main Menu</a></li>
   <li><a href="logout.php">Logout</a></li>
   </ul><br/></br>
 
