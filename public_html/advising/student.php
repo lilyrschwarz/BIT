@@ -22,6 +22,8 @@ $db = new mysqli($servername, $username, $password, $dbname);
     while ($row2 = mysqli_fetch_array($thesis_url )) {
 	$url = $row2['FilePath'].$row2['FileName'];
 	//var_dump($url);
+
+  echo $program_type;
     }
 ?>
 
@@ -92,6 +94,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
       <a href="applytograduate.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">Apply to Graduate</a> -->
 
   <?php
+
 
       if (!empty($program_type)) {
       	//foreach($course_array as $key=>$value)
