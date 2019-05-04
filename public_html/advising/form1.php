@@ -119,8 +119,8 @@ if (!empty($program_type)) {
 }
 }
           ?>
-<li><a href="logout.php">Logout</a></li>
-</ul><br/></br>
+<li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">Main Menu</a></li>
+<li><a href="logout.php">Logout</a></li></ul><br/></br>
 <style>
 
 

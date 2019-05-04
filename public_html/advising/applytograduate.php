@@ -106,7 +106,8 @@ li a:hover:not(.active) {
  }
 }
             ?>
-  <li><a href="logout.php">Logout</a></li>
+            <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">Main Menu</a></li>
+            <li><a href="logout.php">Logout</a></li></ul><br/></br>
 </ul><br/></br>
 <div align="center">
   <h2>Apply to Graduate</h2>
