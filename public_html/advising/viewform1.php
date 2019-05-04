@@ -157,7 +157,7 @@ background-color: #4CAF50;
 </head>
 <body>
   <ul>
-  <li><a class="active" href="student.php">Advising Home</a></li>
+  <li><a class="active" href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/gs.php">Advising Home</a></li>
   <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
   <li><a href="transcript.php">Transcript</a></li>
   <li><a href="studentinfo.php">Update Info</a></li>
