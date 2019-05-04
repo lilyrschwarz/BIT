@@ -6,7 +6,7 @@ INSERT INTO users VALUES
   ("GS", "Dawn", "Ginetti", "123456", "dawn@gwu.edu", 6),
   # Faculty Reviewer
   ("FR", "Bhagi", "Narahari", "123456", "narahari@gwu.edu", 10),
-  ("FR", "Neel", "Bogwat", "123456", "neelb@gwu.edu", 11),
+  ("FR", "Neel", "Bogwat", "123456", "neelb@gwu.edu", 72410997),
   # Chair of Admissions Comm
   ("CAC", "John", "Smith" ,"123456", "jsmith@gmail.com", 42142172),
   # Applicants
@@ -109,6 +109,8 @@ VALUES
 
 insert into user (fname, lname, uid, password, type, active) values ('Billie', 'Holiday', 88888888, '123456', 'MS', 'yes'), ('Diana', 'Krall', 99999999, '123456', 'MS', 'yes');
 insert into transcript (uid, grade, crn) values (88888888, 'IP', 2), (88888888, 'IP', 3);
+insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("John", "Smith", "42142172", "123 Totally Real Street", "Washington", "DC", 20052, "86046265943", "jsmith@gwu.edu", "123456", "yes", "inst", NULL, "yes")
+insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("Neel", "Bogwat", "72410997", "123 Totally Real Street", "Washington", "DC", 20052, "1246981468", "neel@gwu.edu", "123456", "yes", "inst", NULL, "yes")
 
 
 

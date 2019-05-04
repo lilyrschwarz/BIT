@@ -1,5 +1,14 @@
 <?php
-session_start();
+	session_start();
+	$reviewerButton ='';
+	$bannerMessage = "Homepage";
+	//$logoutLink = "login.php";
+	if($_SESSION['role'] == "CAC" || $_SESSION['role'] == "FR"){
+		$reviewerButton = '<li><a href="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/menu.php"> Return</a></li>';
+		$bannerMessage = "Graduate Applications";
+		//$logoutLink = "http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php";
+	}
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -29,7 +38,7 @@ session_start();
 	    	top: 20px;
     	}
     	.btn {
-	      background-color: #4CAF50;
+	      background-color: #990000;
 	      color: white;
 	      padding: 12px;
 	      margin: 10px 0;
@@ -57,18 +66,6 @@ session_start();
 	      top: 10px;
 	    }
 
-	    .btn {
-	        background-color: #4CAF50;
-	        color: white;
-	        padding: 12px;
-	        margin: 10px 0;
-	        border: none;
-	        width: 25%;
-	        border-radius: 3px;
-	        cursor: pointer;
-	        font-size: 17px;
-	    }
-
 	    ul {
 	    list-style-type: none;
 	    margin: 0;
@@ -94,7 +91,7 @@ session_start();
 	    }
 
 	    .active {
-	      background-color: #4CAF50;
+	      background-color: #990000;
 	    }
 
 	</style>
@@ -104,7 +101,8 @@ session_start();
 
 <body>
 	<ul>
-    <li><a class="active" href="home.php">Home</a></li>
+	<?php echo $reviewerButton?>
+    <li><a class="active" href="home.php"><?php echo $bannerMessage?></a></li>
     <li style="float:right"><a href="logout.php">Log Out</a></li>
     </ul>
 	<?php
@@ -223,32 +221,56 @@ session_start();
 			// get all the applicants whose application is complete
 			$result = mysqli_query($conn, "SELECT DISTINCT userID, fname, lname FROM users, app_review WHERE status>4 AND userID=uid");
 
-			// start table
-			echo "<table border='1' align='center' style='border-collapse:collapse;'>
+			if ($_SESSION['role'] == "FR"){
+				// start table
+				echo "<table border='1' align='center' style='border-collapse:collapse;'>
 	            	<tr>
 	                	<th>First Name</th>
 		                <th>Last Name</th>
 		                <th></th>
 					</tr>";
+			}
+			else{
+				// start table
+				echo "<table border='1' align='center' style='border-collapse:collapse;'>
+	            	<tr>
+	                	<th>First Name</th>
+		                <th>Last Name</th>
+		                <th></th>
+		                <th></th>
+					</tr>";
+			}
+			
 
 			// show each applicant with a button to the review page
 			for ($i=0; $i < $result->num_rows; $i++) {
 				$row = $result->fetch_assoc();
 				// the button will go to a different place based on role
-				if ($_SESSION['role'] == "FR")
+				if ($_SESSION['role'] == "FR"){
 					$button = "<form action='application_form_review.php' method='post'>
 		    						<input type='submit' name='".$row['userID']."' value='Review Application'>
 						  		</form>";
-				else 
-					$button = "<form action='application_form_review_CAC.php' method='post'>
-		    						<input type='submit' name='".$row['userID']."' value='Review Application'>
-						  		</form>";
-
-				echo "<tr>
+					echo "<tr>
                     	<td>".$row['fname']."</td>
 	                    <td>".$row['lname']."</td>
 	                    <td>".$button."</td>
 	                </tr>";
+				}
+				else { 
+					$button = "<form action='application_form_review_CAC.php' method='post'>
+		    						<input type='submit' name='".$row['userID']."' value='Review Application'>
+						  		</form>";
+					echo "<tr>
+                    	<td>".$row['fname']."</td>
+	                    <td>".$row['lname']."</td>
+	                    <td>".$button."</td>
+	                    <td>
+	                    	<form action='list_reviews.php' method='post'>
+							<input type='submit' name='".$row['userID']."' value='View faculty reviews'>
+							</form>
+						</td>
+	                </tr>";
+				}
 			}
 		}// end-reviewer view
 
