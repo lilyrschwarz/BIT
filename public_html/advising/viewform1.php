@@ -24,7 +24,7 @@ $dbname = "SJL";
   $credits_sum = $credits_sum->fetch_assoc();
   $credits_sum = $credits_sum['sum_of_credits'];
   echo $credits_sum;
-*/
+
   //$program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 /*
   $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
