@@ -1,19 +1,26 @@
+
 <?php
-  session_start();
+  session_start();  
+  //$_SESSION['id'] = 55555555;
+  /*Important variable that will be used later to determine 
+  if we're ready to move to the next page of the application */
+  $done = false;
 
   // connect to mysql
-  $conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
+  $servername = "localhost";
+  $user = "sloanej";
+  $pass = "Westland76!";
+  $dbname = "sloanej";
+  $conn = mysqli_connect($servername, $user, $pass, $dbname);
   // Check connection
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
   }
 
-  
-
   ////////////////////////////////////////////////////
   //RETRIEVE INFORMATION
   ////////////////////////////////////////////////////
-  // get the applicant the GS wants to update
+  //get the applicant the GS wants to update
   $applicants = mysqli_query($conn, "SELECT * FROM users WHERE role='A'");
   while ($row = $applicants->fetch_assoc()) {
     if (isset($_POST[$row['userID']])) {
@@ -23,20 +30,17 @@
       $name = $fname." ".$lname;
     }
   }
+ 
+
   if (!$_SESSION['applicantID'])
     echo "Error: Applicant not found</br>";
 
+  // $sql = "SELECT fname, lname FROM users WHERE userID = " . $_SESSION['applicantID'] . "";
+  // $result = mysqli_query($conn, $sql) or die ("ERROR: failed to get applicant name");
+  // $value = mysqli_fetch_object($result);
+  // $fname = $value->fname;
+  // $lname = $value->lname;
 
-  //IF THIS STUDENT HAS ALREADY BEEN REVIEWED BY THIS REVIEWER, TELL THE USER TO GO BACK
-  $sql = "SELECT rating FROM app_review WHERE reviewerID = " .$_SESSION['id']. " AND uid = " .$_SESSION['applicantID'];
-  $result = mysqli_query($conn, $sql) or die ("already reviewed test failed");
-  if (mysqli_num_rows($result) != 0){
-    die('<h2> You have already reviewed this student <h2> <br><br>
-        <form id="mainform" method="post" action="home.php">
-        <input type="submit" name="submit" value="Back to Home">');
-  }
-
-  
   $sql = "SELECT degreeType, AOI, experience, semester, year FROM academic_info WHERE uid= " .$_SESSION['applicantID'];
   $result = mysqli_query($conn, $sql) or die ("************* ACADEMIC INFO SQL FAILED *************");
   $value = mysqli_fetch_object($result);
@@ -61,23 +65,48 @@
   $result = mysqli_query($conn, $sql) or die ("************* REC LETTER SQL FAILED *************");
   $value = mysqli_fetch_object($result);
   $university = $value->institution;
-  /////////////////////////////////////////////////////////////
 
+  //Review info:
+  $sql = "SELECT rating, generic, credible FROM rec_review WHERE reviewerRole = 'FR' AND uid = " .$_SESSION['applicantID'];
+  $result = mysqli_query($conn, $sql) or die ("************* retrieve rec review SQL FAILED *************");
+  $value = mysqli_fetch_object($result);
+  $rating = $value->rating;
+  $generic = $value->generic;
+  $credible = $value->credible;
+  if($generic == 1){
+    $generic = "Yes";
+  } else {
+    $generic = "No";
+  }
+  if($credible == 1){
+    $credible = "Yes";
+  } else {
+    $credible = "No";
+  }
+
+  $sql = "SELECT comments, deficiency, rating, advisor FROM app_review WHERE reviewerRole = 'FR' AND uid = " .$_SESSION['applicantID'];
+  $result = mysqli_query($conn, $sql) or die ("************* retrieve app review SQL FAILED *************");
+  $value = mysqli_fetch_object($result);
+  $comments = $value->comments;
+  $deficiency = $value->deficiency;
+  $action = $value->rating;
+  $advisor = $value->advisor;
+  /////////////////////////////////////////////////////////////
   
 ?>
 
 <html>
  <head>
   <title>
-    View Application
+    Faculty Review
   </title>
   
- <style>
+  <style>
     .field {
       position: absolute;
       left: 180px;
     }
-    /*body{line-height: 1.6;}*/
+   /* body{line-height: 1.6;}*/
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -85,72 +114,30 @@
        width: 100%;
     }
     .error {color: #FF0000;}
+    /*table, th, td {
+      text-align: left;
+    }*/
     .topright {
-      position: absolute;
-      right: 10px;
-      top: 10px;
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
     }
-
-    .btn {
-        background-color: #990000;
-        color: white;
-        padding: 12px;
-        margin: 10px 0;
-        border: none;
-        width: 40%;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 17px;
-    }
-
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    }
-
-    li {
-    float: left;
-    }
-
-    li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-    background-color: #111;
-    }
-
-    .active {
-      background-color: #990000;
-    }
-    
-
-
   </style>
   <link rel="stylesheet" href="style.css">
  </head>
- 
- <ul>
-  <li><a href="GS_home.php">Back</a></li>
-  <li><a class="active" href="application_form_review.php">View Application</a></li>
-  <li style="float:right"><a href="logout.php">Log Out</a></li>
- </ul>
+  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
-  <h1> Application for <?php echo $name; ?></h1>
+  <h1> Faculty Review </h1>
 
   <body>
-    <b>Name: </b> <u> <?php echo $name; ?> </u> <br><br>
+    <!-- General info -->
+    <h2> Applicant Information </h2>
+    <b>Name: </b> <u> <?php echo $fname.", ".$lname; ?> </u> <br><br>
     <b>Student Number: </b> <u> <?php echo $_SESSION['applicantID']; ?> </u> <br><br>
+
+    <!-- Academic Info -->
     <b>Semester and Year of Application: </b> <u> <?php echo $semester." ".$year; ?> </u> <br><br>
     <b>Applying for Degree: </b> <u> <?php echo $degreeType; ?> </u> <br>
-    <hr>
 
     <h3>Summary of Credentials </h3>
     <b>GRE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Verbal: </b>
@@ -161,12 +148,14 @@
     <u> <?php echo $advScore; ?> </u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Subject: </b>
     <u> <?php echo $subject; ?> </u><br>
     <b>TOEFL Score: </b> <u> <?php echo $toefl; ?> </u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <b>Year of Exam: </b> <u> <?php echo $advYear; ?> </u> <hr>
+    <b>Year of Exam: </b> <u> <?php echo $advYear; ?> </u> <br><br>
 
+
+    <!-- Prior Degrees -->
     <h3>Prior Degrees </h3> 
     <?php
       //display prior degree info in a table format
-      $sql = "SELECT * FROM prior_degrees WHERE uid= " .$_SESSION['applicantID'];
+      $sql = "SELECT * FROM prior_degrees WHERE uid= " .$_SESSION['id'];
       $result = mysqli_query($conn, $sql);
       if (mysqli_num_rows($result) > 0){
         echo "<table style=width:40%>";
@@ -176,7 +165,6 @@
         //Add Major
         echo "<th>Year</th>";
         echo "<th>University</th>";
-        echo "<th>Major</th>";
         echo "</tr>";
         while($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
@@ -184,7 +172,6 @@
           echo "<td>" . $row['gpa'] . "</td>";
           echo "<td>" . $row['year'] . "</td>";
           echo "<td>" . $row['university'] . "</td>";
-           echo "<td>" . $row['major'] . "</td>";
           echo "</tr>";
         }
         echo "</table>";
@@ -194,22 +181,41 @@
     ?>
 
     <b>Areas of Interest: </b> <u> <?php echo $aoi; ?> </u> <br>
-    <b>Experience: </b> <u> <?php echo $experience; ?> </u> <hr>
+    <b>Experience: </b> <u> <?php echo $experience; ?> </u> <br><br>
+    <hr>
 
-    <h3>Recommendation Letters </h3>
+    <h2> Faculty Review </h2>
+
+    
+      <h3>Recommendation Letter </h3>
+      <b>From: </b> <u> <?php echo $university; ?> </u> <br>
+      <b>Faculty rating: </b> <u> <?php echo $rating; ?> </u> <br>
+      <b>Generic: </b> <u> <?php echo $generic; ?> </u> <br>
+      <b>credible: </b> <u> <?php echo $credible; ?> </u> <br><br>
+
+      <h3>Faculty Reviewer Action </h3>
+      <b>Recommended Action: </b> <u> <?php echo $action; ?> </u> <br>
+      (1=Reject, 2=Borderline admit, 3=Admit without aid, 4=Admit with aid)<br>
+      <b>Recommended Deficiency Courses: </b> <u> <?php echo $dificiency; ?> </u> <br>
+      <b>Recommended Advisor: </b> <u> <?php echo $advisor; ?> </u> <br>
+      <b>Faculty Reviewer Comments: </b> <br>
+      <textarea rows="4" cols="50"><?php echo $comments; ?> </textarea>
+    	
+
       <?php
-        //show all recommendation letters
-        $sql = "SELECT * FROM rec_letter WHERE uid= " .$_SESSION['applicantID'];
-        $result = mysqli_query($conn, $sql);
-        $num = 1;
-        while($row = mysqli_fetch_assoc($result)) {
-          echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
-          echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
-          echo "<b>Letter: </b><br>";
-          echo '<textarea readonly rows="15" cols="80" style="font-size: 18px;background: transparent;">'.$row['recommendation'].'</textarea>';
-          echo "<br><br>";
-        }
+        if ($_SESSION['role'] == 'CAC'){
+            echo '<form id="mainform" method="post" action="application_form_review_CAC.php">
+      	        <div class="bottomCentered"> <input type="submit" name="submit" value="Return"> </div>
+     	        </form>';
+     	}
+     	if($_SESSION['role'] == 'GS'){
+     		echo '<form id="mainform" method="post" action="home.php">
+      	        <div class="bottomCentered"> <input type="submit" name="submit" value="Return"> </div>
+     	        </form>';
+     	}
       ?>
-     
+
+
+
   </body>
 </html>

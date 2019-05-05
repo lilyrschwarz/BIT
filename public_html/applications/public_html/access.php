@@ -33,7 +33,7 @@
   $type = $value->degreeType;
 
   //Insert into REG's "user" table
-  $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type, advising_hold) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."', 'yes')";
+  $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."')";
   $result = mysqli_query($conn, $sql) or die ("insert into REGS failed");
 
   //get new uid
@@ -82,7 +82,7 @@
       transform: translateX(-50%) translateY(-50%);
     }
     .btn {
-  background-color: #990000;
+  background-color: #4CAF50;
   color: white;
   padding: 12px;
   margin: 10px 0;
@@ -107,7 +107,7 @@
 
       <br><br>
 
-      <form method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php"> 
+      <form method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL-dev/registration/public_html/login.php">
         <input type="submit" name="submit" value="Go To Student Services" class="btn">
       </form>
 

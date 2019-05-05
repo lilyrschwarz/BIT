@@ -1,5 +1,8 @@
 <?php
   session_start();
+  /*Important variable that will be used later to determine 
+  if we're ready to move to the next page of the application */
+  $done = false;
 
   // connect to mysql
   $conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
@@ -8,12 +11,11 @@
     die("Connection failed: " . mysqli_connect_error());
   }
 
-  
-
   ////////////////////////////////////////////////////
   //RETRIEVE INFORMATION
   ////////////////////////////////////////////////////
   // get the applicant the GS wants to update
+  //$_SESSION['applicantID'] = '';
   $applicants = mysqli_query($conn, "SELECT * FROM users WHERE role='A'");
   while ($row = $applicants->fetch_assoc()) {
     if (isset($_POST[$row['userID']])) {
@@ -23,20 +25,11 @@
       $name = $fname." ".$lname;
     }
   }
+ 
   if (!$_SESSION['applicantID'])
     echo "Error: Applicant not found</br>";
 
 
-  //IF THIS STUDENT HAS ALREADY BEEN REVIEWED BY THIS REVIEWER, TELL THE USER TO GO BACK
-  $sql = "SELECT rating FROM app_review WHERE reviewerID = " .$_SESSION['id']. " AND uid = " .$_SESSION['applicantID'];
-  $result = mysqli_query($conn, $sql) or die ("already reviewed test failed");
-  if (mysqli_num_rows($result) != 0){
-    die('<h2> You have already reviewed this student <h2> <br><br>
-        <form id="mainform" method="post" action="home.php">
-        <input type="submit" name="submit" value="Back to Home">');
-  }
-
-  
   $sql = "SELECT degreeType, AOI, experience, semester, year FROM academic_info WHERE uid= " .$_SESSION['applicantID'];
   $result = mysqli_query($conn, $sql) or die ("************* ACADEMIC INFO SQL FAILED *************");
   $value = mysqli_fetch_object($result);
@@ -62,17 +55,14 @@
   $value = mysqli_fetch_object($result);
   $university = $value->institution;
   /////////////////////////////////////////////////////////////
-
-  
 ?>
-
 <html>
  <head>
   <title>
-    View Application
+    Application Info
   </title>
   
- <style>
+  <style>
     .field {
       position: absolute;
       left: 180px;
@@ -86,64 +76,19 @@
     }
     .error {color: #FF0000;}
     .topright {
-      position: absolute;
-      right: 10px;
-      top: 10px;
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
     }
-
-    .btn {
-        background-color: #990000;
-        color: white;
-        padding: 12px;
-        margin: 10px 0;
-        border: none;
-        width: 40%;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 17px;
-    }
-
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    }
-
-    li {
-    float: left;
-    }
-
-    li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-    background-color: #111;
-    }
-
-    .active {
-      background-color: #990000;
-    }
-    
-
-
+    /*table, th, td {
+      text-align: left;
+    }*/
   </style>
   <link rel="stylesheet" href="style.css">
  </head>
- 
- <ul>
-  <li><a href="GS_home.php">Back</a></li>
-  <li><a class="active" href="application_form_review.php">View Application</a></li>
-  <li style="float:right"><a href="logout.php">Log Out</a></li>
- </ul>
+  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
-  <h1> Application for <?php echo $name; ?></h1>
+  <h1> Applicant Information </h1>
 
   <body>
     <b>Name: </b> <u> <?php echo $name; ?> </u> <br><br>
@@ -161,7 +106,7 @@
     <u> <?php echo $advScore; ?> </u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Subject: </b>
     <u> <?php echo $subject; ?> </u><br>
     <b>TOEFL Score: </b> <u> <?php echo $toefl; ?> </u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <b>Year of Exam: </b> <u> <?php echo $advYear; ?> </u> <hr>
+    <b>Year of Exam: </b> <u> <?php echo $advYear; ?> </u> <br><br>
 
     <h3>Prior Degrees </h3> 
     <?php
@@ -173,7 +118,6 @@
         echo "<tr>";
         echo "<th>Degree</th>";
         echo "<th>GPA </th>";
-        //Add Major
         echo "<th>Year</th>";
         echo "<th>University</th>";
         echo "<th>Major</th>";
@@ -184,7 +128,7 @@
           echo "<td>" . $row['gpa'] . "</td>";
           echo "<td>" . $row['year'] . "</td>";
           echo "<td>" . $row['university'] . "</td>";
-           echo "<td>" . $row['major'] . "</td>";
+          echo "<td>" . $row['major'] . "</td>";
           echo "</tr>";
         }
         echo "</table>";
@@ -194,22 +138,6 @@
     ?>
 
     <b>Areas of Interest: </b> <u> <?php echo $aoi; ?> </u> <br>
-    <b>Experience: </b> <u> <?php echo $experience; ?> </u> <hr>
-
-    <h3>Recommendation Letters </h3>
-      <?php
-        //show all recommendation letters
-        $sql = "SELECT * FROM rec_letter WHERE uid= " .$_SESSION['applicantID'];
-        $result = mysqli_query($conn, $sql);
-        $num = 1;
-        while($row = mysqli_fetch_assoc($result)) {
-          echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
-          echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
-          echo "<b>Letter: </b><br>";
-          echo '<textarea readonly rows="15" cols="80" style="font-size: 18px;background: transparent;">'.$row['recommendation'].'</textarea>';
-          echo "<br><br>";
-        }
-      ?>
-     
+    <b>Experience: </b> <u> <?php echo $experience; ?> </u> <br><br>
   </body>
 </html>

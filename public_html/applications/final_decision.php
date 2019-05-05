@@ -140,13 +140,8 @@ session_start();
 		$row = $result->fetch_assoc();
 
 		// if no decision made, give them the option of viewing the application
-		if ($result->num_rows == 0 || $row['status'] < 4) {
-			echo "<p>The CAC has not reviewed this application yet, but you may still view the application and make a final decision.</p></br>";
-
-			// button to view the application
-			echo "<form action='application_view_form.php' method='post'>
-				<input type='submit' name='".$_SESSION['applicantID']."' value='View application'>
-				</form></br>";
+		if ($result->num_rows == 0 || $row['status'] < 6) {
+			echo "<p>The final decision made by the CAC: <u>THE CAC HAS NOT REVIEWED THIS APPLICANT</u></p>";
 		}
 
 		// if CAC has reviewed, show the final decision

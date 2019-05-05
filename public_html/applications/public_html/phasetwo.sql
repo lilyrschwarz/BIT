@@ -1,13 +1,10 @@
 /*******************
 ADVISING
 ********************/
-#Advising Drop
-#set session foreign_key_checks = 0;
-
 drop table if exists alumni cascade;
 drop table if exists systems_administrator cascade;
 drop table if exists graduate_secretary cascade;
-#drop table if exists transcript cascade;
+drop table if exists transcript cascade;
 drop table if exists student cascade;
 drop table if exists advisor cascade;
 drop table if exists form1 cascade;
@@ -22,19 +19,19 @@ create table thesis (
   primary key (university_id)
 );
 
-# create table courses (
-#   subject varchar(4),
-#   course_num int (5),
-#   title varchar (30),
-#   credits int (2),
-#   prereq_sub1 varchar (4),
-#   prereq_1 int (5),
-#   prereq_sub2 varchar (4),
-#   prereq_2 int (5),
-#   primary key (course_num, subject),
-#   foreign key (prereq_1, prereq_sub1) references courses(course_num, subject),
-#   foreign key (prereq_2, prereq_sub2) references courses(course_num, subject)
-# );
+create table courses (
+  subject varchar(4),
+  course_num int (5),
+  title varchar (30),
+  credits int (2),
+  prereq_sub1 varchar (4),
+  prereq_1 int (5),
+  prereq_sub2 varchar (4),
+  prereq_2 int (5),
+  primary key (course_num, subject),
+  foreign key (prereq_1, prereq_sub1) references courses(course_num, subject),
+  foreign key (prereq_2, prereq_sub2) references courses(course_num, subject)
+);
 
 create table loginusers (
   user_type varchar (30),
@@ -49,9 +46,34 @@ create table form1 (
   subject varchar(4),
   course_num int(5),
   primary key (num, university_id),
-  foreign key(university_id) references user (uid)
+  foreign key(university_id) references loginusers (university_id)
 );
 
+create table advisor (
+  university_id int(8),
+  name varchar(30),
+  primary key (university_id),
+  foreign key(university_id) references loginusers (university_id)
+);
+
+create table student (
+  university_id int (8),
+  f_name varchar (30),
+  l_name varchar (30),
+  address varchar (255),
+  email varchar (255),
+  phone_num bigint,
+  program_type varchar (20),
+  advisor int (8),
+  GPA float (5, 4),
+  total_credits int(5),
+  clear_for_grad int (1),
+  thesis_approved int (1),
+  thesis MEDIUMTEXT,
+  primary key (university_id),
+  foreign key (advisor) references advisor (university_id),
+  foreign key (university_id) references loginusers (university_id)
+);
 
 
 
@@ -69,17 +91,17 @@ create table alumni (
   primary key (university_id)
 );
 
-# create table transcript (
-# 	semester varchar(6),
-# 	year int(4),
-# 	final_grade varchar(2),
-# 	credits int(2),
-# 	course_num int(5),
-# 	subject varchar(4),
-# 	university_id int(8),
-#	primary key (semester, year, course_num, university_id),
-#	foreign key (university_id) references student (university_id)
-#);
+create table transcript (
+	semester varchar(6),
+	year int(4),
+	final_grade varchar(2),
+	credits int(2),
+	course_num int(5),
+	subject varchar(4),
+	university_id int(8),
+	primary key (semester, year, course_num, university_id),
+	foreign key (university_id) references student (university_id)
+);
 
 
 create table systems_administrator (
@@ -94,12 +116,12 @@ create table graduate_secretary (
   foreign key(university_id) references loginusers (university_id)
 );
 
-#set session foreign_key_checks = 1;
 
 /********************
 Applications
 ********************/
-#Applications drop
+
+-- erase anything that is already there
 DROP TABLE IF EXISTS rec_review CASCADE;
 DROP TABLE IF EXISTS app_review CASCADE;
 DROP TABLE IF EXISTS gre CASCADE;
@@ -107,14 +129,16 @@ DROP TABLE IF EXISTS prior_degrees CASCADE;
 DROP TABLE IF EXISTS rec_letter CASCADE;
 DROP TABLE IF EXISTS academic_info CASCADE;
 DROP TABLE IF EXISTS personal_info CASCADE;
-DROP TABLE IF EXISTS undertranscript CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
+
+-- create the tables
 
 CREATE TABLE users (
   role varchar(3) NOT NULL,
   fname char(15) NOT NULL,
   lname char(15) NOT NULL,
+  username varchar(20) NOT NULL,
   password varchar(20) NOT NULL,
   email varchar(50) NOT NULL,
   userID int(8) NOT NULL,
@@ -169,23 +193,20 @@ CREATE TABLE app_review (
   reason char,
   rating int,
   advisor char(30),
-  reviewerID int,
-  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-accepted, 10-declined
+  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-admitted
   PRIMARY KEY (reviewID),
-  FOREIGN KEY (uid) REFERENCES users(userID),
-  FOREIGN KEY (reviewerID) REFERENCES users(userID)
+  FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
 CREATE TABLE rec_review (
   reviewID int(8) NOT NULL, 
   reviewerRole varchar(3),
-  reviewerID int,
   rating int,
   generic boolean, 
   credible boolean, 
   uid int(8) NOT NULL,
   recID int,
-  PRIMARY KEY (recID, reviewerID),
+  PRIMARY KEY (recID, reviewerRole),
   FOREIGN KEY (uid) REFERENCES users(userID),
   FOREIGN KEY (recID) REFERENCES rec_letter(recID),
   FOREIGN KEY (reviewID) REFERENCES app_review(reviewID)
@@ -211,30 +232,59 @@ CREATE TABLE prior_degrees (
   major varchar(30),
   uid int(8) NOT NULL,
   deg_type char(3),
-  degreeID int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (degreeID),
+  PRIMARY KEY (deg_type, uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
-CREATE TABLE undertranscript (
-  uid int(8),
-  pdf BLOB,
-  PRIMARY KEY (uid),
-  FOREIGN KEY (uid) REFERENCES users(userID)
+CREATE TABLE transcript (
+	uid int(8),
+	pdf BLOB,
+	PRIMARY KEY (uid),
+	FOREIGN KEY (uid) REFERENCES users(userID)
 );
 
+-- insert admissions committee and two applicants
+INSERT INTO users VALUES 
+  -- Systems Administrator
+  ("SA", "Julia", "Bristow", "julia320", "admin1", "julia_bristow@gwu.edu", 12345678),
+  -- Graduate Secretary
+  ("GS", "Jack", "Sloane", "jacksloane", "password", "email@gmail.com", 13254761),
+  -- Faculty Reviewer
+  ("FR", "Bhagi", "Narahari", "bn", "password", "narahari@gwu.edu", 21147362),
+  -- Chair of Admissions Comm
+  ("CAC", "John", "Smith", "jsmith", "123456", "jsmith@gmail.com", 42142172),
+  -- Applicants
+  ("A", "John", "Lennon", "john_lennon", "plsletmein", "john_lennon@gmail.com", 55555555),
+  ("A", "Ringo", "Starr", "rstarr", "Apply!", "ringostarr@gmail.com", 66666666);
 
+-- insert personal data for applicants
+INSERT INTO personal_info VALUES
+  ("John", "Lennon", 55555555, "123 Main St", "New York", "NY", "23321", "8604626594", 111111111),
+  ("Ringo", "Starr", 66666666, NULL, NULL, NULL, NULL, NULL, 222111111);
+
+-- John's application (complete)
+INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES ("Recommender", "1", "recommend@gmail.com", "GWU", 55555555);
+INSERT INTO academic_info VALUES (55555555, "MS", "Computer Science", "bioinformatics research", "FA", 2019, true, true);
+INSERT INTO gre VALUES (157, 162, 2018, 830, "mathematics", 100, 2018, 55555555);
+INSERT INTO prior_degrees VALUES (3.6, 2017, "GWU", "Computer Science", 55555555, "BS");
+
+INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "FR");
+INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "CAC");
+INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "FR", 7);
+INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "CAC", 7);
+
+-- Ringo's application (incomplete)
+INSERT INTO academic_info (uid, transcript, recletter) VALUES (66666666, false, false);
 
 
 /********************
 Registration
 ********************/
-
-#Registration Drop
 DROP TABLE IF EXISTS transcript CASCADE;
 DROP TABLE IF EXISTS course CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS user CASCADE;
+
 
 CREATE TABLE user (
   fname varchar(20),
@@ -249,9 +299,6 @@ CREATE TABLE user (
   password varchar(20),
   active varchar(5),
   type varchar(5),
-  isAdvisor varchar(3),
-  isReviewer varchar(3),
-  advising_hold varchar (3),
   PRIMARY KEY (uid)
 );
 
@@ -291,40 +338,3 @@ CREATE TABLE transcript (
   foreign key (uid) references user(uid),
   foreign key (crn) references course(crn)
 );
-
-create table form1 (
-  num int AUTO_INCREMENT,
-  university_id int (8),
-  subject varchar(4),
-  course_num int(5),
-  primary key (num, university_id),
-  foreign key(university_id) references user (uid)
-);
-
-create table advisor (
-  university_id int(8),
-  name varchar(30),
-  primary key (university_id),
-  foreign key(university_id) references user (uid)
-);
-
-create table student (
-  university_id int (8),
-  f_name varchar (30),
-  l_name varchar (30),
-  address varchar (255),
-  email varchar (255),
-  phone_num varchar(10),
-  program_type varchar (20),
-  advisor int (8),
-  GPA float (5, 4),
-  total_credits int(5),
-  clear_for_grad int (1),
-  thesis_approved int (1),
-  thesis MEDIUMTEXT,
-  primary key (university_id),
-  foreign key (advisor) references advisor (university_id),
-  foreign key (university_id) references user (uid)
-);
-
-

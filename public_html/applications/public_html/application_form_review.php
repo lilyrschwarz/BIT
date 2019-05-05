@@ -33,11 +33,12 @@
     echo "Error: Applicant not found</br>";
 
 
-  //IF THIS STUDENT HAS ALREADY BEEN REVIEWED BY THIS REVIEWER, TELL THE USER TO GO BACK
-  $sql = "SELECT rating FROM app_review WHERE reviewerID = " .$_SESSION['id']. " AND uid = " .$_SESSION['applicantID'];
-  $result = mysqli_query($conn, $sql) or die ("already reviewed test failed");
-  if (mysqli_num_rows($result) != 0){
-    die('<h2> You have already reviewed this student <h2> <br><br>
+  //IF THIS STUDENT HAS ALREADY BEEN REVIEWED, TELL THE USER to go back
+  $sql = "SELECT rating FROM app_review WHERE reviewerRole = 'FR' AND uid = " .$_SESSION['applicantID'];
+  $result = mysqli_query($conn, $sql); //or die ("************* INITIAL TEST SQL FAILED *************");
+  $value = mysqli_fetch_object($result);
+  if ($value->rating != NULL){
+    die('<h2> This student has already been reviewed <h2> <br><br>
         <form id="mainform" method="post" action="home.php">
         <input type="submit" name="submit" value="Back to Home">');
   }
@@ -103,7 +104,31 @@
         $advisor = $_POST["advisor"];
 
 
-      
+      // insert rec review into database
+      $sql = "SELECT reviewID FROM app_review WHERE uid = ".$_SESSION['applicantID']." AND reviewerRole = 'FR'";
+      $result = mysqli_query($conn, $sql) or die ("************* GET reviewID FAILED*************");
+      if (mysqli_num_rows($result) != 0){
+        $value = mysqli_fetch_object($result);
+        $reviewID = $value->reviewID;
+      }
+      else{
+        die("Cannot Review: This applicant has not been initialized properly int the database");
+      }
+      if (isset($_POST['rating1'])){
+        $recID = $_SESSION['recID1'];
+        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', " .$_POST['rating1'].", " .$_POST['generic1']. ", " .$_POST['credible1']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
+        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 1 SQL FAILED *************");
+      }
+      if (isset($_POST['rating2'])){
+        $recID = $_SESSION['recID2'];
+        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', " .$_POST['rating2'].", " .$_POST['generic2']. ", " .$_POST['credible2']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
+        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 2 SQL FAILED *************");
+      }
+      if (isset($_POST['rating3'])){
+        $recID = $_SESSION['recID3'];
+        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', " .$_POST['rating3'].", " .$_POST['generic3']. ", " .$_POST['credible3']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
+        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 3 SQL FAILED *************");
+      }
 
 ///////////////////////////////
       // //set up foreign key reference between rec_letter and rec_review
@@ -136,44 +161,20 @@
 
 
       //load general review info into datase
-      //$sql = "UPDATE app_review SET reviewerRole = '" .$_SESSION['role']. "', rating = " .$action.", advisor = '" .$advisor. "', status = 5 WHERE reviewID = " .$reviewID. "";;
-      //$result = mysqli_query($conn, $sql) or die ("************* INSERT INTO app_review SQL FAILED *************");
-      $sql = "INSERT INTO app_review (uid, reviewerRole, rating, advisor, reviewerID, status) VALUES (".$_SESSION['applicantID'].", '".$_SESSION['role']."', ".$action.", '".$advisor."', ".$_SESSION['id'].", 5)";
+      $sql = "UPDATE app_review SET reviewerRole = '" .$_SESSION['role']. "', rating = " .$action.", advisor = '" .$advisor. "', status = 5 WHERE reviewID = " .$reviewID. "";;
       $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO app_review SQL FAILED *************");
       
       //check if defiency is empty. If not, update app review
       if (!empty($_POST["defCourse"])){
-        $sql = "UPDATE app_review SET deficiency = '" . $_POST["defCourse"]. "' WHERE reviewerID = ".$_SESSION['id'];
+        $sql = "UPDATE app_review SET deficiency = '" . $_POST["defCourse"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewID = " .$reviewID . "";
         $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH dificiency SQL FAILED *************");
       }
 
       //if comments is not empty, update app review
       if (!empty($_POST["comments"])){
-        $sql = "UPDATE app_review SET comments = '" . $_POST["comments"]. "' WHERE reviewerID = ".$_SESSION['id'];
+        $sql = "UPDATE app_review SET comments = '" . $_POST["comments"]. "' WHERE uid = " .$_SESSION['applicantID']. " AND reviewID = " .$reviewID . "";
         $result = mysqli_query($conn, $sql) or die ("************* UPDATE app_review WITH comments SQL FAILED *************");
 
-      }
-
-      // insert rec review into database
-      $sql = "SELECT reviewID FROM app_review WHERE reviewerID = ".$_SESSION['id'];
-      $result = mysqli_query($conn, $sql) or die ("************* GET reviewID FAILED*************");
-      $value = mysqli_fetch_object($result);
-      $reviewID = $value->reviewID;
-     
-      if (isset($_POST['rating1'])){
-        $recID = $_SESSION['recID1'];
-        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', ".$_SESSION['id'].", " .$_POST['rating1'].", " .$_POST['generic1']. ", " .$_POST['credible1']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
-        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 1 SQL FAILED *************");
-      }
-      if (isset($_POST['rating2'])){
-        $recID = $_SESSION['recID2'];
-        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', ".$_SESSION['id'].", " .$_POST['rating2'].", " .$_POST['generic2']. ", " .$_POST['credible2']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
-        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 2 SQL FAILED *************");
-      }
-      if (isset($_POST['rating3'])){
-        $recID = $_SESSION['recID3'];
-        $sql = "INSERT INTO rec_review VALUES(" .$reviewID. ", '" .$_SESSION['role']. "', ".$_SESSION['id'].", " .$_POST['rating3'].", " .$_POST['generic3']. ", " .$_POST['credible3']. ", " . $_SESSION['applicantID'].", ". $recID . ")";
-        $result = mysqli_query($conn, $sql) or die ("************* INSERT INTO rec_review 3 SQL FAILED *************");
       }
 
       //if reject, require reason, and load reason into database
@@ -199,12 +200,12 @@
     Review Form
   </title>
   
- <style>
+  <style>
     .field {
       position: absolute;
       left: 180px;
     }
-    /*body{line-height: 1.6;}*/
+   /* body{line-height: 1.6;}*/
     .bottomCentered{
        position: fixed;   
        text-align: center;
@@ -213,62 +214,17 @@
     }
     .error {color: #FF0000;}
     .topright {
-      position: absolute;
-      right: 10px;
-      top: 10px;
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
     }
-
-    .btn {
-        background-color: #990000;
-        color: white;
-        padding: 12px;
-        margin: 10px 0;
-        border: none;
-        width: 40%;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 17px;
-    }
-
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    }
-
-    li {
-    float: left;
-    }
-
-    li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-    background-color: #111;
-    }
-
-    .active {
-      background-color: #990000;
-    }
-    
-
-
+   /* table, th, td {
+      text-align: left;
+    }*/
   </style>
   <link rel="stylesheet" href="style.css">
  </head>
- 
- <ul>
-  <li><a href="home.php">Back</a></li>
-  <li><a class="active" href="application_form_review.php">Review Applicant</a></li>
-  <li style="float:right"><a href="logout.php">Log Out</a></li>
- </ul>
+  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
   <h1> Graduate Admissions Review Form </h1>
 
@@ -335,9 +291,9 @@
           echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
           echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
           echo "<b>Letter: </b><br>";
-          echo '<textarea readonly rows="15" cols="80" style="font-size: 18px;background: transparent;">'.$row['recommendation'].'</textarea>';
+          echo '<textarea readonly rows="15" cols="100">'.$row['recommendation'].'</textarea>';
           echo "<br><br>";
-          
+
           echo 
           '
           Rating: &nbsp;&nbsp;&nbsp;&nbsp; 
@@ -377,19 +333,15 @@
       4. <input type="radio" name="action" value=4 > Admit with aid <br>
       
       <b>Deficiency Courses if Any: </b><input type="text" name="defCourse"><br>
-      <b>Recommended Advisor: </b><input type="text" name="advisor"><br><br>
+      <b>Recommended Advisor: </b><input type="text" name="advisor"><br>
 
-      <b>GAS Reviewer Comments: </b><br>
-      <textarea rows="10" cols="71" style="font-size: 18px;"
-    name="comments" form="mainform"></textarea>
-      <br><br>
-
-      <input type="submit" name="submit" value="Submit Review" class="btn"><br>
-      <span class="error"><?php echo $somethingEmpty;?></span><br><br>
+      <div class="bottomCentered"><input type="submit" name="submit" value="Submit Review">
+      <span class="error"><?php echo $somethingEmpty;?></span></div>
 
     </form>
 
-     
+     <b>GAS Reviewer Comments: </b><br>
+     <textarea rows="5" cols="50" name="comments" form="mainform"></textarea>
 
   </body>
 </html>
