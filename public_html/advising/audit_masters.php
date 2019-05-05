@@ -318,7 +318,7 @@ else{
             echo "Did Not Meet Minimum Credit Requirement.<br />";
             $cleared = 0;
         }
-    }
+    
     else{
         echo "Could not retreive credit information. Returning... <br />";
         $cleared = 0;
