@@ -210,12 +210,12 @@ else{
     $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
     $result = mysqli_query($db, $sql_1);
 
-    if(empty($result)){
-        echo "Student did not complete a form 1. Returning...<br />";
+    if(empty($result) || $credits_sum <30){
+        echo "Student did not complete a form 1. Requirement not met.<br />";
         $cleared = 0;
     }
     else if (!empty($result)) {
-        echo "student completed form 1!<br />";
+        echo "Completed Form 1!<br />";
     }
 
     /***************************************************/
@@ -223,29 +223,29 @@ else{
     /***************************************************/
 
     if(array_search(6212, $classes) !== FALSE){
-        echo "course 1 reqt met! <br />";
+        echo "Course 1 Requirement Met! <br />";
     }
     else{
         /* DID NOT MEET COURSE 1 REQT */
-        echo "course 1 reqt not met. <br />";
+        echo "Course 1 Requirement Not Met. <br />";
         $cleared = 0;
     }
 
     if(array_search(6221, $classes) !== FALSE){
-        echo "course 2 reqt met! <br />";
+        echo "Course 2 Requirement Met! <br />";
     }
     else{
         /* DID NOT MEET COURSE 2 REQT */
-        echo "course 2 reqt not met. <br />";
+        echo "Course 2 Requirement Not Met. <br />";
         $cleared = 0;
     }
 
     if(array_search(6461, $classes) !== FALSE){
-        echo "course 3 reqt met! <br />";
+        echo "Course 3 Requirement Met! <br />";
     }
     else{
         /* DID NOT MEET COURSE 3 REQT */
-        echo "course 3 reqt not met. <br />";
+        echo "Course 3 Requirement Not Met. <br />";
         $cleared = 0;
     }
 
@@ -261,7 +261,7 @@ else{
         }
     }
     else{
-        echo "Could not fetch final grades. Returning... <br />";
+        echo "Could not Fetch Final Grades. <br />";
         $cleared = 0;
     }
 
@@ -279,7 +279,7 @@ else{
 
     if($grades_below_b > 2){
         /* MORE THAN TWO GRADES BELOW B */
-        echo "More than two grades below B. Returning...<br />";
+        echo "More Than Two Grades Below B. Grade Requirement Not Met.<br />";
         $cleared = 0;
     }
 
@@ -293,12 +293,12 @@ else{
         $gpa = $result_4->fetch_assoc();
         if($gpa['GPA'] < (float)3.0){
             /* DID NOT MEET GPA REQT */
-            echo "GPA below 3.0. Returning...<br />";
+            echo "GPA Below 3.0. GPA Requirement Not Met.<br />";
             $cleared = 0;
         }
     }
     else{
-      echo "Could not access GPA information. Returning... <br />";
+      echo "Could Not Access GPA Information.<br />";
       echo $db->error;
         $cleared = 0;
     }
@@ -313,11 +313,9 @@ else{
 
     // $sql = "SELECT total_credits FROM student WHERE university_id = '.$user.';";
     // $result_5 = mysqli_query($db,$sql);
-
-    if(!empty($credits_sum)){
-        if($credits_sum < 30){
+  else if($credits_sum < 30){
             /* DID NOT MEET CREDIT MINIMUM */
-            echo "Did not meet minimum credit requirement. Returning...<br />";
+            echo "Did Not Meet Minimum Credit Requirement.<br />";
             $cleared = 0;
         }
     }
@@ -341,7 +339,7 @@ else{
         }
     }
     else{
-        echo "Could not receive course subject data. Returning... <br />";
+        echo "Could Not Receive Course Subject Data.<br />";
         $cleared = 0;
     }
 
@@ -349,7 +347,7 @@ else{
     $num_noncsci = $num_noncsci_arr['ECE'] + $num_noncsci_arr['MATH'];
     if($num_noncsci > 2){
         /* MORE THAN 2 NON CSCI CLASSES */
-        echo "More than two classes in minimum credits are non-csci. Returning...<br />";
+        echo "More Than Two Classes in Minimum Credits are Non-CSCI.<br />";
         $cleared = 0;
         //return
     }
@@ -360,7 +358,7 @@ else{
     if($cleared === 1){
         $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
         mysqli_query($db, $sql);
-        echo "Cleared for graduation!";
+        echo "Congrats! You are Cleared for Graduation!";
     }
 
 
