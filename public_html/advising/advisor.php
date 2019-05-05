@@ -64,7 +64,7 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
         <h1>Faculty Advisor</h1>
     </div>
     <div>
-      <form action="SearchForm1.php">
+      <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/SearchForm1.php">
         <input type="submit" value="Review a Student's Form 1">
       </form
     </div>
