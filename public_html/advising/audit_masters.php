@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['uid'] && $_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD'){
+if($_SESSION['uid'] && $_SESSION['type'] == 'MS'){
 
 }
 else{
@@ -120,7 +120,7 @@ else{
 
   <link rel="stylesheet" href="style.css">
   <head>
-  <title>View Info</title>
+  <title>Audit</title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
   <!-- <style>
