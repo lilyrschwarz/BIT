@@ -93,33 +93,9 @@ li a:hover:not(.active) {
 }
 </style>
 <ul>
-<li><a class="active" href="student.php">Home</a></li>
-<li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
-<li><a href="transcript.php">Transcript</a></li>
-<li><a href="studentinfo.php">Update Info</a></li>
-<li><a href="viewStudentPersonalInfo.php">View Info</a></li>
-<li><a href="form1.php">Update Form 1</a></li>
-<li><a href="viewform1.php">View Form 1</a></li>
-<li><a href="applytograduate.php">Apply to Graduate</a></li>
+<li><a class="active" href="student.php">Advising Home</a></li>
 
-
-<?php
-
-if (!empty($program_type)) {
-  //foreach($course_array as $key=>$value)
-  while($row = $program_type->fetch_assoc())
-  {
-    if($row['program_type'] == 'PhD'){
-?>
-
-<li><a href="submitThesisFile.php" >Submit Thesis</a><li>
-  <li><a href="<?php echo $url;?>" target="_blank">View Thesis</a><li>
-<?php
-}
-}
-}
-          ?>
-<li><a href="logout.php">Logout</a></li>
+          <li style="float:right"><a href="logout.php"  >Logout</a></li></ul><br/></br>
 </ul><br/></br>
 <style>
 
