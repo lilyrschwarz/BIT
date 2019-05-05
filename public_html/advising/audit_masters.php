@@ -6,7 +6,7 @@ if($_SESSION['uid'] && $_SESSION['type'] == 'MS'){
 }
 else{
     echo $_SESSION['uid'].$_SESSION['type'];
-    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_htmladvising/applytograduate.php");
 }
 
 
@@ -211,7 +211,7 @@ else{
     $result = mysqli_query($db, $sql_1);
 
     if(empty($result) || $credits_sum <30){
-        echo "Student did not complete a form 1. Requirement not met.<br />";
+        echo "Student did not complete a form 1.<br />";
         $cleared = 0;
     }
     else if (!empty($result)) {
