@@ -208,11 +208,12 @@ background-color: #4CAF50;
 
   <?php
     //if($db->connect_error){echo "db connect error";}
+    echo "Student: ".$fullname;
     $course_array = $db->query("SELECT subject, course_num FROM form1 where university_id =".$student_id);
     //echo $_SESSION['username'];
     if (!empty($course_array)) {
       //foreach($course_array as $key=>$value)
-      echo $fullname;
+
       while($row = $course_array->fetch_assoc())
       {
     ?>
