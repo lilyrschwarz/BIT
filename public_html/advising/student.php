@@ -28,7 +28,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Student Advising</title>
 <meta charset="UTF-8">
 <meta name="viewport">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
