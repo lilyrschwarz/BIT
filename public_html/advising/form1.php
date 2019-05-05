@@ -299,7 +299,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
   if(isset($_POST['submit'])){
     $count = 0;
 
-    $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
+  //  $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
 
     foreach($_POST['check_list'] as $first_value=>$tmpArray) {
 
