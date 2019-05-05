@@ -6,7 +6,7 @@ if($_SESSION['uid'] && $_SESSION['type'] == 'PHD'){
 }
 else{
     echo $_SESSION['uid'].$_SESSION['type'];
-    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/applytograduate.php");
 }
 
 
@@ -198,6 +198,10 @@ else{
     /* indicate to the grad secretary that the audit did */
     /* not complete successfully                         */
     /*****************************************************/
+    $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
+    $credits_sum = $credits_sum->fetch_assoc();
+    $credits_sum = $credits_sum['sum_of_credits'];
+
     $cleared = 1;
 
     $user = $_SESSION['uid'];
@@ -206,13 +210,13 @@ else{
     $sql_1 = "SELECT * FROM form1 WHERE university_id =" .$user.";";
     $result = mysqli_query($db, $sql_1);
 
-    if(empty($result)){
-        echo "Student did not complete a form 1. Returning...<br />";
+    if(empty($result) || $credits_sum<36){
+        echo "Student Did Not Complete a Form 1.<br />";
         $cleared = 0;
         //header("Location: applytograduate.php");
     }
     else if (!empty($result)) {
-        echo "student completed form 1!<br />";
+        echo "Student Completed Form 1!<br />";
     }
 
     /***************************************************/
@@ -227,7 +231,7 @@ else{
         }
     }
     else{
-        echo "Could not fetch final grades. Returning... <br />";
+        echo "Could Not Fetch Final Grades.<br />";
         $cleared = 0;
     }
 
@@ -245,7 +249,7 @@ else{
 
     if($grades_below_b > 1){
         /* MORE THAN TWO GRADES BELOW B */
-        echo "More than one grade below B. Returning...<br />";
+        echo "More Than One Grade Below B.<br />";
         $cleared = 0;
     }
 
@@ -259,12 +263,12 @@ else{
         $gpa = $result_4->fetch_assoc();
         if($gpa['GPA'] < (float)3.5){
             /* DID NOT MEET GPA REQT */
-            echo "GPA below 3.5. Returning...<br />";
+            echo "GPA Below 3.5.<br />";
             $cleared = 0;
         }
     }
     else{
-	    echo "Could not access GPA information. Returning... <br />";
+	    echo "Could Not Access GPA Information. <br />";
 	    echo $db->error;
         $cleared = 0;
     }
@@ -273,19 +277,17 @@ else{
     /* THIRD CHECK: overall credits > 36               */
     /***************************************************/
 
-    $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
-    $credits_sum = $credits_sum->fetch_assoc();
-    $credits_sum = $credits_sum['sum_of_credits'];
+
 
     if(!empty($credits_sum)){
         if($credits_sum < 36){
             /* DID NOT MEET CREDIT MINIMUM */
-            echo "Did not meet minimum credit requirement. Returning...<br />";
+            echo "Did Not Meet Minimum Credit Requirement.<br />";
             $cleared = 0;
         }
     }
     else{
-        echo "Could not retreive credit information. Returning... <br />";
+        echo "Could Not Retreive Credit Information. <br />";
         $cleared = 0;
     }
 
@@ -298,12 +300,12 @@ else{
 
     if(!empty($result_6)){
         if($result_6 !== 1){
-            echo "Student's thesis has not been approved by the GS yet.";
+            echo "Thesis Has Not Yet Approved by the GS.<br/>";
             $cleared = 0;
         }
     }
     else{
-        echo "Could not access thesis information. Returning... <br />";
+        echo "Could Not Access Thesis Information.<br />";
         echo $db->error;
         $cleared = 0;
     }
@@ -313,8 +315,10 @@ else{
     /**************************************************/
     if($cleared === 1){
         $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
-        echo "Cleared for graduation!";
+        echo "<b>Congrats! You are Cleared for Graduation!</b>";
         header("Location: student.php");
+    }else{
+      echo "<b>Not Cleared for Graduation.</b>";
     }
 
 
