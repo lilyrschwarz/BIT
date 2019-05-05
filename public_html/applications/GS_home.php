@@ -84,6 +84,7 @@
     <ul>
     <li><a class="active" href="GS_home.php">Homepage</a></li>
     <li><a href="GS_admitted_list.php">View Admitted Students</a></li>
+    <li><a href="GS_stats.php">View Statistics</a></li>
     <li style="float:right"><a href="logout.php">Log Out</a></li>
     </ul>
 
@@ -228,10 +229,11 @@
 		      <tr>
 		    <th>First Name</th>
 		    <th>Last Name</th>
-		    <th></th>
-		    <th></th>
-		    <th></th>
-		    <th></th>
+		    <th>Mark Documents</th>
+		    <th>Faculty Reviews</th>
+		    <th>CAC Review</th>
+		    <th>Update Decision</th>
+		    <th>View Application</th>
 		  </tr>";
 
 		// show each applicant with a button to the review page
@@ -259,7 +261,13 @@
 		          <input type='submit' name='".$row['userID']."' value='Update decision'>
 		          </form>
 		        </td>
-		              </tr>";
+		        <td>
+		        	<form align='center' action='application_view_form.php' method='post'>
+		          	<input type='submit' name='".$row['userID']."' value='View Application'>
+		          	</form>
+		        </td>
+
+		        </tr>";
 		}
 	}
 	// if there were no matches, tell them

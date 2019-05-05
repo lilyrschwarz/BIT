@@ -257,6 +257,8 @@
     .active {
       background-color: #990000;
     }
+    
+
 
   </style>
   <link rel="stylesheet" href="style.css">
@@ -333,7 +335,7 @@
           echo "<b>Author:</b> <u>".$row['fname']." ".$row['lname']."</u><br>";
           echo "<b>From: </b> <u>".$row['institution']."</u> <br>";
           echo "<b>Letter: </b><br>";
-          echo '<textarea readonly rows="15" cols="80" style="font-size: 16px;">'.$row['recommendation'].'</textarea>';
+          echo '<textarea readonly rows="15" cols="80" style="font-size: 18px;background: transparent;">'.$row['recommendation'].'</textarea>';
           echo "<br><br>";
           
           echo 
@@ -378,7 +380,8 @@
       <b>Recommended Advisor: </b><input type="text" name="advisor"><br><br>
 
       <b>GAS Reviewer Comments: </b><br>
-      <textarea rows="10" cols="71" style="font-size: 18px;" name="comments" form="mainform"></textarea>
+      <textarea rows="10" cols="71" style="font-size: 18px;"
+    name="comments" form="mainform"></textarea>
       <br><br>
 
       <input type="submit" name="submit" value="Submit Review" class="btn"><br>

@@ -58,6 +58,9 @@ table td, table th {
   margin: 0;
   padding: 0.5em 1em;
 }
+td {
+  width:20px;
+}
 
 thead {
   background-color: #d3d3d3;

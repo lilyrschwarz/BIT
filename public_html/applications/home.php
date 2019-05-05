@@ -195,7 +195,11 @@
 					<span class="center">
 					<form method="post" action="acceptance_fee.php">
 					<input type="submit" name="submit" value="Accept Admission" class="btn">
-					</form></span>
+					</form>
+					<form method="post" action="decline.php">
+					<input type="submit" name="submit" value="Decline Admission" class="btn">
+					</form>
+					</span>
 				';
 			}
 
@@ -204,7 +208,22 @@
 				echo "</p>";
 				echo "<p style='text-align: center;'>We regret to inform you that you have not been chosen as a potential student for this school.</p>";
 			}
-
+			else if ($row['status'] == 9) {
+				echo 
+				'
+				<p style="text-align: center;">Your student acount has already been created.</p>
+				<br>
+				<form align="center" method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php">
+					<input type="submit" name="submit" value="Login To Student Services" class="btn">
+				</form>
+				';
+			}
+			else if ($row['status'] == 10) {
+				echo 
+				'
+				<p style="text-align: center;">You declined admission.</p>';
+	
+			}
 			else 
 				echo "Error: we could not find any information for this user</p><br/>";
 

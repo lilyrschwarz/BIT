@@ -12,10 +12,12 @@
 <html>
   <head>
   <title>
-    GS Homepage
+    View Admitted Students
   </title>
  
+ <link rel="stylesheet" href="style.css">
   <style>
+
     .field {
       position: absolute;
       left: 180px;
@@ -76,7 +78,7 @@
 
   </style>
 
-  <link rel="stylesheet" href="style.css">
+  
   </head>
   
   <body>
@@ -84,6 +86,7 @@
     <ul>
     <li><a href="GS_home.php">Homepage</a></li>
     <li><a class="active" href="GS_admitted_list.php">View Admitted Students</a></li>
+    <li><a href="GS_stats.php">View Statistics</a></li>
     <li style="float:right"><a href="logout.php">Log Out</a></li>
     </ul>
 
@@ -228,8 +231,9 @@
 		      <tr>
 		    <th>First Name</th>
 		    <th>Last Name</th>
-		    <th></th>
-		    <th></th>
+		    <th>Faculty Reviews</th>
+		    <th>CAC Review</th>
+		    <th>View Application</th>
 		    <th></th>
 		  </tr>";
 
@@ -241,7 +245,7 @@
 			$v = mysqli_fetch_object($r);
 			$status	= $v->status;
 
-			$acceptance = "";
+			$acceptance = "               ";
 			if($status == 9)
 				$acceptance = "ACCEPTED ADMISSION";
 			
@@ -262,6 +266,12 @@
 			<input type='submit' name='".$row['userID']."' value='View CAC review'>
 			</form>
 			</td>
+
+			<td>
+	        	<form align='center' action='application_view_form.php' method='post'>
+	          	<input type='submit' name='".$row['userID']."' value='View Application'>
+	          	</form>
+		    </td>
 
 			<td>".$acceptance."</td>
 

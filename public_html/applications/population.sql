@@ -22,7 +22,7 @@ INSERT INTO personal_info VALUES
 # John's application (complete)
 INSERT INTO rec_letter (fname, lname, email, institution, uid, recommendation) VALUES ("Reco", "Mendor", "recommend@gmail.com", "GWU", 55555555, "This applicant is satisfactory.");
 INSERT INTO academic_info VALUES (55555555, "MS", "Computer Science", "bioinformatics research", "FA", 2019, true, true);
-INSERT INTO gre VALUES (157, 162, 2018, 830, "mathematics", 100, 2018, 55555555);
+INSERT INTO gre VALUES (157, 162, 2018, 146, "mathematics", 100, 2018, 55555555);
 INSERT INTO prior_degrees (gpa, year, university, major, uid, deg_type) VALUES (3.6, 2017, "GWU", "Computer Science", 55555555, "BS");
 
 #INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "FR");

@@ -33,7 +33,7 @@
   $type = $value->degreeType;
 
   //Insert into REG's "user" table
-  $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."')";
+  $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type, advising_hold) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."', 'yes')";
   $result = mysqli_query($conn, $sql) or die ("insert into REGS failed");
 
   //get new uid

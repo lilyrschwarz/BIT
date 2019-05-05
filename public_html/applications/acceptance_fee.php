@@ -102,7 +102,7 @@ label {
 }
 
 .btn:hover {
-  background-color: #45a049;
+  background-color: #990000;
 }
 
 span.price {
@@ -123,7 +123,6 @@ span.price {
 
   <link rel="stylesheet" href="style.css">
   </head>
-  <span class="topright"><form method="post" action="logout.php"><input type="submit" name="submit" value="Logout"></form></span>
   
    <h1> Application Fee </h1>
    <h3> Congratulations on being admitted! Please fill out your application fee deposit in order to gain access to our student services.</h3>
@@ -198,7 +197,7 @@ span.price {
     <div class="container">
       <h4>Acceptance Fee </h4>
       <hr>
-      <p>Total <span class="price" style="color:black"><b>$3,000,000,000,000,000,000,000</b></span></p>
+      <p>Total <span class="price" style="color:black"><b>$800</b></span></p>
     </div>
   </div>
 </div>

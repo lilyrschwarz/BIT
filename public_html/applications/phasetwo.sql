@@ -170,7 +170,7 @@ CREATE TABLE app_review (
   rating int,
   advisor char(30),
   reviewerID int,
-  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-accepted
+  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-accepted, 10-declined
   PRIMARY KEY (reviewID),
   FOREIGN KEY (uid) REFERENCES users(userID),
   FOREIGN KEY (reviewerID) REFERENCES users(userID)
@@ -251,9 +251,7 @@ CREATE TABLE user (
   type varchar(5),
   isAdvisor varchar(3),
   isReviewer varchar(3),
-  gpa float(5,4),
-  advisor int(8),
-  total_credits int(3),
+  advising_hold varchar (3),
   PRIMARY KEY (uid)
 );
 
@@ -294,6 +292,15 @@ CREATE TABLE transcript (
   foreign key (crn) references course(crn)
 );
 
+create table form1 (
+  num int AUTO_INCREMENT,
+  university_id int (8),
+  subject varchar(4),
+  course_num int(5),
+  primary key (num, university_id),
+  foreign key(university_id) references user (uid)
+);
+
 create table advisor (
   university_id int(8),
   name varchar(30),
@@ -319,6 +326,5 @@ create table student (
   foreign key (advisor) references advisor (university_id),
   foreign key (university_id) references user (uid)
 );
-
 
 
