@@ -163,14 +163,24 @@
         } else if ($type == "MS" || $type == "PHD") {
             $activeQuery = "select active from user where uid=" . $_SESSION["uid"];
             $activeOrNot = mysqli_fetch_assoc(mysqli_query($connection, $activeQuery))["active"];
+            $holdQuery = "select advising_hold from user where uid=". $_SESSION["uid"];
+            $holdRes = mysqli_fetch_assoc(mysqli_query($connection, $holdQuery))["advising_hold"];
+
             if ($activeOrNot == "yes") {
-                $addAction = "add-drop.php";
-                $_SESSION["studuid"] = $_SESSION["uid"];
-                $addPrompt = "Add/Drop Classes";
+                if($holdRes == "yes"){
+                    $addAction = "advising-hold.php";
+                    $_SESSION["studuid"] = $_SESSION["uid"];
+                    $addPrompt = "Fill in Advising form";
+                }else{
+                    $addAction = "add-drop.php";
+                    $_SESSION["studuid"] = $_SESSION["uid"];
+                    $addPrompt = "Add/Drop Classes";
+                }
             } else {
                 $nextItem = false;
                 echo "To register for classes, you must be active. Contact a system admin to change your status.";
             }
+
         } else if ($type == "secr" || $type == "inst") {
             $nextItem = false;
         } else {
