@@ -28,15 +28,15 @@ $form1 = null;
 
 
 
-$program_type = $conn->query("SELECT program_type from student where university_id =".$_SESSION['uid']);
+$program_type = $conn->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
 
-$thesis_url = $conn->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['uid']);
+$thesis_url = $conn->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
 while ($row2 = mysqli_fetch_array($thesis_url )) {
 $url = $row2['FilePath'].$row2['FileName'];
 //var_dump($url);
 }
 
-$classesResult = $conn->query("select C.courseno, C.dept FROM course C, transcript T where '".$_SESSION['uid']."'=T.uid AND T.crn=C.crn");
+$classesResult = $conn->query("select C.courseno, C.dept FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn");
 
 // Check connection
 if (!$conn) {
@@ -56,94 +56,70 @@ $university_id = $_SESSION['uid'];
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<style>
-  /*tbody tr:nth-child(odd) {
-      background-color: #ff33cc;
-  }
-
-  tbody tr:nth-child(even) {
-      background-color: #e495e4;
-  }
-
-  h2 {
-    color: #5689DF;
-  }*/
-
-  .center{
-    text-align: center;
-  }
-
-  .topright {
-      position: absolute;
-      right: 10px;
-      top: 20px;
-    }
-    .btn {
-      background-color: #990000;
-      color: white;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      width: 40%;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 17px;
-    }
-    .field {
-      position: absolute;
-      left: 180px;
-    }
-    /*body{line-height: 1.6;}*/
-    .bottomCentered{
-       position: fixed;
-       text-align: center;
-       bottom: 30px;
-       width: 100%;
-    }
-    .error {color: #FF0000;}
-    .topright {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-    }
-
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    }
-
-    li {
-    float: left;
-    }
-
-    li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-    background-color: #111;
-    }
-
-    .active {
-      background-color: #990000;
-    }
-
-</style>
-
-<link rel="stylesheet" href="style.css">
 <head>
 <!--  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="style.css" />-->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
-  <!-- <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /*tbody tr:nth-child(odd) {
+        background-color: #ff33cc;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #e495e4;
+    }
+
+    h2 {
+      color: #5689DF;
+    }*/
+
+    .center{
+      text-align: center;
+    }
+
+    .topright {
+        position: absolute;
+        right: 10px;
+        top: 20px;
+      }
+      .btn {
+        background-color: #990000;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 40%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+      }
+      .field {
+        position: absolute;
+        left: 180px;
+      }
+      /*body{line-height: 1.6;}*/
+      .bottomCentered{
+         position: fixed;
+         text-align: center;
+         bottom: 30px;
+         width: 100%;
+      }
+      .error {color: #FF0000;}
+      .topright {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+
+      ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      }
+
   ul {
   list-style-type: none;
   margin: 0;
@@ -171,38 +147,14 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: #4CAF50;
+  background-color: #990000;
 }
-</style> -->
+</style>
 <ul>
-  <li><a class="active" href="student.php">Advising Home</a></li>
-  <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
-  <li><a href="transcript.php">Transcript</a></li>
-  <li><a href="studentinfo.php">Update Info</a></li>
-  <li><a href="viewStudentPersonalInfo.php">View Info</a></li> -->
-  <!-- <li><a href="form1.php">Update Form 1</a></li>
-  <li><a href="viewform1.php">View Form 1</a></li> -->
-  <!-- <li><a href="applytograduate.php">Apply to Graduate</a></li> -->
+<li><a class="active" href="student.php">Advising Home</a></li>
 
-<!--
-<?php
-
-if (!empty($program_type)) {
-  //foreach($course_array as $key=>$value)
-  while($row = $program_type->fetch_assoc())
-  {
-    if($row['program_type'] == 'PhD'){
-?>
-
-<li><a href="submitThesisFile.php" >Submit Thesis</a><li>
-  <li><a href="<?php echo $url;?>" target="_blank">View Thesis</a><li>
-<?php
-}
-}
-}
-          ?> -->
-<!-- <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php"  style="float:left">Main Menu</a></li> -->
-<li style="float:right"><a href="logout.php"  >Logout</a></li></ul><br/></br>
+          <li style="float:right"><a href="logout.php"  >Logout</a></li></ul><br/></br>
+</ul><br/></br>
 <style>
 
 
@@ -281,47 +233,51 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 
 </head>
 
-<body>
+<body class="gray-bg">
 <div class="container">
 <div class="main">
-  <h2>Form 1</h2>
-  <form method="post">
-  <label class="heading">Pick a Maximum of 12:</label></br></br>
-  <?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
-    <input name="check_list[<?php echo $class["dept"]; ?>][]" value=<?php echo $class["courseno"]; ?> type="checkbox" class="auto"/><?php echo $class["dept"]; ?> <label><?php echo $class["courseno"]; ?> </label> <br>
+<h2>Form 1</h2>
+<form method="post">
+<label class="heading">Pick a Maximum of 12:</label></br></br>
+<?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
+  <input name="check_list[<?php echo $class["dept"]; ?>][]" value=<?php echo $class["courseno"]; ?> type="checkbox" class="auto"/><?php echo $class["dept"]; ?> <label><?php echo $class["courseno"]; ?> </label> <br>
 
-  <?php } ?>
-  <input type="submit" name="submit" value="Submit">
+<?php } ?>
+<input type="submit" name="submit" value="Submit">
 
-  <!-- Including PHP Script ----->
-  <?php include 'checkbox_value.php';?>
-  <?php
-  if(isset($_POST['submit'])){
-    $count = 0;
+<!-- Including PHP Script ----->
+<?php include 'checkbox_value.php';?>
+<?php
+if(isset($_POST['submit'])){
+  $count = 0;
 
-  //  $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
+  $delete = mysqli_query($conn, "DELETE FROM form1 WHERE university_id =".$university_id);
 
-    foreach($_POST['check_list'] as $first_value=>$tmpArray) {
+  foreach($_POST['check_list'] as $first_value=>$tmpArray) {
 
-        foreach($tmpArray as $second_value) {
+      foreach($tmpArray as $second_value) {
 
-            echo $first_value." ".$second_value."<br>";;
-            $count++;
-            $secval = (int) $second_value;
-            //$count, $university_id, '$first_value', $secval
-            $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES (2, 1, 'CSCI', 6233);");
+          echo $first_value." ".$second_value."<br>";;
+          $count++;
+          $secval = (int) $second_value;
+          $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
 
-            $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
+          $form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
 
-              // var_dump($secval);
+            // var_dump($secval);
 
-  //echo mysqli_error();
+//echo mysqli_error();
 
-        }
       }
+    }
+    if($count>12){
+      echo "You can only submit up to 12 courses";
+      header('Location: ' . $form1.php);
+      die();
+    }
 
+    if ($form1) {
 
-      if ($form1) {
         //  echo '<br>Input data is successful';
           header("Location: viewform1.php");
 

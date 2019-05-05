@@ -73,7 +73,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 
     <!-- <a href="viewStudentPersonalInfo.php" class="w3-button  w3-block w3-hover-dark-grey w3-padding-16">View Personal Information</a> -->
 <div>
-  <form action="testingform1.php">
+  <form action="form1.php">
     <input type="submit" value="Update Form 1">
   </form
 </div>
