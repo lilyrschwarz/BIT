@@ -133,6 +133,7 @@ insert into loginusers values
     #('alumni', 65656565, '2222'),
     ('alumni', 77777777, '4444');
     #('alumni', 88888888, '8888');
+    
 
 insert into advisor values
     (10,  'Narahari'),
