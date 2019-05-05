@@ -51,12 +51,12 @@ else{
       <!-- <div class="  w3-container w3-center" >
         <div class="w3-padding-64"> -->
     <div style="text-align: center"><div style=display: inline-block; width: 80%>
+      <h1>Advising Systems Adminstrator</h1>
 
         <!-- First Grid -->
         <!-- <div class="w3-row">
             <div class="  w3-container w3-center" >
                 <div class="w3-padding-64">
-                    <h1>Advising Systems Adminstrator</h1>
                 </div>
                 <div class="w3-padding-64">
                     <a href="create_user.php" class="w3-button  w3-block w3-hover-blue-grey w3-padding-16">Create User</a>
@@ -81,7 +81,7 @@ else{
             <input type="submit" value="Main Menu">
           </form
         </div>
-        
+
         <div>
           <form action="logout.php">
             <input type="submit" value="Logout">
