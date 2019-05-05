@@ -214,9 +214,16 @@
 		// if the user is a reviewer, show them the list of applicants
 		else if ($_SESSION['role'] == "FR" || $_SESSION['role'] == "CAC") {
 
-			// page header info
-        	echo "<h2 style='text-align: center;'>Reviewer Home Page</h2>
-        		<h4 style='text-align: center;'>View completed applications and review them here:</h4>";
+			if ($_SESSION['role'] == "FR"){
+				// page header info
+	        	echo "<h2 style='text-align: center;'>Reviewer Home Page</h2>
+	        		<h4 style='text-align: center;'>View completed applications and review them here:</h4>";
+	        }
+	        if ($_SESSION['role'] == "CAC"){
+				// page header info
+	        	echo "<h2 style='text-align: center;'>Chair of Admissions Committee Home Page</h2>
+	        		<h4 style='text-align: center;'>View completed applications and review them here:</h4>";
+	        }
 
 			// get all the applicants whose application is complete
         	$q = "SELECT DISTINCT userID, fname, lname FROM users, app_review WHERE status=5 AND userID=uid";
