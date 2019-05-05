@@ -107,20 +107,28 @@
 
 
         //echo $type;
+        if($type == "alum"){
+            $editInfoPrompt = "Edit Profile";
+            $editInfoAction = "edit-info-reg.php";
+            echo "<div><form action=\"" . $editInfoAction . "\"><input type=\"submit\" value=\"" . $editInfoPrompt . "\"/></form></div>";
+            $transAction = "viewtrans.php";
+            $transPrompt = "View My Transcript";
+            $_SESSION["studuid"] = $_SESSION["uid"];
+            echo "<div><form action=\"" . $transAction . "\"><input type=\"submit\" value=\"" . $transPrompt . "\"/></form></div>";
+            //echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 
+        }
+
+       // echo $type;
         //EDIT PROFILE
         $editInfoPrompt = "";
         if ($type == "admin") {
             $editInfoPrompt = "Edit Profiles";
             $editInfoAction = "edit-info-admin.php";
-        } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type = "secr") {
+        } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type == "secr") {
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";
             //echo $type;
-        } else if($type = "alum"){
-            $editInfoPrompt = "Edit Profile";
-            $editInfoAction = "edit-info-reg.php";
-            echo $type;
         }else {
             $nextItem = false;
         }
@@ -129,7 +137,7 @@
         } else {
             $nextItem = true;
         }
-
+        //echo $type;
         //VIEW SCHEDULE
         $schedulePrompt = "";
         if ($type == "admin") {
@@ -153,13 +161,15 @@
 
         //TRANSCRIPTS
         $transPrompt = "";
-        if (($type == "admin" || $type == "secr" || $type == "inst" )&& $type!="alum") {
+        if (($type == "admin" || $type == "secr" || $type == "inst" )) {
             $transAction = "viewTransAdmin.php";
             $transPrompt = "View Transcripts";
-        } else if ($type == "MS" || $type == "PHD" || $type = "alum") {
+        } else if ($type == "MS" || $type == "PHD") {
             $transAction = "viewtrans.php";
             $transPrompt = "View My Transcript";
             $_SESSION["studuid"] = $_SESSION["uid"];
+        }else {
+            $nextItem = false;
         }
 
         if ($nextItem) {
@@ -195,7 +205,7 @@
                 echo "To register for classes, you must be active. Contact a system admin to change your status.";
             }
 
-        } else if ($type == "secr" || $type == "inst" ||  $type == "alum") {
+        } else if ($type == "secr" || $type == "inst" || $type == "alum" ) {
             $nextItem = false;
         } else {
             die("Error with add/drop user type logic");
@@ -212,7 +222,6 @@
         if ($type == "admin" || $type == "secr") {
             $editAction = "edit-grades-admin.php";
             $editPrompt = "Edit Grades";
-            echo $type;
         } else if ($type == "inst") {
             $editAction = "edit-grades-inst.php";
             $editPrompt = "Edit Grades";
@@ -259,8 +268,13 @@
         }else if ($Adv = "yes") {
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/advisor.php";
             $advPrompt = "Visit the Advising System";
-        } else {
-            $nextItem = false;
+        } 
+        // else if ($type == "alum") {
+        //     $nextItem = false;
+        // }
+        else{
+                        $nextItem = false;
+
         }
         if ($nextItem) {
             echo "<div><form action=\"" . $advAction . "\"><input type=\"submit\" value=\"" . $advPrompt . "\"/></form></div>";
