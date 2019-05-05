@@ -195,7 +195,7 @@ CREATE TABLE app_review (
   rating int,
   advisor char(30),
   reviewerID int,
-  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-admitted
+  status int NOT NULL DEFAULT 1,  #1-app incomplete, 2-app complete (both t/r pending), 3-transcript pending, 4-letter pending, 5-review pending, 6-admitted without aid, 7-admitted with aid, 8-rejected, 9-accepted
   PRIMARY KEY (reviewID),
   FOREIGN KEY (uid) REFERENCES users(userID),
   FOREIGN KEY (reviewerID) REFERENCES users(userID)
