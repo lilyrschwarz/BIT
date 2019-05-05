@@ -73,66 +73,134 @@
             if (!$connection) {
                 die("Couldn't connect: ".mysqli_error());
             }
+           // echo $_SESSION['type']
+            if($_SESSION['type'] == "inst"){  
+              //  echo $_SESSION['type'];
+                 if(empty($_POST["uid"])) {
+                    $query = "select   u.fname,   u.lname,   u.uid,   u.email,   u.type FROM   user u,   student s,   advisor a WHERE   u.uid = s.university_id and a.university_id = ".$_SESSION["uid"]."  and s.advisor = ".$_SESSION["uid"];
+                    $result = mysqli_query($connection, $query);
+                    if (mysqli_num_rows($result) > 0) {
+                        echo "<table>";
+                        //Display a table of all the students
+                        echo "<thead><tr><th>First Name</th><th>Last Name</th><th>UID</th><th>Email</th><th>Student Type</th></tr></thead>";
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row["fname"] . "</td>";
+                            echo "<td>" . $row["lname"] . "</td>";
+                            echo "<td>" . $row["uid"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["type"] . "</td>";
+                            echo "<td>";
+                            echo "<form action=\"setUIDTranscript.php\" method=\"post\">";
+                            echo "<input type=\"hidden\" name=\"studuid\" value=\"" . $row["uid"] . "\">";
+                            echo "<input type=\"submit\" value=\"View Student Transcript\"/>";
+                            echo "</form>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
 
-            //no UID search
-            if(empty($_POST["uid"])) {
-                $query = "select fname, lname, uid, email, type from user where type = 'MS' or type = 'PHD'";
-                $result = mysqli_query($connection, $query);
-                if (mysqli_num_rows($result) > 0) {
-                    echo "<table>";
-                    //Display a table of all the students
-                    echo "<thead><tr><th>First Name</th><th>Last Name</th><th>UID</th><th>Email</th><th>Student Type</th></tr></thead>";
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>" . $row["fname"] . "</td>";
-                        echo "<td>" . $row["lname"] . "</td>";
-                        echo "<td>" . $row["uid"] . "</td>";
-                        echo "<td>" . $row["email"] . "</td>";
-                        echo "<td>" . $row["type"] . "</td>";
-                        echo "<td>";
-                        echo "<form action=\"setUIDTranscript.php\" method=\"post\">";
-                        echo "<input type=\"hidden\" name=\"studuid\" value=\"" . $row["uid"] . "\">";
-                        echo "<input type=\"submit\" value=\"View Student Transcript\"/>";
-                        echo "</form>";
-                        echo "</td>";
-                        echo "</tr>";
+                    } else {
+                        //If nothing came back from the query, there was a problem
+                        die("Bad query: ".mysqli_error());
                     }
-                    echo "</table>";
 
+                //A specific UID was searched
                 } else {
-                    //If nothing came back from the query, there was a problem
-                    die("Bad query: ".mysqli_error());
+                    $query = "select   u.fname, u.lname, u.uid,   u.email, u.type FROM user u, student s,   advisor a WHERE   u.uid = s.university_id and u.uid ".$_POST["uid"]." and s.advisor = ".$_SESSION["uid"];
+                    $result = mysqli_query($connection, $query);
+                    if (mysqli_num_rows($result) > 0) {
+                        echo "<table>";
+                        //Display a table of all the students
+                        echo "<thead><tr><th>First Name</th><th>Last Name</th><th>UID</th><th>Email</th><th>Student Type</th></tr></thead>";
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row["fname"] . "</td>";
+                            echo "<td>" . $row["lname"] . "</td>";
+                            echo "<td>" . $row["uid"] . "</td>";
+                            //echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["type"] . "</td>";
+                            echo "<td>";
+                            echo "<form action=\"setUIDTranscript.php.php\" method=\"post\">";
+                            echo "<input type=\"hidden\" name=\"studuid\" value=\"" . $row["uid"] . "\">";
+                            echo "<input type=\"submit\" value=\"View Student Transcript\"/>";
+                            echo "</form>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+
+                    } else {
+                        echo "No students with that UID!";
+                    }
                 }
+                //$row = mysqli_fetch_assoc($result);
+            }
 
-            //A specific UID was searched
-            } else {
-                $query = "select fname, lname, uid, email, type from user where (type = 'MS' or type = 'PHD') and uid=".$_POST["uid"];
-                $result = mysqli_query($connection, $query);
-                if (mysqli_num_rows($result) > 0) {
-                    echo "<table>";
-                    //Display a table of all the students
-                    echo "<thead><tr><th>First Name</th><th>Last Name</th><th>UID</th><th>Email</th><th>Student Type</th></tr></thead>";
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td>" . $row["fname"] . "</td>";
-                        echo "<td>" . $row["lname"] . "</td>";
-                        echo "<td>" . $row["uid"] . "</td>";
-                        //echo "<td>" . $row["email"] . "</td>";
-                        echo "<td>" . $row["type"] . "</td>";
-                        echo "<td>";
-                        echo "<form action=\"setUIDTranscript.php.php\" method=\"post\">";
-                        echo "<input type=\"hidden\" name=\"studuid\" value=\"" . $row["uid"] . "\">";
-                        echo "<input type=\"submit\" value=\"View Student Transcript\"/>";
-                        echo "</form>";
-                        echo "</td>";
-                        echo "</tr>";
+
+
+            else{
+                            //no UID search
+                if(empty($_POST["uid"])) {
+                    $query = "select fname, lname, uid, email, type from user where type = 'MS' or type = 'PHD'";
+                    $result = mysqli_query($connection, $query);
+                    if (mysqli_num_rows($result) > 0) {
+                        echo "<table>";
+                        //Display a table of all the students
+                        echo "<thead><tr><th>First Name</th><th>Last Name</th><th>UID</th><th>Email</th><th>Student Type</th></tr></thead>";
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row["fname"] . "</td>";
+                            echo "<td>" . $row["lname"] . "</td>";
+                            echo "<td>" . $row["uid"] . "</td>";
+                            echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["type"] . "</td>";
+                            echo "<td>";
+                            echo "<form action=\"setUIDTranscript.php\" method=\"post\">";
+                            echo "<input type=\"hidden\" name=\"studuid\" value=\"" . $row["uid"] . "\">";
+                            echo "<input type=\"submit\" value=\"View Student Transcript\"/>";
+                            echo "</form>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+
+                    } else {
+                        //If nothing came back from the query, there was a problem
+                        die("Bad query: ".mysqli_error());
                     }
-                    echo "</table>";
 
+                //A specific UID was searched
                 } else {
-                    echo "No students with that UID!";
+                    $query = "select fname, lname, uid, email, type from user where (type = 'MS' or type = 'PHD') and uid=".$_POST["uid"];
+                    $result = mysqli_query($connection, $query);
+                    if (mysqli_num_rows($result) > 0) {
+                        echo "<table>";
+                        //Display a table of all the students
+                        echo "<thead><tr><th>First Name</th><th>Last Name</th><th>UID</th><th>Email</th><th>Student Type</th></tr></thead>";
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row["fname"] . "</td>";
+                            echo "<td>" . $row["lname"] . "</td>";
+                            echo "<td>" . $row["uid"] . "</td>";
+                            //echo "<td>" . $row["email"] . "</td>";
+                            echo "<td>" . $row["type"] . "</td>";
+                            echo "<td>";
+                            echo "<form action=\"setUIDTranscript.php.php\" method=\"post\">";
+                            echo "<input type=\"hidden\" name=\"studuid\" value=\"" . $row["uid"] . "\">";
+                            echo "<input type=\"submit\" value=\"View Student Transcript\"/>";
+                            echo "</form>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+
+                    } else {
+                        echo "No students with that UID!";
+                    }
                 }
             }
+    
 
             //close sql connection
             mysqli_close($connection);
