@@ -88,6 +88,10 @@ li a:hover:not(.active) {
 				   SELECT university_id, f_name, l_name, address, email, phone_num, program_type, advisor
 				   FROM student
 				   WHERE university_id=".$student_id);
+//$form1_update = mysqli_query($conn,"UPDATE form1 set subject = '$first_value', course_num = '$secval' where num = '$count' and university_id= '$university_id';");
+
+
+  $insertUser = $conn->query("UPDATE user SET type='alum' WHERE uid=".$student_id);
 
 	//update graduation year and semester for alum
 	$gradYear = $conn->query("UPDATE alumni
