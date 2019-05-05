@@ -326,7 +326,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
         die();
       }
 
-      if ($form1===1) {
+      if ($form1) {
 echo $form1;
         //  echo '<br>Input data is successful';
           header("Location: viewform1.php");
