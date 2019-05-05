@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-    if($_SESSION['uid'] && $_SESSION['type'] == 'inst'){
+    if($_SESSION['uid'] && $_SESSION['type'] == 'admin'){
     }
     else{
       echo $_SESSION['uid'].$_SESSION['type'];
@@ -188,8 +188,8 @@ $dbname = "SJL";
         <?php
   $result = $db->query("SELECT f_name, l_name,university_id
 	  		FROM student
-			WHERE program_type = 'PhD' AND advisor =".$_SESSION['uid']) or die ("No Thesis Submissions");
-        echo "Advisee: ";
+			WHERE program_type = 'PhD'" or die ("No Thesis Submissions");
+        echo "Student: ";
         echo "<select name='student_id'>";
         while ($row = mysqli_fetch_array($result )) {
                 echo "<option value =' ".$row['university_id']."'>" .$row['f_name']." ".$row['l_name']. "</option>";

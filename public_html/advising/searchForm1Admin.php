@@ -1,6 +1,6 @@
 <?php
 session_start();
-    if($_SESSION['uid'] && ($_SESSION['type'] == 'inst'){
+    if($_SESSION['uid'] && ($_SESSION['type'] == 'admin'){
     }
     else{
       echo $_SESSION['uid'].$_SESSION['type'];
@@ -179,7 +179,7 @@ background-color: #4CAF50;
   <div class="w3-responsive">
      <form method="post">
     	<?php
-  	$result = $db->query("SELECT f_name, l_name,university_id FROM student WHERE advisor =".$_SESSION['uid']) or die ("cannot retrieve names");
+  	$result = $db->query("SELECT f_name, l_name,university_id FROM student" or die ("cannot retrieve names");
   	echo "Advisee: ";
     	echo "<select name='student_id'>";
 	while ($row = mysqli_fetch_array($result )) {
