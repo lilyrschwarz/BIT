@@ -64,18 +64,20 @@
       if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());
       }
-      $query = "select f_name, l_name, program_type, advisor.name as aname FROM student, advisor WHERE advisor = advisor.university_id and student.university_id =".$_SESSION['uid'].")";
-      $result = mysqli_query($conn, $query);
-        
-        echo "Student Name:";
-        echo  $row["fname"] . $row["lname"];
+      
+        echo "Student Name: ";
+        echo $_SESSION["fname"]. " ";
+        echo $_SESSION["lname"];
         echo "<br>";
         echo "Program Type: ";
-        echo $row["program_type"];
+        echo $_SESSION['type'];
         echo "<br>";
-        echo "Advisor:" ;
-        echo $row["aname"];
-        echo "<br>";
+        echo "Advisor: " ;
+      $query = "select a.name FROM student s, advisor a WHERE s.advisor = a.university_id and s.university_id = '".$_SESSION['studuid']."'";
+      $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+      $row = mysqli_fetch_assoc($result);
+      echo $row['name'];
+       echo "<br>";
       
       
 

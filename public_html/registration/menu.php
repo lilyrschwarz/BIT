@@ -55,6 +55,7 @@
         $isReviewer = $_SESSION['isReviewer'];
 
         $nrole = "";
+
         if ($type == "admin") {
             $nrole = "Admin";
             $_SESSION['role'] = "SA";
@@ -64,10 +65,11 @@
             $nrole = "PhD Student";
         } else if ($type == "inst") {
             $nrole = "Instructor";
-            $_SESSION['role'] = "FR";
-				if($type == "inst" && $isReviewer == "yes"){
+            //$_SESSION['role'] = "FR";
+			if($type == "inst" && $isReviewer == "yes"){
         		$_SESSION['role'] = "FR";
        		 }
+             
         } else if ($type == "secr") {
             $nrole = "Secretary";
             $_SESSION['role'] = "GS";
@@ -87,17 +89,24 @@
         $extra = "";
         echo "<div style=\"text-align: center;\"><div style=\"display: inline-block; width: 80%;\">";
         if($isAdvisor == "yes"){
-            $extra = " and Advisor";
+            if($isReviewer == "yes"){
+                 $extra = ", Advisor, and Reviewer";
+            }else{
+              $extra = " and Advisor";
+            }
         }else if($isReviewer == "yes"){
-            $extra = " and Reviewer";
-        }else if($isReviewer == "yes" && $isAdvisor == "yes"){
-            $extra = ", Advisor, and Reviewer";
+            if($isAdvisor == "yes"){
+                $extra = ", Advisor, and Reviewer";
+            }else{
+               $extra = " and Reviewer";
+            }
         }
 
         echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $nrole . $extra. " privileges.<br><br>";
         $nextItem = true;
 
 
+        //echo $type;
 
         //EDIT PROFILE
         $editInfoPrompt = "";
@@ -107,7 +116,12 @@
         } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type = "secr") {
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";
-        } else {
+            //echo $type;
+        } else if($type = "alum"){
+            $editInfoPrompt = "Edit Profile";
+            $editInfoAction = "edit-info-reg.php";
+            echo $type;
+        }else {
             $nextItem = false;
         }
         if ($nextItem) {
@@ -127,7 +141,7 @@
         } else if ($type == "inst") {
             $scheduleAction = "view-schedule-inst.php";
             $schedulePrompt = "View My Schedule";
-        } else if ($type == "secr") {
+        } else if ($type == "secr" || $type == "alum") {
             $nextItem = false;
         }
 
@@ -181,7 +195,7 @@
                 echo "To register for classes, you must be active. Contact a system admin to change your status.";
             }
 
-        } else if ($type == "secr" || $type == "inst") {
+        } else if ($type == "secr" || $type == "inst" ||  $type == "alum") {
             $nextItem = false;
         } else {
             die("Error with add/drop user type logic");
@@ -198,6 +212,7 @@
         if ($type == "admin" || $type == "secr") {
             $editAction = "edit-grades-admin.php";
             $editPrompt = "Edit Grades";
+            echo $type;
         } else if ($type == "inst") {
             $editAction = "edit-grades-inst.php";
             $editPrompt = "Edit Grades";
@@ -241,7 +256,7 @@
             //echo "WE ARE A STUDENT";
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/student.php";
             $advPrompt = "Visit the Advising System";
-        }else if ($type == "inst" && $isAdvisor = "yes") {
+        }else if ($Adv = "yes") {
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/advisor.php";
             $advPrompt = "Visit the Advising System";
         } else {

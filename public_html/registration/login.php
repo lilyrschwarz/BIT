@@ -70,17 +70,28 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION["uid"] = $uid;
                 $_SESSION["password"] = $password;
-                $query = "select type, isAdvisor, isReviewer from user where uid=" . $uid;
+                $query = "select type, isReviewer from user where uid=" . $uid;
                 $result = mysqli_query($connection, $query);
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION["type"] = $row["type"];
                 $_SESSION["isReviewer"] = $row["isReviewer"];
+
+                $query = "select type, isAdvisor from user where uid=" . $uid;
+                $result = mysqli_query($connection, $query);
+                $row = mysqli_fetch_assoc($result);
                 $_SESSION["isAdvisor"] = $row["isAdvisor"];
+
 
                 $query = "select fname from user where uid=" . $uid;
                 $result = mysqli_query($connection, $query);
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION["fname"] = $row["fname"];
+
+                $query = "select lname from user where uid=" . $uid;
+                $result = mysqli_query($connection, $query);
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION["lname"] = $row["lname"];
+
                 $query = "select role from users where userID=". $uid;
                 $result = mysqli_query($conn, $query);
                 $row = mysqli_fetch_assoc($result);
