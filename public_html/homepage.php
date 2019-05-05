@@ -38,7 +38,7 @@ input[type=submit]:hover {
 
 
 <!-- Content -->
-<div class="w3-content" style="max-width:1100px;>
+<div class="w3-content" style="max-width:1100px";>
 
   <div class="w3-panel">
     <h1><b>Bhagi Institute of Technology</b></h1>
@@ -60,19 +60,19 @@ input[type=submit]:hover {
   <!-- Slideshow -->
   <div class="w3-container">
     <div class="w3-display-container mySlides">
-      <img src="images/stressedgal.jpg" style="width:50%">
+      <img src="images/code.jpg" style="width:50%">
       <!-- <div class="w3-display-topleft w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Lorem ipsum</span>
       </div> -->
     </div>
     <div class="w3-display-container mySlides">
-      <img src="images/lol.jpg" style="width:50%">
+      <img src="images/backpack.jpg" style="width:50%">
       <!-- <div class="w3-display-middle w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Klorim tipsum</span>
       </div> -->
     </div>
     <div class="w3-display-container mySlides">
-      <img src="images/confused.jpg" style="width:50%">
+      <img src="images/study.jpg" style="width:50%">
       <!-- <div class="w3-display-topright w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Blorum pipsum</span>
       </div> -->
