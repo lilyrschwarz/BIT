@@ -38,7 +38,7 @@ input[type=submit]:hover {
 
 
 <!-- Content -->
-<div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+<div class="w3-content" style="max-width:1100px;>
 
   <div class="w3-panel">
     <h1><b>Bhagi Institute of Technology</b></h1>
