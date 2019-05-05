@@ -188,7 +188,7 @@ $dbname = "SJL";
         <?php
   $result = $db->query("SELECT f_name, l_name,university_id
 	  		FROM student
-			WHERE program_type = 'PhD'" or die ("No Thesis Submissions");
+			WHERE program_type = 'PhD'") or die ("No Thesis Submissions");
         echo "Student: ";
         echo "<select name='student_id'>";
         while ($row = mysqli_fetch_array($result )) {

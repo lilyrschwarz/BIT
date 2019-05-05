@@ -181,7 +181,7 @@ background-color: #4CAF50;
      <form method="post">
     	<?php
   	$result = $db->query("SELECT f_name, l_name,university_id FROM student" or die ("cannot retrieve names"));
-  	echo "Advisee: ";
+  	echo "Student: ";
     	echo "<select name='student_id'>";
 	while ($row = mysqli_fetch_array($result )) {
         	echo "<option value =' ".$row['university_id']."'>" .$row['f_name']." ".$row['l_name']. "</option>";
