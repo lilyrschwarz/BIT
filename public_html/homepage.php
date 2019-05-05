@@ -43,9 +43,11 @@ input[type=submit]:hover {
   <div class="w3-panel">
     <h1><b>Bhagi Institute of Technology</b></h1>
   </div>
+
+  <div style="align: center">
   <div>
     <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/login.php">
-      <input type="submit" value="Already a Student? Sign in Here!">
+      <input type="submit" value="Already a Student?     Sign in Here!">
     </form
   </div>
   <div>
@@ -53,6 +55,7 @@ input[type=submit]:hover {
       <input type="submit" value="Apply to BIT">
     </form
   </div>
+</div>
 
   <!-- Slideshow -->
   <div class="w3-container">
