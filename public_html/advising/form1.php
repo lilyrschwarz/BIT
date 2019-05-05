@@ -219,7 +219,7 @@ width: 308px;
 margin-top: 35px;
 float:left;
 border-radius: 5px;
-Border:2px solid #999900;
+Border:2px solid #000000;
 padding:0px 50px 20px;
 }
 p{
@@ -264,8 +264,8 @@ input[type=submit]{
 padding: 10px;
 text-align: center;
 font-size: 18px;
-background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
-border: 2px solid #e5a900;
+/* background: linear-gradient(#ffbc00 5%, #ffdd7f 100%); */
+border: 2px solid #000000;
 color: #ffffff;
 font-weight: bold;
 cursor: pointer;
