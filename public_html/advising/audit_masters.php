@@ -294,8 +294,6 @@ else{
         if($gpa['GPA'] < (float)3.0){
             /* DID NOT MEET GPA REQT */
             echo "GPA Below 3.0. GPA Requirement Not Met.<br />";
-            echo $gpa;
-            echo "wdfadsfsd";
             $cleared = 0;
         }
     }
