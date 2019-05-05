@@ -240,7 +240,7 @@
                     $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."')";	
                    
                     $sqli = "SELECT MAX(uid) AS uid FROM user";
-                    $result = mysqli_query($conn, $sqli) or die ("get uid failed");
+                    $result = mysqli_query($connection, $sqli) or die ("get uid failed");
                     $value = mysqli_fetch_object($result);
                     $Nuid = $value->uid;
 

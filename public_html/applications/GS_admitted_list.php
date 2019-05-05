@@ -237,7 +237,7 @@
 		while ($row = mysqli_fetch_assoc($result)) {
 
 			$q = "SELECT status FROM app_review WHERE uid = " .$row['userID'];
-			$r = mysqli_query($conn, $r) or die("acceptance query failed");
+			$r = mysqli_query($conn, $q) or die("acceptance query failed");
 			$v = mysqli_fetch_object($r);
 			$status	= $v->status;
 
