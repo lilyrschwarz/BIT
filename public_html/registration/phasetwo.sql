@@ -43,14 +43,6 @@ create table loginusers (
   primary key (university_id)
 );
 
-create table form1 (
-  num int AUTO_INCREMENT,
-  university_id int (8),
-  subject varchar(4),
-  course_num int(5),
-  primary key (num, university_id),
-  foreign key(university_id) references user (uid)
-);
 
 
 
@@ -246,9 +238,7 @@ CREATE TABLE user (
   type varchar(5),
   isAdvisor varchar(3),
   isReviewer varchar(3),
-  gpa float(5,4),
-  advisor int(8),
-  total_credits int(3),
+  advising_hold varchar (3),
   PRIMARY KEY (uid)
 );
 
@@ -287,6 +277,15 @@ CREATE TABLE transcript (
   lineid int auto_increment primary key,
   foreign key (uid) references user(uid),
   foreign key (crn) references course(crn)
+);
+
+create table form1 (
+  num int AUTO_INCREMENT,
+  university_id int (8),
+  subject varchar(4),
+  course_num int(5),
+  primary key (num, university_id),
+  foreign key(university_id) references user (uid)
 );
 
 create table advisor (
