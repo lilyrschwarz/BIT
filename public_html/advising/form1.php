@@ -320,14 +320,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
       }
 
 
-      if($count>12){
-        echo "You can only submit up to 12 courses";
-        header('Location: ' . $form1.php);
-        die();
-      }
-
       if ($form1) {
-echo $form1;
         //  echo '<br>Input data is successful';
           header("Location: viewform1.php");
 
