@@ -313,7 +313,7 @@ else{
 
     // $sql = "SELECT total_credits FROM student WHERE university_id = '.$user.';";
     // $result_5 = mysqli_query($db,$sql);
-  else if($credits_sum < 30){
+ if($credits_sum < 30){
             /* DID NOT MEET CREDIT MINIMUM */
             echo "Did Not Meet Minimum Credit Requirement.<br />";
             $cleared = 0;
