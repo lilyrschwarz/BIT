@@ -1,12 +1,12 @@
 <?php
 session_start();
-    if($_SESSION['uid'] && ($_SESSION['type'] == 'inst'){
+//If they somehow got here without logging in, politely send them away
+    if($_SESSION['uid'] && $_SESSION['type'] == 'inst'){
     }
     else{
       echo $_SESSION['uid'].$_SESSION['type'];
-      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/advisor.php");
     }
-
 $servername = "localhost";
 $username = "SJL";
 $password = "SJLoss1!";
