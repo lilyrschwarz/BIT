@@ -62,87 +62,36 @@ $university_id = $_SESSION['uid'];
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
-    /*tbody tr:nth-child(odd) {
-        background-color: #ff33cc;
-    }
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
 
-    tbody tr:nth-child(even) {
-        background-color: #e495e4;
-    }
+li {
+  float: left;
+}
 
-    h2 {
-      color: #5689DF;
-    }*/
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: sans-serif;
 
-    .center{
-      text-align: center;
-    }
+}
 
-    .topright {
-        position: absolute;
-        right: 10px;
-        top: 20px;
-      }
-      .btn {
-        background-color: #990000;
-        color: white;
-        padding: 12px;
-        margin: 10px 0;
-        border: none;
-        width: 40%;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 17px;
-      }
-      .field {
-        position: absolute;
-        left: 180px;
-      }
-      /*body{line-height: 1.6;}*/
-      .bottomCentered{
-         position: fixed;
-         text-align: center;
-         bottom: 30px;
-         width: 100%;
-      }
-      .error {color: #FF0000;}
-      .topright {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-      }
+li a:hover:not(.active) {
+  background-color: #111;
+}
 
-      ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #333;
-      }
-
-      li {
-      float: left;
-      }
-
-      li a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      }
-
-      li a:hover:not(.active) {
-      background-color: #111;
-      }
-
-      .active {
-        background-color: #990000;
-      }
-
-  </style>
-
-  <link rel="stylesheet" href="style.css">
+.active {
+  background-color: #4CAF50;
+}
+</style>
 <ul>
 <li><a class="active" href="student.php">Home</a></li>
 <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
