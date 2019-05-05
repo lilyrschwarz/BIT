@@ -109,7 +109,7 @@ VALUES
 
 insert into user (fname, lname, uid, password, type, active) values ('Billie', 'Holiday', 88888888, '123456', 'MS', 'yes'), ('Diana', 'Krall', 99999999, '123456', 'MS', 'yes');
 insert into transcript (uid, grade, crn) values (88888888, 'IP', 2), (88888888, 'IP', 3);
-insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("John", "Smith", "42142172", "123 Real Street", "Washington", "DC", 20052, "8604626594", "jsmith@gwu.edu", "123456", "yes", "inst", NULL, "yes");
+#insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("John", "Smith", "42142172", "123 Real Street", "Washington", "DC", 20052, "8604626594", "jsmith@gwu.edu", "123456", "yes", "inst", NULL, "yes");
 insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("Neel", "Bogwat", "72410997", "123 Real Street", "Washington", "DC", 20052, "1246981468", "neel@gwu.edu", "123456", "yes", "inst", NULL, "yes");
 
 
