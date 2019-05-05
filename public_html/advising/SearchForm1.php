@@ -212,6 +212,7 @@ background-color: #4CAF50;
     //echo $_SESSION['username'];
     if (!empty($course_array)) {
       //foreach($course_array as $key=>$value)
+      echo $fullname;
       while($row = $course_array->fetch_assoc())
       {
     ?>
