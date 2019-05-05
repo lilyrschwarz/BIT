@@ -304,11 +304,11 @@ else{
             $cleared = 0;
         }
     }
-    else{
-        echo "Could Not Access Thesis Information.<br />";
-        echo $db->error;
-        $cleared = 0;
-    }
+    // else{
+    //     echo "Could Not Access Thesis Information.<br />";
+    //     echo $db->error;
+    //     $cleared = 0;
+    // }
 
     /**************************************************/
     /* IF WE MADE IT TO THIS POINT, CLEAR FOR GRAD!!! */

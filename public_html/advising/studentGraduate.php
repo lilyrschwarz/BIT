@@ -1,10 +1,12 @@
 <?php
 session_start();
-if($_SESSION['login_user'] && $_SESSION['role'] == 'graduate_secretary'){
+
+if($_SESSION['uid'] && ($_SESSION['type'] == 'secr' )){
+ //echo $_SESSION['uid'];
 }
 else{
-  echo $_SESSION['login_user'].$_SESSION['role'];
-  header("Location: login.php");
+    echo $_SESSION['uid'].$_SESSION['type'];
+    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
 }
 
 $servername = "localhost";
