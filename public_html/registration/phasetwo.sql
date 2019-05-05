@@ -49,34 +49,9 @@ create table form1 (
   subject varchar(4),
   course_num int(5),
   primary key (num, university_id),
-  foreign key(university_id) references loginusers (university_id)
+  foreign key(university_id) references user (uid)
 );
 
-create table advisor (
-  university_id int(8),
-  name varchar(30),
-  primary key (university_id),
-  foreign key(university_id) references loginusers (university_id)
-);
-
-create table student (
-  university_id int (8),
-  f_name varchar (30),
-  l_name varchar (30),
-  address varchar (255),
-  email varchar (255),
-  phone_num varchar(10),
-  program_type varchar (20),
-  advisor int (8),
-  GPA float (5, 4),
-  total_credits int(5),
-  clear_for_grad int (1),
-  thesis_approved int (1),
-  thesis MEDIUMTEXT,
-  primary key (university_id),
-  foreign key (advisor) references advisor (university_id),
-  foreign key (university_id) references loginusers (university_id)
-);
 
 
 
@@ -314,6 +289,31 @@ CREATE TABLE transcript (
   foreign key (crn) references course(crn)
 );
 
+create table advisor (
+  university_id int(8),
+  name varchar(30),
+  primary key (university_id),
+  foreign key(university_id) references user (uid)
+);
+
+create table student (
+  university_id int (8),
+  f_name varchar (30),
+  l_name varchar (30),
+  address varchar (255),
+  email varchar (255),
+  phone_num varchar(10),
+  program_type varchar (20),
+  advisor int (8),
+  GPA float (5, 4),
+  total_credits int(5),
+  clear_for_grad int (1),
+  thesis_approved int (1),
+  thesis MEDIUMTEXT,
+  primary key (university_id),
+  foreign key (advisor) references advisor (university_id),
+  foreign key (university_id) references user (uid)
+);
 
 
 

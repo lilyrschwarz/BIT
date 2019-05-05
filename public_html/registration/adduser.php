@@ -201,6 +201,13 @@
             }else if($_POST["type"] == "secr"){
                 $AppType = "GS";
             }
+            if($_POST["type"] == "MS"){
+                $AdType = "Masters";
+            }else if($_POST["type"] == "PHD"){
+                $AdType = "PhD";
+            }else if($_POST["type"] == "inst" && $_POST['isReviewer'] == "yes"){
+                $AdType = "Advisor";
+            }
 
             if($accountSuccess) {
                 $_SESSION['loggedin'] = TRUE;
@@ -209,19 +216,64 @@
                 $query = "";
                 if($customUID) {
                     $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state, uid, isReviewer, isAdvisor) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."', '".$uid."', '".$isReviewer."', '".$isAdvisor."')";	
-                   $sql = "insert into users (role, fname, lname, password, email, userID) values ('" .$AppType. "', '" .$fname . "', '" .$lname. "', '123456', '" .$email. "', '" .$uid. "')";
+                    $sql = "insert into users (role, fname, lname, password, email, userID) values ('" .$AppType. "', '" .$fname . "', '" .$lname. "', '123456', '" .$email. "', '" .$uid. "')";
                     $sql2 = "insert into personal_info (fname, lname, uid, street, city, state, zip, phone, ssn) values ('" .$fname. "' , '" .$lname. "', '" .$uid. "', '".$street."','".$city."','".$state."', '".$zip."','".$phone."','" .$ssn. "')";
+                    
+                    $result = mysqli_query($connection, $query) or die("Insert into REG with custom ID failed. ".mysqli_error($connection));
+
+                    if($_POST["type"] == "MS" || $_POST["type"] == "PHD"){
+                        $q = "insert into student (university_id, f_name, l_name, email, phone_num, program_type) values ('".$uid."','".$fame."','".$lname."','".$email."','".$phone."','".$AdType."')";
+                        $r = mysqli_query($connection, $q) or die("Insert into Student with custom ID failed. ".mysqli_error($connection));
+                    }
+                    else if($_POST["type"] == "inst" && $_POST['isReviewer'] == "yes"){
+                        $q2 = "insert into advisor (university_id, name) values ('".$uid."','".$lname."')";
+                        $r2 = mysqli_query($connection, $q2) or die("Insert into Advisor with custom ID failed. ".mysqli_error($connection));
+                    }
+
+                    $result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query wih custom IDfailed***********");
+
+                    $result3 = mysqli_query($connection, $sql2) or die ("**********Error: personal_info insert query with custom ID failed***********".mysqli_error($connection));
 
                 } else {
+
+               
                     $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."')";	
+                   
+                    $sqli = "SELECT MAX(uid) AS uid FROM user";
+                    $result = mysqli_query($conn, $sqli) or die ("get uid failed");
+                    $value = mysqli_fetch_object($result);
+                    $Nuid = $value->uid;
+
+                    $sql = "insert into users (role, fname, lname, password, email, userID) values ('" .$AppType. "', '" .$fname . "', '" .$lname. "', '123456', '" .$email. "', '" .$Nuid. "')";
+                    $sql2 = "insert into personal_info (fname, lname, uid, street, city, state, zip, phone, ssn) values ('" .$fname. "' , '" .$lname. "', '" .$Nuid. "', '".$street."','".$city."','".$state."', '".$zip."','".$phone."','" .$ssn. "')";
+                   
+                    $result = mysqli_query($connection, $query) or die("Insert into REG failed. ".mysqli_error($connection));
+
+                    if($_POST["type"] == "MS" || $_POST["type"] == "PHD"){
+                        $q = "insert into student (university_id, f_name, l_name, email, phone_num, program_type) values ('".$Nuid."','".$fame."','".$lname."','".$email."','".$phone."','".$AdType."')";
+                        $r = mysqli_query($connection, $q) or die("Insert into Student failed. ".mysqli_error($connection));
+                    }
+                    else if($_POST["type"] == "inst" && $_POST['isReviewer'] == "yes"){
+                        $q2 = "insert into advisor (university_id, name) values ('".$Nuid."','".$lname."')";
+                        $r2 = mysqli_query($connection, $q2) or die("Insert into Advisor failed. ".mysqli_error($connection));
+                    }
+
+                    $result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query failed***********");
+
+                    $result3 = mysqli_query($connection, $sql2) or die ("**********Error: personal_info insert query failed***********".mysqli_error($connection));
                 }
 
-                $result	= mysqli_query($connection, $query) or die("Insert into REG failed. ".mysqli_error($connection));
+                //$result	= mysqli_query($connection, $query) or die("Insert into REG failed. ".mysqli_error($connection));
 
-                $result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query failed***********");
+                //$result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query failed***********");
 
-                $result3 = mysqli_query($connection, $sql2) or die ("**********Error: personal_info insert query failed***********".mysqli_error($connection));
+                //$result3 = mysqli_query($connection, $sql2) or die ("**********Error: personal_info insert query failed***********".mysqli_error($connection));
                 
+
+                
+
+
+
                 header("Location: manageusers.php");
                 
             }
