@@ -208,22 +208,22 @@
                 $_SESSION['password'] = '123456';
                 $query = "";
                 if($customUID) {
-                    $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state, uid, isReviewer, isAdvisor) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."', '".$uid."', ".$isReviewer."', '".$isAdvisor."')";	
-                    //$sql = "insert into users (role, fname, lname, password, email, userID) values ('" .$AppType. "', '" .$fname . "', '" .$lname. "', '123456', '" .$email. "', " .$uid. ")";
-                    //$sql2 = "insert into personal_info (fname, lname, uid, street, city, state, zip, phone, ssn) values ('" .$fname. "', '" .$lname. "', " .$uid. ", '" .$address. "', '" .$ssn. "')";
+                    $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state, uid, isReviewer, isAdvisor) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."', '".$uid."', '".$isReviewer."', '".$isAdvisor."')";	
+                   $sql = "insert into users (role, fname, lname, password, email, userID) values ('" .$AppType. "', '" .$fname . "', '" .$lname. "', '123456', '" .$email. "', '" .$uid. "')";
+                    $sql2 = "insert into personal_info (fname, lname, uid, street, city, state, zip, phone, ssn) values ('" .$fname. "' , '" .$lname. "', '" .$uid. "', '".$street."','".$city."','".$state."', '".$zip."','".$phone."','" .$ssn. "')";
 
                 } else {
                     $query = "insert into user (fname, lname, password, active, type, street, city, zip, phone, email, state) values ('".$fname."','".$lname."','123456','".$active."','".$type."','".$street."','".$city."','".$zip."','".$phone."','".$email."','".$state."')";	
                 }
 
-                $result	= mysqli_query($connection, $query);
+                $result	= mysqli_query($connection, $query) or die("Insert into REG failed. ".mysqli_error($connection));
 
-                //$result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query failed***********");
+                $result2 = mysqli_query($connection, $sql) or die ("**********Error: user insert query failed***********");
 
-                //$result3 = mysqli_query($conn, $sql2) or die ("**********Error: personal_info insert query failed***********");
+                $result3 = mysqli_query($connection, $sql2) or die ("**********Error: personal_info insert query failed***********".mysqli_error($connection));
                 
                 header("Location: manageusers.php");
-                die("BAAAAAAAAAAAD`");
+                
             }
             
         }

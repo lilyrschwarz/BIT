@@ -71,7 +71,10 @@
         } else if ($type == "secr") {
             $nrole = "Secretary";
             $_SESSION['role'] = "GS";
-        }  
+        }  else if($type == "alum"){
+            $nrole = "Alumni";
+
+        }
         else {
             header("Location: login.php");
             die();
