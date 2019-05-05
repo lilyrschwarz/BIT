@@ -314,5 +314,17 @@ create table student (
   foreign key (university_id) references user (uid)
 );
 
-
+create table alumni (
+  university_id int (8),
+  f_name varchar (30),
+  l_name varchar (30),
+  address varchar (255),
+  email varchar (255),
+  phone_num bigint,
+  program_type varchar (20),
+  advisor int (8),
+  grad_year int (4),
+  grad_semester varchar (10),
+  primary key (university_id)
+);
 

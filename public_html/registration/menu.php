@@ -139,10 +139,10 @@
 
         //TRANSCRIPTS
         $transPrompt = "";
-        if ($type == "admin" || $type == "secr" || $type == "inst") {
+        if (($type == "admin" || $type == "secr" || $type == "inst" )&& $type!="alum") {
             $transAction = "viewTransAdmin.php";
             $transPrompt = "View Transcripts";
-        } else if ($type == "MS" || $type == "PHD") {
+        } else if ($type == "MS" || $type == "PHD" || $type = "alum") {
             $transAction = "viewtrans.php";
             $transPrompt = "View My Transcript";
             $_SESSION["studuid"] = $_SESSION["uid"];
@@ -170,7 +170,7 @@
                 if($holdRes == "yes"){
                     $addAction = "advising-hold.php";
                     $_SESSION["studuid"] = $_SESSION["uid"];
-                    $addPrompt = "Fill in Advising form";
+                    $addPrompt = "Fill in Advising Form";
                 }else{
                     $addAction = "add-drop.php";
                     $_SESSION["studuid"] = $_SESSION["uid"];
@@ -201,7 +201,7 @@
         } else if ($type == "inst") {
             $editAction = "edit-grades-inst.php";
             $editPrompt = "Edit Grades";
-        } else if ($type == "MS" || $type == "PHD") {
+        } else if ($type == "MS" || $type == "PHD" || $type == "alum") {
             $nextItem = false;
         }
 

@@ -63,7 +63,6 @@ insert into user (fname, lname, street, city, state, zip, phone, email, password
 	("Pablo", "Bolton", "Wisconsin Ave", "Washington", "DC", 20052, "0012345678", "pablo@gwu.edu", "123456", "yes", "inst", NULL, NULL),
 	("Poorvi", "Vora", "Wisconsin Ave", "Washington", "DC", 20052, "112345678", "vora@gwu.edu", "123456", "yes", "inst", NULL, "yes");
 
-
 insert into course (dept, courseno, name, credits, prereq1, prereq2, day, tme, section, year, semester, instructor, location)
 VALUES
 	("CSCI", 6221, "SW Paradigms", 3,  null, null, "M", "1500-1730",1,2019,"Spring",8,1), 
@@ -108,6 +107,7 @@ VALUES
 
 insert into user (fname, lname, uid, password, type, active) values ('Billie', 'Holiday', 88888888, '123456', 'MS', 'yes'), ('Diana', 'Krall', 99999999, '123456', 'MS', 'yes');
 insert into transcript (uid, grade, crn) values (88888888, 'IP', 2), (88888888, 'IP', 3);
+insert into user(fname, lname, uid, password, type) values 	("Eric", "Clapton", "123456", "123456", "alum");
 
 
 
