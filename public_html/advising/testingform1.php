@@ -89,7 +89,7 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: #4CAF50;
+  background-color: #990000;
 }
 </style>
 <ul>
@@ -175,7 +175,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 
 </head>
 
-<body>
+<body class="gray-bg">
 <div class="container">
 <div class="main">
 <h2>Form 1</h2>
