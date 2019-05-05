@@ -219,7 +219,7 @@ width: 308px;
 margin-top: 35px;
 float:left;
 border-radius: 5px;
-Border:2px solid #000000;
+Border:2px solid #999900;
 padding:0px 50px 20px;
 }
 p{
@@ -264,8 +264,8 @@ input[type=submit]{
 padding: 10px;
 text-align: center;
 font-size: 18px;
-/* background: linear-gradient(#ffbc00 5%, #ffdd7f 100%); */
-border: 2px solid #000000;
+background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
+border: 2px solid #e5a900;
 color: #ffffff;
 font-weight: bold;
 cursor: pointer;
@@ -326,7 +326,7 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
         die();
       }
 
-      if ($form1===1) {
+      if ($form1) {
 echo $form1;
         //  echo '<br>Input data is successful';
           header("Location: viewform1.php");
