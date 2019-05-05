@@ -316,10 +316,10 @@ else{
             $cleared = 0;
         }
 
-    else{
-        echo "Could not retreive credit information. Returning... <br />";
-        $cleared = 0;
-    }
+    // else{
+    //     echo "Could not retreive credit information. Returning... <br />";
+    //     $cleared = 0;
+    // }
 
     /***************************************************/
     /* SIXTH CHECK: no more than 2 non-csci classes    */
