@@ -180,7 +180,7 @@ background-color: #4CAF50;
   <div class="w3-responsive">
      <form method="post">
     	<?php
-  	$result = $db->query("SELECT f_name, l_name,university_id FROM student" or die ("cannot retrieve names");
+  	$result = $db->query("SELECT f_name, l_name,university_id FROM student" or die ("cannot retrieve names"));
   	echo "Advisee: ";
     	echo "<select name='student_id'>";
 	while ($row = mysqli_fetch_array($result )) {
