@@ -318,7 +318,7 @@ else{
             echo "Did Not Meet Minimum Credit Requirement.<br />";
             $cleared = 0;
         }
-    
+
     else{
         echo "Could not retreive credit information. Returning... <br />";
         $cleared = 0;
@@ -358,7 +358,9 @@ else{
     if($cleared === 1){
         $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
         mysqli_query($db, $sql);
-        echo "Congrats! You are Cleared for Graduation!";
+        echo "<b>Congrats! You are Cleared for Graduation!</b>";
+    }else{
+      echo "<b>Not Cleared for Graduation.</b>";
     }
 
 
