@@ -300,7 +300,7 @@ else{
 
     if(!empty($result_6)){
         if($result_6 !== 1){
-            echo "Thesis Has Not Yet Approved by the GS.";
+            echo "Thesis Has Not Yet Approved by the GS.<br/>";
             $cleared = 0;
         }
     }
