@@ -60,19 +60,19 @@ input[type=submit]:hover {
   <!-- Slideshow -->
   <div class="w3-container">
     <div class="w3-display-container mySlides">
-      <img src="/w3images/coffee.jpg" style="width:100%">
+      <img src="/images/stressedgal.jpg" style="width:100%">
       <!-- <div class="w3-display-topleft w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Lorem ipsum</span>
       </div> -->
     </div>
     <div class="w3-display-container mySlides">
-      <img src="/w3images/workbench.jpg" style="width:100%">
+      <img src="/images/lol.jpg" style="width:100%">
       <!-- <div class="w3-display-middle w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Klorim tipsum</span>
       </div> -->
     </div>
     <div class="w3-display-container mySlides">
-      <img src="/w3images/sound.jpg" style="width:100%">
+      <img src="/images/confused.jpg" style="width:100%">
       <!-- <div class="w3-display-topright w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Blorum pipsum</span>
       </div> -->
