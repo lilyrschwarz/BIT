@@ -195,7 +195,7 @@ background-color: #4CAF50;
   $row = mysqli_fetch_array($gr_year);
   $graduationyear = $row['grad_year'];
   echo "<br/>";
-  // echo $graduationyear;
+  echo $graduationyear;
   echo "<br/>";
 ?>
 
@@ -218,7 +218,7 @@ background-color: #4CAF50;
       {
     ?>
   <tr>
-    <td><?php echo $row["f_name"]; ?><?php echo $row["l_name"]; ?></td>
+    <td><?php echo $row["f_name"]; ?> <?php echo $row["l_name"]; ?></td>
     <td><?php echo $row["email"]; ?></td>
   </tr>
 
