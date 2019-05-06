@@ -161,7 +161,7 @@ else{
     <?php
     echo
     '
-      <h3>Thesis:</h3>
+      <h3>Thesis Submission:</h3>
       <a href= "Upload/'.$_SESSION['uid'].'.pdf" target="_blank">
       View Uploaded Transcript</a><br>
     ';
@@ -170,7 +170,7 @@ else{
 $university_id = $_SESSION['uid'];
 
 // $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], null, null)");
-$ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, null, null);");
+$ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, '$university_id.'pdf'', 'Upload');");
 
     // echo $insertingThesis;
     if ( $ThesisInsert === TRUE ) {
