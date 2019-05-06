@@ -141,13 +141,15 @@ insert into user (fname, lname, uid, password, type, isReviewer) VALUES ("John",
 insert into user (fname, lname, uid, password, type, active, admit_semester, admit_year) values 
 	('Billie', 'Holiday', 88888888, '123456', 'MS', 'yes', 'FA', 2018), 
 	('Diana', 'Krall', 99999999, '123456', 'MS', 'yes', 'FA', 2019),
-	('Ella', 'Fitzgerald', 23456789, '123456', 'PHD', 'yes', 'FA', 2019),
 	('Eva', 'Cassidy', 87654321, '123456', 'MS', 'yes', 'FA', 2017),
 	('Jimi', 'Hendrix', 45678901, '123456', 'MS', 'yes', 'FA', 2017),
 	('Paul', 'McCartney', 55555555, '123456', 'MS', 'yes', 'FA', 2017),
 	('George', 'Harrison', 66666666, '123456', 'MS', 'yes', 'FA', 2016),
 	('Stevie', 'Nicks', 12345678, '123456', 'PHD', 'yes', 'FA', 2017),
 	('Kurt', 'Cobain', 34567890, '123456', 'alum', 'no', NULL, NULL);
+
+insert into user (fname, lname, uid, password, type, active, admit_semester, admit_year, advising_hold) values 
+('Ella', 'Fitzgerald', 23456789, '123456', 'PHD', 'yes', 'FA', 2019, 'yes');
 
 
 
@@ -268,7 +270,8 @@ insert into loginusers values
 
 insert into advisor values
     (10,  'Narahari'),
-    (12, 'Vora');
+    (12, 'Vora'),
+    (14, 'Parmer');
 
 insert into student values
     ( 1, 'Richard', 'Sear', 'Wisconsin Ave', 'searri@gwu.edu',"0123456789", 'Masters', 10, 3.3750, null, 0, 0, null),
