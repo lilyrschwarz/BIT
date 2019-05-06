@@ -293,7 +293,7 @@ else{
         $gpa = $result_4->fetch_assoc();
         if($gpa['GPA'] < (float)3.0){
             /* DID NOT MEET GPA REQT */
-            echo "GPA Below 3.0. GPA Requirement Not Met.<br />";
+            echo "GPA Below 3.0. Requirement Not Met.<br />";
             $cleared = 0;
         }
     }

@@ -14,6 +14,12 @@ $dbname = "SJL";
 $db = new mysqli($servername, $username, $password, $dbname);
 
 
+  $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
+  $credits_sum = $credits_sum->fetch_assoc();
+  $credits_sum = $credits_sum['sum_of_credits'];
+
+
+
 //  $query = mysql_query("SELECT subject, course_num, year, semester, credits, final_grade FROM transcript");
 ?>
 <!DOCTYPE html>
@@ -105,7 +111,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 
 <link rel="stylesheet" href="style.css">
 <head>
-<title>View Info</title>
+<title>Audit</title>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <!-- <style>
@@ -142,7 +148,7 @@ background-color: #4CAF50;
 </head>
 <body>
   <ul>
-  <li><a class="active" href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/student.php">Advising Home</a></li>
+  <li><a class="active" href="student.php">Advising Home</a></li>
   <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
   <li><a href="transcript.php">Transcript</a></li>
   <li><a href="studentinfo.php">Update Info</a></li>
@@ -171,6 +177,7 @@ background-color: #4CAF50;
   <!-- <li><a href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">Main Menu</a></li> -->
   <li style="float:right"><a href="logout.php">Logout</a></li>
 
+</ul><br/></br>
 </ul><br/></br>
   <div class="w3-container">
   <h2>View Form 1</h2>

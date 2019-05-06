@@ -173,31 +173,8 @@ background-color: #4CAF50;
 
 </ul><br/></br>
   <div class="w3-container">
-  <h2>Alumni by Graduation Year</h2>
+  <h2>Students Who are Cleared for Graduation</h2>
 
-<!-- Enter university id of student -->
-  <div class="w3-responsive">
-     <form method="post">
-    	<?php
-  	$result = $db->query("SELECT grad_year FROM alumni") or die ("cannot retrieve names");
-  	echo "Year: ";
-    	echo "<select name='g_year'>";
-	while ($row = mysqli_fetch_array($result )) {
-        	echo "<option value =' ".$row['grad_year']."'>" .$row['grad_year']."</option>";
-	}
-    	echo "</select>";
-    	?>
-        <input type="submit"/>
-     </form>
-<?php
-  $g_year = $_POST['g_year'];
-  $gr_year = $db->query("SELECT grad_year FROM alumni where grad_year=".$g_year);
-  $row = mysqli_fetch_array($gr_year);
-  $graduationyear = $row['grad_year'];
-  echo "<br/>";
-  echo $graduationyear;
-  echo "<br/>";
-?>
 
 <!-- display form1 info -->
   <table class="w3-table-all">
@@ -209,7 +186,7 @@ background-color: #4CAF50;
   <?php
     //if($db->connect_error){echo "db connect error";}
     // echo "Student: ".$fullname;
-    $alumni_array = $db->query("SELECT f_name, l_name, email FROM alumni where grad_year =".$g_year);
+    $alumni_array = $db->query("SELECT f_name, l_name, email FROM student where clear_for_grad =1");
     //echo $_SESSION['username'];
     if (!empty($alumni_array)) {
       //foreach($course_array as $key=>$value)

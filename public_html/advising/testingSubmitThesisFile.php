@@ -151,7 +151,7 @@ else{
 			<h3><b>Submit Thesis</b></h3>
 			<i>Select a PDF to upload.<br>
 			<input type="file" name="fileToUpload" id="fileToUpload"><br>
-			<input type="submit" name="submit" value="Upload Transcript" class="btn">
+			<input type="submit" name="submit" value="Upload Thesis" class="btn">
 
 
 
@@ -174,23 +174,23 @@ $FileName = $_SESSION['uid'] . '.pdf';
 $ThesisInsert = mysqli_query($conn,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, '$FileName', 'Upload');");
 
     // echo $insertingThesis;
-    if ( $ThesisInsert === TRUE ) {
-              echo "Thesis successfully inserted.";
-              //header("Location: viewThesisFile.php");
-    }
-    else {
-              echo "error: <br>" .mysqli_error($db);
-    }
-
-    $sql = mysqli_query($conn, "UPDATE thesis SET FilePath ='Upload', FileName ='$university_id.'pdf'' WHERE university_id=".$university_id);
-
-          if ( $sql === TRUE ) {
-                    echo "Thesis successfully submitted.";
-                    //header("Location: viewThesisFile.php");
-          }
-          else {
-                    echo "error: <br>" .mysqli_error($db);
-          }
+    // if ( $ThesisInsert === TRUE ) {
+    //           echo "Thesis successfully inserted.";
+    //           //header("Location: viewThesisFile.php");
+    // }
+    // else {
+    //           echo "error: <br>" .mysqli_error($db);
+    // }
+    //
+    // $sql = mysqli_query($conn, "UPDATE thesis SET FilePath ='Upload', FileName ='$university_id.'pdf'' WHERE university_id=".$university_id);
+    //
+    //       if ( $sql === TRUE ) {
+    //                 echo "Thesis successfully submitted.";
+    //                 //header("Location: viewThesisFile.php");
+    //       }
+    //       else {
+    //                 echo "error: <br>" .mysqli_error($db);
+    //       }
     ?>
     </body>
 </html>

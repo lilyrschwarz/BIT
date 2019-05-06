@@ -176,16 +176,17 @@ background-color: #4CAF50;
   <li style="float:right"><a href="logout.php">Logout</a></li>
 
 </ul><br/></br>
-<h1> THESIS APPROVED </h1>
+<div style="text-align: center">
+<h1> THESIS APPROVAL </h1>
 
 <?php
 
   $updateThesis = $db->query("UPDATE student
 	    		      SET thesis_approved = 1
                               WHERE university_id=".$student_id);
-  echo "yes."
+  echo "Thesis has been approved."
 
 ?>
-
+</div>
 </body>
 </html>
