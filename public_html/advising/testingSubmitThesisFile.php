@@ -1,7 +1,15 @@
 <?php
-	session_start();
+session_start();
 
-	// connect to mysql
+if($_SESSION['uid'] &&  $_SESSION['type'] == 'PHD'){
+
+}
+else{
+    echo $_SESSION['uid'].$_SESSION['type'];
+    header("Location: http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php");
+}
+
+
 	$conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
 	// Check connection
 	if (!$conn) {
