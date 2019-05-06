@@ -309,7 +309,7 @@ create table form1 (
   subject varchar(4),
   course_num int(5),
   primary key (num, university_id),
-  foreign key(university_id) references users (userID)
+  foreign key(university_id) references user (uid)
 );
 
 create table advHold (
@@ -318,7 +318,7 @@ create table advHold (
   subject varchar(4),
   course_num int(5),
   primary key (num, university_id),
-  foreign key(university_id) references users (userID)
+  foreign key(university_id) references user (uid)
 );
 
 
