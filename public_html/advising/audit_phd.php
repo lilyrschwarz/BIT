@@ -295,7 +295,7 @@ else{
     /* FOURTH CHECK: did the student's thesis get     */
     /*               approved?                        */
     /**************************************************/
-    $sql = "SELECT thesis FROM student WHERE university_id = '.$user.';";
+    $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
     $result_6 = mysqli_query($db,$sql);
 
     if(!empty($result_6)){
