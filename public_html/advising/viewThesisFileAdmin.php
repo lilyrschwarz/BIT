@@ -227,9 +227,6 @@ $dbname = "SJL";
              echo "<script>window.open('$url', '_blank');</script>";
 	}
 
-  echo "  <a href= "Upload/'.$student_id.'.pdf" target="_blank">View Thesis</a><br><br>";
-
-
 	//allows advisor to approve thesis
 	echo "<form action='ThesisApproved.php' method='post'>
                  <input type='submit' name='approve' value='APPROVE'/>
