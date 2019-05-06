@@ -1,13 +1,12 @@
 <?php
 session_start();
-
-if($_SESSION['uid'] && $_SESSION['type'] == 'admin'){
-
-}
-else{
-  echo $_SESSION['uid'].$_SESSION['type'];
-  header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
-}
+//If they somehow got here without logging in, politely send them away
+    if($_SESSION['uid'] && $_SESSION['type'] == 'admin'){
+    }
+    else{
+      echo $_SESSION['uid'].$_SESSION['type'];
+      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/admin.php");
+    }
 $servername = "localhost";
 $username = "SJL";
 $password = "SJLoss1!";
@@ -180,8 +179,8 @@ background-color: #4CAF50;
   <div class="w3-responsive">
      <form method="post">
     	<?php
-  	$result = $db->query("SELECT f_name, l_name,university_id FROM student" or die ("cannot retrieve names"));
-  	echo "Student: ";
+  	$result = $db->query("SELECT f_name, l_name,university_id FROM student") or die ("cannot retrieve names");
+  	echo "Advisee: ";
     	echo "<select name='student_id'>";
 	while ($row = mysqli_fetch_array($result )) {
         	echo "<option value =' ".$row['university_id']."'>" .$row['f_name']." ".$row['l_name']. "</option>";
@@ -209,10 +208,12 @@ background-color: #4CAF50;
 
   <?php
     //if($db->connect_error){echo "db connect error";}
+    // echo "Student: ".$fullname;
     $course_array = $db->query("SELECT subject, course_num FROM form1 where university_id =".$student_id);
     //echo $_SESSION['username'];
     if (!empty($course_array)) {
       //foreach($course_array as $key=>$value)
+
       while($row = $course_array->fetch_assoc())
       {
     ?>
