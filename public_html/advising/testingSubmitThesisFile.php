@@ -155,5 +155,15 @@
 
 
 		</form>
+
+
+    <?php
+    echo
+    '
+      <h3>Thesis:</h3> 
+      <a href= "Upload/'.$_SESSION['uid'].'.pdf" target="_blank">
+      View Uploaded Transcript</a><br>
+    ';
+    ?>
     </body>
 </html>
