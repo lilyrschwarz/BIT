@@ -52,6 +52,10 @@
 		        $confirmation = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 		        $_SESSION['completed_p5'] = true;
 		        $_SESSION['transcript_uploaded'] = true;   
+
+		        $q = "UPDATE academic_info SET transcript_uploaded = 1 WHERE uid = ".$_SESSION['id'];
+		        $r = mysqli_query($conn, $q) or die ("transcript uploaded boolean failed");
+		        
 		        header("Location:confirmation.php"); 
 	      		exit;
 		    } else {
