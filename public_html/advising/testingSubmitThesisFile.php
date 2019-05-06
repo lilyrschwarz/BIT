@@ -171,16 +171,16 @@ else{
       <a href= "Upload/'.$_SESSION['uid'].'.pdf" target="_blank">
       View Uploaded Transcript</a><br>
     ';
-// $studentid = $_SESSION['uid'];
-    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . ".pdf" WHERE university_id=".$_SESSION['uid']);
-
-          if ( $sql === TRUE ) {
-                    echo "Thesis successfully submitted.";
-                    //header("Location: viewThesisFile.php");
-          }
-          else {
-                    echo "error: <br>" .mysqli_error($db);
-          }
+echo $_SESSION['uid'];
+    // $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . ".pdf" WHERE university_id=".$_SESSION['uid']);
+    //
+    //       if ( $sql === TRUE ) {
+    //                 echo "Thesis successfully submitted.";
+    //                 //header("Location: viewThesisFile.php");
+    //       }
+    //       else {
+    //                 echo "error: <br>" .mysqli_error($db);
+    //       }
     ?>
     </body>
 </html>
