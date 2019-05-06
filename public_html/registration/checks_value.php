@@ -6,8 +6,8 @@ if(!empty($_POST['check_list'])) {
   echo "You have selected the following: <br/>";
 
 
-  if($checked_count>12){
-    echo "You can only submit up to 12 courses";
+  if($checked_count<2){
+    echo "You must choose at least 3 classes";
     header('Location: ' . $form1.php);
 
       }else{

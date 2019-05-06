@@ -204,7 +204,7 @@
 
             if ($activeOrNot == "yes") {
                 if($holdRes == "yes"){
-                    $addAction = "advising-hold.php";
+                    $addAction = "viewAdvHold.php";
                     $_SESSION["studuid"] = $_SESSION["uid"];
                     $addPrompt = "Fill in Advising Form";
                 }else{
@@ -319,6 +319,9 @@
         //ADD NEW USERS
         if ($type == "admin") {
             echo "<div><form action=\"manageusers.php\"><input type=\"submit\" value=\"Manage Users\"/></form></div>";
+        }
+        if($type == "admin" || $type == "secr"){
+            echo "<div><form action=\"searchStudentsBy.php\"><input type=\"submit\" value=\"Search through students\"/></form></div>";
         }
 
         //LOGOUT
