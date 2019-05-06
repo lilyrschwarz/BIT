@@ -300,6 +300,8 @@ else{
     $thesis_a = $thesis_a['approved'];
 echo $thesis_a;
 
+echo "sdfsdaukhdaslfjshakjf";
+
   //  $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
 
         if($thesis_a == 1){
