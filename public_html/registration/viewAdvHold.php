@@ -97,6 +97,8 @@ li a:hover:not(.active) {
 
           <li style="float:right"><a href="logout.php"  >Logout</a></li></ul><br/></br>
 </ul><br/></br>
+
+
 <style>
 
 
@@ -178,9 +180,9 @@ background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
 <body class="gray-bg">
 <div class="container">
 <div class="main">
-<h2>Form 1</h2>
+<h2>Advising Form</h2>
 <form method="post">
-<label class="heading">Pick a Minimum of 3:</label></br></br>
+<label class="heading">Fill out to remove advising hold:</label></br></br>
 <?php while($class =	mysqli_fetch_assoc($classesResult)){ ?>
   <input name="check_list[<?php echo $class["dept"]; ?>][]" value=<?php echo $class["courseno"]; ?> type="checkbox" class="auto"/><?php echo $class["dept"]; ?> <label><?php echo $class["courseno"]; ?> </label> <br>
 
