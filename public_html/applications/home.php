@@ -4,9 +4,9 @@
 	$bannerMessage = "Homepage";
 	//$logoutLink = "login.php";
 	if($_SESSION['role'] == "CAC" || $_SESSION['role'] == "FR"){
-		$reviewerButton = '<li><a href="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/menu.php"> Return</a></li>';
+		$reviewerButton = '<li><a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL/public_html/registration/menu.php"> Return</a></li>';
 		$bannerMessage = "Graduate Applications";
-		//$logoutLink = "http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php";
+		//$logoutLink = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL/public_html/registration/login.php";
 	}
 
 ?>
@@ -213,7 +213,7 @@
 				'
 				<p style="text-align: center;">Your student acount has already been created.</p>
 				<br>
-				<form align="center" method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php">
+				<form align="center" method="post" action="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL/public_html/registration/login.php">
 					<input type="submit" name="submit" value="Login To Student Services" class="btn">
 				</form>
 				';
