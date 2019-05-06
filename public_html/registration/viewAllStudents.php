@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>View All Users</title>
+        <title>View All Students</title>
         <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
         <link rel = "stylesheet" type="text/css" href="style.css"/>
@@ -41,7 +41,7 @@
              <li><a class="active" href="menu.php">Menu</a></li>
              <li style="float:right"><a href="logout.php">Log Out</a></li>
         </ul>
-         <form action="manageusers.php" method="post">
+         <form action="viewAllStudents.php" method="post">
             Enter user ID: <input type="text" name="uid">
             <input type="submit" name="search" value="Search"> <br>
         </form>
@@ -60,7 +60,7 @@
             }
 
             //send to menu page if they don't have sufficient permissions
-            if(!($_SESSION['type']=="admin")) {
+            if(!($_SESSION['type']=="admin" || $_SESSION['type']=="secr"))  {
                 header("Location: menu.php");
                 die();
             }
@@ -77,7 +77,7 @@
 
             //no UID search
             if(empty($_POST["uid"])) {
-            $query = "select fname, lname, uid, email, type, active from user order by lname";
+            $query = "select fname, lname, uid, email, type, active from user where type = 'MS' or type = 'PHD' order by lname";
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) > 0) {
                 echo "<table>";

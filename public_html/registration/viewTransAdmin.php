@@ -102,7 +102,7 @@
 
                     } else {
                         //If nothing came back from the query, there was a problem
-                        die("Bad query: ".mysqli_error());
+                        die("You don't have any advisees. ".mysqli_error());
                     }
 
                 //A specific UID was searched

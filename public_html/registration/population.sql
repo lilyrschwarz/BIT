@@ -6,6 +6,7 @@ INSERT INTO users VALUES
   ("GS", "Dawn", "Ginetti", "123456", "dawn@gwu.edu", 6),
   # Faculty Reviewer
   ("FR", "Bhagi", "Narahari", "123456", "narahari@gwu.edu", 10),
+  ("FR", "Neel", "Bogwat", "123456", "neelb@gwu.edu", 72410997),
   # Chair of Admissions Comm
   ("CAC", "John", "Smith" ,"123456", "jsmith@gmail.com", 42142172),
   # Applicants
@@ -19,15 +20,15 @@ INSERT INTO personal_info VALUES
   ("Ringo", "Starr", 66666666, NULL, NULL, NULL, NULL, NULL, 222111111);
 
 # John's application (complete)
-INSERT INTO rec_letter (fname, lname, email, institution, uid) VALUES ("Recommender", "1", "recommend@gmail.com", "GWU", 55555555);
+INSERT INTO rec_letter (fname, lname, email, institution, uid, recommendation) VALUES ("Reco", "Mendor", "recommend@gmail.com", "GWU", 55555555, "This applicant is satisfactory.");
 INSERT INTO academic_info VALUES (55555555, "MS", "Computer Science", "bioinformatics research", "FA", 2019, true, true);
 INSERT INTO gre VALUES (157, 162, 2018, 830, "mathematics", 100, 2018, 55555555);
-INSERT INTO prior_degrees VALUES (3.6, 2017, "GWU", "Computer Science", 55555555, "BS");
+INSERT INTO prior_degrees (gpa, year, university, major, uid, deg_type) VALUES (3.6, 2017, "GWU", "Computer Science", 55555555, "BS");
 
-INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "FR");
-INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "CAC");
-INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "FR", 7);
-INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "CAC", 7);
+#INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "FR");
+INSERT INTO app_review (uid, reviewerRole, reviewerID) VALUES (66666666, "CAC", 42142172);
+#INSERT INTO app_review (uid, reviewerRole, status) VALUES (55555555, "FR", 7);
+INSERT INTO app_review (uid, reviewerRole, status, reviewerID) VALUES (55555555, "CAC", 5, 42142172);
 
 # Ringo's application (incomplete)
 INSERT INTO academic_info (uid, transcript, recletter) VALUES (66666666, false, false);
@@ -62,6 +63,7 @@ insert into user (fname, lname, street, city, state, zip, phone, email, password
 	("Bhagi", "Narahari", "Wisconsin Ave", "Washington", "DC", 20052, "9012345678", "narahari@gwu.edu", "123456", "yes", "inst", "yes", "yes"),
 	("Pablo", "Bolton", "Wisconsin Ave", "Washington", "DC", 20052, "0012345678", "pablo@gwu.edu", "123456", "yes", "inst", NULL, NULL),
 	("Poorvi", "Vora", "Wisconsin Ave", "Washington", "DC", 20052, "112345678", "vora@gwu.edu", "123456", "yes", "inst", NULL, "yes");
+
 
 insert into course (dept, courseno, name, credits, prereq1, prereq2, day, tme, section, year, semester, instructor, location)
 VALUES
@@ -107,7 +109,7 @@ VALUES
 
 insert into user (fname, lname, uid, password, type, active) values ('Billie', 'Holiday', 88888888, '123456', 'MS', 'yes'), ('Diana', 'Krall', 99999999, '123456', 'MS', 'yes');
 insert into transcript (uid, grade, crn) values (88888888, 'IP', 2), (88888888, 'IP', 3);
-insert into user(fname, lname, uid, password, type) values 	("Eric", "Clapton", "123456", "123456", "alum");
+insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("Neel", "Bogwat", "72410997", "123 Real Street", "Washington", "DC", 20052, "1246981468", "neel@gwu.edu", "123456", "yes", "inst", NULL, "yes");
 
 
 

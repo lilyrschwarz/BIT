@@ -42,6 +42,10 @@
   $value = mysqli_fetch_object($result);
   $uid = $value->uid;
 
+  //insert into advising's student table
+  $sql = "INSERT INTO student (university_id, f_name, l_name, email, phone_num, program_type, advisor) VALUES (".$uid.", '".$fname."', '".$lname."', '".$email."', '".$phone."', '".$type."', 10)";
+  $result = mysqli_query($conn, $sql) or die ("insert into student failed");
+
   //update status
   $sql = "UPDATE app_review SET status = 9 WHERE uid = " .$uid_old;
   $result = mysqli_query($conn, $sql) or die ("update status failed");

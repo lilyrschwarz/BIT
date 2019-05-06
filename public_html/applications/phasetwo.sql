@@ -8,9 +8,6 @@ drop table if exists alumni cascade;
 drop table if exists systems_administrator cascade;
 drop table if exists graduate_secretary cascade;
 #drop table if exists transcript cascade;
-drop table if exists student cascade;
-drop table if exists advisor cascade;
-drop table if exists form1 cascade;
 drop table if exists loginusers cascade;
 drop table if exists courses cascade;
 drop table if exists thesis cascade;
@@ -235,6 +232,10 @@ DROP TABLE IF EXISTS transcript CASCADE;
 DROP TABLE IF EXISTS course CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS user CASCADE;
+drop table if exists student cascade;
+drop table if exists advisor cascade;
+drop table if exists form1 cascade;
+
 
 CREATE TABLE user (
   fname varchar(20),
