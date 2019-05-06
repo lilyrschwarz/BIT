@@ -287,7 +287,6 @@ else{
     /* FOURTH CHECK: overall gpa > 3.0                 */
     /***************************************************/
     $sql = "SELECT GPA FROM student WHERE university_id = ".$user.";";
-    echo $sql;
     $result_4 = mysqli_query($db,$sql);
 
     if(!empty($result_4)){
