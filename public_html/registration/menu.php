@@ -67,8 +67,18 @@
             $nrole = "Instructor";
             //$_SESSION['role'] = "FR";
 			if($type == "inst" && $isReviewer == "yes"){
-        		$_SESSION['role'] = "FR";
-       		 }
+        		//$query = ;
+                $result = mysqli_query($db, "select role from users where userID =".$_SESSION['uid']) or die("error getting FR or CAC");
+                $rll = mysqli_fetch_object($result);
+                $rll2 = $rll->role;
+
+                if($rll2 == "FR"){
+                    $_SESSION['role'] = "FR";
+                }else if($rll2 == "CAC"){
+                    $_SESSION['role'] = "CAC";
+
+                }
+       		}
              
         } else if ($type == "secr") {
             $nrole = "Secretary";
@@ -81,7 +91,7 @@
             header("Location: login.php");
             die();
         }
-
+//echo $rll2;
         $advrole = mysqli_query($db, "select user_type from loginusers where university_id =". $_SESSION["uid"]);
         $advrole = mysqli_fetch_assoc($advrole);
         $advrole = $advrole['user_type'];
@@ -102,7 +112,7 @@
             }
         }
 
-        echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $nrole . $extra. " privileges.<br><br>";
+        echo "Welcome, " . $_SESSION['fname'] . ". You are logged in with " . $nrole . $extra. $rll2." privileges.<br><br>";
         $nextItem = true;
 
 
@@ -291,9 +301,9 @@
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "inst" && $isReviewer == "yes") {
-
-			$advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
             $advPrompt = "Review Applicants";
+            
         } else {
             $nextItem = false;
         }
