@@ -76,6 +76,11 @@ $connection = mysqli_connect($servername, $username, $password, $dbname);
       </form
     </div>
     <div>
+      <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/SearchAdvHold.php">
+        <input type="submit" value="Remove Advising Holds">
+      </form
+    </div>
+    <div>
       <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">
         <input type="submit" value="Main Menu">
       </form
