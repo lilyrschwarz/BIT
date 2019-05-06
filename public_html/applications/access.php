@@ -27,10 +27,12 @@
   $value = mysqli_fetch_object($result);
   $email = $value->email;
 
-  $sql = "SELECT degreeType FROM academic_info WHERE uid = " .$uid_old; 
+  $sql = "SELECT degreeType, semester, year FROM academic_info WHERE uid = " .$uid_old; 
   $result = mysqli_query($conn, $sql) or die ("type fetch failed");
   $value = mysqli_fetch_object($result);
   $type = $value->degreeType;
+  $semester $value->semester;
+  $year $value->year;
 
   //Insert into REG's "user" table
   $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type, advising_hold) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."', 'yes')";
