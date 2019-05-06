@@ -142,7 +142,6 @@
 	    <li style="float:right"><a href="logout.php">Log Out</a></li>
 	    </ul>
 
-    	<h1> Page 5: Transcript </h1>
 
 		<form method="post" enctype="multipart/form-data">
 			<h3><b>Transcript</b></h3>
@@ -160,10 +159,23 @@
     <?php
     echo
     '
-      <h3>Thesis:</h3> 
+      <h3>Thesis:</h3>
       <a href= "Upload/'.$_SESSION['uid'].'.pdf" target="_blank">
       View Uploaded Transcript</a><br>
     ';
+
+
+    $sql = mysqli_query($db, "UPDATE thesis
+                                  SET FilePath ='$target_dir', FileName ='$_SESSION['uid'].'.pdf'
+                                  WHERE university_id=".$_SESSION['uid']);
+
+          if ( $sql === TRUE ) {
+                    echo "Thesis successfully submitted.";
+                    //header("Location: viewThesisFile.php");
+          }
+          else {
+                    echo "error: <br>" .mysqli_error($db);
+          }
     ?>
     </body>
 </html>
