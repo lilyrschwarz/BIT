@@ -12,46 +12,21 @@
     <br><br><br>
     <?php
         session_start();
-
         //connect to database
         $servername = "localhost";
-            $username = "SJL";
-            $password = "SJLoss1!";
-            $dbname = "SJL";
-            $connection = mysqli_connect($servername, $username, $password, $dbname);
-            if (!$connection) {
-                die("Couldn't connect: ".mysqli_error());
-            }
-
+        $username = "SJL";
+        $password = "SJLoss1!";
+        $dbname = "SJL";
+        $connection = mysqli_connect($servername, $username, $password, $dbname);
+        //If they somehow got here without logging in, politely send them away
+        if (!$_SESSION['loggedin']) {
+            header("Location: login.php");
+            die();
+        }
         //get CRN of course
         $courseToAdd = $_POST['crn'];
-
         //global variable to hold whether a student is allowed to register
         $canAdd = true;
-        $query = "select crn from transcript where uid = " . $_SESSION['studuid']. " and not grade = 'IP'";
-        $result = mysqli_query($connection, $query);
-        if (mysqli_num_rows($result) > 0) {
-            $already = false;
-            while ($row = mysqli_fetch_assoc($result)) {
-                $crn1 = $row['crn'];
-                $crn2 = $courseToAdd;
-                    if($crn1 != $crn2){
-                        $already = false; 
-                    }else{
-                        $already = true;
-                    }  
-            }
-
-            if($already){
-                        echo "You have already taken this class, and are not elligible to take it again.";
-                        echo "<br><br>";
-                        echo "<form action=\"add-drop.php\" class=\"menu-button\">";
-                        echo "<input type=\"submit\" value=\"Return to Add/Drop Page\"/>";
-                        echo "</form>";
-                        $canAdd = false;
-                        die();
-            }
-        }
         //get student's current course list and check for schedule conflicts
         $query = "select crn from transcript where uid = " . $_SESSION['studuid'] . " and grade='IP'";
         $result = mysqli_query($connection, $query);
@@ -62,7 +37,6 @@
                 $crn2 = $courseToAdd;
                 //echo "CRN 1: ".$crn1."<br>";
                 //echo "CRN 2: ".$crn2."<br>";
-
                 //get the days for the two CRNs
                 $getD1 = "select day from course where crn=" . $crn1;
                 $getD2 = "select day from course where crn=" . $crn2;
@@ -70,7 +44,6 @@
                 $D2 = mysqli_fetch_assoc(mysqli_query($connection, $getD2))['day'];
                 //echo $D1."<br>";
                 //echo $D2."<br>";
-
                 //if they're on different days, no problems
                 if ($D1 != $D2) {
                     $conflicts = false;
@@ -81,13 +54,11 @@
                     $getT2 = "select tme from course where crn=" . $crn2;
                     $T1 = mysqli_fetch_assoc(mysqli_query($connection, $getT1))['tme'];
                     $T2 = mysqli_fetch_assoc(mysqli_query($connection, $getT2))['tme'];
-
                     //extract substrings and cast to ints to get start and end times
                     $s1 = (int) substr($T1, 0, 4);
                     $s2 = (int) substr($T2, 0, 4);
                     $e1 = (int) substr($T1, 5, 4);
                     $e2 = (int) substr($T2, 5, 4);
-
                     //if there's overlap, return true. Otherwise, return false
                     if ($s1 >= $s2 && $s1 <= $e2) {
                         $conflicts = true;
@@ -100,7 +71,6 @@
                     }
                 }
             }
-
             //If there were conflicts, show an error message
             if ($conflicts) {
                 echo "You have a scheduling conflict with the course you tried to add. Pick another.";
@@ -108,11 +78,10 @@
                 echo "<form action=\"add-drop.php\" class=\"menu-button\">";
                 echo "<input type=\"submit\" value=\"Return to Add/Drop Page\"/>";
                 echo "</form>";
-		        $canAdd = false;
-		        die();
+                $canAdd = false;
+                die();
             }
         }
-
         //check that student has met prerequisites
         $P1Err = "";
         $P2Err = "";
@@ -122,12 +91,11 @@
         $preRes2 = mysqli_query($connection, $getPre2);
         //echo mysqli_error() . "<br>";
         //echo $preRes2 . "<br>";
-
         //there is a first prereq
         if (mysqli_num_rows($preRes1) > 0) {
             //echo "Found prereq1";
             $P1 = mysqli_fetch_assoc($preRes1)['prereq1'];
-	        $P1Dept = substr($P1, 0, 4);
+            $P1Dept = substr($P1, 0, 4);
             $P1Num = substr($P1, 5, 4);
             $findIfP1isFulfilled = "select c.crn from course as c, transcript as t where c.crn = t.crn and uid = " . $_SESSION['studuid'] . " and c.dept = '" . $P1Dept . "' and c.courseno =" . $P1Num . " and not t.grade = 'IP'";
             if (!(mysqli_num_rows(mysqli_query($connection, $findIfP1isFulfilled)) > 0)) {
@@ -135,12 +103,11 @@
                 $P1Err = "You haven't fulfilled the first prerequisite: " . $P1Dept . " " . $P1Num . ".<br>";
             }
         }
-
         //there is a second prereq
         if (mysqli_num_rows($preRes2) > 0) {
             //echo "Found prereq2";
             $P2 = mysqli_fetch_assoc($preRes2)['prereq2'];
-	        $P2Dept = substr($P2, 0, 4);
+            $P2Dept = substr($P2, 0, 4);
             $P2Num = substr($P2, 5, 4);
             $findIfP2isFulfilled = "select c.crn from course as c, transcript as t where c.crn = t.crn and uid = " . $_SESSION['studuid'] . " and c.dept = '" . $P2Dept . "' and c.courseno =" . $P2Num . " and not t.grade = 'IP'";
             if (!(mysqli_num_rows(mysqli_query($connection, $findIfP2isFulfilled)) > 0)) {
@@ -148,7 +115,6 @@
                 $P2Err = "You haven't fulfilled the second prerequisite: " . $P2Dept . " " . $P2Num . ".<br>";
             }
         }
-
         //not all prereqs were fulfilled
         if (!$canAdd) {
             //don't let user add course
@@ -159,7 +125,6 @@
             echo "<input type=\"submit\" value=\"Return to Add/Drop Page\"/>";
             echo "</form>";
         }
-
         //no errors - add course
         if($canAdd) {
             $addQuery = "insert into transcript (uid, grade, crn) values (" . $_SESSION['studuid'] . ",'IP'," . $courseToAdd . ")";
@@ -167,7 +132,6 @@
             header("Location: add-drop.php");
             die();
         }
-
     ?>
     </div>
 </body>
