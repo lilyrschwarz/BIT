@@ -238,8 +238,7 @@ $dbname = "SJL";
                  <input type='submit' name='approve' value='APPROVE'/>
               </form>";
 
-     }
-  }
+    
 ?>
 </div>
 </div>
