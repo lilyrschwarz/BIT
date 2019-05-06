@@ -297,11 +297,13 @@ else{
     /**************************************************/
     $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
     $result_6 = mysqli_query($db,$sql);
-    echo $sql;
     if(!empty($result_6)){
-        if($result_6 !== 1){
-            echo "Thesis Has Not Yet Approved by the GS.<br/>";
-            $cleared = 0;
+        if($result_6 === 1){
+            echo "Thesis Has Been Approved by the GS!<br/>";
+
+        }else{
+          echo "Thesis Has Not Been Approved by the GS.<br/>";
+          $cleared = 0;
         }
     }
     // else{
@@ -316,7 +318,6 @@ else{
     if($cleared === 1){
         $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
         echo "<b>Congrats! You are Cleared for Graduation!</b>";
-        header("Location: student.php");
     }else{
       echo "<b>Not Cleared for Graduation.</b>";
     }
