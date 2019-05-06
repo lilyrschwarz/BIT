@@ -179,7 +179,13 @@ $university_id = $_SESSION['uid'];
 $ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, null, null);");
 
     // echo $insertingThesis;
-
+    if ( $ThesisInsert === TRUE ) {
+              echo "Thesis successfully inserted.";
+              //header("Location: viewThesisFile.php");
+    }
+    else {
+              echo "error: <br>" .mysqli_error($db);
+    }
 
     $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$university_id.'pdf'' WHERE university_id=".$university_id);
 
