@@ -170,7 +170,7 @@ else{
 $university_id = $_SESSION['uid'];
 
 // $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], null, null)");
-$ThesisInsert = mysqli_query($conn,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, 'bith', 'Upload');");
+$ThesisInsert = mysqli_query($conn,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, '$university_id."pdf"', 'Upload');");
 
     // echo $insertingThesis;
     if ( $ThesisInsert === TRUE ) {
