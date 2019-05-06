@@ -195,7 +195,7 @@ background-color: #4CAF50;
   $row = mysqli_fetch_array($g_year);
   $graduationyear = $row['grad_year'];
   echo "<br/>";
-  echo $g_year;
+  // echo $graduationyear;
   echo "<br/>";
 ?>
 
