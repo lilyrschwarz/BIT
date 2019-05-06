@@ -196,7 +196,7 @@ background-color: #4CAF50;
   $fullname = $row['f_name']." ".$row['l_name'];
   echo "<br/>";
   echo $fullname;
-  echo $student_id;
+  $_SESSION['advHoldId'] = $student_id;
   echo "<br/>";
 ?>
 
