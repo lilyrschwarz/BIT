@@ -168,6 +168,7 @@ else{
 // echo $_SESSION['uid'];
 // $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
 $university_id = $_SESSION['uid'];
+$FileName = $_SESSION['uid'] . '.pdf';
 
 // $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], null, null)");
 $ThesisInsert = mysqli_query($conn,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, '$_SESSION['uid'] . '.pdf'', 'Upload');");
