@@ -177,7 +177,7 @@ background-color: #4CAF50;
 
 <!-- Enter university id of student -->
   <div class="w3-responsive">
-     <form method="post">
+     <form href= "Upload/'.'$student_id'.'.pdf" target="_blank" method="post">
     	<?php
   	$result = $db->query("SELECT f_name, l_name,university_id FROM student WHERE advisor =".$_SESSION['uid']) or die ("cannot retrieve names");
   	echo "Advisee: ";
