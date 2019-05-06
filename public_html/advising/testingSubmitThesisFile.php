@@ -164,9 +164,9 @@
       View Uploaded Transcript</a><br>
     ';
 
-
+$File_Name = $_SESSION['uid']."pdf";
     $sql = mysqli_query($db, "UPDATE thesis
-                                  SET FilePath =$target_dir, FileName ='.$_SESSION['uid'].'.pdf
+                                  SET FilePath =$target_dir, FileName =$File_Name
                                   WHERE university_id=".$_SESSION['uid']);
 
           if ( $sql === TRUE ) {
