@@ -37,10 +37,10 @@ else{
 		}
 
 		// Check file size
-		if ($_FILES["fileToUpload"]["size"] > 200000) {
-		    $error = "Sorry, your file is too large";
-		    $uploadOk = 0;
-		}
+		// if ($_FILES["fileToUpload"]["size"] > 200000) {
+		//     $error = "Sorry, your file is too large";
+		//     $uploadOk = 0;
+		// }
 		//make sure file is pdf
 		if ($fileType != "pdf"){
 			$error = "Only PDF files allowed";
@@ -141,24 +141,18 @@ else{
    <body>
 
     	<ul>
-	    <li><a href="app_personal_info.php">Personal Information</a></li>
-	    <li><a href="app_academic_info.php">Academic Information</a></li>
-	    <li><a href="app_prior_degrees.php">Prior Degrees</a></li>
-	    <li><a href="app_rec_letter.php">Recommendation Letters</a></li>
-	    <li><a class="active" href="app_transcript.php">Transcript</a></li>
-	    <li><a href="confirmation.php">Finish</a></li>
+
+	    <li><a class="active" href="student.php">Transcript</a></li>
 	    <li style="float:right"><a href="logout.php">Log Out</a></li>
 	    </ul>
 
 
 		<form method="post" enctype="multipart/form-data">
-			<h3><b>Transcript</b></h3>
-			<i>If you choose to mail your transcript email the pdf file to <u>sloanej@gwu.edu</u>.<br>
-			 We will update your status when it has been recieved.</i><br><br>
+			<h3><b>Submit Thesis</b></h3>
+			<i>Select a PDF to upload.<br>
 			<input type="file" name="fileToUpload" id="fileToUpload"><br>
 			<input type="submit" name="submit" value="Upload Transcript" class="btn">
-			<span class="error"><?php echo $confirmation;?></span></span><br>
-			<span class="error"><?php echo $error;?></span></span><br>
+
 
 
 		</form>
