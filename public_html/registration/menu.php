@@ -66,8 +66,8 @@
         } else if ($type == "inst") {
             $nrole = "Instructor";
             //$_SESSION['role'] = "FR";
-			if($type == "inst" && $isReviewer == "yes"){
-        		//$query = ;
+            if($type == "inst" && $isReviewer == "yes"){
+                //$query = ;
                 $result = mysqli_query($db, "select role from users where userID =".$_SESSION['uid']);
                 $rll = mysqli_fetch_object($result);
                 $rll2 = $rll->role;
@@ -78,7 +78,7 @@
                     $_SESSION['role'] = "CAC";
 
                 }
-       		}
+            }
              
         } else if ($type == "secr") {
             $nrole = "Secretary";
@@ -86,6 +86,8 @@
         }  else if($type == "alum"){
             $nrole = "Alumni";
 
+        }else if($type == "regis"){
+            $nrole = "Registrar";
         }
         else {
             header("Location: login.php");
@@ -116,7 +118,6 @@
         $nextItem = true;
 
 
-        //echo $type;
         if($type == "alum"){
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";
@@ -135,9 +136,9 @@
         if ($type == "admin") {
             $editInfoPrompt = "Edit Profiles";
             $editInfoAction = "edit-info-admin.php";
-        } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type == "secr") {
+        } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type == "secr" || $type == "regis") {
                   //  echo $_SESSION['role'];
-
+            echo $type;
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";
             //echo $type;
@@ -163,6 +164,8 @@
             $schedulePrompt = "View My Schedule";
         } else if ($type == "secr" || $type == "alum") {
             $nextItem = false;
+        }else{
+           $nextItem = false;
         }
 
         if ($nextItem) {
@@ -173,7 +176,7 @@
 
         //TRANSCRIPTS
         $transPrompt = "";
-        if (($type == "admin" || $type == "secr" || $type == "inst" )) {
+        if (($type == "admin" || $type == "secr" || $type == "inst" || $type == "regis")) {
             $transAction = "viewTransAdmin.php";
             $transPrompt = "View Transcripts";
         } else if ($type == "MS" || $type == "PHD") {
@@ -217,7 +220,7 @@
                 echo "To register for classes, you must be active. Contact a system admin to change your status.";
             }
 
-        } else if ($type == "secr" || $type == "inst" || $type == "alum" ) {
+        } else if ($type == "secr" || $type == "inst" || $type == "alum" || $type == "regis" ) {
             $nextItem = false;
         } else {
             die("Error with add/drop user type logic");
@@ -237,7 +240,10 @@
         } else if ($type == "inst") {
             $editAction = "edit-grades-inst.php";
             $editPrompt = "Edit Grades";
-        } else if ($type == "MS" || $type == "PHD" || $type == "alum") {
+        } else if($type == "regis"){
+            $editAction = "edit-grades-regis.php";
+            $editPrompt = "Edit Grades";
+        }else if ($type == "MS" || $type == "PHD" || $type == "alum") {
             $nextItem = false;
         }
 
@@ -297,11 +303,11 @@
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/system_admin_page.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "secr") {
-        	
+            
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "inst" && $isReviewer == "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Review Applicants";
             
         } else {
@@ -321,7 +327,13 @@
         if($type == "admin" || $type == "secr"){
             echo "<div><form action=\"searchStudentsBy.php\"><input type=\"submit\" value=\"Search through students\"/></form></div>";
         }
-
+        if($type == "MS" || $type == "PHD"){
+            echo "<div><form action=\"research.php\"><input type=\"submit\" value=\"Read about Research!\"/></form></div>";
+        }
+        if($type == "regis"){
+           //echo "<div><form action=\"createCourse.php\"><input type=\"submit\" value=\"Create a New Online Course\"/></form></div>";
+            //echo "<div><form action=\"edit-grades-regis.php\"><input type=\"submit\" value=\"Edit All Grades\"/></form></div>"
+        }
         //LOGOUT
         echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 

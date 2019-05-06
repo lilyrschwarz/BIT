@@ -198,11 +198,13 @@ else{
     /* indicate to the grad secretary that the audit did */
     /* not complete successfully                         */
     /*****************************************************/
+    $cleared = 1;
+
+
     $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
     $credits_sum = $credits_sum->fetch_assoc();
     $credits_sum = $credits_sum['sum_of_credits'];
 
-    $cleared = 1;
 
     $user = $_SESSION['uid'];
 
@@ -295,15 +297,37 @@ else{
     /* FOURTH CHECK: did the student's thesis get     */
     /*               approved?                        */
     /**************************************************/
-    $sql = "SELECT thesis FROM student WHERE university_id = '.$user.';";
+    $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
     $result_6 = mysqli_query($db,$sql);
 
     if(!empty($result_6)){
-        if($result_6 !== 1){
-            echo "Thesis Has Not Yet Approved by the GS.<br/>";
-            $cleared = 0;
+        $thesis_app = $result_6->fetch_assoc();
+        if($thesis_app['thesis_approved'] == 1){
+            /* MET THESIS REQ */
+            echo "Thesis Has Been Approved by the GS!<br/>";
         }
+    }else{
+
+      $cleared = 0;
+
     }
+
+
+    // $query = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
+    // $result = mysqli_query($db, $query);
+    // $row = mysqli_fetch_assoc($result);
+    // $thesis_app = $row["thesis_approved"];
+    //
+    //
+    // echo $thesis_app;
+    //     if($thesis_app == 1){
+    //         echo "Thesis Has Been Approved by the GS!lolol<br/>";
+    //
+    //     }else{
+    //       echo "Thesis Has Not Been Approved by the GS. haha<br/>";
+    //       $cleared = 0;
+    //     }
+    //}
     // else{
     //     echo "Could Not Access Thesis Information.<br />";
     //     echo $db->error;
@@ -314,9 +338,10 @@ else{
     /* IF WE MADE IT TO THIS POINT, CLEAR FOR GRAD!!! */
     /**************************************************/
     if($cleared === 1){
-        $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
+        $sql_phd = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
+        mysqli_query($db, $sql_phd);
+
         echo "<b>Congrats! You are Cleared for Graduation!</b>";
-        header("Location: student.php");
     }else{
       echo "<b>Not Cleared for Graduation.</b>";
     }
