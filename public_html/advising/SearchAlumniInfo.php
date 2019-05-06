@@ -183,7 +183,7 @@ background-color: #4CAF50;
   	echo "Year: ";
     	echo "<select name='g_year'>";
 	while ($row = mysqli_fetch_array($result )) {
-        	echo "<option value =' ".$row['grad_year']."'></option>";
+        	echo "<option value =' ".$row['grad_year']."'>" .$row['grad_year']."</option>";
 	}
     	echo "</select>";
     	?>
