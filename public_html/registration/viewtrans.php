@@ -80,6 +80,10 @@
           $row = mysqli_fetch_assoc($result);
           if($row['program_type'] == "Masters"){
             echo "MS";
+          }else if($row['program_type'] == "PhD"){
+            echo "PHD";
+          }else{
+            echo($row['program_type']);
           }
           echo "<br>";
           echo "Grad Year: " ;
