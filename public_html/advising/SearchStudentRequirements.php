@@ -24,7 +24,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Graduate</title>
 <head>
 <meta name="viewport" content="width=device_width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">

@@ -198,11 +198,13 @@ else{
     /* indicate to the grad secretary that the audit did */
     /* not complete successfully                         */
     /*****************************************************/
+    $cleared = 1;
+
+
     $credits_sum = $db->query("SELECT sum(c.credits) as sum_of_credits from course c, transcript t where '".$_SESSION['uid']."'=t.uid AND t.crn=c.crn");
     $credits_sum = $credits_sum->fetch_assoc();
     $credits_sum = $credits_sum['sum_of_credits'];
 
-    $cleared = 1;
 
     $user = $_SESSION['uid'];
 
@@ -337,6 +339,8 @@ else{
     /**************************************************/
     if($cleared === 1){
         $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
+        mysqli_query($db, $sql);
+
         echo "<b>Congrats! You are Cleared for Graduation!</b>";
     }else{
       echo "<b>Not Cleared for Graduation.</b>";
