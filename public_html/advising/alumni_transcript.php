@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if($_SESSION['uid'] && $_SESSION['type'] == 'alumni'){
+if($_SESSION['uid'] && $_SESSION['type'] == 'alum'){
 
 }
 else{
