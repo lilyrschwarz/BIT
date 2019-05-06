@@ -301,12 +301,11 @@ else{
     if(!empty($result_6)){
         $thesis_app = $result_6->fetch_assoc();
         if($thesis_app['thesis_approved'] === 1){
-            /* DID NOT MEET GPA REQT */
-            echo "Thesis Has Been Approved by the GS!lolol<br/>";
+            /* MET THESIS REQ */
+            echo "Thesis Has Been Approved by the GS!<br/>";
         }
     }else{
 
-      echo "sdfsdjkfhs;dkfj;sdkl";
       $cleared = 0;
 
     }
