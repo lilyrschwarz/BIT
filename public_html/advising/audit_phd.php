@@ -297,7 +297,7 @@ else{
     /**************************************************/
     $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
     $result_6 = mysqli_query($db,$sql);
-
+    echo $sql;
     if(!empty($result_6)){
         if($result_6 !== 1){
             echo "Thesis Has Not Yet Approved by the GS.<br/>";
