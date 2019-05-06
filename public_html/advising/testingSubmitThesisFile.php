@@ -176,7 +176,7 @@ else{
 $university_id = $_SESSION['uid'];
 
 // $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], null, null)");
-$ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, subject, FilePath) VALUES ($university_id, null, null);");
+$ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, null, null);");
 
     // echo $insertingThesis;
 
