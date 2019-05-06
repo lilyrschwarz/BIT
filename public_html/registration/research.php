@@ -79,22 +79,25 @@
             die();
         }
 
-        
 
-        echo "Search For a Student through the following methods: ";
+
+        echo "Read About Research: ";
 
         echo "<br>";
 
-        $SearchByUID = "Search By UID";
-        $SearchByUIDAction = "viewAllStudentsU.php";
+        $SearchByUID = "Poorvi Vora";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~poorvi/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
-        $SearchByUID = "Search By Program Type";
-        $SearchByUIDAction = "viewAllStudentsM.php";
+
+        $SearchByUID = "Tim Wood";
+        $SearchByUIDAction = "http://faculty.cs.gwu.edu/timwood/research/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
-        $SearchByUID = "Search By Active Type";
-        $SearchByUIDAction = "viewAllStudentsA.php";
+
+
+        $SearchByUID = "James Hahn";
+        $SearchByUIDAction = "https://icg.gwu.edu/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
-        
+
         echo "</center>";
 
     ?>
