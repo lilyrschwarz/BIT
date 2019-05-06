@@ -118,7 +118,6 @@
         $nextItem = true;
 
 
-        //echo $type;
         if($type == "alum"){
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";

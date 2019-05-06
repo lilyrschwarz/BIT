@@ -75,31 +75,41 @@
         echo "Program Type: ";
 
         if($row['type'] == "alum"){
-          $query = "select grad_year, program_type FROM alumni WHERE university_id = '".$_SESSION['studuid']."'";
+          $query = "select grad_year, program_type, advisor FROM alumni WHERE university_id = '".$_SESSION['studuid']."'";
           $result = mysqli_query($conn, $query) or die("error extracting advisor");
-          $row = mysqli_fetch_assoc($result);
-          if($row['program_type'] == "Masters"){
+          $row3 = mysqli_fetch_assoc($result);
+          if($row3['program_type'] == "Masters"){
             echo "MS";
-          }else if($row['program_type'] == "PhD"){
+          }else if($row3['program_type'] == "PhD"){
             echo "PHD";
           }else{
-            echo($row['program_type']);
+            echo($row3['program_type']);
           }
           echo "<br>";
           echo "Grad Year: " ;
-          echo $row['grad_year'];
+          echo $row3['grad_year'];
           echo "<br>";
         }else{
-          echo $row['type'];
+          echo $row3['type'];
           echo "<br>";
         }
 
-        echo "Advisor: " ;
-        $query = "select a.name FROM student s, advisor a WHERE s.advisor = a.university_id and s.university_id = '".$_SESSION['studuid']."'";
-        $result = mysqli_query($conn, $query) or die("error extracting advisor");
-        $row = mysqli_fetch_assoc($result);
-        echo $row['name'];
+
+
+        if($row['type'] == "MS" || $row['type'] == "PHD"){
+          echo "Advisor: " ;
+          $query = "select a.name FROM student s, advisor a WHERE s.advisor = a.university_id and s.university_id = '".$_SESSION['studuid']."'";
+          $result = mysqli_query($conn, $query) or die("error extracting advisor");
+          $row2 = mysqli_fetch_assoc($result);
+          echo $row2['name'];
+        }else{
+          $query = "select a.name FROM alumni n, advisor a WHERE n.advisor = a.university_id and n.university_id = '".$_SESSION['studuid']."'";
+          $result = mysqli_query($conn, $query) or die("error extracting advisor from alumni");
+          $row2 = mysqli_fetch_assoc($result);
+          echo $row2['name'];
+        }
         echo "<br>";
+
 
 
 
@@ -130,33 +140,33 @@
         $result_sum = mysqli_query($conn, $credit_sum);
         $final_sum = mysqli_fetch_assoc($result_sum)["sum(c.credits)"];
          if (mysqli_num_rows($result2) > 0) {
-         	while($row = mysqli_fetch_assoc($result2)){
+          while($row = mysqli_fetch_assoc($result2)){
               if($row["grade"] == "A"){
-              	$sum += (4.0 * $row["credits"]);
+                $sum += (4.0 * $row["credits"]);
               }
               if($row["grade"] == "A-"){
-              	$sum += (3.7 * $row["credits"]);
+                $sum += (3.7 * $row["credits"]);
               }
               if($row["grade"] == "B+"){
-              	$sum += (3.3 * $row["credits"]);
+                $sum += (3.3 * $row["credits"]);
               }
               if($row["grade"] == "B"){
-              	$sum += (3.0 * $row["credits"]);
+                $sum += (3.0 * $row["credits"]);
               }
               if($row["grade"] == "B-"){
-              	$sum += (2.7 * $row["credits"]);
+                $sum += (2.7 * $row["credits"]);
               }
               if($row["grade"] == "C+"){
-              	$sum += (2.3 * $row["credits"]);
+                $sum += (2.3 * $row["credits"]);
               }
               if($row["grade"] == "C"){
-              	$sum += (2.0 * $row["credits"]);
+                $sum += (2.0 * $row["credits"]);
               }
               if($row["grade"] == "F"){
-              	$sum += (0 * $row["credits"]);
+                $sum += (0 * $row["credits"]);
               }
               // if($row["grade"] == "IP"){
-              // 	$sum += 0;
+              //  $sum += 0;
               //   $final_sum -= 1;
               // }
             }
