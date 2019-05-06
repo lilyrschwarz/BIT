@@ -195,19 +195,25 @@ if (!$conn) {
 <div class="w3-container">
 
 
-<?php
-	//remove advising hold
-  $removeHold = $conn->query("UPDATE user
-				  SET advising_hold='no'
-				  WHERE uid=".$student_id);
 
-        //update user table for student->alum
-        // $alumUser = $conn->query("UPDATE users
-        //                           SET user_type='alumni'
-        //                           WHERE university_id=".$student_id);
+<div style="text-align: center">
+<h1> Advising Hold</h1>
+
+<?php
+
+$removeHold = $conn->query("UPDATE user
+        SET advising_hold='no'
+        WHERE uid=".$student_id);
+if($removeHold){
+    echo "<br>Advising hold has been removed.</b>"
+}else {
+    echo "<br>You still have an advising hold.</b>"
+}
+
 
 
 ?>
+</div>
 
 
 </div>
