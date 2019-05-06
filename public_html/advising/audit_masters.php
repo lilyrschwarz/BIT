@@ -6,7 +6,7 @@ if($_SESSION['uid'] && $_SESSION['type'] == 'MS'){
 }
 else{
     echo $_SESSION['uid'].$_SESSION['type'];
-    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_htmladvising/applytograduate.php");
+    header("Location: http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/applytograduate.php");
 }
 
 

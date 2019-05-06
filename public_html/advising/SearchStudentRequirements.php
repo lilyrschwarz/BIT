@@ -6,7 +6,7 @@ if($_SESSION['uid'] && ($_SESSION['type'] == 'secr' )){
 }
 else{
     echo $_SESSION['uid'].$_SESSION['type'];
-    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+    header("Location: http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/registration/menu.php");
 }
 
 $servername = "localhost";
@@ -148,7 +148,7 @@ background-color: #4CAF50;
 </head>
 <body>
   <ul>
-  <li><a class="active" href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/gs.php">Advising Home</a></li>
+  <li><a class="active" href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/gs.php">Advising Home</a></li>
   <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
   <li><a href="transcript.php">Transcript</a></li>
   <li><a href="studentinfo.php">Update Info</a></li>

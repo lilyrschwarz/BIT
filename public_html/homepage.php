@@ -46,12 +46,12 @@ input[type=submit]:hover {
 
   <div style="text-align: center">
   <div>
-    <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/login.php">
+    <form action="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/registration/login.php">
       <input type="submit" value="Already a Student?     Sign in Here!">
     </form
   </div>
   <div>
-    <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/applications/login.php">
+    <form action="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/login.php">
       <input type="submit" value="Apply to BIT">
     </form
   </div>

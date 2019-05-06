@@ -1,5 +1,5 @@
 <?php
-	/* NEEDS FORM VALIDATION*/
+  /* NEEDS FORM VALIDATION*/
   session_start(); 
   
   // connect to mysql
@@ -31,8 +31,8 @@
   $result = mysqli_query($conn, $sql) or die ("type fetch failed");
   $value = mysqli_fetch_object($result);
   $type = $value->degreeType;
-  $semester $value->semester;
-  $year $value->year;
+  $semester = $value->semester;
+  $year = $value->year;
 
   //Insert into REG's "user" table
   $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type, advising_hold, admit_semester, admit_year) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."', 'yes', '".$semester."', '".$year."')";
@@ -52,7 +52,6 @@
   $sql = "UPDATE app_review SET status = 9 WHERE uid = " .$uid_old;
   $result = mysqli_query($conn, $sql) or die ("update status failed");
 
-  session_destroy ();
 ?>
 
 <html>
@@ -113,7 +112,7 @@
 
       <br><br>
 
-      <form method="post" action="http://gwupyterhub.seas.gwu.edu/~sloanej/SJL/public_html/registration/login.php"> 
+      <form method="post" action="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/registration/login.php"> 
         <input type="submit" name="submit" value="Go To Student Services" class="btn">
       </form>
 

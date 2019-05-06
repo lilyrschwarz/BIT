@@ -4,7 +4,7 @@
 	$bannerMessage = "Homepage";
 	//$logoutLink = "login.php";
 	if($_SESSION['role'] == "CAC" || $_SESSION['role'] == "FR"){
-		$reviewerButton = '<li><a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL/public_html/registration/menu.php"> Return</a></li>';
+		$reviewerButton = '<li><a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/registration/menu.php"> Return</a></li>';
 		$bannerMessage = "Graduate Applications";
 		//$logoutLink = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL/public_html/registration/login.php";
 	}

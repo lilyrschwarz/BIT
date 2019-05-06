@@ -192,7 +192,7 @@ if (!$conn) {
 
   </ul><br/></br>
 </ul><br/></br>
-<div class="w3-container">
+<div align="center"class="w3-container">
 
 
 <?php
@@ -223,8 +223,8 @@ if (!$conn) {
 
 
 	if($insertAlum === TRUE) {
-		echo "<h1>Student successfully graduated</h1>";
-		echo "<h2>Student has been transitioned to alumni</h2>";
+		echo "<h1>Student Has Successfully Graduated</h1>";
+		echo "<h2>Student Has Been Transitioned to Alumni</h2>";
 	} else {
 		echo "error";
 	}
