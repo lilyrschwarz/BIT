@@ -150,6 +150,7 @@ drop table if exists graduate_secretary cascade;
 drop table if exists student cascade;
 drop table if exists advisor cascade;
 drop table if exists form1 cascade;
+drop table if exists advHold cascade;
 
 drop table if exists loginusers cascade;
 drop table if exists courses cascade;
@@ -301,6 +302,25 @@ create table alumni (
 # primary key (semester, year, course_num, university_id),
 # foreign key (university_id) references student (university_id)
 #);
+
+create table form1 (
+  num int AUTO_INCREMENT,
+  university_id int (8),
+  subject varchar(4),
+  course_num int(5),
+  primary key (num, university_id),
+  foreign key(university_id) references users (userID)
+);
+
+create table advHold (
+  num int AUTO_INCREMENT,
+  university_id int (8),
+  subject varchar(4),
+  course_num int(5),
+  primary key (num, university_id),
+  foreign key(university_id) references users (userID)
+);
+
 
 
 create table systems_administrator (
