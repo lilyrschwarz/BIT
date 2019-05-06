@@ -147,7 +147,7 @@ $dbname = "SJL";
   </head>
   <body>
     <ul>
-    <li><a class="active" href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/student.php">Advising Home</a></li>
+    <li><a class="active" href="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/advising/advisor.php">Advising Home</a></li>
     <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
     <li><a href="transcript.php">Transcript</a></li>
     <li><a href="studentinfo.php">Update Info</a></li>
@@ -180,7 +180,7 @@ $dbname = "SJL";
 
 
 <div class="w3-container">
-<h1> THESIS </h1>
+<h1> View PhD Thesis: </h1>
 
 <div class="w3-responsive">
 
@@ -192,7 +192,7 @@ $dbname = "SJL";
         echo "Advisee: ";
         echo "<select name='student_id'>";
         while ($row = mysqli_fetch_array($result )) {
-                echo "<option value =' ".$row['university_id']."'>" .$row['f_name']." ".$row['l_name']. "</option>";
+                echo "<option value ='".$row['university_id']."'>" .$row['f_name']." ".$row['l_name']. "</option>";
         }
         echo "</select>";
         ?>
@@ -213,9 +213,15 @@ $dbname = "SJL";
   if(isset($_POST['submit'])) {
     echo
     '
-    <h3>Transcript:</h3>
+    <h3>Thesis:</h3>
     <a href= "Upload/'.$student_id.'.pdf" target="_blank">
-    View Transcript</a><br><br>
+    View Thesis
+
+
+
+
+
+    </a><br><br>
     ';     // if(is_null($row['FileName'])) {
 	   // echo "Student has not submitted a thesis.";
      //
@@ -238,7 +244,7 @@ $dbname = "SJL";
                  <input type='submit' name='approve' value='APPROVE'/>
               </form>";
 
-    
+
 ?>
 </div>
 </div>
