@@ -307,6 +307,7 @@ else{
     // $thes_app = mysqli_fetch_object($result6);
     // $thesis_app = $thes_app->thesis_approved;
     //if(!empty($result_6)){
+    echo $thesis_app;
         if($thesis_app == 1){
             echo "Thesis Has Been Approved by the GS!lolol<br/>";
 
