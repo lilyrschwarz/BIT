@@ -175,7 +175,8 @@ else{
 
 $insertingThesis = mysqli_query("INSERT into thesis values
     ($_SESSION['uid'], null, null)");
-    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . "."pdf" WHERE university_id=".$_SESSION['uid']);
+    echo $insertingThesis;
+    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . "."pdf" WHERE university_id=".$_SESSION['uid']");
 
           if ( $sql === TRUE ) {
                     echo "Thesis successfully submitted.";
