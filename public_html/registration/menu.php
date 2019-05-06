@@ -277,13 +277,11 @@
             //echo "WE ARE A STUDENT";
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/student.php";
             $advPrompt = "Visit the Advising System";
-        }else if ($Adv = "yes") {
+        }else if ($type == "inst" && $isAdvisor == "yes") {
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/advisor.php";
             $advPrompt = "Visit the Advising System";
         } 
-        // else if ($type == "alum") {
-        //     $nextItem = false;
-        // }
+        
         else{
                         $nextItem = false;
 
