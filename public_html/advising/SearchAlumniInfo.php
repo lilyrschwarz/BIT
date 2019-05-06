@@ -173,43 +173,43 @@ background-color: #4CAF50;
 
 </ul><br/></br>
   <div class="w3-container">
-  <h2>View Form 1</h2>
+  <h2>Alumni by Graduation Year</h2>
 
 <!-- Enter university id of student -->
   <div class="w3-responsive">
      <form method="post">
     	<?php
-  	$result = $db->query("SELECT f_name, l_name,university_id FROM alumni") or die ("cannot retrieve names");
-  	echo "Alumni: ";
-    	echo "<select name='student_id'>";
+  	$result = $db->query("SELECT grad_year FROM alumni") or die ("cannot retrieve names");
+  	echo "Year: ";
+    	echo "<select name='g_year'>";
 	while ($row = mysqli_fetch_array($result )) {
-        	echo "<option value =' ".$row['university_id']."'>" .$row['f_name']." ".$row['l_name']. "</option>";
+        	echo "<option value =' ".$row['grad_year']."'></option>";
 	}
     	echo "</select>";
     	?>
         <input type="submit"/>
      </form>
 <?php
-  $student_id = $_POST['student_id'];
-  $student_name = $db->query("SELECT f_name, l_name FROM alumni");
-  $row = mysqli_fetch_array($student_name);
-  $fullname = $row['f_name']." ".$row['l_name'];
+  $student_id = $_POST['g_year'];
+  $g_year = $db->query("SELECT grad_year FROM alumni");
+  $row = mysqli_fetch_array($g_year);
+  $graduationyear = $row['grad_year'];
   echo "<br/>";
-  echo $fullname;
+  echo $graduationyear;
   echo "<br/>";
 ?>
 
 <!-- display form1 info -->
   <table class="w3-table-all">
   <tr>
-    <th>Subject</th>
-    <th>Course Number</th>
+    <th>Name</th>
+    <th>Email Address</th>
   </tr>
 
   <?php
     //if($db->connect_error){echo "db connect error";}
     // echo "Student: ".$fullname;
-    $course_array = $db->query("SELECT f_name, l_name, email FROM alumni where university_id =".$grad_year);
+    $course_array = $db->query("SELECT f_name, l_name, email FROM alumni where grad_year =".$g_year);
     //echo $_SESSION['username'];
     if (!empty($course_array)) {
       //foreach($course_array as $key=>$value)
