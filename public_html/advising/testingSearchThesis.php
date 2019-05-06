@@ -205,7 +205,7 @@ background-color: #4CAF50;
 echo
 '
 <h3>Thesis:</h3>
-<a href= "Transcripts/'.$sudent_id.'.pdf" target="_blank">
+<a href= "Upload/'.$student_id.'.pdf" target="_blank">
 View Thesis</a><br><br>
 ';
 
