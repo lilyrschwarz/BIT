@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['uid'] && ($_SESSION['type'] == 'secr' )){
+if($_SESSION['uid'] && ($_SESSION['type'] == 'inst' )){
  //echo $_SESSION['uid'];
 }
 else{
