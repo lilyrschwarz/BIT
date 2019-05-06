@@ -150,7 +150,7 @@ insert into student values
     (99999999, 'Diana', 'Krall', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'PhD', 12, null, null, 0, 0, null);
 
 insert into alumni values
-    ( 77777777, 'Eric', 'Clapton', 'Somewhere, Pittsburgh', 'vic@school.edu', 1234567, 'Masters', 10, 2014, 'spring');
+    (123456, 'Eric', 'Clapton', 'Somewhere, Pittsburgh', 'vic@school.edu', 1234567, 'Masters', 10, 2014, 'spring');
 
 insert into systems_administrator values
     (5);

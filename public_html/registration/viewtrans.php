@@ -66,19 +66,37 @@
       }
       
         echo "Student Name: ";
-        echo $_SESSION["fname"]. " ";
-        echo $_SESSION["lname"];
+        $query = "select fname, lname, type FROM user WHERE uid = '".$_SESSION['studuid']."'";
+        $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+        $row = mysqli_fetch_assoc($result);
+        echo $row['fname']. " ";
+        echo $row['lname'];
         echo "<br>";
         echo "Program Type: ";
-        echo $_SESSION['type'];
-        echo "<br>";
+
+        if($row['type'] == "alum"){
+          $query = "select grad_year, program_type FROM alumni WHERE university_id = '".$_SESSION['studuid']."'";
+          $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+          $row = mysqli_fetch_assoc($result);
+          if($row['program_type'] == "Masters"){
+            echo "MS";
+          }
+          echo "<br>";
+          echo "Grad Year: " ;
+          echo $row['grad_year'];
+          echo "<br>";
+        }else{
+          echo $row['type'];
+          echo "<br>";
+        }
+
         echo "Advisor: " ;
-      $query = "select a.name FROM student s, advisor a WHERE s.advisor = a.university_id and s.university_id = '".$_SESSION['studuid']."'";
-      $result = mysqli_query($conn, $query) or die("error extracting advisor");    
-      $row = mysqli_fetch_assoc($result);
-      echo $row['name'];
-       echo "<br>";
-      
+        $query = "select a.name FROM student s, advisor a WHERE s.advisor = a.university_id and s.university_id = '".$_SESSION['studuid']."'";
+        $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+        $row = mysqli_fetch_assoc($result);
+        echo $row['name'];
+        echo "<br>";
+
       
 
       // Search database for courses that match with input uid
