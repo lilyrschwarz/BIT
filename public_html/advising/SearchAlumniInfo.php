@@ -1,7 +1,7 @@
 <?php
 session_start();
 //If they somehow got here without logging in, politely send them away
-    if($_SESSION['uid'] && $_SESSION['type'] == 'sect'){
+    if($_SESSION['uid'] && $_SESSION['type'] == 'secr'){
     }
     else{
       echo $_SESSION['uid'].$_SESSION['type'];

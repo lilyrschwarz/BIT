@@ -70,6 +70,19 @@ else{
         <input type="submit" value="Graduate a Student">
       </form
     </div>
+
+    <div>
+      <form action="SearchAlumniInfo.php">
+        <input type="submit" value="View Alumni">
+      </form
+    </div>
+
+    <div>
+      <form action="applytograduate.php">
+        <input type="submit" value="View Students About to Graduate">
+      </form
+    </div>
+
     <div>
       <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">
         <input type="submit" value="Main Menu">
