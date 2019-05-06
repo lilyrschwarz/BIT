@@ -207,7 +207,7 @@ echo $student_id;
 echo
 '
 <h3>Thesis:</h3>
-<a href= "Upload/'.$student_id.'.pdf" target="_blank">
+<a href= "Upload/'.'$student_id'.'.pdf" target="_blank">
 View Thesis</a><br><br>
 ';
 
