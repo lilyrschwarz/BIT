@@ -106,7 +106,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
     </form
 </div>
 <div>
-    <form action="<?php echo $url;?>">
+    <form action="<?php echo $url;?>" target='_blank'>
       <input type="submit" value="View Thesis Submission">
     </form
   </div>
