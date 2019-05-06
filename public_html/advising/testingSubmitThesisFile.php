@@ -173,8 +173,11 @@ else{
     ';
 // echo $_SESSION['uid'];
 // $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
+$university_id = $_SESSION['uid'];
 
-$insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], 'null', 'null')");
+// $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], null, null)");
+$ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, subject, FilePath) VALUES ($university_id, null, null);");
+
     // echo $insertingThesis;
 
 
