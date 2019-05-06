@@ -282,7 +282,7 @@
 		  $subject = "Recommendation Letter for " .$fname." ".$lname."";
 		  $headers = "MIME-Version: 1.0" . "\r\n";
 		  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-	      //mail($email, $subject, $msg, $headers) or die ("rec email failed");
+	      mail($email, $subject, $msg, $headers) or die ("rec email failed");
 	      
 	      //email optional recs
 	      if ($secondRec){
@@ -300,7 +300,7 @@
 						</p>
 					</body>
 					</html>';
-	      	//mail($email2, $subject, $msg, $headers) or die ("rec email failed");
+	      	mail($email2, $subject, $msg, $headers) or die ("rec email failed");
 	      }
 	      if ($thirdRec){
 	      	 $msg = '<html>
@@ -316,7 +316,7 @@
 						</p>
 					</body>
 					</html>';
-	      	//mail($email3, $subject, $msg, $headers) or die ("rec email failed");
+	      	mail($email3, $subject, $msg, $headers) or die ("rec email failed");
 	      }
 
 	      $_SESSION['completed_p4'] = true;
