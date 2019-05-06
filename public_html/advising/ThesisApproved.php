@@ -189,7 +189,6 @@ background-color: #4CAF50;
 
   $_SESSION['updateThesis'] = $updateThesis;
 
-  echo $_SESSION['updateThesis'];
 
 ?>
 </div>

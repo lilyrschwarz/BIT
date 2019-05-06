@@ -295,23 +295,19 @@ else{
     /* FOURTH CHECK: did the student's thesis get     */
     /*               approved?                        */
     /**************************************************/
-    $thesis_a= $db->query("SELECT thesis_approved as approved FROM student WHERE university_id = '.$user.';");
-    $thesis_a = $thesis_a->fetch_assoc();
-    $thesis_a = $thesis_a['approved'];
-echo $thesis_a;
-
-echo "sdfsdaukhdaslfjshakjf";
-
-  //  $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
-
-        if($thesis_a == 1){
+    $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
+    $result_6 = mysqli_query($db,$sql);
+    $thes_app = mysqli_fetch_object($result6);
+    $thesis_app = $thes_app->thesis_approved;
+    //if(!empty($result_6)){
+        if($thesis_app === 1){
             echo "Thesis Has Been Approved by the GS!<br/>";
 
         }else{
           echo "Thesis Has Not Been Approved by the GS.<br/>";
           $cleared = 0;
         }
-
+    //}
     // else{
     //     echo "Could Not Access Thesis Information.<br />";
     //     echo $db->error;
