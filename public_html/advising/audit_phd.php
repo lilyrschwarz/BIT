@@ -338,8 +338,8 @@ else{
     /* IF WE MADE IT TO THIS POINT, CLEAR FOR GRAD!!! */
     /**************************************************/
     if($cleared === 1){
-        $sql = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
-        mysqli_query($db, $sql);
+        $sql_phd = "UPDATE student SET clear_for_grad = 1 WHERE university_id =".$user.";";
+        mysqli_query($db, $sql_phd);
 
         echo "<b>Congrats! You are Cleared for Graduation!</b>";
     }else{

@@ -202,7 +202,7 @@ $row = $requirementcheck->fetch_assoc();
 $reqcheck = $row["clear_for_grad"];
 //echo $reqcheck;
 
-if($reqcheck==1) {
+if($reqcheck==1 ) {
 	echo "Student has met requirements";
 
 ?>
