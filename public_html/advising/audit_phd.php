@@ -298,18 +298,18 @@ else{
     $thesis_a= $db->query("SELECT thesis_approved as approved FROM student WHERE university_id = '.$user.';");
     $thesis_a = $thesis_a->fetch_assoc();
     $thesis_a = $thesis_a['approved'];
-
+echo $thesis_a;
 
   //  $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
 
-        if($thesis_a === 1){
+        if($thesis_a == 1){
             echo "Thesis Has Been Approved by the GS!<br/>";
 
         }else{
           echo "Thesis Has Not Been Approved by the GS.<br/>";
           $cleared = 0;
         }
-    
+
     // else{
     //     echo "Could Not Access Thesis Information.<br />";
     //     echo $db->error;
