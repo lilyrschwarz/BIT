@@ -301,7 +301,7 @@
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "inst" && $isReviewer == "yes") {
-            $advAction = "http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/applications/home.php";
+            $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Review Applicants";
             
         } else {
@@ -321,7 +321,9 @@
         if($type == "admin" || $type == "secr"){
             echo "<div><form action=\"searchStudentsBy.php\"><input type=\"submit\" value=\"Search through students\"/></form></div>";
         }
-
+        if($type == "MS" || $type == "PHD"){
+            echo "<div><form action=\"research.php\"><input type=\"submit\" value=\"Read about Research!\"/></form></div>";
+        }
         //LOGOUT
         echo "<div><form action=\"logout.php\"><input type=\"submit\" value=\"Logout\"/></form></div>";
 
