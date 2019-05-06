@@ -175,7 +175,7 @@ else{
 // $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
 
 $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], 'null', 'null')");
-    echo $insertingThesis;
+    // echo $insertingThesis;
 
 
     $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . "."pdf" WHERE university_id=".$_SESSION['uid']");
