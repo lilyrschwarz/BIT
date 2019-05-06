@@ -172,7 +172,7 @@ else{
       View Uploaded Transcript</a><br>
     ';
 // $studentid = $_SESSION['uid'];
-    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName =$_SESSION['uid'] . ".pdf" WHERE university_id=".$_SESSION['uid']);
+    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . ".pdf" WHERE university_id=".$_SESSION['uid']);
 
           if ( $sql === TRUE ) {
                     echo "Thesis successfully submitted.";
