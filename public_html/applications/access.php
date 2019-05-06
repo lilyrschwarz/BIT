@@ -34,7 +34,7 @@
 
   //Insert into REG's "user" table
   $sql = "INSERT INTO user (fname, lname, street, city, state, zip, phone, email, password, active, type, advising_hold) VALUES ('" .$fname. "', '" .$lname. "', '" .$street. "', '" .$city. "', '" .$state. "', " .$zip. ", '" .$phone. "', '" .$email. "', '123456', 'yes', '".$type."', 'yes')";
-  $result = mysqli_query($conn, $sql) or die ("insert into REGS failed");
+  $result = mysqli_query($conn, $sql) or die ("insert into REGS failed: " . mysqli_error($conn));
 
   //get new uid
   $sql = "SELECT MAX(uid) AS uid FROM user";

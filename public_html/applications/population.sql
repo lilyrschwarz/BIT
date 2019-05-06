@@ -6,7 +6,6 @@ INSERT INTO users VALUES
   ("GS", "Dawn", "Ginetti", "123456", "dawn@gwu.edu", 6),
   # Faculty Reviewer
   ("FR", "Bhagi", "Narahari", "123456", "narahari@gwu.edu", 10),
-  ("FR", "Neel", "Bhagwat", "123456", "neelb@gwu.edu", 72410997),
   # Chair of Admissions Comm
   ("CAC", "John", "Smith" ,"123456", "jsmith@gmail.com", 42142172),
   # Applicants
@@ -21,8 +20,8 @@ INSERT INTO personal_info VALUES
 
 # John's application (complete)
 INSERT INTO rec_letter (fname, lname, email, institution, uid, recommendation) VALUES ("Reco", "Mendor", "recommend@gmail.com", "GWU", 55555555, "This applicant is satisfactory.");
-INSERT INTO academic_info VALUES (55555555, "MS", "Computer Science", "bioinformatics research", "FA", 2019, true, true);
-INSERT INTO gre VALUES (157, 162, 2018, 146, "mathematics", 100, 2018, 55555555);
+INSERT INTO academic_info VALUES (55555555, "MS", "Computer Science", "bioinformatics research", "FA", 2019, true, true, false);
+INSERT INTO gre VALUES (157, 162, 2018, 150, "mathematics", 100, 2018, 55555555);
 INSERT INTO prior_degrees (gpa, year, university, major, uid, deg_type) VALUES (3.6, 2017, "GWU", "Computer Science", 55555555, "BS");
 
 #INSERT INTO app_review (uid, reviewerRole) VALUES (66666666, "FR");
@@ -109,9 +108,9 @@ VALUES
 
 insert into user (fname, lname, uid, password, type, active) values ('Billie', 'Holiday', 88888888, '123456', 'MS', 'yes'), ('Diana', 'Krall', 99999999, '123456', 'MS', 'yes');
 insert into transcript (uid, grade, crn) values (88888888, 'IP', 2), (88888888, 'IP', 3);
-insert into user (fname, lname, uid, street, city, state, zip, phone, email, password, active, type, isAdvisor, isReviewer) VALUES ("Neel", "Bhagwat", "72410997", "123 Real Street", "Washington", "DC", 20052, "1246981468", "neel@gwu.edu", "123456", "yes", "inst", NULL, "yes");
 insert into user (fname, lname, uid, password, type) VALUES ("Eric", "Clapton", "123456", "123456", "alum");
 insert into user (fname, lname, uid, password, type, isReviewer) VALUES ("John", "Smith", "42142172", "123456", "inst", "yes");
+
 
 
 
@@ -150,7 +149,7 @@ insert into student values
     (99999999, 'Diana', 'Krall', 'Somewhere, someplace', 'lol@school.edu', "0123456789", 'PhD', 12, null, null, 0, 0, null);
 
 insert into alumni values
-    ( 77777777, 'Eric', 'Clapton', 'Somewhere, Pittsburgh', 'vic@school.edu', 1234567, 'Masters', 10, 2014, 'spring');
+    (123456, 'Eric', 'Clapton', 'Somewhere, Pittsburgh', 'vic@school.edu', 1234567, 'Masters', 10, 2014, 'spring');
 
 insert into systems_administrator values
     (5);

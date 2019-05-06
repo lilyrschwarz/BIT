@@ -255,12 +255,28 @@
         mysqli_free_result($result);
       }
     ?>
-    <br><br>
+    <br>
+
+    <?php
+        //link if transcript is uploaded
+        $q = "SELECT transcript_uploaded FROM academic_info WHERE uid = ".$_SESSION['applicantID'];
+        $r = mysqli_query($conn, $q);
+        $v = mysqli_fetch_object($r);
+        $transcript_test = $v->transcript_uploaded;
+
+        if ($transcript_test ==  1){
+          echo 
+          '
+            <h3>Transcript:</h3> 
+            <a href= "Transcripts/'.$_SESSION['applicantID'].'.pdf" target="_blank">
+            View  Transcript</a><br><br>
+          ';
+        }
+        
+      ?>
+    <br>
 
     
-
-
-    <!-- RETURN -->
 
 
 

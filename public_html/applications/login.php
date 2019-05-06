@@ -141,12 +141,15 @@
 
 					// set up session variables for main site
 					$_SESSION['loggedin'] = true;
-					$q = "SELECT type, isAdvisor, isReviewer FROM user WHERE uid = ".$_SESSION['id'];
+					$q = "SELECT fname, type, isAdvisor, isReviewer FROM user WHERE uid = ".$_SESSION['id'];
 					$r = mysqli_query($conn, $q) or die("user session variables failed");
 					$value = mysqli_fetch_object($r);
+					$_SESSION['fname'] = $value->fname;
 					$_SESSION['type'] = $value->type;
 					$_SESSION['isAdvisor'] = $value->isAdvisor;
 					$_SESSION['isReviewer'] = $value->isReviewer;
+
+
 
 					// direct to application page
 					header("Location: home.php");
