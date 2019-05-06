@@ -230,7 +230,7 @@ background-color: #4CAF50;
               ?>
   </table>
 <br><br>
-<p>By pressing the button below, you are electronically signing to have the advising hold removed</p>
+<p>By pressing the button below, you are electronically signing to have the advising hold removed.</p>
   <form action="removeHold.php" method="post">
 <input type="submit" name="remove" value="Remove Advising Hold"/>
   </form>
