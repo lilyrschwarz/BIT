@@ -105,11 +105,6 @@ $db = new mysqli($servername, $username, $password, $dbname);
       <input type="submit" value="Submit a Thesis">
     </form
 </div>
-<div>
-    <form href="'Upload/'.$_SESSION['uid'].'pdf" target='_blank'>
-      <input type="submit" value="View Thesis Submission">
-    </form
-  </div>
 
 
 <?php
