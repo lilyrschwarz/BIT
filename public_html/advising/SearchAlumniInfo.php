@@ -191,7 +191,7 @@ background-color: #4CAF50;
      </form>
 <?php
   $g_year = $_POST['g_year'];
-  $gr_year = $db->query("SELECT grad_year FROM alumni where grad_year=".$g_year);
+  $gr_year = $db->query("SELECT DISTINCT grad_year FROM alumni where grad_year=".$g_year);
   $row = mysqli_fetch_array($gr_year);
   $graduationyear = $row['grad_year'];
   echo "<br/>";
