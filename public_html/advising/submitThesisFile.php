@@ -33,7 +33,7 @@ $dbname = "SJL";
 	  die("connection failed" . mysqli_connect_error());
   }
 
-  $student_id = $_SESSION['login_user'];
+  $student_id = $_SESSION['uid'];
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -240,7 +240,7 @@ $dbname = "SJL";
 	if($uploadThisFile){
 		$tempName = $_FILES['files']['tmp_name'];
 
-		$filename = basename($file_name,$ext).$_SESSION['login_user'];
+		$filename = basename($file_name,$ext).$_SESSION['uid'];
 		$newFileName = $filename.$ext;
 
     chmod($tempName, 777);
