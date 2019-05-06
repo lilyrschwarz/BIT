@@ -101,7 +101,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
           	if($row['program_type'] == 'PhD'){
   ?>
   <div>
-    <form action="submitThesisFile.php">
+    <form action="testingSubmitThesisFile.php">
       <input type="submit" value="Submit a Thesis">
     </form
 </div>
