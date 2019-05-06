@@ -14,7 +14,7 @@ else{
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Secretary</title>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport">
@@ -57,7 +57,7 @@ else{
     <div class="w3-padding-64"> -->
     <div style="text-align: center"><div style=display: inline-block; width: 80%>
 
-        <h1>Graduate Secretary</h1>
+        <h1>Graduate Secretary Advising</h1>
     </div>
 
     <div>

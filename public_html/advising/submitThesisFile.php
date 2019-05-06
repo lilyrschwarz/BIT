@@ -20,10 +20,10 @@ $dbname = "SJL";
 
   $db = mysqli_connect($servername, $username, $password, $dbname);
 
-  $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['login_user']);
+  $program_type = $db->query("SELECT program_type from student where university_id =".$_SESSION['uid']);
 
 
-  $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['login_user']);
+  $thesis_url = $db->query("SELECT FileName, FilePath from thesis where university_id =".$_SESSION['uid']);
   while ($row2 = mysqli_fetch_array($thesis_url )) {
   $url = $row2['FilePath'].$row2['FileName'];
   //  var_dump($url);
