@@ -79,22 +79,41 @@
             die();
         }
 
-        
 
-        echo "Search For a Student through the following methods: ";
+
+        echo "Read About Professors Who Do Research: <br><br>";
 
         echo "<br>";
 
-        $SearchByUID = "Search By UID";
-        $SearchByUIDAction = "viewAllStudentsU.php";
+        $SearchByUID = "Poorvi Vora";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~poorvi/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
-        $SearchByUID = "Search By Program Type";
-        $SearchByUIDAction = "viewAllStudentsM.php";
+
+        $SearchByUID = "Tim Wood";
+        $SearchByUIDAction = "http://faculty.cs.gwu.edu/timwood/research/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
-        $SearchByUID = "Search By Active Type";
-        $SearchByUIDAction = "viewAllStudentsA.php";
+
+
+        $SearchByUID = "James Hahn";
+        $SearchByUIDAction = "https://icg.gwu.edu/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
-        
+
+        $SearchByUID = "Aylin Caliskan";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~aylin/";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
+        $SearchByUID = "Rachelle Heller";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~sheller/";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
+        $SearchByUID = "Bhagi Narahari";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~narahari/research.html";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
+        $SearchByUID = "Gabe Parmer";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~gparmer/";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
         echo "</center>";
 
     ?>

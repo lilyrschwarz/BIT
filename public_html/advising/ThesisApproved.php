@@ -180,11 +180,15 @@ background-color: #4CAF50;
 <h1> THESIS APPROVAL </h1>
 
 <?php
+//echo $student_id;
 
   $updateThesis = $db->query("UPDATE student
 	    		      SET thesis_approved = 1
                               WHERE university_id=".$student_id);
   echo "Thesis has been approved."
+
+  $_SESSION['updateThesis'] = $updateThesis;
+
 
 ?>
 </div>
