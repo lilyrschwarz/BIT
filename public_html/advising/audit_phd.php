@@ -309,7 +309,7 @@ else{
           echo "Thesis Has Not Been Approved by the GS.<br/>";
           $cleared = 0;
         }
-    }
+    
     // else{
     //     echo "Could Not Access Thesis Information.<br />";
     //     echo $db->error;
