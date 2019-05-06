@@ -33,7 +33,7 @@
     <?php
 
         session_start();
-
+       // echo $_SESSION['role'];
         //connect to database
         $servername = "localhost";
         $username = "SJL";
@@ -68,7 +68,7 @@
             //$_SESSION['role'] = "FR";
 			if($type == "inst" && $isReviewer == "yes"){
         		//$query = ;
-                $result = mysqli_query($db, "select role from users where userID =".$_SESSION['uid']) or die("error getting FR or CAC");
+                $result = mysqli_query($db, "select role from users where userID =".$_SESSION['uid']);
                 $rll = mysqli_fetch_object($result);
                 $rll2 = $rll->role;
 
@@ -136,6 +136,8 @@
             $editInfoPrompt = "Edit Profiles";
             $editInfoAction = "edit-info-admin.php";
         } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type == "secr") {
+                  //  echo $_SESSION['role'];
+
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";
             //echo $type;

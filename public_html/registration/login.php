@@ -93,7 +93,7 @@
                 $_SESSION["lname"] = $row["lname"];
 
                 $query = "select role from users where userID=". $uid;
-                $result = mysqli_query($conn, $query);
+                $result = mysqli_query($connection, $query);
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['role'] = $row['role'];
                 header("Location: menu.php");
