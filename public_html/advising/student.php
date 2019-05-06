@@ -6,7 +6,7 @@ if($_SESSION['uid'] && $_SESSION['type'] == 'MS' || $_SESSION['type'] == 'PHD'){
 }
 else{
     echo $_SESSION['uid'].$_SESSION['type'];
-    header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/registration/menu.php");
+    header("Location: http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/registration/menu.php");
 }
 
 $servername = "localhost";
@@ -114,7 +114,7 @@ $db = new mysqli($servername, $username, $password, $dbname);
 ?>
 
 <div>
-  <form action="http://gwupyterhub.seas.gwu.edu/~lilyrschwarz/SJL/public_html/registration/menu.php">
+  <form action="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/registration/menu.php">
     <input type="submit" value="Main Menu">
   </form
 </div>
