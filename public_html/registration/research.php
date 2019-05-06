@@ -81,7 +81,7 @@
 
 
 
-        echo "Read About Research: ";
+        echo "Read About Professors Who Do Research: ";
 
         echo "<br>";
 
