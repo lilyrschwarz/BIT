@@ -304,8 +304,9 @@ else{
             /* DID NOT MEET GPA REQT */
             echo "Thesis Has Been Approved by the GS!lolol<br/>";
         }
-
     }else{
+
+      echo "sdfsdjkfhs;dkfj;sdkl";
       $cleared = 0;
 
     }
