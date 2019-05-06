@@ -5,7 +5,7 @@ session_start();
     }
     else{
       echo $_SESSION['uid'].$_SESSION['type'];
-      header("Location: http://gwupyterhub.seas.gwu.edu/~selingonal/SJL/public_html/advising/advisor.php");
+      header("Location: http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/advising/advisor.php");
     }
 $servername = "localhost";
 $username = "SJL";
