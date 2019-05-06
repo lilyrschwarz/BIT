@@ -56,7 +56,7 @@ CREATE TABLE academic_info (
   year int(4),
   transcript boolean,
   recletter boolean,
-  transcript_uploaded boolean,
+  transcript_uploaded boolean DEFAULT false,
   PRIMARY KEY (uid),
   FOREIGN KEY (uid) REFERENCES users(userID)
 );
@@ -178,6 +178,8 @@ CREATE TABLE user (
   isAdvisor varchar(3),
   isReviewer varchar(3),
   advising_hold varchar(3),
+  admit_year int(4),
+  admit_semester varchar(2),
   PRIMARY KEY (uid)
 );
 
