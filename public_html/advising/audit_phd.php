@@ -295,10 +295,13 @@ else{
     /* FOURTH CHECK: did the student's thesis get     */
     /*               approved?                        */
     /**************************************************/
-    $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
-    $result_6 = mysqli_query($db,$sql);
-    if(!empty($result_6)){
-      $thesis_a = $result_6->fetch_assoc();
+    $thesis_a= $db->query("SELECT thesis_approved as approved FROM student WHERE university_id = '.$user.';");
+    $thesis_a = $thesis_a->fetch_assoc();
+    $thesis_a = $thesis_a['approved'];
+
+
+  //  $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
+
         if($thesis_a === 1){
             echo "Thesis Has Been Approved by the GS!<br/>";
 
