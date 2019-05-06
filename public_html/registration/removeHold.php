@@ -204,14 +204,14 @@ if (!$conn) {
 $removeHold = $conn->query("UPDATE user
         SET advising_hold='no'
         WHERE uid=".$student_id);
-if($removeHold){
+if(!empty($removeHold)){
     echo "<br>Advising Hold Has Been Removed</b>";
 }else {
     echo "<br>No Advising Holds Have Been Removed</b>";
 }
 echo "hahahaha";
 echo $student_id;
-
+ 
 
 
 ?>
