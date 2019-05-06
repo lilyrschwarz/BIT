@@ -142,7 +142,7 @@ else{
 
     	<ul>
 
-	    <li><a class="active" href="student.php">Transcript</a></li>
+	    <li><a class="active" href="student.php">Advising Home</a></li>
 	    <li style="float:right"><a href="logout.php">Log Out</a></li>
 	    </ul>
 
