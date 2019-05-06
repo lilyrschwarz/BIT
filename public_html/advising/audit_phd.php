@@ -295,26 +295,36 @@ else{
     /* FOURTH CHECK: did the student's thesis get     */
     /*               approved?                        */
     /**************************************************/
-    $query = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
-    $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_assoc($result);
-    $thesis_app = $row["thesis_approved"];
+    $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
+    $result_6 = mysqli_query($db,$sql);
 
-
-
-    // $sql = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
-    // $result_6 = mysqli_query($db,$sql);
-    // $thes_app = mysqli_fetch_object($result6);
-    // $thesis_app = $thes_app->thesis_approved;
-    //if(!empty($result_6)){
-    echo $thesis_app;
-        if($thesis_app == 1){
+    if(!empty($result_6)){
+        $thesis_app = $result_6->fetch_assoc();
+        if($thesis_app['thesis_approved'] === 1){
+            /* DID NOT MEET GPA REQT */
             echo "Thesis Has Been Approved by the GS!lolol<br/>";
-
-        }else{
-          echo "Thesis Has Not Been Approved by the GS. haha<br/>";
-          $cleared = 0;
         }
+
+    }else{
+      $cleared = 0;
+
+    }
+
+
+    // $query = "SELECT thesis_approved FROM student WHERE university_id = '.$user.';";
+    // $result = mysqli_query($db, $query);
+    // $row = mysqli_fetch_assoc($result);
+    // $thesis_app = $row["thesis_approved"];
+    //
+    //
+    // echo $thesis_app;
+    //     if($thesis_app == 1){
+    //         echo "Thesis Has Been Approved by the GS!lolol<br/>";
+    //
+    //     }else{
+    //       echo "Thesis Has Not Been Approved by the GS. haha<br/>";
+    //       $cleared = 0;
+    //     }
     //}
     // else{
     //     echo "Could Not Access Thesis Information.<br />";
