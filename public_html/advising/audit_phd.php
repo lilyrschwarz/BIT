@@ -302,7 +302,7 @@ else{
 
     if(!empty($result_6)){
         $thesis_app = $result_6->fetch_assoc();
-        if($thesis_app['thesis_approved'] === 1){
+        if($thesis_app['thesis_approved'] == 1){
             /* MET THESIS REQ */
             echo "Thesis Has Been Approved by the GS!<br/>";
         }
