@@ -308,10 +308,10 @@ else{
     // $thesis_app = $thes_app->thesis_approved;
     //if(!empty($result_6)){
         if($thesis_app == 1){
-            echo "Thesis Has Been Approved by the GS!<br/>";
+            echo "Thesis Has Been Approved by the GS!lolol<br/>";
 
         }else{
-          echo "Thesis Has Not Been Approved by the GS.<br/>";
+          echo "Thesis Has Not Been Approved by the GS. haha<br/>";
           $cleared = 0;
         }
     //}
