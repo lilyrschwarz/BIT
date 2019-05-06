@@ -151,7 +151,7 @@ else{
 			<h3><b>Submit Thesis</b></h3>
 			<i>Select a PDF to upload.<br>
 			<input type="file" name="fileToUpload" id="fileToUpload"><br>
-			<input type="submit" name="submit" value="Upload Transcript" class="btn">
+			<input type="submit" name="submit" value="Upload Thesis" class="btn">
 
 
 
