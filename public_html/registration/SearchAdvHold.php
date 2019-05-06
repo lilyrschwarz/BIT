@@ -173,7 +173,7 @@ background-color: #4CAF50;
 
 </ul><br/></br>
   <div class="w3-container">
-  <h2>View Form 1</h2>
+  <h2>View Advising Hold</h2>
 
 <!-- Enter university id of student -->
   <div class="w3-responsive">
@@ -222,26 +222,17 @@ background-color: #4CAF50;
     <td><?php echo $row["course_num"]; ?></td>
   </tr>
 
-  <form action="SearchAdvHold.php" method="post">
-<input type="submit" name="remove" value="Remove Hold"/>
-  </form>
-
 
 
   <?php
-
-
                  }
   }
-
-  if(isset($_POST['submit'])) {
-    $removeHold = $conn->query("UPDATE user
-            SET advising_hold='no'
-            WHERE uid=".$student_id);
-	}
-
               ?>
   </table>
+
+  <form action="removeHold.php" method="post">
+<input type="submit" name="remove" value="Remove Advising Hold"/>
+  </form>
   </div>
 
   </div>
