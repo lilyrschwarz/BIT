@@ -98,6 +98,22 @@
         $SearchByUIDAction = "https://icg.gwu.edu/";
         echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
 
+        $SearchByUID = "Aylin Caliskan";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~aylin/";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
+        $SearchByUID = "Rachelle Heller";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~sheller/";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
+        $SearchByUID = "Bhagi Narahari";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~narahari/research.html";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
+        $SearchByUID = "Gabe Parmer";
+        $SearchByUIDAction = "https://www2.seas.gwu.edu/~gparmer/";
+        echo "<div><form action=\"" . $SearchByUIDAction . "\"><input type=\"submit\" value=\"" . $SearchByUID . "\"/></form></div>";
+
         echo "</center>";
 
     ?>
