@@ -202,6 +202,8 @@ background-color: #4CAF50;
 <!-- display form1 info -->
 
 <?php
+
+echo $student_id;
 echo
 '
 <h3>Thesis:</h3>
