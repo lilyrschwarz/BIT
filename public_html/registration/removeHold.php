@@ -209,6 +209,8 @@ if($removeHold){
 }else {
     echo "<br>No Advising Holds Have Been Removed</b>";
 }
+echo "hahahaha";
+echo $student_id;
 
 
 
