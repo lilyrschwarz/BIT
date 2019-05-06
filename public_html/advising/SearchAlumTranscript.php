@@ -97,7 +97,7 @@ li a:hover:not(.active) {
   if($db->connect_error){echo "db connect error";}
   $alum_id = $_POST['alum_id'] ?? '';
 
-  $info_array = $db->query("SELECT f_name, l_name, program_type, grad_year, grad_semester, advisor.name as aname
+  $info_array = $db->query("SELECT DISTINCT f_name, l_name, program_type, grad_year, grad_semester, advisor.name as aname
                             FROM alumni, advisor
                             WHERE advisor = advisor.university_id and alumni.university_id =".$alum_id);
 
