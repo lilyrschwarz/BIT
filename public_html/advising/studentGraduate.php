@@ -161,7 +161,7 @@ if (!$conn) {
   </head>
   <body>
     <ul>
-    <li><a class="active" href="student.php">Advising Home</a></li>
+    <li><a class="active" href="gs.php">Advising Home</a></li>
     <!-- <li><a href="StudentEnrollmentInfo.php">Current Enrolment</a></li>
     <li><a href="transcript.php">Transcript</a></li>
     <li><a href="studentinfo.php">Update Info</a></li>
@@ -212,9 +212,9 @@ if (!$conn) {
 				  WHERE university_id=".$student_id);
 
         //update user table for student->alum
-        $alumUser = $conn->query("UPDATE users
-                                  SET user_type='alumni'
-                                  WHERE university_id=".$student_id);
+        // $alumUser = $conn->query("UPDATE users
+        //                           SET user_type='alumni'
+        //                           WHERE university_id=".$student_id);
 
 	//delete student from student table
 	$deleteStudent = $conn->query("DELETE FROM student
