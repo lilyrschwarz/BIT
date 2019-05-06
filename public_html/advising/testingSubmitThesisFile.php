@@ -37,10 +37,10 @@ else{
 		}
 
 		// Check file size
-		if ($_FILES["fileToUpload"]["size"] > 200000) {
-		    $error = "Sorry, your file is too large";
-		    $uploadOk = 0;
-		}
+		// if ($_FILES["fileToUpload"]["size"] > 200000) {
+		//     $error = "Sorry, your file is too large";
+		//     $uploadOk = 0;
+		// }
 		//make sure file is pdf
 		if ($fileType != "pdf"){
 			$error = "Only PDF files allowed";
@@ -141,24 +141,18 @@ else{
    <body>
 
     	<ul>
-	    <li><a href="app_personal_info.php">Personal Information</a></li>
-	    <li><a href="app_academic_info.php">Academic Information</a></li>
-	    <li><a href="app_prior_degrees.php">Prior Degrees</a></li>
-	    <li><a href="app_rec_letter.php">Recommendation Letters</a></li>
-	    <li><a class="active" href="app_transcript.php">Transcript</a></li>
-	    <li><a href="confirmation.php">Finish</a></li>
+
+	    <li><a class="active" href="student.php">Transcript</a></li>
 	    <li style="float:right"><a href="logout.php">Log Out</a></li>
 	    </ul>
 
 
 		<form method="post" enctype="multipart/form-data">
-			<h3><b>Transcript</b></h3>
-			<i>If you choose to mail your transcript email the pdf file to <u>sloanej@gwu.edu</u>.<br>
-			 We will update your status when it has been recieved.</i><br><br>
+			<h3><b>Submit Thesis</b></h3>
+			<i>Select a PDF to upload.<br>
 			<input type="file" name="fileToUpload" id="fileToUpload"><br>
 			<input type="submit" name="submit" value="Upload Transcript" class="btn">
-			<span class="error"><?php echo $confirmation;?></span></span><br>
-			<span class="error"><?php echo $error;?></span></span><br>
+
 
 
 		</form>
@@ -167,18 +161,27 @@ else{
     <?php
     echo
     '
-      <h3>Thesis:</h3>
+      <h3>Thesis Submission:</h3>
       <a href= "Upload/'.$_SESSION['uid'].'.pdf" target="_blank">
       View Uploaded Transcript</a><br>
     ';
 // echo $_SESSION['uid'];
 // $form1 = mysqli_query($conn,"INSERT INTO form1(num, university_id, subject, course_num) VALUES ($count, $university_id, '$first_value', $secval);");
+$university_id = $_SESSION['uid'];
 
-$insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], 'null', 'null')");
+// $insertingThesis = mysqli_query($db, "INSERT into thesis(university_id, FileName, FilePath) values  ($_SESSION['uid'], null, null)");
+$ThesisInsert = mysqli_query($conn,"INSERT INTO thesis(university_id, FileName, FilePath) VALUES ($university_id, 'bith', 'Upload');");
+
     // echo $insertingThesis;
+    if ( $ThesisInsert === TRUE ) {
+              echo "Thesis successfully inserted.";
+              //header("Location: viewThesisFile.php");
+    }
+    else {
+              echo "error: <br>" .mysqli_error($db);
+    }
 
-
-    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$_SESSION['uid']' . "."pdf" WHERE university_id=".$_SESSION['uid']");
+    $sql = mysqli_query($conn, "UPDATE thesis SET FilePath ='Upload', FileName ='$university_id.'pdf'' WHERE university_id=".$university_id);
 
           if ( $sql === TRUE ) {
                     echo "Thesis successfully submitted.";
