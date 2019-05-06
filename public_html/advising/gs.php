@@ -78,8 +78,8 @@ else{
     </div>
 
     <div>
-      <form action="applytograduate.php">
-        <input type="submit" value="View Students About to Graduate">
+      <form action="AboutToGraduate.php">
+        <input type="submit" value="Students About to Graduate">
       </form
     </div>
 
