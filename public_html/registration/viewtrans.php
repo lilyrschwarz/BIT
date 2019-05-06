@@ -64,10 +64,10 @@
       if (!$conn) {
           die("Connection failed: " . mysqli_connect_error());
       }
-      
+
         echo "Student Name: ";
         $query = "select fname, lname, type FROM user WHERE uid = '".$_SESSION['studuid']."'";
-        $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+        $result = mysqli_query($conn, $query) or die("error extracting advisor");
         $row = mysqli_fetch_assoc($result);
         echo $row['fname']. " ";
         echo $row['lname'];
@@ -76,7 +76,7 @@
 
         if($row['type'] == "alum"){
           $query = "select grad_year, program_type FROM alumni WHERE university_id = '".$_SESSION['studuid']."'";
-          $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+          $result = mysqli_query($conn, $query) or die("error extracting advisor");
           $row = mysqli_fetch_assoc($result);
           if($row['program_type'] == "Masters"){
             echo "MS";
@@ -92,12 +92,12 @@
 
         echo "Advisor: " ;
         $query = "select a.name FROM student s, advisor a WHERE s.advisor = a.university_id and s.university_id = '".$_SESSION['studuid']."'";
-        $result = mysqli_query($conn, $query) or die("error extracting advisor");    
+        $result = mysqli_query($conn, $query) or die("error extracting advisor");
         $row = mysqli_fetch_assoc($result);
         echo $row['name'];
         echo "<br>";
 
-      
+
 
       // Search database for courses that match with input uid
       $query = "select C.credits, C.section, C.name, C.courseno, C.dept, C.day, C.tme, C.instructor, C.crn, C.location, T.grade FROM course C, transcript T where '".$_SESSION['studuid']."'=T.uid AND T.crn=C.crn;";
@@ -158,7 +158,7 @@
             }
             $gpa = ($sum/$final_sum);
             echo "GPA: " .$gpa;
-            $gpa_update = mysqli_query($conn,"update student set gpa = '". $gpa . "' where uid =". $_SESSION['studuid']);
+            $gpa_update = mysqli_query($conn,"update student set GPA = '". $gpa . "' where university_id =". $_SESSION['studuid']);
             $total_credits = mysqli_query($conn,"update student set total_credits = '".$finalSum."' where uid =". $_SESSION['studuid']);
           }
     ?>

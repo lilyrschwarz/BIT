@@ -200,7 +200,7 @@ if (!$conn) {
 <h1> Advising Hold</h1>
 
 <?php
-echo $_SESSION['advHoldId'];
+//echo $_SESSION['advHoldId'];
 $removeHold = $conn->query("UPDATE user
         SET advising_hold='no'
         WHERE uid=".$_SESSION['advHoldId']);
