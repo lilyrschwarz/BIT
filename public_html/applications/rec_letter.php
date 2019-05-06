@@ -77,6 +77,17 @@
        width: 100%;
     }
     .error {color: #FF0000;}
+    .btn {
+        background-color: #990000;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 25%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
   </style>
   <link rel="stylesheet" href="style.css">
  </head>
@@ -95,7 +106,7 @@
       <textarea rows="50" cols="100" name="rec" form="mainform"> Enter Recommendation (250 words max)</textarea> <br>
       <span class="error"><?php echo " " . $recErr;?></span></span>
 
-      <div class="bottomCentered"><input type="submit" name="submit" value="Submit Recommendation"> </div>
+      <input type="submit" name="submit" value="Submit Recommendation" class="btn">
 
     </form>
       

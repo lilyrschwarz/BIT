@@ -769,7 +769,7 @@
 						'.$fname.' '.$lname.' has requested a letter of recommendation from you. If you <br>
 						are interested, please copy the code provided, and follow the link below.<br>
 						Code: ' .$recID1.'<br><br>
-						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL-dev/applications/public_html/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL-dev/applications/public_html/rec_letter.php </a>
+						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/rec_letter.php </a>
 
 					</p>
 				</body>
@@ -790,7 +790,7 @@
 						'.$fname.' '.$lname.' has requested a letter of recommendation from you. If you <br>
 						are interested, please copy the code provided, and follow the link below.<br>
 						Code: ' .$recID2.'<br><br>
-						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL-dev/applications/public_html/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL-dev/applications/public_html/rec_letter.php </a>
+						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/rec_letter.php </a>
 
 					</p>
 				</body>
@@ -807,7 +807,7 @@
 						'.$fname.' '.$lname.' has requested a letter of recommendation from you. If you <br>
 						are interested, please copy the code provided, and follow the link below.<br>
 						Code: ' .$recID3.'<br><br>
-						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL-dev/applications/public_html/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/SJL-dev/applications/public_html/rec_letter.php </a>
+						<a href="http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/rec_letter.php"> http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/rec_letter.php </a>
 
 					</p>
 				</body>

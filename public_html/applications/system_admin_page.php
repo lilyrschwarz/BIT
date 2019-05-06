@@ -8,11 +8,7 @@
       }
 
   // connect to mysql
-  $servername = "localhost";
-  $user = "sloanej";
-  $pass = "Westland76!";
-  $dbname = "sloanej";
-  $conn = mysqli_connect($servername, $user, $pass, $dbname);
+  $conn = mysqli_connect("localhost", "SJL", "SJLoss1!", "SJL");
   // Check connection
   if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
