@@ -190,9 +190,9 @@ background-color: #4CAF50;
         <input type="submit"/>
      </form>
 <?php
-  $student_id = $_POST['g_year'];
-  $g_year = $db->query("SELECT grad_year FROM alumni");
-  $row = mysqli_fetch_array($g_year);
+  $g_year = $_POST['g_year'];
+  $gr_year = $db->query("SELECT grad_year FROM alumni where grad_year=".$g_year);
+  $row = mysqli_fetch_array($gr_year);
   $graduationyear = $row['grad_year'];
   echo "<br/>";
   // echo $graduationyear;
@@ -209,12 +209,12 @@ background-color: #4CAF50;
   <?php
     //if($db->connect_error){echo "db connect error";}
     // echo "Student: ".$fullname;
-    $course_array = $db->query("SELECT f_name, l_name, email FROM alumni where grad_year =".$g_year);
+    $alumni_array = $db->query("SELECT f_name, l_name, email FROM alumni where grad_year =".$g_year);
     //echo $_SESSION['username'];
-    if (!empty($course_array)) {
+    if (!empty($alumni_array)) {
       //foreach($course_array as $key=>$value)
 
-      while($row = $course_array->fetch_assoc())
+      while($row = $alumni_array->fetch_assoc())
       {
     ?>
   <tr>
