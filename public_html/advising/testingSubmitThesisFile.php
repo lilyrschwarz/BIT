@@ -166,7 +166,7 @@
 
 
     $sql = mysqli_query($db, "UPDATE thesis
-                                  SET FilePath ='$target_dir', FileName =$_SESSION['uid'].'.pdf
+                                  SET FilePath =$target_dir, FileName ='.$_SESSION['uid'].'.pdf
                                   WHERE university_id=".$_SESSION['uid']);
 
           if ( $sql === TRUE ) {
