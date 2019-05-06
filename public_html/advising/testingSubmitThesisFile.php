@@ -181,7 +181,7 @@ $ThesisInsert = mysqli_query($db,"INSERT INTO thesis(university_id, FileName, Fi
     // echo $insertingThesis;
 
 
-    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$university_id'.'pdf' WHERE university_id=".$_SESSION['uid']);
+    $sql = mysqli_query($db, "UPDATE thesis SET FilePath ='Upload', FileName ='$university_id'.'pdf' WHERE university_id=".$university_id);
 
           if ( $sql === TRUE ) {
                     echo "Thesis successfully submitted.";
