@@ -187,6 +187,10 @@ background-color: #4CAF50;
                               WHERE university_id=".$student_id);
   echo "Thesis has been approved."
 
+  $_SESSION['updateThesis'] = $updateThesis;
+
+  echo $_SESSION['updateThesis'];
+
 ?>
 </div>
 </body>
