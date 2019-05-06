@@ -66,8 +66,8 @@
         } else if ($type == "inst") {
             $nrole = "Instructor";
             //$_SESSION['role'] = "FR";
-			if($type == "inst" && $isReviewer == "yes"){
-        		//$query = ;
+            if($type == "inst" && $isReviewer == "yes"){
+                //$query = ;
                 $result = mysqli_query($db, "select role from users where userID =".$_SESSION['uid']);
                 $rll = mysqli_fetch_object($result);
                 $rll2 = $rll->role;
@@ -78,7 +78,7 @@
                     $_SESSION['role'] = "CAC";
 
                 }
-       		}
+            }
              
         } else if ($type == "secr") {
             $nrole = "Secretary";
@@ -137,9 +137,9 @@
         if ($type == "admin") {
             $editInfoPrompt = "Edit Profiles";
             $editInfoAction = "edit-info-admin.php";
-        } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type == "secr" || $type = "regis") {
+        } else if ($type == "MS" || $type == "PHD" || $type == "inst" || $type == "secr" || $type == "regis") {
                   //  echo $_SESSION['role'];
-
+            echo $type;
             $editInfoPrompt = "Edit Profile";
             $editInfoAction = "edit-info-reg.php";
             //echo $type;
@@ -304,7 +304,7 @@
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/system_admin_page.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "secr") {
-        	
+            
             $advAction = "http://gwupyterhub.seas.gwu.edu/~sp19DBp2-SJL/applications/home.php";
             $advPrompt = "Visit the Admissions System";
         }else if ($type == "inst" && $isReviewer == "yes") {
