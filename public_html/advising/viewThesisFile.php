@@ -204,7 +204,6 @@ $dbname = "SJL";
   $student_id = $_POST['student_id'];
   $_SESSION['student_id'] = $student_id;
 
-  href= "Upload/'.'$student_id'.'.pdf" target="_blank"
   //see if student submitted thesis
   // $studentThesis = mysqli_query($db,"SELECT FilePath, FileName FROM thesis where university_id=".$student_id);
   // $row = mysqli_fetch_array($studentThesis);
