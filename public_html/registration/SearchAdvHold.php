@@ -222,9 +222,24 @@ background-color: #4CAF50;
     <td><?php echo $row["course_num"]; ?></td>
   </tr>
 
+  <form action="SearchAdvHold.php" method="post">
+<input type="submit" name="remove" value="Remove Hold"/>
+  </form>
+
+
+
   <?php
+
+
                  }
   }
+
+  if(isset($_POST['submit'])) {
+    $removeHold = $conn->query("UPDATE user
+            SET advising_hold='no'
+            WHERE uid=".$student_id);
+	}
+
               ?>
   </table>
   </div>
